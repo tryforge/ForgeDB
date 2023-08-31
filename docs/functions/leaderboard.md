@@ -2,8 +2,18 @@
 > <img align="top" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Infobox_info_icon.svg/160px-Infobox_info_icon.svg.png?20150409153300" alt="image" width="25" height="auto"> Creates a leaderboard
 ## Usage
 ```
-$leaderboard
+$leaderboard[type;value;position;code;sort type;max;page;separator]
 ```
+| Name | Type | Description | Required | Spread
+| :---: | :---: | :---: | :---: | :---: |
+type | String | The type of the var, eg server, user, role, etc, up to you. | Yes | No
+value | String | The variable name to load the value to, retrieve id with $env[<name>;id] and value with $env[<name>;value] | Yes | No
+position | String | The variable name to load the position to | Yes | No
+code | String | Code to execute for every row found, remember to use $return. | Yes | No
+sort type | Enum (`Asc`, `Desc`) | The sort type for the leaderboard | No | No
+max | Number | The max amount of rows per page | No | No
+page | Number | The page number | No | No
+separator | String | The separator to use for every row | No | No
 <details>
 <summary>
     
@@ -79,6 +89,7 @@ export default new NativeFunction({
             type: ArgType.String
         }
     ],
+    brackets: true,
     async execute(ctx) {
         const [
             type,

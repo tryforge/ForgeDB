@@ -5,6 +5,7 @@ export default new NativeFunction({
     name: "$getVar",
     description: "Returns a variable value",
     unwrap: true,
+    brackets: true,
     args: [
         {
             name: "type",

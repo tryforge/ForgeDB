@@ -65,6 +65,7 @@ export default new NativeFunction({
             type: ArgType.String
         }
     ],
+    brackets: true,
     async execute(ctx) {
         const [
             type,

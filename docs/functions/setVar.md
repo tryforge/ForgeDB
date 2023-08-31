@@ -2,8 +2,13 @@
 > <img align="top" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Infobox_info_icon.svg/160px-Infobox_info_icon.svg.png?20150409153300" alt="image" width="25" height="auto"> Sets a variable value
 ## Usage
 ```
-$setVar
+$setVar[type;id;value]
 ```
+| Name | Type | Description | Required | Spread
+| :---: | :---: | :---: | :---: | :---: |
+type | String | The type of the var, eg server, user, role, etc, up to you. | Yes | No
+id | String | the identifier for the variable | Yes | No
+value | String | The value for the variable | Yes | No
 <details>
 <summary>
     
@@ -42,6 +47,7 @@ export default new NativeFunction({
             type: ArgType.String
         }
     ],
+    brackets: true,
     async execute(ctx, [ type, id, value ]) {
         await ForgeQuickDB.set(type, id, value)
         return Return.success()

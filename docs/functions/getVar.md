@@ -2,8 +2,13 @@
 > <img align="top" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Infobox_info_icon.svg/160px-Infobox_info_icon.svg.png?20150409153300" alt="image" width="25" height="auto"> Returns a variable value
 ## Usage
 ```
-$getVar
+$getVar[type;id;default value]
 ```
+| Name | Type | Description | Required | Spread
+| :---: | :---: | :---: | :---: | :---: |
+type | String | The type of the var, eg server, user, role, etc, up to you. | Yes | No
+id | String | the identifier for the variable | Yes | No
+default value | String | The default value to use | No | No
 <details>
 <summary>
     
@@ -19,6 +24,7 @@ export default new NativeFunction({
     name: "$getVar",
     description: "Returns a variable value",
     unwrap: true,
+    brackets: true,
     args: [
         {
             name: "type",

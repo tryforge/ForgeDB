@@ -5,6 +5,7 @@ export default new NativeFunction({
     name: "$deleteVar",
     description: "Deletes a variable value",
     unwrap: true,
+    brackets: true,
     args: [
         {
             name: "type",

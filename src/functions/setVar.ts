@@ -28,6 +28,7 @@ export default new NativeFunction({
             type: ArgType.String
         }
     ],
+    brackets: true,
     async execute(ctx, [ type, id, value ]) {
         await ForgeQuickDB.set(type, id, value)
         return Return.success()
