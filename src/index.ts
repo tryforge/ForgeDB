@@ -13,11 +13,11 @@ export interface IQuickDBData {
 export class ForgeQuickDB extends ForgeExtension {
     public static db: QuickDBTable
 
-    name: string = "ForgePrisma"
+    name: string = "ForgeQuickDB"
     description: string = "Fast, reliable database driver for forge."
     version: string = "1.0.0"
 
-    public constructor(public readonly path: string) {
+    public constructor(public readonly path: string = "./forge.db") {
         super()
     }
 

@@ -16,7 +16,7 @@ const { ForgeQuickDB } = require("forgequickdb")
 const client = new ForgeClient({
     ...options // The options you currently have
     extensions: [
-        new ForgeQuickDB("./forge.db") // This parameter is the path to the file
+        new ForgeQuickDB()
     ]
 })
 ```

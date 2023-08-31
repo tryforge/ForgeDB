@@ -1,4 +1,4 @@
-import { ArgType, IExtendedCompiledFunctionField, NativeFunction, Return } from "forgescript";
+import { ArgType, IExtendedCompiledFunctionField, NativeFunction, Return, ReturnType } from "forgescript";
 import { ForgeQuickDB } from "..";
 
 export enum SortType {
@@ -102,7 +102,7 @@ export default new NativeFunction({
         const varType = typeExec.value as string
         const pos = positionVariableName.value as string
         const valueName = valueVariableName.value as string
-        const sort = SortType[sortTypeValue.value as keyof typeof SortType] ?? SortType.Asc
+        const sort = sortTypeValue.value === "Desc" ? SortType.Asc : SortType.Desc
         const limit = Number(limitExec.value) || 10
         const pag = Number(pageExec.value) || 1
         const sep = sepExec.value as string || "\n"
@@ -124,7 +124,7 @@ export default new NativeFunction({
             ctx.setEnvironmentKey(pos, index)
             ctx.setEnvironmentKey(valueName, row)
             
-            const execution = await this["resolveCode"](code) as Return
+            const execution = await this["resolveCode"](ctx, code) as Return
             if (!execution.return && !this["isValidReturnType"](execution)) return execution
             else if (execution.return) elements.push(execution.value as string)
         }
