@@ -3,7 +3,7 @@ import { ForgeQuickDB } from "..";
 
 export default new NativeFunction({
     name: "$setVar",
-    description: "Returns a variable value.",
+    description: "Sets a variable value.",
     unwrap: true,
     args: [
         {
@@ -21,16 +21,16 @@ export default new NativeFunction({
             required: true
         },
         {
-            name: "default",
-            description: "The default value if the variable is empty.",
+            name: "value",
+            description: "The value for the variable.",
             rest: false,
             required: true,
             type: ArgType.String
         }
     ],
     brackets: true,
-    async execute(ctx, [ name, id, def ]) {
-        let data = await ForgeQuickDB.get(name, id)
-        return Return.success(data?.value ?? def)
+    async execute(ctx, [ name, id, value ]) {
+        await ForgeQuickDB.set(name, id, value)
+        return Return.success()
     },
 })
