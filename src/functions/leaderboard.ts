@@ -2,8 +2,8 @@ import { ArgType, IExtendedCompiledFunctionField, NativeFunction, Return, Return
 import { ForgeQuickDB } from "..";
 
 export enum SortType {
-    Asc,
-    Desc
+    asc,
+    desc
 }
 
 export default new NativeFunction({
@@ -102,7 +102,7 @@ export default new NativeFunction({
         const varType = typeExec.value as string
         const pos = positionVariableName.value as string
         const valueName = valueVariableName.value as string
-        const sort = sortTypeValue.value === "Desc" ? SortType.Asc : SortType.Desc
+        const sort = sortTypeValue.value === "desc" ? SortType.asc : SortType.desc
         const limit = Number(limitExec.value) || 10
         const pag = Number(pageExec.value) || 1
         const sep = sepExec.value as string || "\n"
@@ -111,7 +111,7 @@ export default new NativeFunction({
 
         const rows = await ForgeQuickDB.allWithType(varType)
             .then(
-                x => x.sort((x, y) => sort === SortType.Asc ? Number(x.value) - Number(y.value) : Number(y.value) - Number(x.value))
+                x => x.sort((x, y) => sort === SortType.asc ? Number(x.value) - Number(y.value) : Number(y.value) - Number(x.value))
             )
             .then(
                 x => x.slice(pag * limit - limit, pag * limit)
