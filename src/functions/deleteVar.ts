@@ -3,20 +3,20 @@ import { ForgeQuickDB } from "..";
 
 export default new NativeFunction({
     name: "$deleteVar",
-    description: "Deletes a variable value",
+    description: "Deletes a variable value.",
     unwrap: true,
     brackets: true,
     args: [
         {
-            name: "type",
-            description: "The type of the var, eg server, user, role, etc, up to you.",
+            name: "name",
+            description: "The name of the variable.",
             rest: false,
             type: ArgType.String,
             required: true
         },
         {
             name: "id",
-            description: "the identifier for the variable",
+            description: "The identifier of a user, guild, channel, message, etc.",
             rest: false,
             type: ArgType.String,
             required: true

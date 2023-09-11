@@ -3,34 +3,34 @@ import { ForgeQuickDB } from "..";
 
 export default new NativeFunction({
     name: "$setVar",
-    description: "Sets a variable value",
+    description: "Sets a variable value.",
     unwrap: true,
     args: [
         {
-            name: "type",
-            description: "The type of the var, eg server, user, role, etc, up to you.",
+            name: "name",
+            description: "The name of the variable.",
             rest: false,
             type: ArgType.String,
             required: true
         },
         {
             name: "id",
-            description: "the identifier for the variable",
+            description: "The identifier of a user, guild, channel, message, etc.",
             rest: false,
             type: ArgType.String,
             required: true
         },
         {
             name: "value",
-            description: "The value for the variable",
+            description: "The value for the variable.",
             rest: false,
             required: true,
             type: ArgType.String
         }
     ],
     brackets: true,
-    async execute(ctx, [ type, id, value ]) {
-        await ForgeQuickDB.set(type, id, value)
+    async execute(ctx, [ name, id, value ]) {
+        await ForgeQuickDB.set(name, id, value)
         return Return.success()
     },
 })
