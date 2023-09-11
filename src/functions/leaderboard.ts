@@ -12,22 +12,22 @@ export default new NativeFunction({
     unwrap: false,
     args: [
         {
-            name: "type",
-            description: "The type of the var, eg server, user, role, etc, up to you.",
+            name: "name",
+            description: "The name of the variable.",
             rest: false,
             type: ArgType.String,
             required: true
         },
         {
-            name: "value",
-            description: "The variable name to load the value to, retrieve id with $env[<name>;id] and value with $env[<name>;value]",
+            name: "envValue",
+            description: "The variable name to load for $env, retrieve id with $env[<name>;id] and value with $env[<name>;value]",
             rest: false,
             required: true,
             type: ArgType.String
         },
         {
-            name: "position",
-            description: "The variable name to load the position to",
+            name: "envPosition",
+            description: "The variable name to load for $env to get position. To retrieve it do $env[<name>]",
             required: true,
             rest: false,
             type: ArgType.String
@@ -41,26 +41,26 @@ export default new NativeFunction({
         },
         {
             name: "sort type",
-            description: "The sort type for the leaderboard",
+            description: "The sort type for the leaderboard. Either asc (top to bottom) or desc (bottom to top)",
             rest: false,
             type: ArgType.Enum,
             enum: SortType
         },
         {
             name: "max",
-            description: "The max amount of rows per page",
+            description: "The max amount of rows per page.",
             rest: false,
             type: ArgType.Number
         },
         {
             name: "page",
-            description: "The page number",
+            description: "The page number.",
             rest: false,
             type: ArgType.Number
         },
         {
             name: "separator",
-            description: "The separator to use for every row",
+            description: "The separator to use for every row.",
             rest: false,
             type: ArgType.String
         }
