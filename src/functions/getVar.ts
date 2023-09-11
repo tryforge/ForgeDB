@@ -2,34 +2,35 @@ import { ArgType, NativeFunction, Return } from "forgescript";
 import { ForgeQuickDB } from "..";
 
 export default new NativeFunction({
-    name: "$getVar",
-    description: "Returns a variable value",
+    name: "$setVar",
+    description: "Returns a variable value.",
     unwrap: true,
-    brackets: true,
     args: [
         {
-            name: "type",
-            description: "The type of the var, eg server, user, role, etc, up to you.",
+            name: "name",
+            description: "The name of the variable.",
             rest: false,
             type: ArgType.String,
             required: true
         },
         {
             name: "id",
-            description: "the identifier for the variable",
+            description: "The identifier of a user, guild, channel, message, etc.",
             rest: false,
             type: ArgType.String,
             required: true
         },
         {
-            name: "default value",
-            description: "The default value to use",
+            name: "default",
+            description: "The default value if the variable is empty.",
             rest: false,
+            required: true,
             type: ArgType.String
         }
     ],
-    async execute(ctx, [ type, id, def ]) {
-        const data = await ForgeQuickDB.get(type, id)
+    brackets: true,
+    async execute(ctx, [ name, id, def ]) {
+        let data = await ForgeQuickDB.get(name, id)
         return Return.success(data?.value ?? def)
     },
 })
