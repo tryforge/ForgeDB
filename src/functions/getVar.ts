@@ -24,7 +24,7 @@ export default new NativeFunction({
             name: "default",
             description: "The default value if the variable is empty.",
             rest: false,
-            required: true,
+            required: false,
             type: ArgType.String
         }
     ],
