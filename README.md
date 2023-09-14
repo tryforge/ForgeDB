@@ -1,22 +1,22 @@
-# ForgeQuickDB
+# ForgeDB
 Easy to use database for forge.
 ## How to use
 > Make sure to have installed typescript package as dependency, if installing from github.
 
 Download this repo as a npm package:
 ```bash
-npm i https://github.com/tryforge/ForgeQuickDB.git
+npm i https://github.com/tryforge/ForgeDB.git
 ```
 
 Now, in your client initialization:
 ```ts
-const { ForgeQuickDB } = require("forgequickdb")
+const { ForgeDB } = require("forgedb")
 
 // I'll assume client, can be bot or anything else
 const client = new ForgeClient({
     ...options // The options you currently have
     extensions: [
-        new ForgeQuickDB()
+        new ForgeDB()
     ]
 })
 ```
