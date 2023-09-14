@@ -1,5 +1,5 @@
 {
-  "name": "forgequickdb",
+  "name": "forgedb",
   "version": "1.0.0",
   "description": "",
   "types": "dist/index.d.ts",
@@ -14,7 +14,7 @@
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^20.5.7",
-    "forgescript": "github:tryforge/ForgeScript-V2",
+    "forgescript": "1.0.6",
     "typedoc": "^0.25.0",
     "typescript": "^5.2.2"
   },
