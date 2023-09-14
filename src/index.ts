@@ -10,7 +10,7 @@ export interface IQuickDBData {
     value: string
 }
 
-export class ForgeQuickDB extends ForgeExtension {
+export class ForgeDB extends ForgeExtension {
     public static db: QuickDBTable
 
     name: string = "ForgeQuickDB"
