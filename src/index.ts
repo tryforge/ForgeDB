@@ -13,7 +13,7 @@ export interface IQuickDBData {
 export class ForgeDB extends ForgeExtension {
     public static db: QuickDBTable
 
-    name: string = "ForgeQuickDB"
+    name: string = "ForgeDB"
     description: string = "Fast, reliable database driver for forge."
     version: string = "1.0.0"
 
