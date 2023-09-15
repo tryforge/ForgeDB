@@ -1,4 +1,5 @@
-import { NativeFunction, Return } from "../structures"
+import { NativeFunction, Return } from "forgescript";
+import { ForgeDB } from "..";
 
 export default new NativeFunction({
     name: "$dbVersion",
