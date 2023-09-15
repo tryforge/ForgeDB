@@ -36,11 +36,7 @@ export default new NativeFunction({
     brackets: true,
     async execute(_ctx, [ name, id, type ]) {
         const data = await ForgeDB.allWithType(name)
-        data.sort((a, b) => {
-            const valueA = parseInt(a.value);
-            const valueB = parseInt(b.value);
-            return valueB - valueA;
-        });
+        data.sort((a, b) => parseInt(a.value) - parseInt(b.value));
         const index = ([SortType[0], SortType.asc].indexOf(type ?? 'asc') === -1 ? data : [...data].reverse()).findIndex(s => s.id === id);
         return Return.success(index+1)
     },
