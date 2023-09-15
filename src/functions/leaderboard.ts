@@ -1,5 +1,5 @@
 import { ArgType, IExtendedCompiledFunctionField, NativeFunction, Return, ReturnType } from "forgescript";
-import { ForgeQuickDB } from "..";
+import { ForgeDB } from "..";
 
 export enum SortType {
     asc,
