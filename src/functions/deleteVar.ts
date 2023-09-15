@@ -23,7 +23,7 @@ export default new NativeFunction({
         }
     ],
     async execute(ctx, [ type, id ]) {
-        await ForgeQuickDB.delete(type, id)
+        await ForgeDB.delete(type, id)
         return Return.success()
     },
 })
