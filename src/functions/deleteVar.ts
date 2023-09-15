@@ -1,5 +1,5 @@
 import { ArgType, NativeFunction, Return } from "forgescript";
-import { ForgeQuickDB } from "..";
+import { ForgeDB } from "..";
 
 export default new NativeFunction({
     name: "$deleteVar",
