@@ -1,12 +1,13 @@
+import { cpus } from "os"
 import { NativeFunction, Return } from "forgescript"
 
 export default new NativeFunction({
-    name: "$cpuCoreCount",
+    name: "$cpuType",
     version: "1.0.0",
-    description: "Returns the cpu core count",
+    description: "Returns the cpu type",
     unwrap: false,
     execute(ctx) {
         // eslint-disable-next-line no-undef
-        return Return.success(os.cpu)
+        return Return.success(os.type)
     },
 })
