@@ -3,7 +3,6 @@ import { ForgeDB } from "..";
 
 export default new NativeFunction({
     name: "$dbVersion",
-    version: "1.0.0",
     description: "Returns the db version you're using",
     unwrap: false,
     execute(ctx) {
