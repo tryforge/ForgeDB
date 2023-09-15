@@ -41,7 +41,7 @@ export default new NativeFunction({
             const valueB = parseInt(b.value);
             return valueB - valueA;
         });
-        const index = (type === SortType.desc ? [...data].reverse() : data).findIndex(s => s.id === id);
+        const index = ([SortType[0], SortType.asc].indexOf(type ?? 'asc') === -1 ? data : [...data].reverse()).findIndex(s => s.id === id);
         return Return.success(index+1)
     },
 })
