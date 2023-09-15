@@ -1,5 +1,5 @@
-import { ArgType, NativeFunction, Return } from "forgescript";
-import { ForgeDB } from "..";
+import { ArgType, NativeFunction, Return } from "forgescript"
+import { ForgeDB } from ".."
 
 export default new NativeFunction({
     name: "$deleteVar",
@@ -12,17 +12,17 @@ export default new NativeFunction({
             description: "The name of the variable",
             rest: false,
             type: ArgType.String,
-            required: true
+            required: true,
         },
         {
             name: "id",
             description: "The identifier of the value (a user, guild, channel, message, etc)",
             rest: false,
             type: ArgType.String,
-            required: true
-        }
+            required: true,
+        },
     ],
-    async execute(_ctx, [ type, id ]) {
+    async execute(_ctx, [type, id]) {
         await ForgeDB.delete(type, id)
         return Return.success()
     },

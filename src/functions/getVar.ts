@@ -1,5 +1,5 @@
-import { ArgType, NativeFunction, Return } from "forgescript";
-import { ForgeDB } from "..";
+import { ArgType, NativeFunction, Return } from "forgescript"
+import { ForgeDB } from ".."
 
 export default new NativeFunction({
     name: "$getVar",
@@ -11,25 +11,25 @@ export default new NativeFunction({
             description: "The name of the variable",
             rest: false,
             type: ArgType.String,
-            required: true
+            required: true,
         },
         {
             name: "id",
             description: "The identifier of the value (a user, guild, channel, message, etc)",
             rest: false,
             type: ArgType.String,
-            required: true
+            required: true,
         },
         {
             name: "default",
             description: "The default value if the identifier doesn't exist in the variable",
             rest: false,
             required: false,
-            type: ArgType.String
-        }
+            type: ArgType.String,
+        },
     ],
     brackets: true,
-    async execute(_ctx, [ name, id, def ]) {
+    async execute(_ctx, [name, id, def]) {
         const data = await ForgeDB.get(name, id)
         return Return.success(data?.value ?? def)
     },
