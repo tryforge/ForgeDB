@@ -8,59 +8,59 @@ export enum SortType {
 
 export default new NativeFunction({
     name: "$leaderboard",
-    description: "Creates a leaderboard",
+    description: "Creates a leaderboard of identifiers in a variable",
     unwrap: false,
     args: [
         {
             name: "name",
-            description: "The name of the variable.",
+            description: "The name of the variable",
             rest: false,
             type: ArgType.String,
             required: true
         },
         {
             name: "envValue",
-            description: "The variable name to load for $env, retrieve id with $env[<name>;id] and value with $env[<name>;value]",
+            description: "The variable name to use for $env, retrieve the id with $env[<name>;id] and the value with $env[<name>;value]",
             rest: false,
             required: true,
             type: ArgType.String
         },
         {
             name: "envPosition",
-            description: "The variable name to load for $env to get position. To retrieve it do $env[<name>]",
+            description: "The variable name to use for $env, retrieve the position with $env[<name>]",
             required: true,
             rest: false,
             type: ArgType.String
         },
         {
             name: "code",
-            description: "Code to execute for every row found, remember to use $return.",
+            description: "Code to execute for each row, remember to use $return",
             rest: false,
             type: ArgType.String,
             required: true
         },
         {
             name: "sort type",
-            description: "The sort type for the leaderboard. Either asc (top to bottom) or desc (bottom to top)",
+            description: "The sort type for the leaderboard, either asc (ascending) or desc (descending)",
             rest: false,
             type: ArgType.Enum,
             enum: SortType
         },
         {
             name: "max",
-            description: "The max amount of rows per page.",
+            description: "The maximum number of rows per page",
             rest: false,
             type: ArgType.Number
         },
         {
             name: "page",
-            description: "The page number.",
+            description: "The page number",
             rest: false,
             type: ArgType.Number
         },
         {
             name: "separator",
-            description: "The separator to use for every row.",
+            description: "The separator to use for each row",
             rest: false,
             type: ArgType.String
         }
