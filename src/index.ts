@@ -24,12 +24,11 @@ export class ForgeDB extends ForgeExtension {
     init(client: ForgeClient): void {
         FunctionManager.load(__dirname + "/functions")
         
-        const db = new QuickDB({
+        ForgeDB.db = new QuickDB({
             driver: new SqliteDriver(this.path)
         })
 
-        client.db = db.table("main")
-        ForgeDB.db = db
+        client.db = ForgeDB.db.table("main")
     }
 
     public static makeIdentifier(type: string, id: string) {
@@ -50,25 +49,22 @@ export class ForgeDB extends ForgeExtension {
         })
     }
 
-    public static delete(type: string, id: string) {
-        const identifier = this.makeIdentifier(type, id)
-        return this.db.delete(identifier)
+    public static delete(type: string, id: string) { 
+        return this.db.delete(this.makeIdentifier(type, id))
     }
 
-    public static allWithType(type: string) {
-        return this.db.startsWith(type).then(x => x.map(x => x.value))
+    public static async allWithType(type: string) {
+        return (await this.db.startsWith(type)).map(x => x.value)
     }
 
-    public static all(filter?: (row: IQuickDBData) => boolean) {
-        return this.db.all()
-            .then(x => x.map(x => x.value))
-            .then(x => filter ? x.filter(filter) : x)
+    public static async all(filter: (row: IQuickDBData) => boolean = () => true) {
+        const all = await this.db.all()
+        return all.map(x => x.value).filter(filter)
     }
 
-    public static deleteWithFilter(fn: (row: IQuickDBData) => boolean) {
-        return this.db.all().then(
-            rows => rows.filter(x => fn(x.value))
-        ).then(x => Promise.all(x.map(x => this.db.delete(x.id))))
+    public static async deleteWithFilter(filter: (row: IQuickDBData) => boolean) {
+        const all = await this.db.all()
+        return Promise.all(all.filter(x => filter(x.value)).map(x => this.db.delete(x.id)))
     }
 
     public static deleteAll() {

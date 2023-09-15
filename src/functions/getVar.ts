@@ -30,7 +30,7 @@ export default new NativeFunction({
     ],
     brackets: true,
     async execute(_ctx, [ name, id, def ]) {
-        let data = await ForgeDB.get(name, id)
+        const data = await ForgeDB.get(name, id)
         return Return.success(data?.value ?? def)
     },
 })
