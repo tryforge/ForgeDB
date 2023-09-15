@@ -29,7 +29,7 @@ export default new NativeFunction({
         }
     ],
     brackets: true,
-    async execute(ctx, [ name, id, value ]) {
+    async execute(_ctx, [ name, id, value ]) {
         await ForgeDB.set(name, id, value)
         return Return.success()
     },

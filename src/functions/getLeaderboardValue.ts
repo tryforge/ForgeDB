@@ -34,8 +34,7 @@ export default new NativeFunction({
         }
     ],
     brackets: true,
-    async execute(ctx, [ name, id, type ]) {
-        let db = await ForgeDB.all()
+    async execute(_ctx, [ name, id, type ]) {
         const data = await ForgeDB.allWithType(name)
         data.sort((a, b) => {
             const valueA = parseInt(a.value);
