@@ -1,5 +1,5 @@
 import { ArgType, NativeFunction, Return } from "forgescript";
-import { ForgeQuickDB } from "..";
+import { ForgeDB } from "..";
 
 export enum SortType {
     asc,
@@ -35,8 +35,8 @@ export default new NativeFunction({
     ],
     brackets: true,
     async execute(ctx, [ name, id, type ]) {
-        let db = await ForgeQuickDB.all()
-        const data = await ForgeQuickDB.allWithType(name)
+        let db = await ForgeDB.all()
+        const data = await ForgeDB.allWithType(name)
         data.sort((a, b) => {
             const valueA = parseInt(a.value);
             const valueB = parseInt(b.value);
