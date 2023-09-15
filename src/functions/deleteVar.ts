@@ -3,20 +3,20 @@ import { ForgeDB } from "..";
 
 export default new NativeFunction({
     name: "$deleteVar",
-    description: "Deletes a variable value.",
+    description: "Deletes a value from a variable",
     unwrap: true,
     brackets: true,
     args: [
         {
             name: "name",
-            description: "The name of the variable.",
+            description: "The name of the variable",
             rest: false,
             type: ArgType.String,
             required: true
         },
         {
             name: "id",
-            description: "The identifier of a user, guild, channel, message, etc.",
+            description: "The identifier of the value (a user, guild, channel, message, etc)",
             rest: false,
             type: ArgType.String,
             required: true

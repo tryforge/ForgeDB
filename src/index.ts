@@ -14,7 +14,7 @@ export class ForgeDB extends ForgeExtension {
     public static db: QuickDBTable
 
     name: string = "ForgeDB"
-    description: string = "Fast, reliable database driver for forge."
+    description: string = "A fast and reliable database extension for Forge"
     version: string = "1.0.0"
 
     public constructor(public readonly path: string = "./forge.db") {
