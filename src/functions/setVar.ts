@@ -1,5 +1,5 @@
 import { ArgType, NativeFunction, Return } from "forgescript";
-import { ForgeQuickDB } from "..";
+import { ForgeDB } from "..";
 
 export default new NativeFunction({
     name: "$setVar",
@@ -30,7 +30,7 @@ export default new NativeFunction({
     ],
     brackets: true,
     async execute(ctx, [ name, id, value ]) {
-        await ForgeQuickDB.set(name, id, value)
+        await ForgeDB.set(name, id, value)
         return Return.success()
     },
 })
