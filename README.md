@@ -1,5 +1,9 @@
 # ForgeDB
 Easy to use database for forge.
+
+[![forgedb](https://img.shields.io/github/package-json/v/tryforge/ForgeDB/main?label=forgedb&color=5c16d4)](https://github.com/tryforge/ForgeDB/)
+[![forgescript](https://img.shields.io/github/package-json/v/tryforge/ForgeScript/main?label=forgescript&color=5c16d4)](https://github.com/tryforge/ForgeScript/)
+[![Discord](https://img.shields.io/discord/739934735387721768?logo=discord)](https://discord.gg/hcJgjzPvqb)
 ## How to use
 > Make sure to have installed typescript package as dependency, if installing from github.
 
