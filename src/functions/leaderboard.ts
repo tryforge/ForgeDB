@@ -109,7 +109,7 @@ export default new NativeFunction({
 
         const elements = new Array<string>()
 
-        const rows = await ForgeQuickDB.allWithType(varType)
+        const rows = await ForgeDB.allWithType(varType)
             .then(
                 x => x.sort((x, y) => sort === SortType.asc ? Number(x.value) - Number(y.value) : Number(y.value) - Number(x.value))
             )
