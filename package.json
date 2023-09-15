@@ -5,7 +5,6 @@
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
   "scripts": {
-    "preinstall": "tsc",
     "docgen": "tsc && typedoc src/index.ts && node dist/docgen",
     "test": "tsc && node dist/__tests__/runner"
   },
