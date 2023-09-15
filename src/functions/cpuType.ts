@@ -1,4 +1,4 @@
-import { cpus } from "os"
+import { type } from "os"
 import { NativeFunction, Return } from "forgescript"
 
 export default new NativeFunction({
