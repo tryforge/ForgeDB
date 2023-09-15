@@ -29,7 +29,7 @@ export class ForgeDB extends ForgeExtension {
         })
 
         client.db = db.table("main")
-        ForgeQuickDB.db = db
+        ForgeDB.db = db
     }
 
     public static makeIdentifier(type: string, id: string) {
