@@ -1,14 +1,14 @@
 # $setVar
-> <img align="top" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Infobox_info_icon.svg/160px-Infobox_info_icon.svg.png?20150409153300" alt="image" width="25" height="auto"> Sets a variable value
+> <img align="top" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Infobox_info_icon.svg/160px-Infobox_info_icon.svg.png?20150409153300" alt="image" width="25" height="auto"> Sets an identifier's value in a variable
 ## Usage
 ```
-$setVar[type;id;value]
+$setVar[name;id;value]
 ```
 | Name | Type | Description | Required | Spread
 | :---: | :---: | :---: | :---: | :---: |
-type | String | The type of the var, eg server, user, role, etc, up to you. | Yes | No
-id | String | the identifier for the variable | Yes | No
-value | String | The value for the variable | Yes | No
+name | String | The name of the variable | Yes | No
+id | String | The identifier for the value (a user, guild, channel, message, etc) | Yes | No
+value | String | The value | Yes | No
 <details>
 <summary>
     
@@ -17,42 +17,43 @@ value | String | The value for the variable | Yes | No
 </summary>
     
 ```ts
-import { ArgType, NativeFunction, Return } from "forgescript";
-import { ForgeQuickDB } from "..";
+import { ArgType, NativeFunction, Return } from "forgescript"
+import { ForgeDB } from ".."
 
 export default new NativeFunction({
     name: "$setVar",
-    description: "Sets a variable value",
+    description: "Sets an identifier's value in a variable",
     unwrap: true,
     args: [
         {
-            name: "type",
-            description: "The type of the var, eg server, user, role, etc, up to you.",
+            name: "name",
+            description: "The name of the variable",
             rest: false,
             type: ArgType.String,
-            required: true
+            required: true,
         },
         {
             name: "id",
-            description: "the identifier for the variable",
+            description: "The identifier for the value (a user, guild, channel, message, etc)",
             rest: false,
             type: ArgType.String,
-            required: true
+            required: true,
         },
         {
             name: "value",
-            description: "The value for the variable",
+            description: "The value",
             rest: false,
             required: true,
-            type: ArgType.String
-        }
+            type: ArgType.String,
+        },
     ],
     brackets: true,
-    async execute(ctx, [ type, id, value ]) {
-        await ForgeQuickDB.set(type, id, value)
+    async execute(_ctx, [name, id, value]) {
+        await ForgeDB.set(name, id, value)
         return Return.success()
     },
 })
+
 ```
     
 </details>

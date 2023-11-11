@@ -18,77 +18,77 @@ exports.default = new forgescript_1.NativeFunction({
             description: "The name of the variable",
             rest: false,
             type: forgescript_1.ArgType.String,
-            required: true
+            required: true,
         },
         {
             name: "envValue",
             description: "The variable name to use for $env, retrieve the id with $env[<name>;id] and the value with $env[<name>;value]",
             rest: false,
             required: true,
-            type: forgescript_1.ArgType.String
+            type: forgescript_1.ArgType.String,
         },
         {
             name: "envPosition",
             description: "The variable name to use for $env, retrieve the position with $env[<name>]",
             required: true,
             rest: false,
-            type: forgescript_1.ArgType.String
+            type: forgescript_1.ArgType.String,
         },
         {
             name: "code",
             description: "Code to execute for each row, remember to use $return",
             rest: false,
             type: forgescript_1.ArgType.String,
-            required: true
+            required: true,
         },
         {
             name: "sort type",
             description: "The sort type for the leaderboard, either asc (ascending) or desc (descending)",
             rest: false,
             type: forgescript_1.ArgType.Enum,
-            enum: SortType
+            enum: SortType,
         },
         {
             name: "max",
             description: "The maximum number of rows per page",
             rest: false,
-            type: forgescript_1.ArgType.Number
+            type: forgescript_1.ArgType.Number,
         },
         {
             name: "page",
             description: "The page number",
             rest: false,
-            type: forgescript_1.ArgType.Number
+            type: forgescript_1.ArgType.Number,
         },
         {
             name: "separator",
             description: "The separator to use for each row",
             rest: false,
-            type: forgescript_1.ArgType.String
-        }
+            type: forgescript_1.ArgType.String,
+        },
     ],
     brackets: true,
     async execute(ctx) {
         const [type, valueVariable, positionVariable, code, sortType, max, page, separator] = this.data.fields;
-        const typeExec = await this["resolveCode"](ctx, type);
+        const typeExec = (await this["resolveCode"](ctx, type));
         if (!this["isValidReturnType"](typeExec))
             return typeExec;
-        const valueVariableName = await this["resolveCode"](ctx, valueVariable);
+        const valueVariableName = (await this["resolveCode"](ctx, valueVariable));
         if (!this["isValidReturnType"](valueVariableName))
             return valueVariableName;
-        const positionVariableName = await this["resolveCode"](ctx, positionVariable);
+        const positionVariableName = (await this["resolveCode"](ctx, positionVariable));
         if (!this["isValidReturnType"](positionVariableName))
             return positionVariableName;
-        const sortTypeValue = await this["resolveCode"](ctx, sortType);
+        const sortTypeValue = (await this["resolveCode"](ctx, sortType));
         if (!this["isValidReturnType"](sortTypeValue))
             return sortTypeValue;
-        const limitExec = await this["resolveCode"](ctx, max);
+        const limitExec = (await this["resolveCode"](ctx, max));
         if (!this["isValidReturnType"](limitExec))
             return limitExec;
-        const pageExec = await this["resolveCode"](ctx, page);
+        const pageExec = (await this["resolveCode"](ctx, page));
         if (!this["isValidReturnType"](pageExec))
             return pageExec;
-        const sepExec = await this["resolveCode"](ctx, separator);
+        const sepExec = (await this["resolveCode"](ctx, separator));
         if (!this["isValidReturnType"](sepExec))
             return sepExec;
         const varType = typeExec.value;
@@ -100,14 +100,14 @@ exports.default = new forgescript_1.NativeFunction({
         const sep = sepExec.value || "\n";
         const elements = new Array();
         const rows = await __1.ForgeDB.allWithType(varType)
-            .then(x => x.sort((x, y) => sort === SortType.asc ? Number(x.value) - Number(y.value) : Number(y.value) - Number(x.value)))
-            .then(x => x.slice(pag * limit - limit, pag * limit));
+            .then((x) => x.sort((x, y) => (sort === SortType.asc ? Number(x.value) - Number(y.value) : Number(y.value) - Number(x.value))))
+            .then((x) => x.slice(pag * limit - limit, pag * limit));
         for (let i = 0, len = rows.length; i < len; i++) {
             const index = pag * limit - limit + i + 1;
             const row = rows[i];
             ctx.setEnvironmentKey(pos, index);
             ctx.setEnvironmentKey(valueName, row);
-            const execution = await this["resolveCode"](ctx, code);
+            const execution = (await this["resolveCode"](ctx, code));
             if (!execution.return && !this["isValidReturnType"](execution))
                 return execution;
             else if (execution.return)

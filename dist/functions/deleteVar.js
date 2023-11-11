@@ -13,15 +13,15 @@ exports.default = new forgescript_1.NativeFunction({
             description: "The name of the variable",
             rest: false,
             type: forgescript_1.ArgType.String,
-            required: true
+            required: true,
         },
         {
             name: "id",
             description: "The identifier of the value (a user, guild, channel, message, etc)",
             rest: false,
             type: forgescript_1.ArgType.String,
-            required: true
-        }
+            required: true,
+        },
     ],
     async execute(_ctx, [type, id]) {
         await __1.ForgeDB.delete(type, id);

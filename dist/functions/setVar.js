@@ -12,22 +12,22 @@ exports.default = new forgescript_1.NativeFunction({
             description: "The name of the variable",
             rest: false,
             type: forgescript_1.ArgType.String,
-            required: true
+            required: true,
         },
         {
             name: "id",
             description: "The identifier for the value (a user, guild, channel, message, etc)",
             rest: false,
             type: forgescript_1.ArgType.String,
-            required: true
+            required: true,
         },
         {
             name: "value",
             description: "The value",
             rest: false,
             required: true,
-            type: forgescript_1.ArgType.String
-        }
+            type: forgescript_1.ArgType.String,
+        },
     ],
     brackets: true,
     async execute(_ctx, [name, id, value]) {

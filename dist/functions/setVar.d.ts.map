@@ -1,1 +1,1 @@
-{"version":3,"file":"setVar.d.ts","sourceRoot":"","sources":["../../src/functions/setVar.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,OAAO,EAAE,cAAc,EAAU,MAAM,aAAa,CAAC;;;;;;;;;;;;;;;;;;;;AAG9D,wBAgCE"}
+{"version":3,"file":"setVar.d.ts","sourceRoot":"","sources":["../../src/functions/setVar.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,OAAO,EAAE,cAAc,EAAU,MAAM,aAAa,CAAA;;;;;;;;;;;;;;;;;;;;AAG7D,wBAgCE"}

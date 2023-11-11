@@ -1,13 +1,13 @@
 # $deleteVar
-> <img align="top" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Infobox_info_icon.svg/160px-Infobox_info_icon.svg.png?20150409153300" alt="image" width="25" height="auto"> Deletes a variable value
+> <img align="top" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Infobox_info_icon.svg/160px-Infobox_info_icon.svg.png?20150409153300" alt="image" width="25" height="auto"> Deletes a value from a variable
 ## Usage
 ```
-$deleteVar[type;id]
+$deleteVar[name;id]
 ```
 | Name | Type | Description | Required | Spread
 | :---: | :---: | :---: | :---: | :---: |
-type | String | The type of the var, eg server, user, role, etc, up to you. | Yes | No
-id | String | the identifier for the variable | Yes | No
+name | String | The name of the variable | Yes | No
+id | String | The identifier of the value (a user, guild, channel, message, etc) | Yes | No
 <details>
 <summary>
     
@@ -16,35 +16,36 @@ id | String | the identifier for the variable | Yes | No
 </summary>
     
 ```ts
-import { ArgType, NativeFunction, Return } from "forgescript";
-import { ForgeQuickDB } from "..";
+import { ArgType, NativeFunction, Return } from "forgescript"
+import { ForgeDB } from ".."
 
 export default new NativeFunction({
     name: "$deleteVar",
-    description: "Deletes a variable value",
+    description: "Deletes a value from a variable",
     unwrap: true,
     brackets: true,
     args: [
         {
-            name: "type",
-            description: "The type of the var, eg server, user, role, etc, up to you.",
+            name: "name",
+            description: "The name of the variable",
             rest: false,
             type: ArgType.String,
-            required: true
+            required: true,
         },
         {
             name: "id",
-            description: "the identifier for the variable",
+            description: "The identifier of the value (a user, guild, channel, message, etc)",
             rest: false,
             type: ArgType.String,
-            required: true
-        }
+            required: true,
+        },
     ],
-    async execute(ctx, [ type, id ]) {
-        await ForgeQuickDB.delete(type, id)
+    async execute(_ctx, [type, id]) {
+        await ForgeDB.delete(type, id)
         return Return.success()
     },
 })
+
 ```
     
 </details>

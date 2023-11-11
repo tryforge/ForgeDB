@@ -1,1 +1,1 @@
-{"version":3,"file":"deleteVar.d.ts","sourceRoot":"","sources":["../../src/functions/deleteVar.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,OAAO,EAAE,cAAc,EAAU,MAAM,aAAa,CAAC;;;;;;;;;;;;;;AAG9D,wBAyBE"}
+{"version":3,"file":"deleteVar.d.ts","sourceRoot":"","sources":["../../src/functions/deleteVar.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,OAAO,EAAE,cAAc,EAAU,MAAM,aAAa,CAAA;;;;;;;;;;;;;;AAG7D,wBAyBE"}

@@ -16,7 +16,7 @@ class ForgeDB extends forgescript_1.ForgeExtension {
     init(client) {
         forgescript_1.FunctionManager.load(__dirname + "/functions");
         ForgeDB.db = new quick_db_1.QuickDB({
-            driver: new quick_db_1.SqliteDriver(this.path)
+            driver: new quick_db_1.SqliteDriver(this.path),
         });
         client.db = ForgeDB.db.table("main");
     }
@@ -32,22 +32,22 @@ class ForgeDB extends forgescript_1.ForgeExtension {
             identifier,
             id,
             type,
-            value
+            value,
         });
     }
     static delete(type, id) {
         return this.db.delete(this.makeIdentifier(type, id));
     }
     static async allWithType(type) {
-        return (await this.db.startsWith(type)).map(x => x.value);
+        return (await this.db.startsWith(type)).map((x) => x.value);
     }
     static async all(filter = () => true) {
         const all = await this.db.all();
-        return all.map(x => x.value).filter(filter);
+        return all.map((x) => x.value).filter(filter);
     }
     static async deleteWithFilter(filter) {
         const all = await this.db.all();
-        return Promise.all(all.filter(x => filter(x.value)).map(x => this.db.delete(x.id)));
+        return Promise.all(all.filter((x) => filter(x.value)).map((x) => this.db.delete(x.id)));
     }
     static deleteAll() {
         return this.db.deleteAll();
