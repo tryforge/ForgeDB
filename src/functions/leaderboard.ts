@@ -1,4 +1,4 @@
-import { ArgType, IExtendedCompiledFunctionField, NativeFunction, Return, ReturnType } from "forgescript"
+import { ArgType, IExtendedCompiledFunctionField, NativeFunction, Return } from "forgescript"
 import { ForgeDB } from ".."
 
 export enum SortType {
