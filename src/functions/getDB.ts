@@ -6,6 +6,6 @@ export default new NativeFunction({
     description: "Returns all the identifiers stored in the DB",
     unwrap: false,
     async execute(_ctx) {
-        return Return.success(ForgeDB.all())
+        return Return.success(await ForgeDB.all())
     },
 })
