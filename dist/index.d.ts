@@ -6,6 +6,8 @@ export interface IQuickDBData {
     id: string;
     type: string;
     value: string;
+    startedAt: number;
+    duration: number;
 }
 export declare class ForgeDB extends ForgeExtension {
     readonly path: string;
@@ -28,5 +30,8 @@ export declare class ForgeDB extends ForgeExtension {
     static all(filter?: (row: IQuickDBData) => boolean): Promise<IQuickDBData[]>;
     static deleteWithFilter(filter: (row: IQuickDBData) => boolean): Promise<number[]>;
     static deleteAll(): Promise<number>;
+    static cdAdd(id: string, duration: number): Promise<void>;
+    static cdDelete(id: string): Promise<void>;
+    static cdTimeLeft(id: string): Promise<number>;
 }
 //# sourceMappingURL=index.d.ts.map

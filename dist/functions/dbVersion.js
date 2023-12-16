@@ -6,7 +6,7 @@ exports.default = new forgescript_1.NativeFunction({
     description: "Returns the version of ForgeDB",
     unwrap: false,
     execute() {
-        return forgescript_1.Return.success(require("../../package.json").version);
+        return this.success(require("../../package.json").version);
     },
 });
 //# sourceMappingURL=dbVersion.js.map

@@ -113,7 +113,7 @@ exports.default = new forgescript_1.NativeFunction({
             else if (execution.return)
                 elements.push(execution.value);
         }
-        return forgescript_1.Return.success(elements.join(sep));
+        return this.success(elements.join(sep));
     },
 });
 //# sourceMappingURL=leaderboard.js.map

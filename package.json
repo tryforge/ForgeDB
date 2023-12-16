@@ -13,12 +13,12 @@
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^20.5.7",
-    "forgescript": "^1.0.6",
     "typedoc": "^0.25.0",
     "typescript": "^5.2.2"
   },
   "dependencies": {
     "better-sqlite3": "^8.6.0",
+    "forgescript": "^1.2.0",
     "quick.db": "^9.1.7"
   }
 }

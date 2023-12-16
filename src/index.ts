@@ -4,10 +4,14 @@ import { QuickDB, SqliteDriver } from "quick.db"
 export type QuickDBTable = QuickDB<IQuickDBData>
 
 export interface IQuickDBData {
+    /* Normal DB */
     identifier: string
     id: string
     type: string
     value: string
+    /* For Cooldowns */
+    startedAt: number
+    duration: number
 }
 
 export class ForgeDB extends ForgeExtension {
@@ -69,5 +73,18 @@ export class ForgeDB extends ForgeExtension {
 
     public static deleteAll() {
         return this.db.deleteAll()
+    }
+    public static async cdAdd(id: string, duration: number) {
+        await this.db.set(id, {
+            startedAt: Date.now(),
+            duration,
+        })
+    }
+    public static async cdDelete(id: string) {
+        await this.db.delete(id)
+    }
+    public static async cdTimeLeft(id: string) {
+        const data = await this.db.get(id)
+        return data ? Math.max(data.duration - (Date.now() - data.startedAt), 0) : 0
     }
 }

@@ -1,4 +1,4 @@
-import { ArgType, NativeFunction, Return } from "forgescript"
+import { ArgType, NativeFunction } from "forgescript"
 import { ForgeDB } from ".."
 
 export default new NativeFunction({
@@ -24,6 +24,6 @@ export default new NativeFunction({
     ],
     async execute(_ctx, [type, id]) {
         await ForgeDB.delete(type, id)
-        return Return.success()
+        return this.success()
     },
 })

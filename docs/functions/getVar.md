@@ -17,7 +17,7 @@ default | String | The default value if the identifier doesn't exist in the vari
 </summary>
     
 ```ts
-import { ArgType, NativeFunction, Return } from "forgescript"
+import { ArgType, NativeFunction } from "forgescript"
 import { ForgeDB } from ".."
 
 export default new NativeFunction({
@@ -50,7 +50,7 @@ export default new NativeFunction({
     brackets: true,
     async execute(_ctx, [name, id, def]) {
         const data = await ForgeDB.get(name, id)
-        return Return.success(data?.value ?? def)
+        return this.success(data?.value ?? def)
     },
 })
 

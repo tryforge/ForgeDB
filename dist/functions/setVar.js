@@ -32,7 +32,7 @@ exports.default = new forgescript_1.NativeFunction({
     brackets: true,
     async execute(_ctx, [name, id, value]) {
         await __1.ForgeDB.set(name, id, value);
-        return forgescript_1.Return.success();
+        return this.success();
     },
 });
 //# sourceMappingURL=setVar.js.map

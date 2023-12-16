@@ -25,7 +25,7 @@ exports.default = new forgescript_1.NativeFunction({
     ],
     async execute(_ctx, [type, id]) {
         await __1.ForgeDB.delete(type, id);
-        return forgescript_1.Return.success();
+        return this.success();
     },
 });
 //# sourceMappingURL=deleteVar.js.map

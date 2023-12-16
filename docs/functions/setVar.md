@@ -17,7 +17,7 @@ value | String | The value | Yes | No
 </summary>
     
 ```ts
-import { ArgType, NativeFunction, Return } from "forgescript"
+import { ArgType, NativeFunction } from "forgescript"
 import { ForgeDB } from ".."
 
 export default new NativeFunction({
@@ -50,7 +50,7 @@ export default new NativeFunction({
     brackets: true,
     async execute(_ctx, [name, id, value]) {
         await ForgeDB.set(name, id, value)
-        return Return.success()
+        return this.success()
     },
 })
 

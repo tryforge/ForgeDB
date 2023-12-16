@@ -68,7 +68,7 @@ export default new NativeFunction({
     brackets: true,
     async execute(ctx) {
         const [type, valueVariable, positionVariable, code, sortType, max, page, separator] = this.data.fields! as IExtendedCompiledFunctionField[]
-
+        
         const typeExec = (await this["resolveCode"](ctx, type)) as Return
         if (!this["isValidReturnType"](typeExec)) return typeExec
 
@@ -116,6 +116,6 @@ export default new NativeFunction({
             else if (execution.return) elements.push(execution.value as string)
         }
 
-        return Return.success(elements.join(sep))
+        return this.success(elements.join(sep))
     },
 })

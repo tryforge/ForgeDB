@@ -1,4 +1,4 @@
-import { ArgType, NativeFunction, Return } from "forgescript"
+import { ArgType, NativeFunction } from "forgescript"
 import { ForgeDB } from ".."
 
 export enum SortType {
@@ -38,6 +38,6 @@ export default new NativeFunction({
         const data = await ForgeDB.allWithType(name)
         data.sort((a, b) => parseInt(a.value) - parseInt(b.value))
         const index = ([SortType[0], SortType.asc].indexOf(type ?? "asc") === -1 ? data : [...data].reverse()).findIndex((s) => s.id === id)
-        return Return.success(index + 1)
+        return this.success(index + 1)
     },
 })

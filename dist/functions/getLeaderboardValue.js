@@ -40,7 +40,7 @@ exports.default = new forgescript_1.NativeFunction({
         const data = await __1.ForgeDB.allWithType(name);
         data.sort((a, b) => parseInt(a.value) - parseInt(b.value));
         const index = ([SortType[0], SortType.asc].indexOf(type ?? "asc") === -1 ? data : [...data].reverse()).findIndex((s) => s.id === id);
-        return forgescript_1.Return.success(index + 1);
+        return this.success(index + 1);
     },
 });
 //# sourceMappingURL=getLeaderboardValue.js.map

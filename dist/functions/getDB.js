@@ -7,7 +7,7 @@ exports.default = new forgescript_1.NativeFunction({
     description: "Returns all the identifiers stored in the DB",
     unwrap: false,
     async execute(_ctx) {
-        return forgescript_1.Return.successJSON(await __1.ForgeDB.all());
+        return this.successJSON(await __1.ForgeDB.all());
     },
 });
 //# sourceMappingURL=getDB.js.map

@@ -52,6 +52,19 @@ class ForgeDB extends forgescript_1.ForgeExtension {
     static deleteAll() {
         return this.db.deleteAll();
     }
+    static async cdAdd(id, duration) {
+        await this.db.set(id, {
+            startedAt: Date.now(),
+            duration,
+        });
+    }
+    static async cdDelete(id) {
+        await this.db.delete(id);
+    }
+    static async cdTimeLeft(id) {
+        const data = await this.db.get(id);
+        return data ? Math.max(data.duration - (Date.now() - data.startedAt), 0) : 0;
+    }
 }
 exports.ForgeDB = ForgeDB;
 //# sourceMappingURL=index.js.map
