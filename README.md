@@ -5,11 +5,10 @@ Easy to use database for forge.
 [![forgescript](https://img.shields.io/github/package-json/v/tryforge/ForgeScript/main?label=forgescript&color=5c16d4)](https://github.com/tryforge/ForgeScript/)
 [![Discord](https://img.shields.io/discord/739934735387721768?logo=discord)](https://discord.gg/hcJgjzPvqb)
 ## How to use
-> Make sure to have installed typescript package as dependency, if installing from github.
 
-Download this repo as a npm package:
+Download this npm package:
 ```bash
-npm i https://github.com/tryforge/ForgeDB.git
+npm i forgedb
 ```
 
 Now, in your client initialization:
@@ -25,4 +24,4 @@ const client = new ForgeClient({
 })
 ```
 And voi-la, you now have database functions loaded to your bot. <br>
-Check our docs/functions folder for info of all functions available.
+Check our [docs/functions folder](https://github.com/tryforge/ForgeDB/tree/main/docs/functions) for info of all functions available.
