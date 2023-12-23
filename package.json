@@ -1,16 +1,29 @@
 {
   "name": "forgedb",
   "version": "1.0.0",
-  "description": "",
+  "description": "Easy to use database for forge.",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
   "scripts": {
     "docgen": "tsc && typedoc src/index.ts && node dist/docgen",
     "test": "tsc && node dist/__tests__/runner"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "bdfd",
+    "aoi.js",
+    "aoi",
+    "dbd",
+    "dbd.ts",
+    "dbd.js",
+    "easy",
+    "fast",
+    "efficient",
+    "bdscript",
+    "database",
+    "db"
+  ],
+  "author": "aggelos007",
+  "license": "MIT",
   "devDependencies": {
     "@types/node": "^20.5.7",
     "typedoc": "^0.25.0",
@@ -20,5 +33,19 @@
     "better-sqlite3": "^8.6.0",
     "forgescript": "^1.2.0",
     "quick.db": "^9.1.7"
+  },
+  "directories": {
+    "doc": "docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tryforge/ForgeDB.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tryforge/ForgeDB/issues"
+  },
+  "homepage": "https://github.com/tryforge/ForgeDB#readme",
+  "engines": {
+    "node": ">=16.11.0"
   }
 }
