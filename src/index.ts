@@ -1,4 +1,4 @@
-import { ForgeClient, ForgeExtension, FunctionManager } from "forgescript"
+import { ForgeClient, ForgeExtension } from "forgescript"
 import { QuickDB, SqliteDriver } from "quick.db"
 
 export type QuickDBTable = QuickDB<IQuickDBData>
@@ -26,7 +26,7 @@ export class ForgeDB extends ForgeExtension {
     }
 
     init(client: ForgeClient): void {
-        FunctionManager.load(__dirname + "/functions")
+        this.load(__dirname + "/functions")
 
         ForgeDB.db = new QuickDB({
             driver: new SqliteDriver(this.path),

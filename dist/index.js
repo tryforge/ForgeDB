@@ -14,7 +14,7 @@ class ForgeDB extends forgescript_1.ForgeExtension {
         this.path = path;
     }
     init(client) {
-        forgescript_1.FunctionManager.load(__dirname + "/functions");
+        this.load(__dirname + "/functions");
         ForgeDB.db = new quick_db_1.QuickDB({
             driver: new quick_db_1.SqliteDriver(this.path),
         });
