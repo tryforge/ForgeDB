@@ -3,6 +3,8 @@ import { ForgeDB } from ".."
 
 export default new NativeFunction({
     name: "$getCooldownTime",
+    version: "1.0.0",
+    category: "unknown",
     description: "Retrieves current cooldown time in ms for given id",
     brackets: true,
     unwrap: true,

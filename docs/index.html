@@ -16,17 +16,14 @@
 <p><a href="https://github.com/tryforge/ForgeDB/"><img src="https://img.shields.io/github/package-json/v/tryforge/ForgeDB/main?label=forgedb&color=5c16d4" alt="forgedb"></a>
 <a href="https://github.com/tryforge/ForgeScript/"><img src="https://img.shields.io/github/package-json/v/tryforge/ForgeScript/main?label=forgescript&color=5c16d4" alt="forgescript"></a>
 <a href="https://discord.gg/hcJgjzPvqb"><img src="https://img.shields.io/discord/739934735387721768?logo=discord" alt="Discord"></a></p>
-<a id="md:how-to-use" class="tsd-anchor"></a><h2><a href="#md:how-to-use">How to use</a></h2><blockquote>
-<p>Make sure to have installed typescript package as dependency, if installing from github.</p>
-</blockquote>
-<p>Download this repo as a npm package:</p>
-<pre><code class="language-bash"><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">i</span><span class="hl-1"> </span><span class="hl-2">https://github.com/tryforge/ForgeDB.git</span>
+<a id="md:how-to-use" class="tsd-anchor"></a><h2><a href="#md:how-to-use">How to use</a></h2><p>Download this npm package:</p>
+<pre><code class="language-bash"><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">i</span><span class="hl-1"> </span><span class="hl-2">forgedb</span>
 </code><button>Copy</button></pre>
 <p>Now, in your client initialization:</p>
 <pre><code class="language-ts"><span class="hl-3">const</span><span class="hl-1"> { </span><span class="hl-4">ForgeDB</span><span class="hl-1"> } = </span><span class="hl-0">require</span><span class="hl-1">(</span><span class="hl-2">&quot;forgedb&quot;</span><span class="hl-1">)</span><br/><br/><span class="hl-5">// I&#39;ll assume client, can be bot or anything else</span><br/><span class="hl-3">const</span><span class="hl-1"> </span><span class="hl-4">client</span><span class="hl-1"> = </span><span class="hl-3">new</span><span class="hl-1"> </span><span class="hl-0">ForgeClient</span><span class="hl-1">({</span><br/><span class="hl-1">    ...</span><span class="hl-6">options</span><span class="hl-1"> </span><span class="hl-5">// The options you currently have</span><br/><span class="hl-1">    </span><span class="hl-6">extensions</span><span class="hl-1">: [</span><br/><span class="hl-1">        </span><span class="hl-3">new</span><span class="hl-1"> </span><span class="hl-0">ForgeDB</span><span class="hl-1">()</span><br/><span class="hl-1">    ]</span><br/><span class="hl-1">})</span>
 </code><button>Copy</button></pre>
 <p>And voi-la, you now have database functions loaded to your bot. <br>
-Check our docs/functions folder for info of all functions available.</p>
+Check our <a href="https://github.com/tryforge/ForgeDB/tree/main/docs/functions">docs/functions folder</a> for info of all functions available.</p>
 </div></div>
 <div class="col-sidebar">
 <div class="page-menu">

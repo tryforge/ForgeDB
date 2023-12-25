@@ -3,6 +3,8 @@ import { ForgeDB } from ".."
 
 export default new NativeFunction({
     name: "$deleteVar",
+    version: "1.0.0",
+    category: "unknown",
     description: "Deletes a value from a variable",
     unwrap: true,
     brackets: true,

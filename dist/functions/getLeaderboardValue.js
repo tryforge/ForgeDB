@@ -10,6 +10,8 @@ var SortType;
 })(SortType || (exports.SortType = SortType = {}));
 exports.default = new forgescript_1.NativeFunction({
     name: "$getLeaderboardValue",
+    version: "1.0.0",
+    category: "unknown",
     description: "Returns the position of a value in the leaderboard of a variable",
     unwrap: true,
     args: [

@@ -3,3 +3,4 @@ docs
 prisma
 */**/__tests__
 src
+metadata

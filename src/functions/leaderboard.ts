@@ -8,6 +8,8 @@ export enum SortType {
 
 export default new NativeFunction({
     name: "$leaderboard",
+    version: "1.0.0",
+    category: "unknown",
     description: "Creates a leaderboard of identifiers in a variable",
     unwrap: false,
     args: [

@@ -3,6 +3,8 @@ import { ForgeDB } from ".."
 
 export default new NativeFunction({
     name: "$deleteCooldown",
+    version: "1.0.0",
+    category: "unknown",
     description: "Deletes cooldown of given id",
     brackets: true,
     unwrap: true,

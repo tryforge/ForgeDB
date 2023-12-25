@@ -3,6 +3,8 @@ import { ForgeDB } from ".."
 
 export default new NativeFunction({
     name: "$cooldown",
+    version: "1.0.0",
+    category: "unknown",
         description: "Adds a command cooldown",
     brackets: true,
     unwrap: false,

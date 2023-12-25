@@ -4,6 +4,8 @@ const forgescript_1 = require("forgescript");
 const __1 = require("..");
 exports.default = new forgescript_1.NativeFunction({
     name: "$getCooldownTime",
+    version: "1.0.0",
+    category: "unknown",
     description: "Retrieves current cooldown time in ms for given id",
     brackets: true,
     unwrap: true,

@@ -10,6 +10,8 @@ var SortType;
 })(SortType || (exports.SortType = SortType = {}));
 exports.default = new forgescript_1.NativeFunction({
     name: "$leaderboard",
+    version: "1.0.0",
+    category: "unknown",
     description: "Creates a leaderboard of identifiers in a variable",
     unwrap: false,
     args: [

@@ -3,6 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const forgescript_1 = require("forgescript");
 exports.default = new forgescript_1.NativeFunction({
     name: "$dbVersion",
+    version: "1.0.0",
+    category: "unknown",
     description: "Returns the version of ForgeDB",
     unwrap: false,
     execute() {

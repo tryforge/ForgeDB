@@ -4,6 +4,8 @@ const forgescript_1 = require("forgescript");
 const __1 = require("..");
 exports.default = new forgescript_1.NativeFunction({
     name: "$deleteVar",
+    version: "1.0.0",
+    category: "unknown",
     description: "Deletes a value from a variable",
     unwrap: true,
     brackets: true,

@@ -3,6 +3,8 @@ import { ForgeDB } from ".."
 
 export default new NativeFunction({
     name: "$setVar",
+    version: "1.0.0",
+    category: "unknown",
     description: "Sets an identifier's value in a variable",
     unwrap: true,
     args: [
