@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "better-sqlite3": "^8.6.0",
-    "forgescript": "^1.2.0",
+    "forgescript": "^1.3.0",
     "quick.db": "^9.1.7"
   },
   "directories": {
