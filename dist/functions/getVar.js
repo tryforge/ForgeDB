@@ -39,7 +39,7 @@ exports.default = new forgescript_1.NativeFunction({
                 return this.successJSON(def);
             else if (__1.ForgeDB.defaults && name in __1.ForgeDB.defaults) {
                 const defData = __1.ForgeDB.defaults[name];
-                if ("functions" in defData) {
+                if (typeof defData === "object" && defData !== null && "functions" in defData) {
                     const d = defData;
                     // Run
                     const result = await forgescript_1.Interpreter.run(ctx.clone({

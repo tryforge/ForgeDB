@@ -37,7 +37,7 @@ export default new NativeFunction({
             if (def) return this.successJSON(def)
             else if (ForgeDB.defaults && name in ForgeDB.defaults) {
                 const defData = ForgeDB.defaults[name]
-                if ("functions" in (defData as IExtendedCompilationResult)) {
+                if (typeof defData === "object" && defData !== null && "functions" in (defData as IExtendedCompilationResult)) {
                     const d = <IExtendedCompilationResult>defData
                     // Run
                     const result = await Interpreter.run(
