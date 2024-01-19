@@ -43,6 +43,7 @@ export default new NativeFunction({
                     const result = await Interpreter.run(
                         ctx.clone({
                             data: d,
+                            allowTopLevelReturn: true,
                             doNotSend: true,
                             redirectErrorsToConsole: true,
                         })

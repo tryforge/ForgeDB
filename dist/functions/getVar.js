@@ -44,6 +44,7 @@ exports.default = new forgescript_1.NativeFunction({
                     // Run
                     const result = await forgescript_1.Interpreter.run(ctx.clone({
                         data: d,
+                        allowTopLevelReturn: true,
                         doNotSend: true,
                         redirectErrorsToConsole: true,
                     }));
