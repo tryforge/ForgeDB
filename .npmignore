@@ -1,0 +1,6 @@
+docs
+\.env
+prisma
+*/**/__tests__
+src
+metadata
