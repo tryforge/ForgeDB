@@ -1,19 +1,19 @@
 # ForgeDB
 Easy to use database for forge.
 
-[![forgedb](https://img.shields.io/github/package-json/v/tryforge/ForgeDB/main?label=forgedb&color=5c16d4)](https://github.com/tryforge/ForgeDB/)
+[![forge.db](https://img.shields.io/github/package-json/v/tryforge/ForgeDB/main?label=forge.db&color=5c16d4)](https://github.com/tryforge/ForgeDB/)
 [![forgescript](https://img.shields.io/github/package-json/v/tryforge/ForgeScript/main?label=forgescript&color=5c16d4)](https://github.com/tryforge/ForgeScript/)
 [![Discord](https://img.shields.io/discord/739934735387721768?logo=discord)](https://discord.gg/hcJgjzPvqb)
 ## How to use
 
 Download this npm package:
 ```bash
-npm i forgedb
+npm i forge.db
 ```
 
 Now, in your client initialization:
 ```ts
-const { ForgeDB } = require("forgedb")
+const { ForgeDB } = require("forge.db")
 
 // I'll assume client, can be bot or anything else
 const client = new ForgeClient({
@@ -24,4 +24,4 @@ const client = new ForgeClient({
 })
 ```
 And voi-la, you now have database functions loaded to your bot. <br>
-Check our [docs/functions folder](https://github.com/tryforge/ForgeDB/tree/main/docs/functions) for info of all functions available.
+Check our [docs/functions folder](https://docs.botforge.org/p/ForgeDB/) for info of all functions available.
