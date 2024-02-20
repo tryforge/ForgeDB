@@ -8,21 +8,21 @@ export default new NativeFunction({
     args: [
         {
             name: "name",
-            description: "The name of the variable",
+            description: "The name of the variable.",
             rest: false,
             type: ArgType.String,
             required: true,
         },
         {
             name: "id",
-            description: "The identifier for the value (a user, guild, channel, message, etc)",
+            description: "The identifier for the value (a user, guild, channel, message, etc).",
             rest: false,
             type: ArgType.String,
             required: true,
         },
         {
             name: "value",
-            description: "The value",
+            description: "The value.",
             rest: false,
             required: true,
             type: ArgType.String,

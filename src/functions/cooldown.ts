@@ -3,27 +3,27 @@ import { ForgeDB } from ".."
 
 export default new NativeFunction({
     name: "$cooldown",
-        description: "Adds a command cooldown",
+        description: "Adds a cooldown to a command.",
     brackets: true,
     unwrap: false,
     args: [
         {
             name: "id",
             rest: false,
-            description: "The id to assign the cooldown to, can be anything",
+            description: "The ID to which the cooldown should be assigned. The ID can be anything.",
             type: ArgType.String,
             required: true,
         },
         {
             name: "duration",
-            description: "The duration of the cooldown",
+            description: "The duration of the cooldown.",
             rest: false,
             type: ArgType.Time,
             required: true,
         },
         {
             name: "code",
-            description: "The code to execute if the cooldown is active",
+            description: "The code to execute if the cooldown is active.",
             rest: false,
             type: ArgType.String,
         },

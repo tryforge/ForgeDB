@@ -3,13 +3,13 @@ import { ForgeDB } from ".."
 
 export default new NativeFunction({
     name: "$deleteCooldown",
-    description: "Deletes cooldown of given id",
+    description: "Deletes the cooldown of given ID.",
     brackets: true,
     unwrap: true,
     args: [
         {
             name: "id",
-            description: "The id to delete its cooldown",
+            description: "The ID for which to its cooldown.",
             rest: false,
             type: ArgType.String,
             required: true,
