@@ -1,3 +1,3 @@
-import { generateMetadata } from "forgescript" 
+import { generateMetadata } from "@tryforge/forgescript" 
 
 generateMetadata(`${__dirname}/functions`, "functions")

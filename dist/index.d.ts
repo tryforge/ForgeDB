@@ -1,4 +1,4 @@
-import { ForgeClient, ForgeExtension, IExtendedCompilationResult } from "forgescript";
+import { ForgeClient, ForgeExtension, IExtendedCompilationResult } from "@tryforge/forgescript";
 import { QuickDB } from "quick.db";
 export type QuickDBTable = QuickDB<IQuickDBData>;
 export interface IQuickDBData {
@@ -19,13 +19,18 @@ export declare class ForgeDB extends ForgeExtension {
     constructor(path?: string);
     init(client: ForgeClient): void;
     static makeIdentifier(type: string, id: string): string;
-    static get(type: string, id: string): any;
-    static set(type: string, id: string, value: string): any;
-    static delete(type: string, id: string): any;
-    static allWithType(type: string): Promise<any>;
-    static all(filter?: (row: IQuickDBData) => boolean): Promise<any>;
-    static deleteWithFilter(filter: (row: IQuickDBData) => boolean): Promise<any>;
-    static deleteAll(): any;
+    static get(type: string, id: string): Promise<IQuickDBData | null>;
+    static set(type: string, id: string, value: string): Promise<{
+        identifier: string;
+        id: string;
+        type: string;
+        value: string;
+    }>;
+    static delete(type: string, id: string): Promise<number>;
+    static allWithType(type: string): Promise<IQuickDBData[]>;
+    static all(filter?: (row: IQuickDBData) => boolean): Promise<IQuickDBData[]>;
+    static deleteWithFilter(filter: (row: IQuickDBData) => boolean): Promise<number[]>;
+    static deleteAll(): Promise<number>;
     static cdAdd(id: string, duration: number): Promise<void>;
     static cdDelete(id: string): Promise<void>;
     static cdTimeLeft(id: string): Promise<number>;

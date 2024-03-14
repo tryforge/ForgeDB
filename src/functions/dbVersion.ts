@@ -1,4 +1,4 @@
-import { ArgType, NativeFunction } from "forgescript"
+import { ArgType, NativeFunction } from "@tryforge/forgescript"
 
 export default new NativeFunction({
     name: "$dbVersion",

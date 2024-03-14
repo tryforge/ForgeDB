@@ -1,4 +1,4 @@
-import { Compiler, ForgeClient, ForgeExtension, IExtendedCompilationResult } from "forgescript"
+import { Compiler, ForgeClient, ForgeExtension, IExtendedCompilationResult } from "@tryforge/forgescript"
 import { QuickDB, SqliteDriver } from "quick.db"
 
 export type QuickDBTable = QuickDB<IQuickDBData>

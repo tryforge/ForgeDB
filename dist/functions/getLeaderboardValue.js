@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SortType = void 0;
-const forgescript_1 = require("forgescript");
+const forgescript_1 = require("@tryforge/forgescript");
 const __1 = require("..");
 var SortType;
 (function (SortType) {

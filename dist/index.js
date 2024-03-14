@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ForgeDB = void 0;
-const forgescript_1 = require("forgescript");
+const forgescript_1 = require("@tryforge/forgescript");
 const quick_db_1 = require("quick.db");
 class ForgeDB extends forgescript_1.ForgeExtension {
     path;

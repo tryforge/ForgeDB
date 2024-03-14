@@ -1,4 +1,4 @@
-import { ArgType, IExtendedCompiledFunctionField, NativeFunction } from "forgescript"
+import { ArgType, IExtendedCompiledFunctionField, NativeFunction } from "@tryforge/forgescript"
 import { ForgeDB } from ".."
 
 export default new NativeFunction({

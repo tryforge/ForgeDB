@@ -1,4 +1,4 @@
-import { ArgType, NativeFunction } from "forgescript";
+import { ArgType, NativeFunction } from "@tryforge/forgescript";
 export declare enum SortType {
     asc = 0,
     desc = 1
