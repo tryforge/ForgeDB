@@ -26,6 +26,6 @@ export default new NativeFunction({
     ],
     async execute(_ctx, [id, type]) {
         if(DataType[type] == 'member' && id.split('_').length != 2) return this.error(Error('The `id` field with the type `member` must follow this format: `userID_guildID`'));
-        return this.success(await DataBase.cdTimeLeft(id))
+        return this.success(await DataBase.cdTimeLeft(`${id}_${DataType[type]}`))
     },
 })

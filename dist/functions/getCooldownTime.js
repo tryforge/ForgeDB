@@ -28,7 +28,7 @@ exports.default = new forgescript_1.NativeFunction({
     async execute(_ctx, [id, type]) {
         if (database_1.DataType[type] == 'member' && id.split('_').length != 2)
             return this.error(Error('The `id` field with the type `member` must follow this format: `userID_guildID`'));
-        return this.success(await database_1.DataBase.cdTimeLeft(id));
+        return this.success(await database_1.DataBase.cdTimeLeft(`${id}_${database_1.DataType[type]}`));
     },
 });
 //# sourceMappingURL=getCooldownTime.js.map
