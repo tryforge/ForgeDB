@@ -1,5 +1,5 @@
 import { Compiler, ForgeClient, ForgeExtension, IExtendedCompilationResult } from "@tryforge/forgescript"
-import { DataBase } from "./database"
+import { DataBase, IDataBaseOptions } from "./database"
 
 export class ForgeDB extends ForgeExtension {
     public static defaults?: Record<PropertyKey, IExtendedCompilationResult | unknown>
@@ -8,13 +8,13 @@ export class ForgeDB extends ForgeExtension {
     description: string = "A fast and reliable database extension for Forge"
     version: string = "1.0.0"
 
-    public constructor(public readonly path: string = "./forge.db") {
+    public constructor(public readonly options?: IDataBaseOptions) {
         super()
     }
 
     init(client: ForgeClient): void {
         this.load(__dirname + "/functions")
-        client.db = new DataBase()
+        client.db = new DataBase(this.options)
     }
 
     public variables(rec: Record<PropertyKey, unknown>) {

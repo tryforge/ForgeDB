@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { execSync } from "child_process";
 import * as fs from "fs";
+import { readFile } from "fs/promises";
 
 export enum DataType { global, guild, user, member, channel, message };
 
@@ -12,21 +13,31 @@ export interface IPrismaData {
     value: string
 }
 
-const prismaSchema = `generator client {\n  provider = "prisma-client-js"\n}\n\ndatasource db {\n  provider = "sqlite"\n  url = "file:./forge.db"\n}\n\nmodel data {\n  identifier String @id @map("_id")\n  name String\n  id String\n  type String\n  value String\n}\n\nmodel cds {\n  id String @id @map("_id")\n  startedAt Int \n  duration Int\n}`;
-function createPrismaConfig() {
+async function configPrisma(prismaSchema: string) {
     const directoryPath = './prisma';
-    if(fs.existsSync(directoryPath)) return false;
-    fs.mkdirSync(directoryPath);
-    fs.writeFileSync(`${directoryPath}/schema.prisma`, prismaSchema)
-    return true
+    if(fs.existsSync(directoryPath)){
+        if((await readFile(`${directoryPath}/schema.prisma`)).toString() == prismaSchema) return false;
+        fs.writeFileSync(`${directoryPath}/schema.prisma`, prismaSchema)
+        return true;
+    } else {
+        fs.mkdirSync(directoryPath);
+        fs.writeFileSync(`${directoryPath}/schema.prisma`, prismaSchema)
+        return true
+    }
+}
+
+export interface IDataBaseOptions {
+    type: "mongodb";
+    url: `mongodb+svr://${string}:${string}@${string}`;
 }
 
 export class DataBase {
     private static db: PrismaClient
 
-    constructor(){
-        if(createPrismaConfig()) execSync("npx prisma generate && npx prisma db push");
-        DataBase.db = new PrismaClient()
+    constructor(options?: IDataBaseOptions){
+        const data =`generator client {\n  provider = "prisma-client-js"\n}\n\ndatasource db {\n  provider = "${options?.type ?? "sqlite"}"\n  url = "${options?.url ?? "file:./forge.db"}"\n}\n\nmodel data {\n  identifier String @id @map("_id")\n  name String\n  id String\n  type String\n  value String\n}\n\nmodel cds {\n  id String @id @map("_id")\n  startedAt Int \n  duration Int\n}`
+        configPrisma(data).then(s => { if(s) execSync("npx prisma generate && npx prisma db push") })
+        .then(() => { DataBase.db = new PrismaClient() })
     }
 
     public static async all(){

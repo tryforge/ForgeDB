@@ -4,18 +4,18 @@ exports.ForgeDB = void 0;
 const forgescript_1 = require("@tryforge/forgescript");
 const database_1 = require("./database");
 class ForgeDB extends forgescript_1.ForgeExtension {
-    path;
+    options;
     static defaults;
     name = "ForgeDB";
     description = "A fast and reliable database extension for Forge";
     version = "1.0.0";
-    constructor(path = "./forge.db") {
+    constructor(options) {
         super();
-        this.path = path;
+        this.options = options;
     }
     init(client) {
         this.load(__dirname + "/functions");
-        client.db = new database_1.DataBase();
+        client.db = new database_1.DataBase(this.options);
     }
     variables(rec) {
         ForgeDB.variables(rec);

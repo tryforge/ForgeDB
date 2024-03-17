@@ -13,9 +13,13 @@ export interface IPrismaData {
     type: 'global' | 'guild' | 'user' | 'member' | 'channel' | 'message';
     value: string;
 }
+export interface IDataBaseOptions {
+    type: "mongodb";
+    url: `mongodb+svr://${string}:${string}@${string}`;
+}
 export declare class DataBase {
     private static db;
-    constructor();
+    constructor(options?: IDataBaseOptions);
     static all(): Promise<{
         identifier: string;
         name: string;
