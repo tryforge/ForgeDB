@@ -16,25 +16,55 @@ export interface IPrismaData {
 export declare class DataBase {
     private static db;
     constructor();
-    static all(): Promise<any>;
+    static all(): Promise<{
+        identifier: string;
+        name: string;
+        id: string;
+        type: string;
+        value: string;
+    }[]>;
     static set(options: {
         name: string;
         id: string;
         type: IPrismaData['type'];
         value: string;
-    }): Promise<any>;
+    }): Promise<{
+        identifier: string;
+        name: string;
+        id: string;
+        type: string;
+        value: string;
+    }>;
     static get(options: {
         name: string;
         id: string;
         type: IPrismaData['type'];
-    }): Promise<any>;
+    }): Promise<{
+        identifier: string;
+        name: string;
+        id: string;
+        type: string;
+        value: string;
+    } | null>;
     static delete(data: {
         name: string;
         id: string;
         type: IPrismaData['type'];
-    }): Promise<any>;
-    static allWithType(name: string, type: string): Promise<any>;
-    static wipe(): Promise<any>;
+    }): Promise<void | {
+        identifier: string;
+        name: string;
+        id: string;
+        type: string;
+        value: string;
+    }>;
+    static allWithType(name: string, type: string): Promise<{
+        identifier: string;
+        name: string;
+        id: string;
+        type: string;
+        value: string;
+    }[]>;
+    static wipe(): Promise<import(".prisma/client").Prisma.BatchPayload>;
     static cdAdd(data: {
         id: string;
         duration: number;
