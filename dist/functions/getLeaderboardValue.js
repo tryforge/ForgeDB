@@ -21,17 +21,17 @@ exports.default = new forgescript_1.NativeFunction({
             type: forgescript_1.ArgType.String,
             required: true,
         }, {
+            name: "id",
+            description: "The identifier of a user",
+            rest: false,
+            type: forgescript_1.ArgType.String,
+            required: true,
+        }, {
             name: "type",
             description: "The type of record (ex: global, guild, user etc)",
             rest: false,
             type: forgescript_1.ArgType.Enum,
             enum: database_1.DataType,
-            required: true,
-        }, {
-            name: "id",
-            description: "The identifier of a user",
-            rest: false,
-            type: forgescript_1.ArgType.String,
             required: true,
         },
         {
@@ -43,7 +43,7 @@ exports.default = new forgescript_1.NativeFunction({
         },
     ],
     brackets: true,
-    async execute(_ctx, [name, type, id, sortType]) {
+    async execute(_ctx, [name, id, type, sortType]) {
         if (database_1.DataType[type] == 'member' && id.split('_').length != 2)
             return this.error(Error('The `id` field with the type `member` must follow this format: `userID_guildID`'));
         const data = await database_1.DataBase.allWithType(name, database_1.DataType[type]);

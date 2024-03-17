@@ -19,17 +19,17 @@ export default new NativeFunction({
             type: ArgType.String,
             required: true,
         },{
+            name: "id",
+            description: "The identifier of a user",
+            rest: false,
+            type: ArgType.String,
+            required: true,
+        },{
             name: "type",
             description: "The type of record (ex: global, guild, user etc)",
             rest: false,
             type: ArgType.Enum,
             enum: DataType,
-            required: true,
-        },{
-            name: "id",
-            description: "The identifier of a user",
-            rest: false,
-            type: ArgType.String,
             required: true,
         },
         {
@@ -41,7 +41,7 @@ export default new NativeFunction({
         },
     ],
     brackets: true,
-    async execute(_ctx, [name, type, id, sortType]) {
+    async execute(_ctx, [name, id, type, sortType]) {
         if(DataType[type] == 'member' && id.split('_').length != 2) return this.error(Error('The `id` field with the type `member` must follow this format: `userID_guildID`'));
         const data = await DataBase.allWithType(name, DataType[type])
         data.sort((a, b) => parseInt(a.value) - parseInt(b.value))
