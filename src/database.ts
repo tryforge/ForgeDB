@@ -26,6 +26,11 @@ async function configPrisma(prismaSchema: string) {
     }
 }
 
+async function connect(data:string){ 
+    if(await configPrisma(data)) 
+    execSync("npx prisma generate && npx prisma db push") 
+}
+
 export interface IDataBaseOptions {
     type: "mongodb";
     url: `mongodb+svr://${string}:${string}@${string}`;
@@ -36,8 +41,7 @@ export class DataBase {
 
     constructor(options?: IDataBaseOptions){
         const data =`generator client {\n  provider = "prisma-client-js"\n}\n\ndatasource db {\n  provider = "${options?.type ?? "sqlite"}"\n  url = "${options?.url ?? "file:./forge.db"}"\n}\n\nmodel data {\n  identifier String @id @map("_id")\n  name String\n  id String\n  type String\n  value String\n}\n\nmodel cds {\n  id String @id @map("_id")\n  startedAt Int \n  duration Int\n}`
-        configPrisma(data).then(s => { if(s) execSync("npx prisma generate && npx prisma db push") })
-        .then(() => { DataBase.db = new PrismaClient() })
+        connect(data).then( () => { DataBase.db = new PrismaClient() })
     }
 
     public static async all(){

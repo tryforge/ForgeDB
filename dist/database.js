@@ -52,13 +52,15 @@ async function configPrisma(prismaSchema) {
         return true;
     }
 }
+async function connect(data) {
+    if (await configPrisma(data))
+        (0, child_process_1.execSync)("npx prisma generate && npx prisma db push");
+}
 class DataBase {
     static db;
     constructor(options) {
         const data = `generator client {\n  provider = "prisma-client-js"\n}\n\ndatasource db {\n  provider = "${options?.type ?? "sqlite"}"\n  url = "${options?.url ?? "file:./forge.db"}"\n}\n\nmodel data {\n  identifier String @id @map("_id")\n  name String\n  id String\n  type String\n  value String\n}\n\nmodel cds {\n  id String @id @map("_id")\n  startedAt Int \n  duration Int\n}`;
-        configPrisma(data).then(s => { if (s)
-            (0, child_process_1.execSync)("npx prisma generate && npx prisma db push"); })
-            .then(() => { DataBase.db = new client_1.PrismaClient(); });
+        connect(data).then(() => { DataBase.db = new client_1.PrismaClient(); });
     }
     static async all() {
         return await this.db.data.findMany();
