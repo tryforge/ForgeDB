@@ -1,1 +1,1 @@
-{"version":3,"file":"deleteCooldown.d.ts","sourceRoot":"","sources":["../../src/functions/deleteCooldown.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,OAAO,EAAE,cAAc,EAAE,MAAM,uBAAuB,CAAA;;;;;;;;AAG/D,wBAmBE"}
+{"version":3,"file":"deleteCooldown.d.ts","sourceRoot":"","sources":["../../src/functions/deleteCooldown.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,OAAO,EAAE,cAAc,EAAE,MAAM,uBAAuB,CAAA;AAC/D,OAAO,EAAY,QAAQ,EAAE,MAAM,aAAa,CAAA;;;;;;;;;;;;;;;AAEhD,wBA0BE"}

@@ -1,5 +1,5 @@
 import { ArgType, NativeFunction } from "@tryforge/forgescript"
-import { ForgeDB } from ".."
+import { DataBase } from "../database"
 
 export default new NativeFunction({
     name: "$getDB",
@@ -8,6 +8,6 @@ export default new NativeFunction({
     output: ArgType.Json,
     unwrap: false,
     async execute(_ctx) {
-        return this.successJSON(await ForgeDB.all())
+        return this.successJSON(await DataBase.all())
     },
 })

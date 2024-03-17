@@ -1,10 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const forgescript_1 = require("@tryforge/forgescript");
-const __1 = require("..");
+const database_1 = require("../database");
 exports.default = new forgescript_1.NativeFunction({
     name: "$deleteVar",
-    version: "1.0.0",
     description: "Deletes a value from a variable",
     unwrap: true,
     brackets: true,
@@ -15,17 +14,25 @@ exports.default = new forgescript_1.NativeFunction({
             rest: false,
             type: forgescript_1.ArgType.String,
             required: true,
-        },
-        {
+        }, {
             name: "id",
-            description: "The identifier of the value (a user, guild, channel, message, etc)",
+            description: "The identifier of the value",
             rest: false,
             type: forgescript_1.ArgType.String,
             required: true,
-        },
+        }, {
+            name: "type",
+            description: "The type of record (ex: global, guild, user etc)",
+            rest: false,
+            type: forgescript_1.ArgType.Enum,
+            enum: database_1.DataType,
+            required: true,
+        }
     ],
-    async execute(_ctx, [type, id]) {
-        await __1.ForgeDB.delete(type, id);
+    async execute(_ctx, [name, id, type]) {
+        if (database_1.DataType[type] == 'member' && id.split('_').length != 2)
+            return this.error(Error('The `id` field with the type `member` must follow this format: `userID_guildID`'));
+        await database_1.DataBase.delete({ name, id, type: database_1.DataType[type] });
         return this.success();
     },
 });

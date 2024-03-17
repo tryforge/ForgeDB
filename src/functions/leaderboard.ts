@@ -1,5 +1,6 @@
 import { ArgType, IExtendedCompiledFunctionField, NativeFunction, Return } from "@tryforge/forgescript"
 import { ForgeDB } from ".."
+import { DataBase, DataType } from "../database"
 
 export enum SortType {
     asc,
@@ -8,7 +9,6 @@ export enum SortType {
 
 export default new NativeFunction({
     name: "$leaderboard",
-    version: "1.0.0",
     description: "Creates a leaderboard of identifiers in a variable",
     output: ArgType.String,
     unwrap: false,
@@ -18,6 +18,14 @@ export default new NativeFunction({
             description: "The name of the variable",
             rest: false,
             type: ArgType.String,
+            required: true,
+        },
+        {
+            name: "type",
+            description: "The type of record (ex: global, guild, user etc)",
+            rest: false,
+            type: ArgType.Enum,
+            enum: DataType,
             required: true,
         },
         {
@@ -69,9 +77,9 @@ export default new NativeFunction({
     ],
     brackets: true,
     async execute(ctx) {
-        const [type, valueVariable, positionVariable, code, sortType, max, page, separator] = this.data.fields! as IExtendedCompiledFunctionField[]
+        const [name, type, valueVariable, positionVariable, code, sortType, max, page, separator] = this.data.fields! as IExtendedCompiledFunctionField[]
         
-        const typeExec = (await this["resolveCode"](ctx, type)) as Return
+        const typeExec = (await this["resolveCode"](ctx, name)) as Return
         if (!this["isValidReturnType"](typeExec)) return typeExec
 
         const valueVariableName = (await this["resolveCode"](ctx, valueVariable)) as Return
@@ -99,13 +107,12 @@ export default new NativeFunction({
         const limit = Number(limitExec.value) || 10
         const pag = Number(pageExec.value) || 1
         const sep = (sepExec.value as string) || "\n"
-
+        
         const elements = new Array<string>()
-
-        const rows = await ForgeDB.allWithType(varType)
+        const rows = await DataBase.allWithType(varType, type.value)
             .then((x) => x.sort((x, y) => (sort === SortType.asc ? Number(x.value) - Number(y.value) : Number(y.value) - Number(x.value))))
             .then((x) => x.slice(pag * limit - limit, pag * limit))
-
+        
         for (let i = 0, len = rows.length; i < len; i++) {
             const index = pag * limit - limit + i + 1
             const row = rows[i]

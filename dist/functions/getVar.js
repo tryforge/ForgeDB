@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const forgescript_1 = require("@tryforge/forgescript");
+const database_1 = require("../database");
 const __1 = require("..");
 exports.default = new forgescript_1.NativeFunction({
     name: "$getVar",
-    version: "1.0.0",
     description: "Returns an identifier's value in a variable",
     output: forgescript_1.ArgType.Unknown,
     unwrap: true,
@@ -18,9 +18,17 @@ exports.default = new forgescript_1.NativeFunction({
         },
         {
             name: "id",
-            description: "The identifier of the value (a user, guild, channel, message, etc)",
+            description: "The identifier of the value",
             rest: false,
             type: forgescript_1.ArgType.String,
+            required: true,
+        },
+        {
+            name: "type",
+            description: "The type of record (ex: global, guild, user etc)",
+            rest: false,
+            type: forgescript_1.ArgType.Enum,
+            enum: database_1.DataType,
             required: true,
         },
         {
@@ -32,8 +40,10 @@ exports.default = new forgescript_1.NativeFunction({
         },
     ],
     brackets: true,
-    async execute(ctx, [name, id, def]) {
-        const data = await __1.ForgeDB.get(name, id).then((x) => x?.value);
+    async execute(ctx, [name, id, type, def]) {
+        if (database_1.DataType[type] == 'member' && id.split('_').length != 2)
+            return this.error(Error('The `id` field with the type `member` must follow this format: `userID_guildID`'));
+        const data = await database_1.DataBase.get({ name, id, type: database_1.DataType[type] }).then((x) => x?.value);
         if (data === null || data === undefined) {
             if (def)
                 return this.successJSON(def);

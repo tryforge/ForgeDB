@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SortType = void 0;
 const forgescript_1 = require("@tryforge/forgescript");
-const __1 = require("..");
+const database_1 = require("../database");
 var SortType;
 (function (SortType) {
     SortType[SortType["asc"] = 0] = "asc";
@@ -10,7 +10,6 @@ var SortType;
 })(SortType || (exports.SortType = SortType = {}));
 exports.default = new forgescript_1.NativeFunction({
     name: "$getLeaderboardValue",
-    version: "1.0.0",
     description: "Returns the position of a value in the leaderboard of a variable",
     output: forgescript_1.ArgType.Number,
     unwrap: true,
@@ -21,10 +20,16 @@ exports.default = new forgescript_1.NativeFunction({
             rest: false,
             type: forgescript_1.ArgType.String,
             required: true,
-        },
-        {
+        }, {
+            name: "type",
+            description: "The type of record (ex: global, guild, user etc)",
+            rest: false,
+            type: forgescript_1.ArgType.Enum,
+            enum: database_1.DataType,
+            required: true,
+        }, {
             name: "id",
-            description: "The identifier of the value (of a user, guild, channel, message, etc)",
+            description: "The identifier of a user",
             rest: false,
             type: forgescript_1.ArgType.String,
             required: true,
@@ -38,10 +43,12 @@ exports.default = new forgescript_1.NativeFunction({
         },
     ],
     brackets: true,
-    async execute(_ctx, [name, id, type]) {
-        const data = await __1.ForgeDB.allWithType(name);
+    async execute(_ctx, [name, type, id, sortType]) {
+        if (database_1.DataType[type] == 'member' && id.split('_').length != 2)
+            return this.error(Error('The `id` field with the type `member` must follow this format: `userID_guildID`'));
+        const data = await database_1.DataBase.allWithType(name, database_1.DataType[type]);
         data.sort((a, b) => parseInt(a.value) - parseInt(b.value));
-        const index = ([SortType[0], SortType.asc].indexOf(type ?? "asc") === -1 ? data : [...data].reverse()).findIndex((s) => s.id === id);
+        const index = ([SortType[0], SortType.asc].indexOf(sortType ?? "asc") === -1 ? data : [...data].reverse()).findIndex((s) => s.id === id);
         return this.success(index + 1);
     },
 });

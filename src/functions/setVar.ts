@@ -1,9 +1,8 @@
 import { ArgType, NativeFunction } from "@tryforge/forgescript"
-import { ForgeDB } from ".."
+import { DataBase, DataType, IPrismaData } from "../database"
 
 export default new NativeFunction({
     name: "$setVar",
-    version: "1.0.0",
     description: "Sets an identifier's value in a variable",
     unwrap: true,
     args: [
@@ -13,15 +12,20 @@ export default new NativeFunction({
             rest: false,
             type: ArgType.String,
             required: true,
-        },
-        {
+        },{
             name: "id",
-            description: "The identifier for the value (a user, guild, channel, message, etc)",
+            description: "The identifier of the value",
             rest: false,
             type: ArgType.String,
             required: true,
-        },
-        {
+        },{
+            name: "type",
+            description: "The type of record (ex: global, guild, user etc)",
+            rest: false,
+            type: ArgType.Enum,
+            enum: DataType,
+            required: true,
+        },{
             name: "value",
             description: "The value",
             rest: false,
@@ -30,8 +34,9 @@ export default new NativeFunction({
         },
     ],
     brackets: true,
-    async execute(_ctx, [name, id, value]) {
-        await ForgeDB.set(name, id, value)
+    async execute(_ctx, [name, id, type, value]) {
+        if(DataType[type] == 'member' && id.split('_').length != 2) return this.error(Error('The `id` field with the type `member` must follow this format: `userID_guildID`'));
+        await DataBase.set({name, id, value, type: DataType[type] as IPrismaData['type']})
         return this.success()
     },
 })

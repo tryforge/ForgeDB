@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SortType = void 0;
 const forgescript_1 = require("@tryforge/forgescript");
-const __1 = require("..");
+const database_1 = require("../database");
 var SortType;
 (function (SortType) {
     SortType[SortType["asc"] = 0] = "asc";
@@ -10,7 +10,6 @@ var SortType;
 })(SortType || (exports.SortType = SortType = {}));
 exports.default = new forgescript_1.NativeFunction({
     name: "$leaderboard",
-    version: "1.0.0",
     description: "Creates a leaderboard of identifiers in a variable",
     output: forgescript_1.ArgType.String,
     unwrap: false,
@@ -20,6 +19,14 @@ exports.default = new forgescript_1.NativeFunction({
             description: "The name of the variable",
             rest: false,
             type: forgescript_1.ArgType.String,
+            required: true,
+        },
+        {
+            name: "type",
+            description: "The type of record (ex: global, guild, user etc)",
+            rest: false,
+            type: forgescript_1.ArgType.Enum,
+            enum: database_1.DataType,
             required: true,
         },
         {
@@ -71,8 +78,8 @@ exports.default = new forgescript_1.NativeFunction({
     ],
     brackets: true,
     async execute(ctx) {
-        const [type, valueVariable, positionVariable, code, sortType, max, page, separator] = this.data.fields;
-        const typeExec = (await this["resolveCode"](ctx, type));
+        const [name, type, valueVariable, positionVariable, code, sortType, max, page, separator] = this.data.fields;
+        const typeExec = (await this["resolveCode"](ctx, name));
         if (!this["isValidReturnType"](typeExec))
             return typeExec;
         const valueVariableName = (await this["resolveCode"](ctx, valueVariable));
@@ -101,7 +108,7 @@ exports.default = new forgescript_1.NativeFunction({
         const pag = Number(pageExec.value) || 1;
         const sep = sepExec.value || "\n";
         const elements = new Array();
-        const rows = await __1.ForgeDB.allWithType(varType)
+        const rows = await database_1.DataBase.allWithType(varType, type.value)
             .then((x) => x.sort((x, y) => (sort === SortType.asc ? Number(x.value) - Number(y.value) : Number(y.value) - Number(x.value))))
             .then((x) => x.slice(pag * limit - limit, pag * limit));
         for (let i = 0, len = rows.length; i < len; i++) {

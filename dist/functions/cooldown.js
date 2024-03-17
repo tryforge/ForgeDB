@@ -1,11 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const forgescript_1 = require("@tryforge/forgescript");
-const __1 = require("..");
+const database_1 = require("../database");
 exports.default = new forgescript_1.NativeFunction({
     name: "$cooldown",
-    version: "1.0.0",
-    description: "Adds a command cooldown",
+    description: "Adds a cooldown to a command",
     brackets: true,
     unwrap: false,
     args: [
@@ -14,6 +13,13 @@ exports.default = new forgescript_1.NativeFunction({
             rest: false,
             description: "The id to assign the cooldown to, can be anything",
             type: forgescript_1.ArgType.String,
+            required: true,
+        }, {
+            name: "type",
+            description: "The type of record (ex: global, guild, user etc)",
+            rest: false,
+            type: forgescript_1.ArgType.Enum,
+            enum: database_1.DataType,
             required: true,
         },
         {
@@ -32,13 +38,18 @@ exports.default = new forgescript_1.NativeFunction({
     ],
     async execute(ctx) {
         const [, , code] = this.data.fields;
-        const dur = await this["resolveUnhandledArg"](ctx, 1);
+        const dur = await this["resolveUnhandledArg"](ctx, 2);
         if (!this["isValidReturnType"](dur))
             return dur;
         const idV = await this["resolveUnhandledArg"](ctx, 0);
         if (!this["isValidReturnType"](idV))
             return idV;
-        const cooldown = await __1.ForgeDB.cdTimeLeft(idV.value);
+        const typeV = await this["resolveUnhandledArg"](ctx, 1);
+        if (!this["isValidReturnType"](idV))
+            return idV;
+        if (database_1.DataType[typeV.value] == 'member' && idV.value.split('_').length != 2)
+            return this.error(Error('The `id` field with the type `member` must follow this format: `userID_guildID`'));
+        const cooldown = await database_1.DataBase.cdTimeLeft(idV.value);
         if (cooldown !== 0) {
             const content = await this["resolveCode"](ctx, code);
             if (!this["isValidReturnType"](content))
@@ -47,7 +58,7 @@ exports.default = new forgescript_1.NativeFunction({
             await ctx.container.send(ctx.obj);
             return this.stop();
         }
-        await __1.ForgeDB.cdAdd(idV.value, dur.value);
+        await database_1.DataBase.cdAdd({ id: `${idV.value}_${database_1.DataType[typeV.value]}`, duration: dur.value });
         return this.success();
     },
 });

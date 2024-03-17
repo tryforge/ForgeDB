@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const forgescript_1 = require("@tryforge/forgescript");
-const __1 = require("..");
+const database_1 = require("../database");
 exports.default = new forgescript_1.NativeFunction({
     name: "$getCooldownTime",
     version: "1.0.0",
@@ -16,10 +16,19 @@ exports.default = new forgescript_1.NativeFunction({
             rest: false,
             type: forgescript_1.ArgType.String,
             required: true,
-        },
+        }, {
+            name: "type",
+            description: "The type of record (ex: global, guild, user etc)",
+            rest: false,
+            type: forgescript_1.ArgType.Enum,
+            enum: database_1.DataType,
+            required: true,
+        }
     ],
-    async execute(_ctx, [id]) {
-        return this.success(await __1.ForgeDB.cdTimeLeft(id));
+    async execute(_ctx, [id, type]) {
+        if (database_1.DataType[type] == 'member' && id.split('_').length != 2)
+            return this.error(Error('The `id` field with the type `member` must follow this format: `userID_guildID`'));
+        return this.success(await database_1.DataBase.cdTimeLeft(id));
     },
 });
 //# sourceMappingURL=getCooldownTime.js.map

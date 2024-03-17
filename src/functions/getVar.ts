@@ -1,9 +1,9 @@
 import { ArgType, IExtendedCompilationResult, Interpreter, NativeFunction } from "@tryforge/forgescript"
+import { DataBase, DataType, IPrismaData } from "../database"
 import { ForgeDB } from ".."
 
 export default new NativeFunction({
     name: "$getVar",
-    version: "1.0.0",
     description: "Returns an identifier's value in a variable",
     output: ArgType.Unknown,
     unwrap: true,
@@ -17,9 +17,17 @@ export default new NativeFunction({
         },
         {
             name: "id",
-            description: "The identifier of the value (a user, guild, channel, message, etc)",
+            description: "The identifier of the value",
             rest: false,
             type: ArgType.String,
+            required: true,
+        },
+        {
+            name: "type",
+            description: "The type of record (ex: global, guild, user etc)",
+            rest: false,
+            type: ArgType.Enum,
+            enum: DataType,
             required: true,
         },
         {
@@ -31,8 +39,9 @@ export default new NativeFunction({
         },
     ],
     brackets: true,
-    async execute(ctx, [name, id, def]) {
-        const data = await ForgeDB.get(name, id).then((x) => x?.value)
+    async execute(ctx, [name, id, type, def]) {
+        if(DataType[type] == 'member' && id.split('_').length != 2) return this.error(Error('The `id` field with the type `member` must follow this format: `userID_guildID`'));
+        const data = await DataBase.get({name, id, type: DataType[type] as IPrismaData['type']}).then((x) => x?.value)
         if (data === null || data === undefined) {
             if (def) return this.successJSON(def)
             else if (ForgeDB.defaults && name in ForgeDB.defaults) {
