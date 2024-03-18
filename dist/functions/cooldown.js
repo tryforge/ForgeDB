@@ -9,6 +9,12 @@ exports.default = new forgescript_1.NativeFunction({
     unwrap: false,
     args: [
         {
+            name: "name",
+            description: "The name of the command",
+            rest: false,
+            type: forgescript_1.ArgType.String,
+            required: true,
+        }, {
             name: "id",
             rest: false,
             description: "The id to assign the cooldown to, can be anything",
@@ -37,19 +43,22 @@ exports.default = new forgescript_1.NativeFunction({
         },
     ],
     async execute(ctx) {
-        const [, , code] = this.data.fields;
-        const dur = await this["resolveUnhandledArg"](ctx, 2);
+        const [, , , , code] = this.data.fields;
+        const dur = await this["resolveUnhandledArg"](ctx, 3);
         if (!this["isValidReturnType"](dur))
             return dur;
-        const idV = await this["resolveUnhandledArg"](ctx, 0);
+        const nameV = await this["resolveUnhandledArg"](ctx, 0);
+        if (!this["isValidReturnType"](nameV))
+            return nameV;
+        const idV = await this["resolveUnhandledArg"](ctx, 1);
         if (!this["isValidReturnType"](idV))
             return idV;
-        const typeV = await this["resolveUnhandledArg"](ctx, 1);
+        const typeV = await this["resolveUnhandledArg"](ctx, 2);
         if (!this["isValidReturnType"](idV))
             return idV;
         if (database_1.DataType[typeV.value] == 'member' && idV.value.split('_').length != 2)
             return this.error(Error('The `id` field with the type `member` must follow this format: `userID_guildID`'));
-        const cooldown = await database_1.DataBase.cdTimeLeft(idV.value);
+        const cooldown = await database_1.DataBase.cdTimeLeft(`${nameV.value}_${idV.value}_${database_1.DataType[typeV.value]}`);
         if (cooldown !== 0) {
             const content = await this["resolveCode"](ctx, code);
             if (!this["isValidReturnType"](content))
@@ -58,7 +67,7 @@ exports.default = new forgescript_1.NativeFunction({
             await ctx.container.send(ctx.obj);
             return this.stop();
         }
-        await database_1.DataBase.cdAdd({ id: `${idV.value}_${database_1.DataType[typeV.value]}`, duration: dur.value });
+        await database_1.DataBase.cdAdd({ id: `${nameV.value}_${idV.value}_${database_1.DataType[typeV.value]}`, duration: dur.value });
         return this.success();
     },
 });

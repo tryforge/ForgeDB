@@ -8,6 +8,12 @@ export default new NativeFunction({
     unwrap: true,
     args: [
         {
+            name: "name",
+            description: "The name of the command",
+            rest: false,
+            type: ArgType.String,
+            required: true,
+        },{
             name: "id",
             description: "The cooldown id you want to delete",
             rest: false,
@@ -22,9 +28,9 @@ export default new NativeFunction({
             required: true,
         }
     ],
-    async execute(_ctx, [id, type]) {
+    async execute(_ctx, [name, id, type]) {
         if(DataType[type] == 'member' && id.split('_').length != 2) return this.error(Error('The `id` field with the type `member` must follow this format: `userID_guildID`'));
-        DataBase.cdDelete(`${id}_${type}`)
+        DataBase.cdDelete(`${name}_${id}_${DataType[type]}`)
         return this.success()
     },
 })

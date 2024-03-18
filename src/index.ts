@@ -14,7 +14,8 @@ export class ForgeDB extends ForgeExtension {
 
     init(client: ForgeClient): void {
         this.load(__dirname + "/functions")
-        client.db = new DataBase(this.options)
+        new DataBase(this.options)
+        client.db = DataBase
     }
 
     public variables(rec: Record<PropertyKey, unknown>) {

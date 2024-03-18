@@ -59,7 +59,7 @@ async function connect(data) {
 class DataBase {
     static db;
     constructor(options) {
-        const data = `generator client {\n  provider = "prisma-client-js"\n}\n\ndatasource db {\n  provider = "${options?.type ?? "sqlite"}"\n  url = "${options?.url ?? "file:./forge.db"}"\n}\n\nmodel data {\n  identifier String @id @map("_id")\n  name String\n  id String\n  type String\n  value String\n}\n\nmodel cds {\n  id String @id @map("_id")\n  startedAt Int \n  duration Int\n}`;
+        const data = `generator client {\n  provider = "prisma-client-js"\n}\n\ndatasource db {\n  provider = "${options?.type ?? "sqlite"}"\n  url = "${options?.url ?? "file:./forge.db"}"\n}\n\nmodel data {\n  identifier String @id @map("_id")\n  name String\n  id String\n  type String\n  value String\n}\n\nmodel cds {\n  id String @id @map("_id")\n  startedAt Float \n  duration Int\n}`;
         connect(data).then(() => { DataBase.db = new client_1.PrismaClient(); });
     }
     static async all() {
@@ -100,7 +100,8 @@ class DataBase {
         return await this.db.data.deleteMany();
     }
     static async cdAdd(data) {
-        this.db.cds.create({ data: { ...data, startedAt: Date.now() } });
+        return this.db.cds.create({ data: { ...data, startedAt: Date.now() } })
+            .catch(err => { this.db.cds.update({ where: { id: data.id }, data: { duration: data.duration, startedAt: Date.now() } }); });
     }
     static async cdDelete(id) {
         await this.db.cds.delete({ where: { id } });

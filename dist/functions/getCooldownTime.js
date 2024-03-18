@@ -4,12 +4,18 @@ const forgescript_1 = require("@tryforge/forgescript");
 const database_1 = require("../database");
 exports.default = new forgescript_1.NativeFunction({
     name: "$getCooldownTime",
-    version: "1.0.0",
     description: "Retrieves current cooldown time in ms for given id",
     output: forgescript_1.ArgType.Number,
     brackets: true,
     unwrap: true,
     args: [
+        {
+            name: "name",
+            description: "The name of the command",
+            rest: false,
+            type: forgescript_1.ArgType.String,
+            required: true,
+        },
         {
             name: "id",
             description: "The id to get its cooldown",
@@ -25,10 +31,10 @@ exports.default = new forgescript_1.NativeFunction({
             required: true,
         }
     ],
-    async execute(_ctx, [id, type]) {
+    async execute(_ctx, [name, id, type]) {
         if (database_1.DataType[type] == 'member' && id.split('_').length != 2)
             return this.error(Error('The `id` field with the type `member` must follow this format: `userID_guildID`'));
-        return this.success(await database_1.DataBase.cdTimeLeft(`${id}_${database_1.DataType[type]}`));
+        return this.success(await database_1.DataBase.cdTimeLeft(`${name}_${id}_${database_1.DataType[type]}`));
     },
 });
 //# sourceMappingURL=getCooldownTime.js.map

@@ -72,7 +72,11 @@ export declare class DataBase {
     static cdAdd(data: {
         id: string;
         duration: number;
-    }): Promise<void>;
+    }): Promise<void | {
+        id: string;
+        startedAt: number;
+        duration: number;
+    }>;
     static cdDelete(id: string): Promise<void>;
     static cdTimeLeft(id: string): Promise<number>;
 }

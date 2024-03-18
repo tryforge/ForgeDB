@@ -40,7 +40,7 @@ export class DataBase {
     private static db: PrismaClient
 
     constructor(options?: IDataBaseOptions){
-        const data =`generator client {\n  provider = "prisma-client-js"\n}\n\ndatasource db {\n  provider = "${options?.type ?? "sqlite"}"\n  url = "${options?.url ?? "file:./forge.db"}"\n}\n\nmodel data {\n  identifier String @id @map("_id")\n  name String\n  id String\n  type String\n  value String\n}\n\nmodel cds {\n  id String @id @map("_id")\n  startedAt Int \n  duration Int\n}`
+        const data =`generator client {\n  provider = "prisma-client-js"\n}\n\ndatasource db {\n  provider = "${options?.type ?? "sqlite"}"\n  url = "${options?.url ?? "file:./forge.db"}"\n}\n\nmodel data {\n  identifier String @id @map("_id")\n  name String\n  id String\n  type String\n  value String\n}\n\nmodel cds {\n  id String @id @map("_id")\n  startedAt Float \n  duration Int\n}`
         connect(data).then( () => { DataBase.db = new PrismaClient() })
     }
 
@@ -87,7 +87,8 @@ export class DataBase {
     }
 
     public static async cdAdd(data: {id: string, duration: number}){
-        this.db.cds.create({ data : { ...data, startedAt: Date.now() } })
+        return this.db.cds.create({ data : { ...data, startedAt: Date.now() } })
+        .catch(err => {this.db.cds.update({where: { id: data.id }, data: {duration: data.duration, startedAt: Date.now()} })})
     }
 
     public static async cdDelete(id: string) {
