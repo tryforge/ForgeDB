@@ -1,5 +1,5 @@
 import { ArgType, IExtendedCompiledFunctionField, NativeFunction, Return } from "@tryforge/forgescript"
-import { DataBase, DataType } from "../../database"
+import { DataBase } from "../../database"
 
 export enum SortType {
     asc,
