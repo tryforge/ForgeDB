@@ -8,7 +8,7 @@ class ForgeDB extends forgescript_1.ForgeExtension {
     static defaults;
     name = "ForgeDB";
     description = "A fast and reliable database extension for Forge";
-    version = "1.0.0";
+    version = "2.0.0";
     constructor(options) {
         super();
         this.options = options;

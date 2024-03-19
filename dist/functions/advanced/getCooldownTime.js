@@ -5,7 +5,7 @@ const database_1 = require("../../database");
 exports.default = new forgescript_1.NativeFunction({
     name: "$getCooldownTime",
     version: "2.0.0",
-    description: "Retrieves current cooldown time in ms for given id",
+    description: "Retrieves current cooldown time in ms of a command",
     output: forgescript_1.ArgType.Number,
     brackets: true,
     unwrap: true,

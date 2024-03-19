@@ -6,7 +6,7 @@ const __1 = require("../..");
 exports.default = new forgescript_1.NativeFunction({
     name: "$getVar",
     version: "2.0.0",
-    description: "Returns an identifier's value in a variable",
+    description: "Returns a variable's value",
     output: forgescript_1.ArgType.Unknown,
     unwrap: true,
     args: [

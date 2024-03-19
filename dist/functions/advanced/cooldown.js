@@ -5,7 +5,7 @@ const database_1 = require("../../database");
 exports.default = new forgescript_1.NativeFunction({
     name: "$cooldown",
     version: "2.0.0",
-    description: "Adds a cooldown to a command",
+    description: "Adds a cooldown to a command.",
     brackets: true,
     unwrap: false,
     args: [

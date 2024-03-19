@@ -5,7 +5,7 @@ const database_1 = require("../../database");
 exports.default = new forgescript_1.NativeFunction({
     name: "$getDB",
     version: "1.0.0",
-    description: "Returns all the identifiers stored in the DB",
+    description: "Returns all the stored values in the DB",
     output: forgescript_1.ArgType.Json,
     unwrap: false,
     async execute(_ctx) {

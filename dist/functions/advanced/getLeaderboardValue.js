@@ -23,7 +23,7 @@ exports.default = new forgescript_1.NativeFunction({
             required: true,
         }, {
             name: "id",
-            description: "The identifier of a user",
+            description: "The identifier of the value",
             rest: false,
             type: forgescript_1.ArgType.String,
             required: true,

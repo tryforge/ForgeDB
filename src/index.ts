@@ -6,7 +6,7 @@ export class ForgeDB extends ForgeExtension {
 
     name: string = "ForgeDB"
     description: string = "A fast and reliable database extension for Forge"
-    version: string = "1.0.0"
+    version: string = "2.0.0"
 
     public constructor(public readonly options?: IDataBaseOptions) {
         super()

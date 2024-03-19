@@ -4,7 +4,7 @@ import { DataBase, DataType } from "../../database"
 export default new NativeFunction({
     name: "$cooldown",
     version: "2.0.0",
-    description: "Adds a cooldown to a command",
+    description: "Adds a cooldown to a command.",
     brackets: true,
     unwrap: false,
     args: [

@@ -4,7 +4,7 @@ import { DataBase, DataType } from "../../database"
 export default new NativeFunction({
     name: "$getCooldownTime",
     version: "2.0.0",
-    description: "Retrieves current cooldown time in ms for given id",
+    description: "Retrieves current cooldown time in ms of a command",
     output: ArgType.Number,
     brackets: true,
     unwrap: true,
