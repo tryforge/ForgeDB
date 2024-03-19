@@ -42,6 +42,7 @@ export default new NativeFunction({
     brackets: true,
     async execute(ctx, [name, id, type, def]) {
         if(DataType[type] == 'member' && id.split('_').length != 2) return this.error(Error('The `id` field with the type `member` must follow this format: `userID_guildID`'));
+        if(DataType[type] == 'channel' && id.split('_').length != 2) return this.error(Error('The `id` field with the type `channel` must follow this format: `channelID_guildID`'));
         const data = await DataBase.get({name, id, type: DataType[type] as IPrismaData['type']}).then((x) => x?.value)
         if (data === null || data === undefined) {
             if (def) return this.successJSON(def)

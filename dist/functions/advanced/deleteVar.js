@@ -33,6 +33,8 @@ exports.default = new forgescript_1.NativeFunction({
     async execute(_ctx, [name, id, type]) {
         if (database_1.DataType[type] == 'member' && id.split('_').length != 2)
             return this.error(Error('The `id` field with the type `member` must follow this format: `userID_guildID`'));
+        if (database_1.DataType[type] == 'channel' && id.split('_').length != 2)
+            return this.error(Error('The `id` field with the type `channel` must follow this format: `channelID_guildID`'));
         await database_1.DataBase.delete({ name, id, type: database_1.DataType[type] });
         return this.success();
     },

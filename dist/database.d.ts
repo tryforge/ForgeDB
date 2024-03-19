@@ -6,13 +6,13 @@ export declare enum DataType {
     channel = 4,
     message = 5,
     role = 6,
-    emojis = 7
+    emoji = 7
 }
 export interface IPrismaData {
     identifier: string;
     name: string;
     id: string;
-    type: 'custom' | 'guild' | 'user' | 'member' | 'channel' | 'message' | 'role' | 'emojis';
+    type: 'custom' | 'guild' | 'user' | 'member' | 'channel' | 'message' | 'role' | 'emoji';
     value: string;
 }
 export interface IDataBaseOptions {

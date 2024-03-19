@@ -44,6 +44,7 @@ export default new NativeFunction({
     brackets: true,
     async execute(_ctx, [name, id, type, sortType]) {
         if(DataType[type] == 'member' && id.split('_').length != 2) return this.error(Error('The `id` field with the type `member` must follow this format: `userID_guildID`'));
+        if(DataType[type] == 'channel' && id.split('_').length != 2) return this.error(Error('The `id` field with the type `channel` must follow this format: `channelID_guildID`'));
         const data = await DataBase.allWithType(name, DataType[type])
         data.sort((a, b) => parseInt(a.value) - parseInt(b.value))
         const index = ([SortType[0], SortType.asc].indexOf(sortType ?? "asc") === -1 ? data : [...data].reverse()).findIndex((s) => s.id === id)
