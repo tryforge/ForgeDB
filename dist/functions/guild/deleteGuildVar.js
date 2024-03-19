@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const forgescript_1 = require("@tryforge/forgescript");
 const database_1 = require("../../database");
 exports.default = new forgescript_1.NativeFunction({
-    name: "$deleteVar",
+    name: "$deleteGuildVar",
     version: "2.0.0",
     description: "Deletes a value from a variable",
     unwrap: true,

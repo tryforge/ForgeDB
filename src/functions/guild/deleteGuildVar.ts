@@ -2,7 +2,7 @@ import { ArgType, NativeFunction } from "@tryforge/forgescript"
 import { DataBase } from "../../database"
 
 export default new NativeFunction({
-    name: "$deleteVar",
+    name: "$deleteGuildVar",
     version: "2.0.0",
     description: "Deletes a value from a variable",
     unwrap: true,
