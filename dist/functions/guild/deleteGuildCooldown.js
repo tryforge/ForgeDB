@@ -5,7 +5,7 @@ const database_1 = require("../../database");
 exports.default = new forgescript_1.NativeFunction({
     name: "$deleteGuildCooldown",
     version: "2.0.0",
-    description: "Deletes a cooldown of a given id",
+    description: "Deletes a cooldown of a given guild",
     brackets: false,
     unwrap: true,
     args: [
