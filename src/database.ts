@@ -3,13 +3,13 @@ import { execSync } from "child_process";
 import * as fs from "fs";
 import { readFile } from "fs/promises";
 
-export enum DataType { global, guild, user, member, channel, message };
+export enum DataType { global, guild, user, member, channel, message, role, emojis };
 
 export interface IPrismaData {
     identifier: string
     name: string;
     id: string
-    type: 'global' | 'guild' | 'user' | 'member' | 'channel' | 'message';
+    type: 'global' | 'guild' | 'user' | 'member' | 'channel' | 'message' | 'role' | 'emojis';
     value: string
 }
 

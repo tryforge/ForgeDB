@@ -36,6 +36,8 @@ var DataType;
     DataType[DataType["member"] = 3] = "member";
     DataType[DataType["channel"] = 4] = "channel";
     DataType[DataType["message"] = 5] = "message";
+    DataType[DataType["role"] = 6] = "role";
+    DataType[DataType["emojis"] = 7] = "emojis";
 })(DataType || (exports.DataType = DataType = {}));
 ;
 async function configPrisma(prismaSchema) {
