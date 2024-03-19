@@ -4,7 +4,7 @@ import { DataBase } from "../../database"
 export default new NativeFunction({
     name: "$deleteUserCooldown",
     version: "2.0.0",
-    description: "Deletes a cooldown of a given id",
+    description: "Deletes a cooldown of a given user",
     brackets: false,
     unwrap: true,
     args: [
