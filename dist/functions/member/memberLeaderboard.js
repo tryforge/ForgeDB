@@ -107,7 +107,7 @@ exports.default = new forgescript_1.NativeFunction({
         const pag = Number(pageExec.value) || 1;
         const sep = sepExec.value || "\n";
         const elements = new Array();
-        const rows = await database_1.DataBase.allWithType(`${varType}_${guild?.value['id'] ?? ctx.guild?.id}`, 'member')
+        const rows = await database_1.DataBase.allWithType(`${varType}_${(guild?.value).id ?? ctx.guild?.id}`, 'member')
             .then((x) => x.sort((x, y) => (sort === SortType.asc ? Number(x.value) - Number(y.value) : Number(y.value) - Number(x.value))))
             .then((x) => x.slice(pag * limit - limit, pag * limit));
         console.log(rows);
