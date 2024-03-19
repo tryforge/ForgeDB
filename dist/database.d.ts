@@ -1,5 +1,5 @@
 export declare enum DataType {
-    global = 0,
+    custom = 0,
     guild = 1,
     user = 2,
     member = 3,
@@ -12,7 +12,7 @@ export interface IPrismaData {
     identifier: string;
     name: string;
     id: string;
-    type: 'global' | 'guild' | 'user' | 'member' | 'channel' | 'message' | 'role' | 'emojis';
+    type: 'custom' | 'guild' | 'user' | 'member' | 'channel' | 'message' | 'role' | 'emojis';
     value: string;
 }
 export interface IDataBaseOptions {

@@ -30,7 +30,7 @@ const fs = __importStar(require("fs"));
 const promises_1 = require("fs/promises");
 var DataType;
 (function (DataType) {
-    DataType[DataType["global"] = 0] = "global";
+    DataType[DataType["custom"] = 0] = "custom";
     DataType[DataType["guild"] = 1] = "guild";
     DataType[DataType["user"] = 2] = "user";
     DataType[DataType["member"] = 3] = "member";
