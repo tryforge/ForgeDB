@@ -1,5 +1,6 @@
 import { Compiler, ForgeClient, ForgeExtension, IExtendedCompilationResult } from "@tryforge/forgescript"
-import { DataBase, IDataBaseOptions } from "./database"
+import { DataBase, IDataBaseOptions } from "./util"
+import { DataSourceOptions } from "typeorm"
 
 export class ForgeDB extends ForgeExtension {
     public static defaults?: Record<PropertyKey, IExtendedCompilationResult | unknown>

@@ -1,5 +1,5 @@
 import { ForgeClient, ForgeExtension, IExtendedCompilationResult } from "@tryforge/forgescript";
-import { IDataBaseOptions } from "./database";
+import { IDataBaseOptions } from "./util";
 export declare class ForgeDB extends ForgeExtension {
     readonly options?: IDataBaseOptions | undefined;
     static defaults?: Record<PropertyKey, IExtendedCompilationResult | unknown>;

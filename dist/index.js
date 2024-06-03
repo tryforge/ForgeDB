@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ForgeDB = void 0;
 const forgescript_1 = require("@tryforge/forgescript");
-const database_1 = require("./database");
+const util_1 = require("./util");
 class ForgeDB extends forgescript_1.ForgeExtension {
     options;
     static defaults;
@@ -15,8 +15,8 @@ class ForgeDB extends forgescript_1.ForgeExtension {
     }
     init(client) {
         this.load(__dirname + "/functions");
-        new database_1.DataBase(this.options);
-        client.db = database_1.DataBase;
+        new util_1.DataBase(this.options);
+        client.db = util_1.DataBase;
     }
     variables(rec) {
         ForgeDB.variables(rec);
