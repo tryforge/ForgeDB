@@ -1,5 +1,5 @@
 export interface IDataBaseOptions {
-    type: "mysql" | "postgres" | "cockroachdb" | "mariadb" | "sqlite" | "mongodb" | "better-sqlite3";
+    type: "mysql" | "postgres" | "sqlite" | "mongodb" | "better-sqlite3";
     url?: string;
     host?: string;
     port?: number;
