@@ -7,9 +7,9 @@ export enum SortType {
 }
 
 export default new NativeFunction({
-    name: "$userLeaderboard",
+    name: "$guildLeaderboard",
     version: "2.0.0",
-    description: "Creates a user leaderboard of a variable",
+    description: "Creates a guild leaderboard of a variable",
     output: ArgType.String,
     unwrap: false,
     args: [
@@ -101,7 +101,7 @@ export default new NativeFunction({
         const sep = (sepExec.value as string) || "\n"
         
         const elements = new Array<string>()
-        const rows = await DataBase.find({name: varType, type: 'user'})
+        const rows = await DataBase.find({name: varType, type: 'guild'})
             .then((x) => x.sort((x, y) => (sort === SortType.asc ? Number(x.value) - Number(y.value) : Number(y.value) - Number(x.value))))
             .then((x) => x.slice(pag * limit - limit, pag * limit))
         
@@ -112,7 +112,7 @@ export default new NativeFunction({
             ctx.setEnvironmentKey(pos, index)
             ctx.setEnvironmentKey(valueName, row)
 
-            if(!code) elements.push(`${index}. ${ctx.client.users.cache.get(row.id)?.username} ~ ${row.value}`)
+            if(!code) elements.push(`${index}. ${ctx.client.guilds.cache.get(row.id)?.name} ~ ${row.value}`)
 
             const execution = (await this["resolveCode"](ctx, code)) as Return
             if (!execution.return && !this["isValidReturnType"](execution)) return execution

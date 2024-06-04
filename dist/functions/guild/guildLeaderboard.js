@@ -9,9 +9,9 @@ var SortType;
     SortType[SortType["desc"] = 1] = "desc";
 })(SortType || (exports.SortType = SortType = {}));
 exports.default = new forgescript_1.NativeFunction({
-    name: "$userLeaderboard",
+    name: "$guildLeaderboard",
     version: "2.0.0",
-    description: "Creates a user leaderboard of a variable",
+    description: "Creates a guild leaderboard of a variable",
     output: forgescript_1.ArgType.String,
     unwrap: false,
     args: [
@@ -101,7 +101,7 @@ exports.default = new forgescript_1.NativeFunction({
         const pag = Number(pageExec.value) || 1;
         const sep = sepExec.value || "\n";
         const elements = new Array();
-        const rows = await util_1.DataBase.find({ name: varType, type: 'user' })
+        const rows = await util_1.DataBase.find({ name: varType, type: 'guild' })
             .then((x) => x.sort((x, y) => (sort === SortType.asc ? Number(x.value) - Number(y.value) : Number(y.value) - Number(x.value))))
             .then((x) => x.slice(pag * limit - limit, pag * limit));
         for (let i = 0, len = rows.length; i < len; i++) {
@@ -110,7 +110,7 @@ exports.default = new forgescript_1.NativeFunction({
             ctx.setEnvironmentKey(pos, index);
             ctx.setEnvironmentKey(valueName, row);
             if (!code)
-                elements.push(`${index}. ${ctx.client.users.cache.get(row.id)?.username} ~ ${row.value}`);
+                elements.push(`${index}. ${ctx.client.guilds.cache.get(row.id)?.name} ~ ${row.value}`);
             const execution = (await this["resolveCode"](ctx, code));
             if (!execution.return && !this["isValidReturnType"](execution))
                 return execution;
