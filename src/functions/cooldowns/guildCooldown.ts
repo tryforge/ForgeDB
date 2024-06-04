@@ -2,9 +2,9 @@ import { ArgType, IExtendedCompiledFunctionField, NativeFunction } from "@tryfor
 import { DataBase } from "../../util"
 
 export default new NativeFunction({
-    name: "$userCooldown",
+    name: "$guildCooldown",
     version: "2.0.0",
-    description: "Adds a cooldown to a command for a user",
+    description: "Adds a cooldown to a command for a guild",
     brackets: true,
     unwrap: false,
     args: [
@@ -29,10 +29,10 @@ export default new NativeFunction({
             type: ArgType.String,
         },
         {
-            name: "user ID",
+            name: "guild ID",
             rest: false,
-            description: "The user id to assign the cooldown to",
-            type: ArgType.User,
+            description: "The guild id to assign the cooldown to",
+            type: ArgType.Guild,
             required: false,
         }
     ],
@@ -47,7 +47,7 @@ export default new NativeFunction({
         const idV = await this["resolveUnhandledArg"](ctx, 3)
         if (!this["isValidReturnType"](idV)) return idV
         
-        const cooldown = await DataBase.cdTimeLeft(DataBase.make_cdIdentifier({name: nameV.value, id: idV.value?.id ?? ctx.user?.id}))
+        const cooldown = await DataBase.cdTimeLeft(DataBase.make_cdIdentifier({name: nameV.value, id: idV.value?.id ?? ctx.guild?.id}))
 
         if(cooldown !== 0) {
             const content = await this["resolveCode"](ctx, code)
@@ -57,7 +57,7 @@ export default new NativeFunction({
             return this.stop()
         }
 
-        await DataBase.cdAdd({name: nameV.value as string, id: idV.value?.id ?? ctx.user?.id, duration: dur.value as number})
+        await DataBase.cdAdd({name: nameV.value as string, id: idV.value?.id ?? ctx.guild?.id, duration: dur.value as number})
 
         return this.success()
     },

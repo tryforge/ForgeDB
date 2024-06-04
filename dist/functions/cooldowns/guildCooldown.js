@@ -3,9 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const forgescript_1 = require("@tryforge/forgescript");
 const util_1 = require("../../util");
 exports.default = new forgescript_1.NativeFunction({
-    name: "$userCooldown",
+    name: "$guildCooldown",
     version: "2.0.0",
-    description: "Adds a cooldown to a command for a user",
+    description: "Adds a cooldown to a command for a guild",
     brackets: true,
     unwrap: false,
     args: [
@@ -30,10 +30,10 @@ exports.default = new forgescript_1.NativeFunction({
             type: forgescript_1.ArgType.String,
         },
         {
-            name: "user ID",
+            name: "guild ID",
             rest: false,
-            description: "The user id to assign the cooldown to",
-            type: forgescript_1.ArgType.User,
+            description: "The guild id to assign the cooldown to",
+            type: forgescript_1.ArgType.Guild,
             required: false,
         }
     ],
@@ -48,7 +48,7 @@ exports.default = new forgescript_1.NativeFunction({
         const idV = await this["resolveUnhandledArg"](ctx, 3);
         if (!this["isValidReturnType"](idV))
             return idV;
-        const cooldown = await util_1.DataBase.cdTimeLeft(util_1.DataBase.make_cdIdentifier({ name: nameV.value, id: idV.value?.id ?? ctx.user?.id }));
+        const cooldown = await util_1.DataBase.cdTimeLeft(util_1.DataBase.make_cdIdentifier({ name: nameV.value, id: idV.value?.id ?? ctx.guild?.id }));
         if (cooldown !== 0) {
             const content = await this["resolveCode"](ctx, code);
             if (!this["isValidReturnType"](content))
@@ -57,8 +57,8 @@ exports.default = new forgescript_1.NativeFunction({
             await ctx.container.send(ctx.obj);
             return this.stop();
         }
-        await util_1.DataBase.cdAdd({ name: nameV.value, id: idV.value?.id ?? ctx.user?.id, duration: dur.value });
+        await util_1.DataBase.cdAdd({ name: nameV.value, id: idV.value?.id ?? ctx.guild?.id, duration: dur.value });
         return this.success();
     },
 });
-//# sourceMappingURL=userCooldown.js.map
+//# sourceMappingURL=guildCooldown.js.map

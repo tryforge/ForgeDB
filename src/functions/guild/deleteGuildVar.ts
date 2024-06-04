@@ -2,9 +2,9 @@ import { ArgType, NativeFunction } from "@tryforge/forgescript"
 import { DataBase } from "../../util"
 
 export default new NativeFunction({
-    name: "$deleteUserVar",
+    name: "$deleteGuildVar",
     version: "2.0.0",
-    description: "Deletes a value from a user variable",
+    description: "Deletes a value from a guild variable",
     unwrap: true,
     brackets: true,
     args: [
@@ -15,15 +15,15 @@ export default new NativeFunction({
             type: ArgType.String,
             required: true,
         },{
-            name: "user ID",
+            name: "guild ID",
             description: "The identifier of the value",
             rest: false,
-            type: ArgType.User,
+            type: ArgType.Guild,
             required: false,
         }
     ],
-    async execute(ctx, [name, user]) {
-        await DataBase.delete({name, id: user?.id ?? ctx.user!.id, type: "user"})
+    async execute(ctx, [name, guild]) {
+        await DataBase.delete({name, id: guild?.id ?? ctx.guild!.id, type: "guild"})
         return this.success()
     },
 })

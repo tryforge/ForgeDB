@@ -3,9 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const forgescript_1 = require("@tryforge/forgescript");
 const util_1 = require("../../util");
 exports.default = new forgescript_1.NativeFunction({
-    name: "$setUserVar",
+    name: "$setGuildVar",
     version: "2.0.0",
-    description: "Sets an user's value in a variable",
+    description: "Sets a guild's value in a variable",
     unwrap: true,
     args: [
         {
@@ -21,17 +21,17 @@ exports.default = new forgescript_1.NativeFunction({
             required: true,
             type: forgescript_1.ArgType.String,
         }, {
-            name: "user ID",
-            description: "The user id of the variable",
+            name: "guild ID",
+            description: "The guild id of the variable",
             rest: false,
-            type: forgescript_1.ArgType.User,
+            type: forgescript_1.ArgType.Guild,
             required: false,
         }
     ],
     brackets: true,
-    async execute(ctx, [name, value, user]) {
-        await util_1.DataBase.set({ name, id: user?.id ?? ctx.user.id, value, type: "user" });
+    async execute(ctx, [name, value, guild]) {
+        await util_1.DataBase.set({ name, id: guild?.id ?? ctx.guild.id, value, type: "guild" });
         return this.success();
     },
 });
-//# sourceMappingURL=setUserVar.js.map
+//# sourceMappingURL=setGuildVar.js.map

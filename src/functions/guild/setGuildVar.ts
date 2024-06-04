@@ -2,9 +2,9 @@ import { ArgType, NativeFunction } from "@tryforge/forgescript"
 import { DataBase } from "../../util"
 
 export default new NativeFunction({
-    name: "$setUserVar",
+    name: "$setGuildVar",
     version: "2.0.0",
-    description: "Sets an user's value in a variable",
+    description: "Sets a guild's value in a variable",
     unwrap: true,
     args: [
         {
@@ -20,16 +20,16 @@ export default new NativeFunction({
             required: true,
             type: ArgType.String,
         },{
-            name: "user ID",
-            description: "The user id of the variable",
+            name: "guild ID",
+            description: "The guild id of the variable",
             rest: false,
-            type: ArgType.User,
+            type: ArgType.Guild,
             required: false,
         }
     ],
     brackets: true,
-    async execute(ctx, [name, value, user]) {
-        await DataBase.set({name, id: user?.id ?? ctx.user!.id, value, type: "user"})
+    async execute(ctx, [name, value, guild]) {
+        await DataBase.set({name, id: guild?.id ?? ctx.guild!.id, value, type: "guild"})
         return this.success()
     },
 })

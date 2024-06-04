@@ -5,7 +5,7 @@ const util_1 = require("../../util");
 exports.default = new forgescript_1.NativeFunction({
     name: "$deleteUserVar",
     version: "2.0.0",
-    description: "Deletes a value from a variable",
+    description: "Deletes a value from a user variable",
     unwrap: true,
     brackets: true,
     args: [
