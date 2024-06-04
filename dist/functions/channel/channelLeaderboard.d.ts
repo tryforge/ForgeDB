@@ -13,6 +13,12 @@ declare const _default: NativeFunction<[{
     name: string;
     description: string;
     rest: false;
+    type: ArgType.Guild;
+    required: false;
+}, {
+    name: string;
+    description: string;
+    rest: false;
     type: ArgType.Enum;
     enum: typeof SortType;
 }, {
@@ -50,4 +56,4 @@ declare const _default: NativeFunction<[{
     required: false;
 }], true>;
 export default _default;
-//# sourceMappingURL=guildLeaderboard.d.ts.map
+//# sourceMappingURL=channelLeaderboard.d.ts.map

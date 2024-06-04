@@ -7,9 +7,9 @@ export enum SortType {
 }
 
 export default new NativeFunction({
-    name: "$userLeaderboard",
+    name: "$channelLeaderboard",
     version: "2.0.0",
-    description: "Creates a user leaderboard of a variable",
+    description: "Creates a channel leaderboard of a variable",
     output: ArgType.String,
     brackets: true,
     unwrap: true,
@@ -20,6 +20,13 @@ export default new NativeFunction({
             rest: false,
             type: ArgType.String,
             required: true,
+        },
+        {
+            name: "guild ID",
+            description: "The guild ID you want the variable of channels",
+            rest: false,
+            type: ArgType.Guild,
+            required: false,
         },
         {
             name: "sort type",
@@ -68,25 +75,25 @@ export default new NativeFunction({
             required: false,
         }
     ],
-    async execute(ctx, [name, sortType, max, page, separator, valueVariable, positionVariable]) {
+    async execute(ctx, [name, guild, sortType, max, page, separator, valueVariable, positionVariable]) {
         const limit = max || 10
         const pag = page || 1
-        const [, , , , , , , code] = this.data.fields as IExtendedCompiledFunctionField[]
+        const [, , , , , , , , code] = this.data.fields as IExtendedCompiledFunctionField[]
         
         const elements = new Array<string>()
-        const rows = await DataBase.find({name, type: 'user'})
+        const rows = await DataBase.find({name, type: 'channel', guildId: guild?.id ?? ctx.guild!.id})
             .then((x) => x.sort((x, y) => (sortType === SortType.desc ? Number(x.value) - Number(y.value) : Number(y.value) - Number(x.value))))
             .then((x) => x.slice(pag * limit - limit, pag * limit))
             
         for (let i = 0, len = rows.length; i < len; i++) {
             const index = pag * limit - limit + i + 1
             const row = rows[i]
-            const username = ctx.client.users.cache.get(row.id)?.username
+            const channel_name = ctx.client.guilds.cache.get(guild?.id ?? ctx.guild!.id)?.channels.cache.get(row.id)?.name
             
-            const info = { username,...row }
+            const info = { channel_name,...row }
             ctx.setEnvironmentKey(positionVariable || '', index)
             ctx.setEnvironmentKey(valueVariable || '', info)
-            if(!code) elements.push(`${index}. ${username} ~ ${row.value}`)
+            if(!code) elements.push(`${index}. ${channel_name} ~ ${row.value}`)
             const execution = (await this["resolveCode"](ctx, code)) as Return
             console.log(execution)
             if(execution.value) elements.push(execution.value as string)

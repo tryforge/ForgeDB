@@ -13,7 +13,8 @@ exports.default = new forgescript_1.NativeFunction({
     version: "2.0.0",
     description: "Creates a guild leaderboard of a variable",
     output: forgescript_1.ArgType.String,
-    unwrap: false,
+    brackets: true,
+    unwrap: true,
     args: [
         {
             name: "name",
@@ -57,7 +58,7 @@ exports.default = new forgescript_1.NativeFunction({
         {
             name: "envPosition",
             description: "The variable name to use for $env, retrieve the position with $env[<name>]",
-            required: true,
+            required: false,
             rest: false,
             type: forgescript_1.ArgType.String,
         },
@@ -66,58 +67,32 @@ exports.default = new forgescript_1.NativeFunction({
             description: "Code to execute for each row, remember to use $return",
             rest: false,
             type: forgescript_1.ArgType.String,
-            required: true,
+            required: false,
         }
     ],
-    brackets: true,
-    async execute(ctx) {
-        const [name, sortType, max, page, separator, valueVariable, positionVariable, code] = this.data.fields;
-        const typeExec = (await this["resolveCode"](ctx, name));
-        if (!this["isValidReturnType"](typeExec))
-            return typeExec;
-        const valueVariableName = (await this["resolveCode"](ctx, valueVariable));
-        if (!this["isValidReturnType"](valueVariableName))
-            return valueVariableName;
-        const positionVariableName = (await this["resolveCode"](ctx, positionVariable));
-        if (!this["isValidReturnType"](positionVariableName))
-            return positionVariableName;
-        const sortTypeValue = (await this["resolveCode"](ctx, sortType));
-        if (!this["isValidReturnType"](sortTypeValue))
-            return sortTypeValue;
-        const limitExec = (await this["resolveCode"](ctx, max));
-        if (!this["isValidReturnType"](limitExec))
-            return limitExec;
-        const pageExec = (await this["resolveCode"](ctx, page));
-        if (!this["isValidReturnType"](pageExec))
-            return pageExec;
-        const sepExec = (await this["resolveCode"](ctx, separator));
-        if (!this["isValidReturnType"](sepExec))
-            return sepExec;
-        const varType = typeExec.value;
-        const pos = positionVariableName.value;
-        const valueName = valueVariableName.value;
-        const sort = sortTypeValue.value === "desc" ? SortType.asc : SortType.desc;
-        const limit = Number(limitExec.value) || 10;
-        const pag = Number(pageExec.value) || 1;
-        const sep = sepExec.value || "\n";
+    async execute(ctx, [name, sortType, max, page, separator, valueVariable, positionVariable]) {
+        const limit = max || 10;
+        const pag = page || 1;
+        const [, , , , , , , code] = this.data.fields;
         const elements = new Array();
-        const rows = await util_1.DataBase.find({ name: varType, type: 'guild' })
-            .then((x) => x.sort((x, y) => (sort === SortType.asc ? Number(x.value) - Number(y.value) : Number(y.value) - Number(x.value))))
+        const rows = await util_1.DataBase.find({ name, type: 'guild' })
+            .then((x) => x.sort((x, y) => (sortType === SortType.desc ? Number(x.value) - Number(y.value) : Number(y.value) - Number(x.value))))
             .then((x) => x.slice(pag * limit - limit, pag * limit));
         for (let i = 0, len = rows.length; i < len; i++) {
             const index = pag * limit - limit + i + 1;
             const row = rows[i];
-            ctx.setEnvironmentKey(pos, index);
-            ctx.setEnvironmentKey(valueName, row);
+            const guild_name = ctx.client.guilds.cache.get(row.id)?.name;
+            const info = { guild_name, ...row };
+            ctx.setEnvironmentKey(positionVariable || '', index);
+            ctx.setEnvironmentKey(valueVariable || '', info);
             if (!code)
-                elements.push(`${index}. ${ctx.client.guilds.cache.get(row.id)?.name} ~ ${row.value}`);
+                elements.push(`${index}. ${guild_name} ~ ${row.value}`);
             const execution = (await this["resolveCode"](ctx, code));
-            if (!execution.return && !this["isValidReturnType"](execution))
-                return execution;
-            else if (execution.return)
+            console.log(execution);
+            if (execution.value)
                 elements.push(execution.value);
         }
-        return this.success(elements.join(sep));
+        return this.success(elements.join(separator || '\n'));
     },
 });
 //# sourceMappingURL=guildLeaderboard.js.map

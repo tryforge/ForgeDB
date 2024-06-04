@@ -39,7 +39,7 @@ declare const _default: NativeFunction<[{
 }, {
     name: string;
     description: string;
-    required: true;
+    required: false;
     rest: false;
     type: ArgType.String;
 }, {
@@ -47,7 +47,7 @@ declare const _default: NativeFunction<[{
     description: string;
     rest: false;
     type: ArgType.String;
-    required: true;
-}], false>;
+    required: false;
+}], true>;
 export default _default;
 //# sourceMappingURL=userLeaderboard.d.ts.map
