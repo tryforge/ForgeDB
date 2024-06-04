@@ -1,5 +1,5 @@
 import { ArgType, IExtendedCompilationResult, Interpreter, NativeFunction } from "@tryforge/forgescript"
-import { DataBase } from "../../database"
+import { DataBase } from "../../util"
 import { ForgeDB } from "../.."
 
 export default new NativeFunction({

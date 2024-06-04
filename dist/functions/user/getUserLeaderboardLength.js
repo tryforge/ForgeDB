@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const forgescript_1 = require("@tryforge/forgescript");
-const database_1 = require("../../database");
+const util_1 = require("../../util");
 exports.default = new forgescript_1.NativeFunction({
     name: "$getUserLeaderboardLength",
     version: "2.0.0",
@@ -33,7 +33,7 @@ exports.default = new forgescript_1.NativeFunction({
     ],
     brackets: true,
     async execute(_ctx, [name, length, decimals]) {
-        const data = await database_1.DataBase.allWithType(name, "user");
+        const data = await util_1.DataBase.find({ name, type: "user" });
         data.sort((a, b) => parseInt(a.value) - parseInt(b.value));
         const number = data.length / (length ?? 1);
         return this.success(decimals ? number : number % 1 ? Math.floor(number) + 1 : number);

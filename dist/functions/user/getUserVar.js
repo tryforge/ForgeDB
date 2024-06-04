@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const forgescript_1 = require("@tryforge/forgescript");
-const database_1 = require("../../database");
+const util_1 = require("../../util");
 const __1 = require("../..");
 exports.default = new forgescript_1.NativeFunction({
     name: "$getUserVar",
@@ -34,7 +34,7 @@ exports.default = new forgescript_1.NativeFunction({
     ],
     brackets: true,
     async execute(ctx, [name, user, def]) {
-        const data = await database_1.DataBase.get({ name, id: user?.id ?? ctx.user.id, type: "user" }).then((x) => x?.value);
+        const data = await util_1.DataBase.get({ name, id: user?.id ?? ctx.user.id, type: "user" }).then((x) => x?.value);
         if (data === null || data === undefined) {
             if (def)
                 return this.successJSON(def);

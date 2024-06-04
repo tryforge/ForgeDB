@@ -1,5 +1,5 @@
 import { ArgType, NativeFunction } from "@tryforge/forgescript"
-import { DataBase } from "../../database"
+import { DataBase } from "../../util"
 
 export enum SortType {
     asc,
@@ -36,7 +36,7 @@ export default new NativeFunction({
     ],
     brackets: true,
     async execute(ctx, [name, sortType, user]) {
-        const data = await DataBase.allWithType(name, "user")
+        const data = await DataBase.find({name, type: "user"})
         data.sort((a, b) => parseInt(a.value) - parseInt(b.value))
         const index = ([SortType[0], SortType.asc].indexOf(sortType ?? "asc") === -1 ? data : [...data].reverse()).findIndex((s) => s.id === (user?.id ?? ctx.user?.id))
         return this.success(index + 1)

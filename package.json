@@ -6,7 +6,7 @@
   "main": "dist/index.js",
   "scripts": {
     "docgen": "tsc && typedoc src/index.ts && node dist/docgen",
-    "test": "tsc && node dist/__tests__/runner"
+    "test": "tsc && node dist/__tests__/"
   },
   "keywords": [
     "bdfd",

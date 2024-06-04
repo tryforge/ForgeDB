@@ -1,5 +1,5 @@
 import { ArgType, NativeFunction } from "@tryforge/forgescript"
-import { DataBase } from "../../database"
+import { DataBase } from "../../util"
 
 export default new NativeFunction({
     name: "$setUserVar",

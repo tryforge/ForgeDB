@@ -1,5 +1,5 @@
 import { ArgType, IExtendedCompiledFunctionField, NativeFunction, Return } from "@tryforge/forgescript"
-import { DataBase } from "../../database"
+import { DataBase } from "../../util"
 
 export enum SortType {
     asc,
@@ -101,7 +101,7 @@ export default new NativeFunction({
         const sep = (sepExec.value as string) || "\n"
         
         const elements = new Array<string>()
-        const rows = await DataBase.allWithType(varType, 'user')
+        const rows = await DataBase.find({name: varType, type: 'user'})
             .then((x) => x.sort((x, y) => (sort === SortType.asc ? Number(x.value) - Number(y.value) : Number(y.value) - Number(x.value))))
             .then((x) => x.slice(pag * limit - limit, pag * limit))
         

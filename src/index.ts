@@ -1,6 +1,5 @@
 import { Compiler, ForgeClient, ForgeExtension, IExtendedCompilationResult } from "@tryforge/forgescript"
 import { DataBase, IDataBaseOptions } from "./util"
-import { DataSourceOptions } from "typeorm"
 
 export class ForgeDB extends ForgeExtension {
     public static defaults?: Record<PropertyKey, IExtendedCompilationResult | unknown>
@@ -15,7 +14,7 @@ export class ForgeDB extends ForgeExtension {
 
     init(client: ForgeClient): void {
         this.load(__dirname + "/functions")
-        new DataBase(this.options)
+        new DataBase(this.options).init()
         client.db = DataBase
     }
 

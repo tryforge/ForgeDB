@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SortType = void 0;
 const forgescript_1 = require("@tryforge/forgescript");
-const database_1 = require("../../database");
+const util_1 = require("../../util");
 var SortType;
 (function (SortType) {
     SortType[SortType["asc"] = 0] = "asc";
@@ -38,7 +38,7 @@ exports.default = new forgescript_1.NativeFunction({
     ],
     brackets: true,
     async execute(ctx, [name, sortType, user]) {
-        const data = await database_1.DataBase.allWithType(name, "user");
+        const data = await util_1.DataBase.find({ name, type: "user" });
         data.sort((a, b) => parseInt(a.value) - parseInt(b.value));
         const index = ([SortType[0], SortType.asc].indexOf(sortType ?? "asc") === -1 ? data : [...data].reverse()).findIndex((s) => s.id === (user?.id ?? ctx.user?.id));
         return this.success(index + 1);

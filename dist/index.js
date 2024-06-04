@@ -15,7 +15,7 @@ class ForgeDB extends forgescript_1.ForgeExtension {
     }
     init(client) {
         this.load(__dirname + "/functions");
-        new util_1.DataBase(this.options);
+        new util_1.DataBase(this.options).init();
         client.db = util_1.DataBase;
     }
     variables(rec) {

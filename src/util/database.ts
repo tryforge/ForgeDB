@@ -82,7 +82,7 @@ export class DataBase {
         return await this.db.getRepository(this.entities.record).clear()
     }
 
-    public static make_cdIdentifier(data: {name: string, id?: string}){
+    public static make_cdIdentifier(data: {name?: string, id?: string}){
         return `${data.name}${data.id ? '_'+data.id : ''}`
     }
 
