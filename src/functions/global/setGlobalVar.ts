@@ -2,9 +2,9 @@ import { ArgType, NativeFunction } from "@tryforge/forgescript"
 import { DataBase } from "../../util"
 
 export default new NativeFunction({
-    name: "$setGuildVar",
+    name: "$setGlobalVar",
     version: "2.0.0",
-    description: "Sets a guild's value in a variable",
+    description: "Sets a global's value in a variable",
     unwrap: true,
     args: [
         {

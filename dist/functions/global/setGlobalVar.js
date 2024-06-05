@@ -3,9 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const forgescript_1 = require("@tryforge/forgescript");
 const util_1 = require("../../util");
 exports.default = new forgescript_1.NativeFunction({
-    name: "$setGuildVar",
+    name: "$setGlobalVar",
     version: "2.0.0",
-    description: "Sets a guild's value in a variable",
+    description: "Sets a global's value in a variable",
     unwrap: true,
     args: [
         {
