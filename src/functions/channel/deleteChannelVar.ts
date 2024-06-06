@@ -5,19 +5,19 @@ import { DataBase } from "../../util"
 export default new NativeFunction({
     name: "$deleteChannelVar",
     version: "2.0.0",
-    description: "Deletes a value from a channel variable",
+    description: "Removes a value from a variable associated with a channel.",
     unwrap: true,
     brackets: true,
     args: [
         {
             name: "name",
-            description: "The name of the variable",
+            description: "The name of the variable.",
             rest: false,
             type: ArgType.String,
             required: true,
         },{
             name: "channel ID",
-            description: "The identifier of the value",
+            description: "The unique identifier of the value to delete.",
             rest: false,
             type: ArgType.Channel,
             required: false,

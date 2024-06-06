@@ -18,7 +18,7 @@ export default new NativeFunction({
         },
         {
             name: "role ID",
-            description: "The identifier of the value",
+            description: "The ID of the role",
             rest: false,
             type: ArgType.Role,
             required: true,

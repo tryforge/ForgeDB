@@ -4,7 +4,7 @@ import { DataBase } from "../../util"
 export default new NativeFunction({
     name: "$setUserVar",
     version: "2.0.0",
-    description: "Sets an user's value in a variable",
+    description: "Sets a user's value in a variable",
     unwrap: true,
     args: [
         {

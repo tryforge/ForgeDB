@@ -4,7 +4,7 @@ import { DataBase } from "../../util"
 export default new NativeFunction({
     name: "$setMessageVar",
     version: "2.0.0",
-    description: "Sets an message's value in a variable",
+    description: "Sets a message's value in a variable",
     unwrap: true,
     args: [
         {
@@ -13,15 +13,17 @@ export default new NativeFunction({
             rest: false,
             type: ArgType.String,
             required: true,
-        },{
+        },
+        {
             name: "value",
             description: "The value",
             rest: false,
             required: true,
             type: ArgType.String,
-        },{
+        },
+        {
             name: "message ID",
-            description: "The message id of the variable",
+            description: "The ID of the message",
             rest: false,
             type: ArgType.Message,
             required: false,

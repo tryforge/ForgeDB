@@ -9,7 +9,7 @@ export enum SortType {
 export default new NativeFunction({
     name: "$userLeaderboard",
     version: "2.0.0",
-    description: "Creates a user leaderboard of a variable",
+    description: "Creates a user leaderboard for a variable",
     output: ArgType.String,
     brackets: true,
     unwrap: true,
@@ -48,21 +48,21 @@ export default new NativeFunction({
         },
         {
             name: "envValue",
-            description: "The variable name to use for $env, retrieve the id with $env[<name>;id] and the value with $env[<name>;value]",
+            description: "The variable name to use for $env. Retrieve the id with $env[<name>;id] and the value with $env[<name>;value]",
             rest: false,
             required: false,
             type: ArgType.String,
         },
         {
             name: "envPosition",
-            description: "The variable name to use for $env, retrieve the position with $env[<name>]",
+            description: "The variable name to use for $env. Retrieve the position with $env[<name>]",
             required: false,
             rest: false,
             type: ArgType.String,
         },
         {
             name: "code",
-            description: "Code to execute for each row, remember to use $return",
+            description: "Code to execute for each row. Remember to use $return",
             rest: false,
             type: ArgType.String,
             required: false,

@@ -4,7 +4,7 @@ import { DataBase } from "../../util"
 export default new NativeFunction({
     name: "$setMemberVar",
     version: "2.0.0",
-    description: "Sets an member's value in a variable",
+    description: "Sets a member's value in a variable",
     unwrap: true,
     args: [
         {
@@ -13,21 +13,24 @@ export default new NativeFunction({
             rest: false,
             type: ArgType.String,
             required: true,
-        },{
+        },
+        {
             name: "value",
-            description: "The value",
+            description: "The value to set",
             rest: false,
             required: true,
             type: ArgType.String,
-        },{
+        },
+        {
             name: "member ID",
-            description: "The member id of the variable",
+            description: "The ID of the member",
             rest: false,
             type: ArgType.User,
             required: false,
-        },{
+        },
+        {
             name: "guild ID",
-            description: "The guild of the identifier",
+            description: "The guild ID",
             rest: false,
             type: ArgType.Guild,
             required: false,

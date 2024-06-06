@@ -14,9 +14,10 @@ export default new NativeFunction({
             rest: false,
             type: ArgType.String,
             required: true,
-        },{
+        },
+        {
             name: "message ID",
-            description: "The identifier of the value",
+            description: "The ID of the message",
             rest: false,
             type: ArgType.Message,
             required: false,

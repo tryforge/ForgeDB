@@ -10,26 +10,27 @@ export enum SortType {
 export default new NativeFunction({
     name: "$getChannelLeaderboardValue",
     version: "2.0.0",
-    description: "Returns the position of a channel in the leaderboard of a variable",
+    description: "Fetches the position of a channel in the leaderboard of a variable",
     output: ArgType.Number,
     unwrap: true,
     args: [
         {
             name: "name",
-            description: "The name of the variable",
+            description: "The name of the variable to query",
             rest: false,
             type: ArgType.String,
             required: true,
         },
         {
             name: "sort type",
-            description: "The sort type for the leaderboard, either asc/0 (ascending) or desc/1 (descending)",
+            description: "The sort order for the leaderboard, either ascending (asc) or descending (desc)",
             rest: false,
             type: ArgType.Enum,
             enum: SortType,
-        },{
+        },
+        {
             name: "channel ID",
-            description: "The channel id of the value",
+            description: "The channel ID of the value",
             rest: false,
             type: ArgType.Channel,
             required: false,

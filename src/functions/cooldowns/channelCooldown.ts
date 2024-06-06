@@ -4,34 +4,34 @@ import { DataBase } from "../../util"
 export default new NativeFunction({
     name: "$channelCooldown",
     version: "2.0.0",
-    description: "Adds a cooldown to a command for a channel",
+    description: "Imposes a cooldown period for a command within a specific channel.",
     brackets: true,
     unwrap: false,
     args: [
         {
             name: "name",
-            description: "The name of the command you are trying to add a cooldown",
+            description: "The name of the command for which you wish to set a cooldown.",
             rest: false,
             type: ArgType.String,
             required: true,
         },
         {
             name: "duration",
-            description: "The duration of the cooldown",
+            description: "The length of time the cooldown will last.",
             rest: false,
             type: ArgType.Time,
             required: true,
         },
         {
             name: "code",
-            description: "The code to execute if the cooldown is active",
+            description: "The code to execute when the cooldown is in effect.",
             rest: false,
             type: ArgType.String,
         },
         {
             name: "channel ID",
             rest: false,
-            description: "The channel id to assign the cooldown to",
+            description: "The unique identifier (id) of the channel to apply the cooldown to.",
             type: ArgType.Channel,
             required: false,
         }
