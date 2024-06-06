@@ -5,24 +5,26 @@ import { DataBase } from "../../util"
 export default new NativeFunction({
     name: "$setChannelVar",
     version: "2.0.0",
-    description: "Sets an channel's value in a variable",
+    description: "Assigns a value to a variable associated with a channel",
     unwrap: true,
     args: [
         {
             name: "name",
-            description: "The name of the variable",
+            description: "The name of the variable to set the value in",
             rest: false,
             type: ArgType.String,
             required: true,
-        },{
+        },
+        {
             name: "value",
-            description: "The value",
+            description: "The value to be assigned",
             rest: false,
             required: true,
             type: ArgType.String,
-        },{
+        },
+        {
             name: "channel ID",
-            description: "The channel id of the variable",
+            description: "The channel ID for which to set the variable value",
             rest: false,
             type: ArgType.Channel,
             required: false,
