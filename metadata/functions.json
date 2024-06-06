@@ -1,1 +1,258 @@
-[{"name":"$cooldown","version":"1.0.0","description":"Adds a command cooldown","brackets":true,"unwrap":false,"args":[{"name":"id","rest":false,"description":"The id to assign the cooldown to, can be anything","type":"String","required":true},{"name":"duration","description":"The duration of the cooldown","rest":false,"type":"Time","required":true},{"name":"code","description":"The code to execute if the cooldown is active","rest":false,"type":"String"}]},{"name":"$dbVersion","version":"1.0.0","description":"Returns the version of ForgeDB","output":["Number"],"unwrap":false},{"name":"$deleteCooldown","version":"1.0.0","description":"Deletes cooldown of given id","brackets":true,"unwrap":true,"args":[{"name":"id","description":"The id to delete its cooldown","rest":false,"type":"String","required":true}]},{"name":"$deleteVar","version":"1.0.0","description":"Deletes a value from a variable","unwrap":true,"brackets":true,"args":[{"name":"name","description":"The name of the variable","rest":false,"type":"String","required":true},{"name":"id","description":"The identifier of the value (a user, guild, channel, message, etc)","rest":false,"type":"String","required":true}]},{"name":"$getCooldownTime","version":"1.0.0","description":"Retrieves current cooldown time in ms for given id","output":["Number"],"brackets":true,"unwrap":true,"args":[{"name":"id","description":"The id to get its cooldown","rest":false,"type":"String","required":true}]},{"name":"$getDB","version":"1.0.0","description":"Returns all the identifiers stored in the DB","output":["Json"],"unwrap":false},{"name":"$getLeaderboardValue","version":"1.0.0","description":"Returns the position of a value in the leaderboard of a variable","output":["Number"],"unwrap":true,"args":[{"name":"name","description":"The name of the variable","rest":false,"type":"String","required":true},{"name":"id","description":"The identifier of the value (of a user, guild, channel, message, etc)","rest":false,"type":"String","required":true},{"name":"sort type","description":"The sort type for the leaderboard, either asc/0 (ascending) or desc/1 (descending)","rest":false,"type":"Enum","enum":["asc","desc"],"enumName":"SortType"}],"brackets":true},{"name":"$getVar","version":"1.0.0","description":"Returns an identifier's value in a variable","output":["Unknown"],"unwrap":true,"args":[{"name":"name","description":"The name of the variable","rest":false,"type":"String","required":true},{"name":"id","description":"The identifier of the value (a user, guild, channel, message, etc)","rest":false,"type":"String","required":true},{"name":"default","description":"The default value if the identifier doesn't exist in the variable","rest":false,"required":false,"type":"String"}],"brackets":true},{"name":"$leaderboard","version":"1.0.0","description":"Creates a leaderboard of identifiers in a variable","output":["String"],"unwrap":false,"args":[{"name":"name","description":"The name of the variable","rest":false,"type":"String","required":true},{"name":"envValue","description":"The variable name to use for $env, retrieve the id with $env[<name>;id] and the value with $env[<name>;value]","rest":false,"required":true,"type":"String"},{"name":"envPosition","description":"The variable name to use for $env, retrieve the position with $env[<name>]","required":true,"rest":false,"type":"String"},{"name":"code","description":"Code to execute for each row, remember to use $return","rest":false,"type":"String","required":true},{"name":"sort type","description":"The sort type for the leaderboard, either asc (ascending) or desc (descending)","rest":false,"type":"Enum","enum":["asc","desc"],"enumName":"SortType"},{"name":"max","description":"The maximum number of rows per page","rest":false,"type":"Number"},{"name":"page","description":"The page number","rest":false,"type":"Number"},{"name":"separator","description":"The separator to use for each row","rest":false,"type":"String"}],"brackets":true},{"name":"$setVar","version":"1.0.0","description":"Sets an identifier's value in a variable","unwrap":true,"args":[{"name":"name","description":"The name of the variable","rest":false,"type":"String","required":true},{"name":"id","description":"The identifier for the value (a user, guild, channel, message, etc)","rest":false,"type":"String","required":true},{"name":"value","description":"The value","rest":false,"required":true,"type":"String"}],"brackets":true}]
+[
+  {
+    "name":"$cooldown",
+    "version":"1.0.0",
+    "description":"Implements a cooldown period for commands",
+    "brackets":true,
+    "unwrap":false,
+    "args":[
+      {
+        "name":"id",
+        "rest":false,
+        "description":"Unique identifier for the cooldown, applicable to any entity",
+        "type":"String",
+        "required":true
+      },
+      {
+        "name":"duration",
+        "description":"The length of the cooldown period",
+        "rest":false,
+        "type":"Time",
+        "required":true
+      },
+      {
+        "name":"code",
+        "description":"The code to execute during the cooldown period",
+        "rest":false,
+        "type":"String"
+      }
+    ]
+  },
+  {
+    "name":"$dbVersion",
+    "version":"1.0.0",
+    "description":"Returns the current version of ForgeDB",
+    "output":["Number"],
+    "unwrap":false
+  },
+  {
+    "name":"$deleteCooldown",
+    "version":"1.0.0",
+    "description":"Removes the cooldown for a specified identifier",
+    "brackets":true,
+    "unwrap":true,
+    "args":[
+      {
+        "name":"id",
+        "description":"The identifier for which to remove the cooldown",
+        "rest":false,
+        "type":"String",
+        "required":true
+      }
+    ]
+  },
+  {
+    "name":"$deleteVar",
+    "version":"1.0.0",
+    "description":"Deletes a value from a specified variable",
+    "unwrap":true,
+    "brackets":true,
+    "args":[
+      {
+        "name":"name",
+        "description":"The name of the variable from which to delete the value",
+        "rest":false,
+        "type":"String",
+        "required":true
+      },
+      {
+        "name":"id",
+        "description":"The identifier of the value to be deleted (e.g., user, guild, channel, message)",
+        "rest":false,
+        "type":"String",
+        "required":true
+      }
+    ]
+  },
+  {
+    "name":"$getCooldownTime",
+    "version":"1.0.0",
+    "description":"Retrieves the remaining cooldown time in milliseconds for a specified identifier",
+    "output":["Number"],
+    "brackets":true,
+    "unwrap":true,
+    "args":[
+      {
+        "name":"id",
+        "description":"The identifier for which to retrieve the cooldown time",
+        "rest":false,
+        "type":"String",
+        "required":true
+      }
+    ]
+  },
+  {
+    "name":"$getDB",
+    "version":"1.0.0",
+    "description":"Returns all stored identifiers in the database",
+    "output":["Json"],
+    "unwrap":false
+  },
+  {
+    "name":"$getLeaderboardValue",
+    "version":"1.0.0",
+    "description":"Fetches the position of a value in the leaderboard for a specified variable",
+    "output":["Number"],
+    "unwrap":true,
+    "args":[
+      {
+        "name":"name",
+        "description":"The name of the variable whose leaderboard position is to be retrieved",
+        "rest":false,
+        "type":"String",
+        "required":true
+      },
+      {
+        "name":"id",
+        "description":"The identifier of the value (e.g., user, guild, channel, message)",
+        "rest":false,
+        "type":"String",
+        "required":true
+      },
+      {
+        "name":"sort type",
+        "description":"The sort order for the leaderboard, either ascending (asc) or descending (desc)",
+        "rest":false,
+        "type":"Enum",
+        "enum":["asc","desc"],
+        "enumName":"SortType"
+      }
+    ],
+    "brackets":true
+  },
+  {
+    "name":"$getVar",
+    "version":"1.0.0",
+    "description":"Retrieves the value of a specified identifier in a variable",
+    "output":["Unknown"],
+    "unwrap":true,
+    "args":[
+      {
+        "name":"name",
+        "description":"The name of the variable to retrieve the value from",
+        "rest":false,
+        "type":"String",
+        "required":true
+      },
+      {
+        "name":"id",
+        "description":"The identifier of the value (e.g., user, guild, channel, message)",
+        "rest":false,
+        "type":"String",
+        "required":true
+      },
+      {
+        "name":"default",
+        "description":"The default value if the identifier does not exist in the variable",
+        "rest":false,
+        "required":false,
+        "type":"String"
+      }
+    ],
+    "brackets":true
+  },
+  {
+    "name":"$leaderboard",
+    "version":"1.0.0",
+    "description":"Generates a leaderboard for specified identifiers in a variable",
+    "output":["String"],
+    "unwrap":false,
+    "args":[
+      {
+        "name":"name",
+        "description":"The name of the variable to create the leaderboard for",
+        "rest":false,
+        "type":"String",
+        "required":true
+      },
+      {
+        "name":"envValue",
+        "description":"Variable name for $env to retrieve the id and value with $env[<name>;id] and $env[<name>;value] respectively",
+        "rest":false,
+        "required":true,
+        "type":"String"
+      },
+      {
+        "name":"envPosition",
+        "description":"Variable name for $env to retrieve the position with $env[<name>]",
+        "required":true,
+        "rest":false,
+        "type":"String"
+      },
+      {
+        "name":"code",
+        "description":"Code to execute for each row; use $return to return results",
+        "rest":false,
+        "type":"String",
+        "required":true
+      },
+      {
+        "name":"sort type",
+        "description":"The sort order for the leaderboard, either ascending (asc) or descending (desc)",
+        "rest":false,
+        "type":"Enum",
+        "enum":["asc","desc"],
+        "enumName":"SortType"
+      },
+      {
+        "name":"max",
+        "description":"The maximum number of rows per page",
+        "rest":false,
+        "type":"Number"
+      },
+      {
+        "name":"page",
+        "description":"The page number to display",
+        "rest":false,
+        "type":"Number"
+      },
+      {
+        "name":"separator",
+        "description":"The separator to use between rows",
+        "rest":false,
+        "type":"String"
+      }
+    ],
+    "brackets":true
+  },
+  {
+    "name":"$setVar",
+    "version":"1.0.0",
+    "description":"Assigns a value to a specified identifier in a variable",
+    "unwrap":true,
+    "args":[
+      {
+        "name":"name",
+        "description":"The name of the variable to set the value in",
+        "rest":false,
+        "type":"String",
+        "required":true
+      },
+      {
+        "name":"id",
+        "description":"The identifier for the value (e.g., user, guild, channel, message)",
+        "rest":false,
+        "type":"String",
+        "required":true
+      },
+      {
+        "name":"value",
+        "description":"The value to be assigned",
+        "rest":false,
+        "required":true,
+        "type":"String"
+      }
+    ],
+    "brackets":true
+  }
+]
