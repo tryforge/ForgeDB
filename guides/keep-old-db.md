@@ -1,6 +1,10 @@
 # How to keep the old DataBase
 This is a guide on what to do to keep using the old database and also to inform the users why the new update requires users to loose their data.
+
 ## Table of Contents
+1. [Reason for this](#why-i-have-to-delete-my-db-and-lose-all-my-data)
+2. [Use old Package](#how-to-use-old-forgedb)
+3. [Update without data loss](#is-it-possible-to-keep-my-database-but-use-the-new-one)
 
 ### Why i have to delete my db and lose all my data?
 As this change may make some people mad, this update is for the general good. First of all old ForgeDB was using Quick.DB. That package didn't provide any ways to make pre-set types so it wasn't safe for the developers to use so we had to get rid of it. Moreover, old package is using a different format which is also very unsafe to use which lead to a ton of bugs as many users noticed. The new format was written that way that there will remove all the bugs and not cause more and in addition will not force more breaking changes in future updates. Last but not least new ForgeDB gives the ability to the user to select which DataBase they will use from a variety of the most popular databases such as SQLite, mySQL and even MongoDB.
