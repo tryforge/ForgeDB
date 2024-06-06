@@ -29,14 +29,14 @@ exports.default = new forgescript_1.NativeFunction({
         },
         {
             name: "id",
-            description: "The name of the variable",
+            description: "The id of a user, guild, channel, etc.",
             rest: false,
             type: forgescript_1.ArgType.String,
             required: false,
         },
         {
             name: "type",
-            description: "The name of the variable",
+            description: "The type of the variable",
             rest: false,
             type: forgescript_1.ArgType.Enum,
             enum: VariableType,
@@ -44,14 +44,14 @@ exports.default = new forgescript_1.NativeFunction({
         },
         {
             name: "value",
-            description: "The name of the variable",
+            description: "The value of the variable",
             rest: false,
             type: forgescript_1.ArgType.String,
             required: false,
         },
         {
             name: "guild ID",
-            description: "The name of the variable",
+            description: "The guild ID of a member, channel or role",
             rest: false,
             type: forgescript_1.ArgType.Guild,
             required: false,
