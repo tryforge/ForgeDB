@@ -11,7 +11,9 @@ An advanced DataBase extension for ForgeScript.
     - [MongoDB Installation](#mongodb-installation)
     - [Other DB Installation](#other-db-installation)
 2. [How to use Events](#how-to-use-events)
-3. [Documentation](https://docs.botforge.org/p/ForgeDB/)
+3. [How to update](https://github.com/tryforge/ForgeDB/blob/main/guides/how-to-update.md)
+4. [Documentation](https://docs.botforge.org/p/ForgeDB/)
+5. [Credits](#credits)
 
 ### Quick Installation
 
@@ -123,6 +125,8 @@ db.commands.add({
 ```
 And voi-la, you learnt how to use database events!
 
-## Thanks <3
+## Credits
 Thanks for reading this guide and for using ForgeDB <br>
-This package was made by with love `aggelos007`, a developer of ForgeScript. Use ForgeScript, it's better and easier
+This package was made by with love [aggelos](https://discord.com/users/637648484979441706), a developer of ForgeScript. Use ForgeScript, it's better and easier.
+
+Also huge thanks to [aditya](https://discord.com/users/903681538842054686) and [aurea](https://discord.com/users/976413539076026388) for their contributions <3
