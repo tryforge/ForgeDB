@@ -9,26 +9,27 @@ export enum SortType {
 export default new NativeFunction({
     name: "$getGuildLeaderboardValue",
     version: "2.0.0",
-    description: "Returns the position of a guild in the leaderboard of a variable",
+    description: "Retrieves the position of a guild in the leaderboard of a variable",
     output: ArgType.Number,
     unwrap: true,
     args: [
         {
             name: "name",
-            description: "The name of the variable",
+            description: "The name of the variable to query",
             rest: false,
             type: ArgType.String,
             required: true,
         },
         {
             name: "sort type",
-            description: "The sort type for the leaderboard, either asc/0 (ascending) or desc/1 (descending)",
+            description: "The sort order for the leaderboard, either ascending (asc) or descending (desc)",
             rest: false,
             type: ArgType.Enum,
             enum: SortType,
-        },{
+        },
+        {
             name: "guild ID",
-            description: "The guild id of the value",
+            description: "The guild ID of the value",
             rest: false,
             type: ArgType.Guild,
             required: false,
