@@ -4,18 +4,19 @@ import { DataBase } from "../../util"
 export default new NativeFunction({
     name: "$setGlobalVar",
     version: "2.0.0",
-    description: "Sets a global's value in a variable",
+    description: "Assigns a value to a variable associated with a global",
     unwrap: true,
     args: [
         {
             name: "name",
-            description: "The name of the variable",
+            description: "The name of the variable to set the value in",
             rest: false,
             type: ArgType.String,
             required: true,
-        },{
+        },
+        {
             name: "value",
-            description: "The value",
+            description: "The value to be assigned",
             rest: false,
             required: true,
             type: ArgType.String,
