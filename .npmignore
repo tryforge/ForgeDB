@@ -1,4 +1,5 @@
 docs
+guides
 \.env
 prisma
 */**/__tests__

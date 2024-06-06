@@ -3,3 +3,4 @@ node_modules
 prisma
 *.db
 *.sqlite
+*/**__tests__

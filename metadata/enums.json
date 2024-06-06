@@ -1,1 +1,1 @@
-{"SortType":["asc","desc"]}
+{"VariableType":["user","channel","role","message","member","custom","guild"],"SortType":["asc","desc"],"DataType":["identifier","name","id","type","value","guildId"]}

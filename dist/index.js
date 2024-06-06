@@ -2,69 +2,29 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ForgeDB = void 0;
 const forgescript_1 = require("@tryforge/forgescript");
-const quick_db_1 = require("quick.db");
+const util_1 = require("./util");
+const structures_1 = require("./structures");
+const tiny_typed_emitter_1 = require("tiny-typed-emitter");
 class ForgeDB extends forgescript_1.ForgeExtension {
-    path;
-    static db;
+    options;
     static defaults;
     name = "ForgeDB";
     description = "A fast and reliable database extension for Forge";
-    version = "1.0.0";
-    constructor(path = "./forge.db") {
+    version = "2.0.0";
+    commands;
+    emitter = new tiny_typed_emitter_1.TypedEmitter();
+    constructor(options) {
         super();
-        this.path = path;
+        this.options = options;
     }
     init(client) {
+        this.commands = new structures_1.DBCommandManager(client);
+        forgescript_1.EventManager.load('ForgeDBEvents', __dirname + '/events');
         this.load(__dirname + "/functions");
-        ForgeDB.db = new quick_db_1.QuickDB({
-            driver: new quick_db_1.SqliteDriver(this.path),
-        });
-        client.db = ForgeDB.db.table("main");
-    }
-    static makeIdentifier(type, id) {
-        return `${type}_${id}`;
-    }
-    static get(type, id) {
-        return this.db.get(this.makeIdentifier(type, id)) ?? {};
-    }
-    static set(type, id, value) {
-        const identifier = this.makeIdentifier(type, id);
-        return this.db.set(identifier, {
-            identifier,
-            id,
-            type,
-            value,
-        });
-    }
-    static delete(type, id) {
-        return this.db.delete(this.makeIdentifier(type, id));
-    }
-    static async allWithType(type) {
-        return (await this.db.startsWith(type)).map((x) => x.value);
-    }
-    static async all(filter = () => true) {
-        const all = await this.db.all();
-        return all.map((x) => x.value).filter(filter);
-    }
-    static async deleteWithFilter(filter) {
-        const all = await this.db.all();
-        return Promise.all(all.filter((x) => filter(x.value)).map((x) => this.db.delete(x.id)));
-    }
-    static deleteAll() {
-        return this.db.deleteAll();
-    }
-    static async cdAdd(id, duration) {
-        await this.db.set(id, {
-            startedAt: Date.now(),
-            duration,
-        });
-    }
-    static async cdDelete(id) {
-        await this.db.delete(id);
-    }
-    static async cdTimeLeft(id) {
-        const data = await this.db.get(id);
-        return data ? Math.max(data.duration - (Date.now() - data.startedAt), 0) : 0;
+        new util_1.DataBase(this.emitter, this.options).init();
+        client.db = util_1.DataBase;
+        if (this.options?.events?.length)
+            client.events.load("ForgeDBEvents", this.options.events);
     }
     variables(rec) {
         ForgeDB.variables(rec);
