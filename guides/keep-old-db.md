@@ -1,27 +1,28 @@
-# How to keep the old DataBase
-This is a guide on what to do to keep using the old database and also to inform the users why the new update requires users to loose their data.
+# Preserving the Old Database
+This guide provides instructions on how to continue using the old database and explains why the new update necessitates data loss.
 
 ## Table of Contents
-1. [Reason for this](#why-i-have-to-delete-my-db-and-lose-all-my-data)
-2. [Use old Package](#how-to-use-old-forgedb)
-3. [Update without data loss](#is-it-possible-to-keep-my-database-but-use-the-new-one)
+1. [Reason for this](#why-must-i-delete-my-database-and-lose-all-my-data)
+2. [Use old Package](#how-to-use-the-old-forgedb)
+3. [Update without data loss](#is-it-possible-to-retain-my-database-while-using-the-new-one)
+4. [Conclusion](#conclusion)
 
-### Why i have to delete my db and lose all my data?
-As this change may make some people mad, this update is for the general good. First of all old ForgeDB was using Quick.DB. That package didn't provide any ways to make pre-set types so it wasn't safe for the developers to use so we had to get rid of it. Moreover, old package is using a different format which is also very unsafe to use which lead to a ton of bugs as many users noticed. The new format was written that way that there will remove all the bugs and not cause more and in addition will not force more breaking changes in future updates. Last but not least new ForgeDB gives the ability to the user to select which DataBase they will use from a variety of the most popular databases such as SQLite, mySQL and even MongoDB.
+### Why Must I Delete My Database and Lose All My Data?
+While this change may be frustrating, it is implemented for the greater good. The old ForgeDB utilized Quick.DB, which lacked the ability to define pre-set types, posing a safety risk for developers. Additionally, the old package used an unsafe format, leading to numerous bugs. The new format is designed to eliminate these issues and prevent future breaking changes. Furthermore, the new ForgeDB allows users to choose from popular databases such as SQLite, MySQL, and MongoDB.
 
-### How to use old ForgeDB
-If you want to use the old ForgeDB package you can install it from github or don't update. To install it from github you will have to download `old` branch. To do that run this 
+### How to Use the Old ForgeDB
+To continue using the old ForgeDB package, either refrain from updating or install it from GitHub by downloading the `old` branch. Execute the following command:
 ```bash
 npm i github:tryforge/ForgeDB#old
 ```
 
-### Is it possible to keep my DataBase but use the new one?
-The answer is yes but it is not recommend as it will consume you a lot of time just to transfer your data is this process can be done only manually. To do this, before you delete `forge.db` you will have to execute this ForgeScript command. 
+### Is It Possible to Retain My Database While Using the New One?
+Yes, but it is not recommended due to the manual effort required. To transfer your data, execute the following ForgeScript command before deleting `forge.db`:
 ```
 $writeFile[forge.db.json;$getDB]
 ```
-After you run this command there should be a new file called `forge.db.json`. In that file there will be your old db records. After that you need to install the new forge.db as [how to update guide](https://github.com/tryforge/ForgeDB/blob/main/guides/how-to-update.md) shows. Then, manually, you will have to set all the records that are inside `forge.db.json` record but you will have to identify what each id goes for so you can use the right function. And that's it! You managed to update your DataBase without loosing any data even tho you wasted a ton of time!
+This command creates a `forge.db.json` file containing your old database records. Then, follow the [update guide](https://github.com/tryforge/ForgeDB/blob/main/guides/how-to-update.md) to install the new ForgeDB. Manually transfer each record from `forge.db.json`, ensuring you use the appropriate function for each ID. Although time-consuming, this process allows you to update without data loss.
 
-### Thanks For Reading
-Thanks for your time reading and we hope you understand the reason behind this update. <br>
+### Conclusion
+Thank you for taking the time to read this guide. We hope it clarifies the reasons behind this update. <br>
 This guide was written by the developer of this package, [aggelos](https://discord.com/users/637648484979441706).
