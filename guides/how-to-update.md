@@ -1,22 +1,23 @@
-# How to Update
-This is a guide showing you how to update only from v1.1.1 to v2.0.0 and above
+# Update Instructions
 
-## <img align="top" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Warning.svg/156px-Warning.svg.png" alt="WarningSignImage" width="25" height="auto"> WARNING
-This update will cause data loss and you will loose all your stored records and cooldowns! If you want to learn why this is happening or what to do to prevent this head over to [keep old db](https://github.com/tryforge/ForgeDB/blob/main/guides/keep-old-db.md) guide!
+This guide outlines the process for updating from version 1.1.1 to version 2.0.0 and later.
 
-## Guide 
-### Step 1: Removing the old DataBase files
-In order to fully update ForgeDB we need to get rid of the old ForgeDB files. To do that we need to delete `node_modules` folder and `forge.db` file
+## <img align="top" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Warning.svg/156px-Warning.svg.png" alt="WarningSignImage" width="25" height="auto"> Important Notice
+Please be aware that this update will result in data loss, including all stored records and cooldowns. For more information on the reasons for this and measures to prevent it, refer to the [keep old db](https://github.com/tryforge/ForgeDB/blob/main/guides/keep-old-db.md) guide.
 
-### Step 2: Installing and Initializing the new DataBase
-To install the new DataBase we need to run on terminal the follwing command: 
+## Update Procedure
+### Step 1: Removing the Old Database Files
+To proceed with the update, the existing ForgeDB files must be removed. This involves deleting the `node_modules` folder and the `forge.db` file.
+
+### Step 2: Installing and Initializing the New Database
+Install the new database by executing the following command in your terminal:
 ```bash
 npm i @tryforge/forge.db sqlite3
 ```
-After we run this command, ForgeDB and SQLite have been installed and ready to be used. In your main file we don't have to change anything
+After running this command, ForgeDB and SQLite will be installed and ready for use. No changes are required in your main file.
 
-### Step 3: One Last Step
-The new DataBase has now been installed and is ready to be used! Though, we need to take a note that the functions that existed no longer exists but they have been replaced by new ones! You can change them in our docs site and read the full changelog [here](https://docs.botforge.org/p/ForgeDB/).
+### Step 3: Final Adjustments
+The new database is now installed and ready for use. However, note that previous functions have been replaced by new ones. Please consult our documentation and review the full changelog [here](https://docs.botforge.org/p/ForgeDB/) for details on these changes.
 
-### Thanks <3
-Thanks for reading and happy coding!
+### Appreciation
+Thank you for following this guide. Happy coding!
