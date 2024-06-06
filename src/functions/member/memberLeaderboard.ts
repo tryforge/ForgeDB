@@ -9,28 +9,28 @@ export enum SortType {
 export default new NativeFunction({
     name: "$memberLeaderboard",
     version: "2.0.0",
-    description: "Creates a member leaderboard of a variable",
+    description: "Creates a leaderboard of members for a variable",
     output: ArgType.String,
     brackets: true,
     unwrap: true,
     args: [
         {
             name: "name",
-            description: "The name of the variable",
+            description: "The name of the variable to create the leaderboard for",
             rest: false,
             type: ArgType.String,
             required: true,
         },
         {
             name: "guild ID",
-            description: "The guild ID you want the variable of members",
+            description: "The guild ID for which to retrieve the variable of members",
             rest: false,
             type: ArgType.Guild,
             required: false,
         },
         {
             name: "sort type",
-            description: "The sort type for the leaderboard, either asc (ascending) or desc (descending)",
+            description: "The sort order for the leaderboard, either ascending (asc) or descending (desc)",
             rest: false,
             type: ArgType.Enum,
             enum: SortType,
