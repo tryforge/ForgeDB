@@ -1,13 +1,17 @@
-import 'reflect-metadata';
 import { Cooldown, IDataBaseOptions, Record, RecordData } from './types';
+import { TypedEmitter } from 'tiny-typed-emitter';
+import { IDBEvents } from '../structures';
+import { TransformEvents } from '..';
+import 'reflect-metadata';
 export declare class DataBase {
     private db;
     private static db;
+    private static emitter;
     private static entities;
-    constructor(options?: IDataBaseOptions);
+    constructor(emitter: TypedEmitter<TransformEvents<IDBEvents>>, options?: IDataBaseOptions);
     init(): Promise<void>;
     static make_intetifier(data: RecordData): string;
-    static set(data: RecordData): Promise<Record>;
+    static set(data: RecordData): Promise<boolean>;
     static get(data: RecordData): Promise<Record | null>;
     static getAll(): Promise<Record[]>;
     static find(data?: RecordData): Promise<Record[]>;

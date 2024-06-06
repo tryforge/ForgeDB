@@ -1,7 +1,9 @@
 import { Entity, Column, PrimaryColumn, ObjectIdColumn } from "typeorm"
+import { IDBEvents } from "../structures";
 
 export interface IDataBaseOptions {
     type: "mysql" | "postgres" | "sqlite" | "mongodb" | "better-sqlite3";
+    events?: Array<keyof IDBEvents>
     url?: string
     host?: string
     port?: number

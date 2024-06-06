@@ -1,5 +1,11 @@
-import { Compiler, ForgeClient, ForgeExtension, IExtendedCompilationResult } from "@tryforge/forgescript"
+import { Compiler, EventManager, ForgeClient, ForgeExtension, IExtendedCompilationResult } from "@tryforge/forgescript"
 import { DataBase, IDataBaseOptions } from "./util"
+import { DBCommandManager, IDBEvents } from "./structures"
+import { TypedEmitter } from "tiny-typed-emitter"
+
+export type TransformEvents<T> = {
+    [P in keyof T]: T[P] extends any[] ? (...args: T[P]) => any : never
+}
 
 export class ForgeDB extends ForgeExtension {
     public static defaults?: Record<PropertyKey, IExtendedCompilationResult | unknown>
@@ -8,14 +14,24 @@ export class ForgeDB extends ForgeExtension {
     description: string = "A fast and reliable database extension for Forge"
     version: string = "2.0.0"
 
+    public commands!: any
+    public emitter = new TypedEmitter<TransformEvents<IDBEvents>>()
+
     public constructor(public readonly options?: IDataBaseOptions) {
         super()
     }
 
     init(client: ForgeClient): void {
+        this.commands = new DBCommandManager(client)
+
+        EventManager.load('ForgeDBEvents', __dirname + '/events')
         this.load(__dirname + "/functions")
-        new DataBase(this.options).init()
+        
+        new DataBase(this.emitter, this.options).init()
         client.db = DataBase
+
+        if (this.options?.events?.length)
+            client.events.load("ForgeDBEvents", this.options.events)
     }
 
     public variables(rec: Record<PropertyKey, unknown>) {

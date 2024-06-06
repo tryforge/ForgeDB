@@ -1,17 +1,18 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DataBase = void 0;
-require("reflect-metadata");
-const typeorm_1 = require("typeorm");
 const types_1 = require("./types");
+const typeorm_1 = require("typeorm");
+require("reflect-metadata");
 function isGuildData(data) {
     return ['member', 'channel', 'role'].includes(data.type);
 }
 class DataBase {
     db;
     static db;
+    static emitter;
     static entities;
-    constructor(options) {
+    constructor(emitter, options) {
         const data = { ...options };
         data.type = data.type ?? 'sqlite';
         if (data.type != 'mongodb')
@@ -23,6 +24,7 @@ class DataBase {
             record: data.type == 'mongodb' ? types_1.MongoRecord : types_1.Record,
             cd: data.type == 'mongodb' ? types_1.MongoCooldown : types_1.Cooldown
         };
+        DataBase.emitter = emitter;
         const db = new typeorm_1.DataSource({
             ...config,
             entities: [DataBase.entities.record, DataBase.entities.cd],
@@ -32,20 +34,23 @@ class DataBase {
     }
     async init() {
         DataBase.db = await this.db;
+        DataBase.emitter.emit("connect");
     }
     static make_intetifier(data) {
         return `${data.type}_${data.name}_${isGuildData(data) ? data.guildId + '_' : ''}${data.id}`;
     }
     static async set(data) {
-        const newRecord = new this.entities.record();
-        newRecord.identifier = this.make_intetifier(data);
-        newRecord.name = data.name;
-        newRecord.id = data.id;
-        newRecord.type = data.type;
-        newRecord.value = data.value;
+        const newData = new this.entities.record();
+        newData.identifier = this.make_intetifier(data);
+        newData.name = data.name;
+        newData.id = data.id;
+        newData.type = data.type;
+        newData.value = data.value;
         if (isGuildData(data))
-            newRecord.guildId = data.guildId;
-        return await this.db.getRepository(this.entities.record).save(newRecord);
+            newData.guildId = data.guildId;
+        const oldData = await this.db.getRepository(this.entities.record).findOneBy({ identifier: this.make_intetifier(data) });
+        return await this.db.getRepository(this.entities.record).save(newData)
+            .then(() => oldData ? this.emitter.emit("variableUpdate", { newData, oldData }) : this.emitter.emit('variableCreate', { data: newData }));
     }
     static async get(data) {
         const identifier = data.identifier ?? this.make_intetifier(data);
@@ -63,6 +68,7 @@ class DataBase {
     }
     static async delete(data) {
         const identifier = data.identifier ?? this.make_intetifier(data);
+        this.emitter.emit('variableDelete', { data: await this.db.getRepository(this.entities.record).findOneBy({ identifier }) });
         return await this.db.getRepository(this.entities.record).delete({ identifier });
     }
     static async wipe() {

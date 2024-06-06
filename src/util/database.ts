@@ -1,6 +1,9 @@
-import 'reflect-metadata';
-import { DataSource, DataSourceOptions } from "typeorm";
 import { Cooldown, GuildData, IDataBaseOptions, MongoCooldown, MongoRecord, Record, RecordData } from './types';
+import { DataSource, DataSourceOptions } from "typeorm";
+import { TypedEmitter } from 'tiny-typed-emitter';
+import { IDBEvents } from '../structures';
+import { TransformEvents } from '..';
+import 'reflect-metadata';
 
 function isGuildData(data: RecordData): data is GuildData {
     return ['member', 'channel', 'role'].includes(data.type!);
@@ -9,12 +12,13 @@ function isGuildData(data: RecordData): data is GuildData {
 export class DataBase {
     private db: Promise<DataSource>;
     private static db: DataSource;
+    private static emitter: TypedEmitter<TransformEvents<IDBEvents>>;
     private static entities: {
         record: typeof Record | typeof MongoRecord
         cd: typeof Cooldown | typeof MongoCooldown
     }
     
-    constructor(options?: IDataBaseOptions) {
+    constructor(emitter: TypedEmitter<TransformEvents<IDBEvents>>,options?: IDataBaseOptions) {
         const data = {...options}
         data.type = data.type ?? 'sqlite'
         if(data.type != 'mongodb') data.database = data.database ?? 'forge.db'
@@ -26,8 +30,8 @@ export class DataBase {
             record: data.type == 'mongodb' ? MongoRecord : Record,
             cd: data.type == 'mongodb' ? MongoCooldown : Cooldown
         }
+        DataBase.emitter = emitter
         
-
         const db = new DataSource({
             ...config,
             entities: [ DataBase.entities.record, DataBase.entities.cd ],
@@ -38,6 +42,7 @@ export class DataBase {
 
     public async init() {
         DataBase.db = await this.db
+        DataBase.emitter.emit("connect")
     }
 
     public static make_intetifier(data: RecordData) {
@@ -45,15 +50,17 @@ export class DataBase {
     }
 
     public static async set(data: RecordData) {
-        const newRecord = new this.entities.record()
-        newRecord.identifier = this.make_intetifier(data)
-        newRecord.name = data.name!
-        newRecord.id = data.id!
-        newRecord.type = data.type!
-        newRecord.value = data.value!
-        if(isGuildData(data)) newRecord.guildId = data.guildId;
-
-        return await this.db.getRepository(this.entities.record).save(newRecord)
+        const newData = new this.entities.record()
+        newData.identifier = this.make_intetifier(data)
+        newData.name = data.name!
+        newData.id = data.id!
+        newData.type = data.type!
+        newData.value = data.value!
+        if(isGuildData(data)) newData.guildId = data.guildId;
+        const oldData = await this.db.getRepository(this.entities.record).findOneBy({ identifier: this.make_intetifier(data) })
+        
+        return await this.db.getRepository(this.entities.record).save(newData)
+        .then(() => oldData ? this.emitter.emit("variableUpdate", { newData, oldData }) : this.emitter.emit('variableCreate', { data: newData }))
     }
 
     public static async get(data: RecordData) {
@@ -75,6 +82,7 @@ export class DataBase {
 
     public static async delete(data: RecordData) {
         const identifier = data.identifier ?? this.make_intetifier(data)
+        this.emitter.emit('variableDelete', { data: await this.db.getRepository(this.entities.record).findOneBy({ identifier }) })
         return await this.db.getRepository(this.entities.record).delete({ identifier })
     }
 
