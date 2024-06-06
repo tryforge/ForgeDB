@@ -16,7 +16,7 @@ export default new NativeFunction({
             required: true,
         },{
             name: "user ID",
-            description: "The identifier of the value",
+            description: "The ID of the user",
             rest: false,
             type: ArgType.User,
             required: false,
