@@ -9,32 +9,32 @@ export default new NativeFunction({
     unwrap: true,
     args: [
             {
-              "name": "name",
-              "description": "The name of the variable to query",
-              "rest": false,
-              "type": "ArgType.String",
-              "required": true
+              name: "name",
+              description: "The name of the variable to query",
+              rest: false,
+              type: ArgType.String,
+              required: true
             },
             {
-              "name": "guild ID",
-              "description": "The guild ID for which to retrieve channel variables",
-              "rest": false,
-              "type": "ArgType.Guild",
-              "required": false
+              name: "guild ID",
+              description: "The guild ID for which to retrieve channel variables",
+              rest: false,
+              type: ArgType.Guild,
+              required: false
             },
             {
-              "name": "length",
-              "description": "The number of users per page",
-              "rest": false,
-              "type": "ArgType.Number",
-              "required": false
+              name: "length",
+              description: "The number of users per page",
+              rest: false,
+              type: ArgType.Number,
+              required: false
             },
             {
-              "name": "decimals",
-              "description": "Specify whether to return decimals for more precise results (default: false)",
-              "rest": false,
-              "type": "ArgType.Boolean",
-              "required": false
+              name: "decimals",
+              description: "Specify whether to return decimals for more precise results (default: false)",
+              rest: false,
+              type: ArgType.Boolean,
+              required: false
             }
     ],
     brackets: true,

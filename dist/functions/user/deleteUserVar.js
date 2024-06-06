@@ -17,7 +17,7 @@ exports.default = new forgescript_1.NativeFunction({
             required: true,
         }, {
             name: "user ID",
-            description: "The identifier of the value",
+            description: "The ID of the user",
             rest: false,
             type: forgescript_1.ArgType.User,
             required: false,

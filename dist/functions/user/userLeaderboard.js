@@ -11,7 +11,7 @@ var SortType;
 exports.default = new forgescript_1.NativeFunction({
     name: "$userLeaderboard",
     version: "2.0.0",
-    description: "Creates a user leaderboard of a variable",
+    description: "Creates a user leaderboard for a variable",
     output: forgescript_1.ArgType.String,
     brackets: true,
     unwrap: true,
@@ -50,21 +50,21 @@ exports.default = new forgescript_1.NativeFunction({
         },
         {
             name: "envValue",
-            description: "The variable name to use for $env, retrieve the id with $env[<name>;id] and the value with $env[<name>;value]",
+            description: "The variable name to use for $env. Retrieve the id with $env[<name>;id] and the value with $env[<name>;value]",
             rest: false,
             required: false,
             type: forgescript_1.ArgType.String,
         },
         {
             name: "envPosition",
-            description: "The variable name to use for $env, retrieve the position with $env[<name>]",
+            description: "The variable name to use for $env. Retrieve the position with $env[<name>]",
             required: false,
             rest: false,
             type: forgescript_1.ArgType.String,
         },
         {
             name: "code",
-            description: "Code to execute for each row, remember to use $return",
+            description: "Code to execute for each row. Remember to use $return",
             rest: false,
             type: forgescript_1.ArgType.String,
             required: false,

@@ -19,7 +19,7 @@ exports.default = new forgescript_1.NativeFunction({
         },
         {
             name: "message ID",
-            description: "The identifier of the value",
+            description: "The ID of the message",
             rest: false,
             type: forgescript_1.ArgType.Message,
             required: false,

@@ -18,14 +18,14 @@ exports.default = new forgescript_1.NativeFunction({
     args: [
         {
             name: "name",
-            description: "The name of the variable",
+            description: "The name of the variable to query",
             rest: false,
             type: forgescript_1.ArgType.String,
             required: true,
         },
         {
             name: "sort type",
-            description: "The sort type for the leaderboard, either asc (ascending) or desc (descending)",
+            description: "The sort order for the leaderboard, either ascending (asc) or descending (desc)",
             rest: false,
             type: forgescript_1.ArgType.Enum,
             enum: SortType,

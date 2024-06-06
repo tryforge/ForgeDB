@@ -22,7 +22,7 @@ exports.default = new forgescript_1.NativeFunction({
             type: forgescript_1.ArgType.String,
         }, {
             name: "role ID",
-            description: "The role id of the variable",
+            description: "The ID of the role",
             rest: false,
             type: forgescript_1.ArgType.Role,
             required: true,

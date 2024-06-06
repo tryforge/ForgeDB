@@ -16,27 +16,27 @@ var VariableType;
 exports.default = new forgescript_1.NativeFunction({
     name: "$searchDB",
     version: "2.0.0",
-    description: "Returns a variable's value of a channel",
+    description: "Retrieves the value of a variable associated with a specific channel.",
     output: forgescript_1.ArgType.Unknown,
     unwrap: true,
     args: [
         {
             name: "name",
-            description: "The name of the variable",
+            description: "The name of the variable from which you want to retrieve the value.",
             rest: false,
             type: forgescript_1.ArgType.String,
             required: false,
         },
         {
             name: "id",
-            description: "The id of a user, guild, channel, etc.",
+            description: "The unique identifier of the user, guild, channel, or any other type.",
             rest: false,
             type: forgescript_1.ArgType.String,
             required: false,
         },
         {
             name: "type",
-            description: "The type of the variable",
+            description: "The type or category of the variable.",
             rest: false,
             type: forgescript_1.ArgType.Enum,
             enum: VariableType,
@@ -44,14 +44,14 @@ exports.default = new forgescript_1.NativeFunction({
         },
         {
             name: "value",
-            description: "The value of the variable",
+            description: "The value associated with the variable.",
             rest: false,
             type: forgescript_1.ArgType.String,
             required: false,
         },
         {
             name: "guild ID",
-            description: "The guild ID of a member, channel or role",
+            description: "The unique identifier of the guild to which the member, channel, or role belongs.",
             rest: false,
             type: forgescript_1.ArgType.Guild,
             required: false,

@@ -5,27 +5,27 @@ const util_1 = require("../../util");
 exports.default = new forgescript_1.NativeFunction({
     name: "$getGuildLeaderboardLength",
     version: "2.0.0",
-    description: "Returns the length of a guild leaderboard",
+    description: "Retrieves the length of a guild leaderboard",
     output: forgescript_1.ArgType.Number,
     unwrap: true,
     args: [
         {
             name: "name",
-            description: "The name of the variable",
+            description: "The name of the variable to query",
             rest: false,
             type: forgescript_1.ArgType.String,
             required: true,
         },
         {
             name: "length",
-            description: "The length of guild per page",
+            description: "The number of guilds per page",
             rest: false,
             type: forgescript_1.ArgType.Number,
             required: false,
         },
         {
             name: "decimals",
-            description: "Return decimals for more accurate results, default: false",
+            description: "Specify whether to return decimals for more precise results (default: false)",
             rest: false,
             type: forgescript_1.ArgType.Boolean,
             required: false

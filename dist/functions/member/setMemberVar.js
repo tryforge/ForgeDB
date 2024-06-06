@@ -5,7 +5,7 @@ const util_1 = require("../../util");
 exports.default = new forgescript_1.NativeFunction({
     name: "$setMemberVar",
     version: "2.0.0",
-    description: "Sets an member's value in a variable",
+    description: "Sets a member's value in a variable",
     unwrap: true,
     args: [
         {
@@ -14,21 +14,24 @@ exports.default = new forgescript_1.NativeFunction({
             rest: false,
             type: forgescript_1.ArgType.String,
             required: true,
-        }, {
+        },
+        {
             name: "value",
-            description: "The value",
+            description: "The value to set",
             rest: false,
             required: true,
             type: forgescript_1.ArgType.String,
-        }, {
+        },
+        {
             name: "member ID",
-            description: "The member id of the variable",
+            description: "The ID of the member",
             rest: false,
             type: forgescript_1.ArgType.User,
             required: false,
-        }, {
+        },
+        {
             name: "guild ID",
-            description: "The guild of the identifier",
+            description: "The guild ID",
             rest: false,
             type: forgescript_1.ArgType.Guild,
             required: false,

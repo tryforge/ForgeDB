@@ -5,18 +5,19 @@ const util_1 = require("../../util");
 exports.default = new forgescript_1.NativeFunction({
     name: "$setGlobalVar",
     version: "2.0.0",
-    description: "Sets a global's value in a variable",
+    description: "Assigns a value to a variable associated with a global",
     unwrap: true,
     args: [
         {
             name: "name",
-            description: "The name of the variable",
+            description: "The name of the variable to set the value in",
             rest: false,
             type: forgescript_1.ArgType.String,
             required: true,
-        }, {
+        },
+        {
             name: "value",
-            description: "The value",
+            description: "The value to be assigned",
             rest: false,
             required: true,
             type: forgescript_1.ArgType.String,

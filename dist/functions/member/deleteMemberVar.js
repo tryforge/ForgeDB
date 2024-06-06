@@ -5,25 +5,27 @@ const util_1 = require("../../util");
 exports.default = new forgescript_1.NativeFunction({
     name: "$deleteMemberVar",
     version: "2.0.0",
-    description: "Deletes a value from a member variable",
+    description: "Removes a value from a member variable",
     unwrap: true,
     brackets: true,
     args: [
         {
             name: "name",
-            description: "The name of the variable",
+            description: "The name of the variable from which to remove the value",
             rest: false,
             type: forgescript_1.ArgType.String,
             required: true,
-        }, {
+        },
+        {
             name: "member ID",
             description: "The identifier of the value",
             rest: false,
             type: forgescript_1.ArgType.User,
             required: false,
-        }, {
+        },
+        {
             name: "guild ID",
-            description: "The guild of the identifier",
+            description: "The guild to which the member belongs",
             rest: false,
             type: forgescript_1.ArgType.Guild,
             required: false,

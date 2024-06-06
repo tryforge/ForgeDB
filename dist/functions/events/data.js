@@ -14,12 +14,12 @@ var DataType;
 exports.default = new forgescript_1.NativeFunction({
     name: "$data",
     version: "2.0.0",
-    description: "Retrieve the data has been set/deleted of a record on create and delete events",
+    description: "Retrieves data that has been set or deleted for a record during create and delete events",
     unwrap: true,
     args: [
         {
             name: "type",
-            description: "The type of what you want to retrieve",
+            description: "The type of data you want to retrieve",
             rest: false,
             type: forgescript_1.ArgType.Enum,
             enum: DataType,

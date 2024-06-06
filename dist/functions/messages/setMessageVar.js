@@ -5,7 +5,7 @@ const util_1 = require("../../util");
 exports.default = new forgescript_1.NativeFunction({
     name: "$setMessageVar",
     version: "2.0.0",
-    description: "Sets an message's value in a variable",
+    description: "Sets a message's value in a variable",
     unwrap: true,
     args: [
         {
@@ -14,15 +14,17 @@ exports.default = new forgescript_1.NativeFunction({
             rest: false,
             type: forgescript_1.ArgType.String,
             required: true,
-        }, {
+        },
+        {
             name: "value",
             description: "The value",
             rest: false,
             required: true,
             type: forgescript_1.ArgType.String,
-        }, {
+        },
+        {
             name: "message ID",
-            description: "The message id of the variable",
+            description: "The ID of the message",
             rest: false,
             type: forgescript_1.ArgType.Message,
             required: false,

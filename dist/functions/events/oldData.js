@@ -14,12 +14,12 @@ var DataType;
 exports.default = new forgescript_1.NativeFunction({
     name: "$oldData",
     version: "2.0.0",
-    description: "Retrieve the old data has been updated of a record on update event",
+    description: "Retrieves the old data that has been updated for a record during an update event",
     unwrap: true,
     args: [
         {
             name: "type",
-            description: "The type of what you want to retrieve",
+            description: "The type of data you want to retrieve",
             rest: false,
             type: forgescript_1.ArgType.Enum,
             enum: DataType,

@@ -11,32 +11,34 @@ var SortType;
 exports.default = new forgescript_1.NativeFunction({
     name: "$getMemberLeaderboardValue",
     version: "2.0.0",
-    description: "Returns the position of a member in the leaderboard of a variable",
+    description: "Retrieves the position of a member in the leaderboard of a variable",
     output: forgescript_1.ArgType.Number,
     unwrap: true,
     args: [
         {
             name: "name",
-            description: "The name of the variable",
+            description: "The name of the variable to query",
             rest: false,
             type: forgescript_1.ArgType.String,
             required: true,
         },
         {
             name: "sort type",
-            description: "The sort type for the leaderboard, either asc/0 (ascending) or desc/1 (descending)",
+            description: "The sort order for the leaderboard, either ascending (asc) or descending (desc)",
             rest: false,
             type: forgescript_1.ArgType.Enum,
             enum: SortType,
-        }, {
+        },
+        {
             name: "member ID",
-            description: "The member id of the value",
+            description: "The member ID for which to retrieve the position",
             rest: false,
             type: forgescript_1.ArgType.User,
             required: false,
-        }, {
+        },
+        {
             name: "guild ID",
-            description: "The guild of the identifier",
+            description: "The guild ID to which the member belongs",
             rest: false,
             type: forgescript_1.ArgType.Guild,
             required: false,

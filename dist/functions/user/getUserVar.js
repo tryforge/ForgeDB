@@ -6,27 +6,27 @@ const __1 = require("../..");
 exports.default = new forgescript_1.NativeFunction({
     name: "$getUserVar",
     version: "2.0.0",
-    description: "Returns a variable's value of a user",
+    description: "Retrieves the value of a specified variable for a user.",
     output: forgescript_1.ArgType.Unknown,
     unwrap: true,
     args: [
         {
-            name: "name",
-            description: "The name of the variable",
+            name: "variable name",
+            description: "The name of the variable.",
             rest: false,
             type: forgescript_1.ArgType.String,
             required: true,
         },
         {
             name: "user ID",
-            description: "The identifier of the value",
+            description: "The identifier of the user.",
             rest: false,
             type: forgescript_1.ArgType.User,
             required: false,
         },
         {
-            name: "default",
-            description: "The default value if the identifier doesn't exist in the variable",
+            name: "default value",
+            description: "The default value if the identifier doesn't exist in the variable.",
             rest: false,
             required: false,
             type: forgescript_1.ArgType.String,

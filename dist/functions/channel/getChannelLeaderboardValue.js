@@ -11,26 +11,27 @@ var SortType;
 exports.default = new forgescript_1.NativeFunction({
     name: "$getChannelLeaderboardValue",
     version: "2.0.0",
-    description: "Returns the position of a channel in the leaderboard of a variable",
+    description: "Fetches the position of a channel in the leaderboard of a variable",
     output: forgescript_1.ArgType.Number,
     unwrap: true,
     args: [
         {
             name: "name",
-            description: "The name of the variable",
+            description: "The name of the variable to query",
             rest: false,
             type: forgescript_1.ArgType.String,
             required: true,
         },
         {
             name: "sort type",
-            description: "The sort type for the leaderboard, either asc/0 (ascending) or desc/1 (descending)",
+            description: "The sort order for the leaderboard, either ascending (asc) or descending (desc)",
             rest: false,
             type: forgescript_1.ArgType.Enum,
             enum: SortType,
-        }, {
+        },
+        {
             name: "channel ID",
-            description: "The channel id of the value",
+            description: "The channel ID of the value",
             rest: false,
             type: forgescript_1.ArgType.Channel,
             required: false,

@@ -5,7 +5,7 @@ const util_1 = require("../../util");
 exports.default = new forgescript_1.NativeFunction({
     name: "$setUserVar",
     version: "2.0.0",
-    description: "Sets an user's value in a variable",
+    description: "Sets a user's value in a variable",
     unwrap: true,
     args: [
         {

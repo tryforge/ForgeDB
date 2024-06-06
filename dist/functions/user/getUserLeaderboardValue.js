@@ -11,26 +11,26 @@ var SortType;
 exports.default = new forgescript_1.NativeFunction({
     name: "$getUserLeaderboardValue",
     version: "2.0.0",
-    description: "Returns the position of a user in the leaderboard of a variable",
+    description: "Returns the position of a user in the leaderboard of a specified variable",
     output: forgescript_1.ArgType.Number,
     unwrap: true,
     args: [
         {
-            name: "name",
+            name: "variableName",
             description: "The name of the variable",
             rest: false,
             type: forgescript_1.ArgType.String,
             required: true,
         },
         {
-            name: "sort type",
-            description: "The sort type for the leaderboard, either asc/0 (ascending) or desc/1 (descending)",
+            name: "sortType",
+            description: "The sort type for the leaderboard: 'asc' (ascending) or 'desc' (descending)",
             rest: false,
             type: forgescript_1.ArgType.Enum,
             enum: SortType,
         }, {
-            name: "user ID",
-            description: "The user id of the value",
+            name: "userID",
+            description: "The user ID of the value",
             rest: false,
             type: forgescript_1.ArgType.User,
             required: false,

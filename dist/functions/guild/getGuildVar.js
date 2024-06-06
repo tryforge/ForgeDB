@@ -6,27 +6,27 @@ const __1 = require("../..");
 exports.default = new forgescript_1.NativeFunction({
     name: "$getGuildVar",
     version: "2.0.0",
-    description: "Returns a variable's value of a guild",
+    description: "Retrieves the value of a variable associated with a guild",
     output: forgescript_1.ArgType.Unknown,
     unwrap: true,
     args: [
         {
             name: "name",
-            description: "The name of the variable",
+            description: "The name of the variable to query",
             rest: false,
             type: forgescript_1.ArgType.String,
             required: true,
         },
         {
             name: "guild ID",
-            description: "The identifier of the value",
+            description: "The guild ID for which to retrieve the variable value",
             rest: false,
             type: forgescript_1.ArgType.Guild,
             required: false,
         },
         {
             name: "default",
-            description: "The default value if the identifier doesn't exist in the variable",
+            description: "The default value to return if the identifier doesn't exist in the variable",
             rest: false,
             required: false,
             type: forgescript_1.ArgType.String,
