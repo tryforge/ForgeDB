@@ -6,7 +6,7 @@ const eventManager_1 = require("../structures/eventManager");
 exports.default = new eventManager_1.DBEventHandler({
     name: "variableCreate",
     version: "2.0.0",
-    description: "test",
+    description: "This event is triggered when a new variable gets created.",
     listener(extras) {
         const commands = this.getExtension(__1.ForgeDB, true).commands.get('create');
         for (const command of commands) {

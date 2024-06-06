@@ -6,7 +6,7 @@ const eventManager_1 = require("../structures/eventManager");
 exports.default = new eventManager_1.DBEventHandler({
     name: "variableUpdate",
     version: "2.0.0",
-    description: "test",
+    description: "This event is triggered when a variable gets updated.",
     listener(extras) {
         const commands = this.getExtension(__1.ForgeDB, true).commands.get('update');
         for (const command of commands) {

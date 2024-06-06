@@ -5,7 +5,7 @@ import { DBEventHandler } from "../structures/eventManager"
 export default new DBEventHandler({
     name: "connect",
     version: "2.0.0",
-    description: "This event is triggered when ForgeDB is connected with Forgescript",
+    description: "This event is triggered when ForgeDB is connected with ForgeScript",
     listener(){
         const commands = this.getExtension(ForgeDB, true).commands.get('connect')
         
