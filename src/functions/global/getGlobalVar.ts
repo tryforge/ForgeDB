@@ -5,20 +5,20 @@ import { ForgeDB } from "../.."
 export default new NativeFunction({
     name: "$getGlobalVar",
     version: "2.0.0",
-    description: "Returns a variable's value of a global",
+    description: "Retrieves the value of a variable associated with a global",
     output: ArgType.Unknown,
     unwrap: true,
     args: [
         {
             name: "name",
-            description: "The name of the variable",
+            description: "The name of the variable to query",
             rest: false,
             type: ArgType.String,
             required: true,
         },
         {
             name: "default",
-            description: "The default value if the identifier doesn't exist in the variable",
+            description: "The default value to return if the identifier doesn't exist in the variable",
             rest: false,
             required: false,
             type: ArgType.String,
