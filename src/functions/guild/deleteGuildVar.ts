@@ -4,17 +4,18 @@ import { DataBase } from "../../util"
 export default new NativeFunction({
     name: "$deleteGuildVar",
     version: "2.0.0",
-    description: "Deletes a value from a guild variable",
+    description: "Removes a value from a guild variable",
     unwrap: true,
     brackets: true,
     args: [
         {
             name: "name",
-            description: "The name of the variable",
+            description: "The name of the variable from which to remove the value",
             rest: false,
             type: ArgType.String,
             required: true,
-        },{
+        },
+        {
             name: "guild ID",
             description: "The identifier of the value",
             rest: false,
