@@ -88,7 +88,6 @@ export default new NativeFunction({
             ctx.setEnvironmentKey(valueVariable || '', info)
             if(!code) elements.push(`${index}. ${guild_name} ~ ${row.value}`)
             const execution = (await this["resolveCode"](ctx, code)) as Return
-            console.log(execution)
             if(execution.value) elements.push(execution.value as string)
         }
 

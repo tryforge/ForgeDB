@@ -95,7 +95,6 @@ exports.default = new forgescript_1.NativeFunction({
             if (!code)
                 elements.push(`${index}. ${channel_name} ~ ${row.value}`);
             const execution = (await this["resolveCode"](ctx, code));
-            console.log(execution);
             if (execution.value)
                 elements.push(execution.value);
         }
