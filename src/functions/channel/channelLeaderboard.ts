@@ -12,7 +12,7 @@ export default new NativeFunction({
     description: "Creates a leaderboard specific to channels based on a variable.",
     output: ArgType.String,
     brackets: true,
-    unwrap: true,
+    unwrap: false,
     args: [
         {
             name: "name",
@@ -69,35 +69,38 @@ export default new NativeFunction({
         },
         {
             name: "code",
-            description: "Code executed for each row, remembering to utilize $return to get results.",
+            description: "Code executed for each row.",
             rest: false,
             type: ArgType.String,
             required: false,
         }
     ],
-    async execute(ctx, [name, guild, sortType, max, page, separator, valueVariable, positionVariable]) {
-        const limit = max || 10
-        const pag = page || 1
-        const [, , , , , , , , code] = this.data.fields as IExtendedCompiledFunctionField[]
-        
+    async execute(ctx) {
+        const [name, guild, sortType, max, page, separator, valueVariable, positionVariable, code] = this.data.fields as IExtendedCompiledFunctionField[]
+        const limit = Number(max?.value) || 10
+        const pag = Number(page?.value) || 1
+
+        const guildID = (await this["resolveCode"](ctx, guild)) as Return
+        if (!this["isValidReturnType"](guildID)) return guildID
+
         const elements = new Array<string>()
-        const rows = await DataBase.find({name, type: 'channel', guildId: guild?.id ?? ctx.guild!.id})
-            .then((x) => x.sort((x, y) => (sortType === SortType.desc ? Number(x.value) - Number(y.value) : Number(y.value) - Number(x.value))))
+        const rows = await DataBase.find({name: name.value, type: 'channel', guildId: guildID.value as string ?? ctx.guild!.id})
+            .then((x) => x.sort((x, y) => (sortType?.value as unknown as SortType === SortType.desc ? Number(x.value) - Number(y.value) : Number(y.value) - Number(x.value))))
             .then((x) => x.slice(pag * limit - limit, pag * limit))
             
         for (let i = 0, len = rows.length; i < len; i++) {
             const index = pag * limit - limit + i + 1
             const row = rows[i]
-            const channel_name = ctx.client.guilds.cache.get(guild?.id ?? ctx.guild!.id)?.channels.cache.get(row.id)?.name
+            const channel_name = ctx.client.guilds.cache.get(guildID.value as string ?? ctx.guild!.id)?.channels.cache.get(row.id)?.name
             
             const info = { channel_name,...row }
-            ctx.setEnvironmentKey(positionVariable || '', index)
-            ctx.setEnvironmentKey(valueVariable || '', info)
+            ctx.setEnvironmentKey(positionVariable?.value || '', index)
+            ctx.setEnvironmentKey(valueVariable?.value || '', info)
             if(!code) elements.push(`${index}. ${channel_name} ~ ${row.value}`)
             const execution = (await this["resolveCode"](ctx, code)) as Return
             if(execution.value) elements.push(execution.value as string)
         }
 
-        return this.success(elements.join(separator || '\n'))
+        return this.success(elements.join(separator?.value || '\n'))
     },
 })

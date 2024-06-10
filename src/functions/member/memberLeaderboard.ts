@@ -1,4 +1,5 @@
 import { ArgType, IExtendedCompiledFunctionField, NativeFunction, Return } from "@tryforge/forgescript"
+import { Guild } from 'discord.js'
 import { DataBase } from "../../util"
 
 export enum SortType {
@@ -12,7 +13,7 @@ export default new NativeFunction({
     description: "Creates a leaderboard of members for a variable",
     output: ArgType.String,
     brackets: true,
-    unwrap: true,
+    unwrap: false,
     args: [
         {
             name: "name",
@@ -69,35 +70,39 @@ export default new NativeFunction({
         },
         {
             name: "code",
-            description: "Code to execute for each row, remember to use $return",
+            description: "Code to execute for each row.",
             rest: false,
             type: ArgType.String,
             required: false,
         }
     ],
-    async execute(ctx, [name, guild, sortType, max, page, separator, valueVariable, positionVariable]) {
-        const limit = max || 10
-        const pag = page || 1
-        const [, , , , , , , , code] = this.data.fields as IExtendedCompiledFunctionField[]
+    async execute(ctx) {
+        const [name, guild, sortType, max, page, separator, valueVariable, positionVariable, code] = this.data.fields as IExtendedCompiledFunctionField[]
         
+        const limit = Number(max?.value) || 10
+        const pag = Number(page?.value) || 1
+        
+        const guildID = (await this["resolveCode"](ctx, guild)) as Return
+        if (!this["isValidReturnType"](guildID)) return guildID
+
         const elements = new Array<string>()
-        const rows = await DataBase.find({name, type: 'member', guildId: guild?.id ?? ctx.guild!.id})
-            .then((x) => x.sort((x, y) => (sortType === SortType.desc ? Number(x.value) - Number(y.value) : Number(y.value) - Number(x.value))))
+        const rows = await DataBase.find({name: name.value, type: 'member', guildId: guildID.value as string?? ctx.guild!.id})
+            .then((x) => x.sort((x, y) => (sortType?.value as unknown as SortType === SortType.desc ? Number(x.value) - Number(y.value) : Number(y.value) - Number(x.value))))
             .then((x) => x.slice(pag * limit - limit, pag * limit))
             
         for (let i = 0, len = rows.length; i < len; i++) {
             const index = pag * limit - limit + i + 1
             const row = rows[i]
-            const username = ctx.client.guilds.cache.get(guild?.id ?? ctx.guild!.id)?.members.cache.get(row.id)?.user.username
+            const username = ctx.client.guilds.cache.get(guildID.value as string ?? ctx.guild!.id)?.members.cache.get(row.id)?.user.username
             
             const info = { username,...row }
-            ctx.setEnvironmentKey(positionVariable || '', index)
-            ctx.setEnvironmentKey(valueVariable || '', info)
+            ctx.setEnvironmentKey(positionVariable?.value || '', index)
+            ctx.setEnvironmentKey(valueVariable?.value || '', info)
             if(!code) elements.push(`${index}. ${username} ~ ${row.value}`)
             const execution = (await this["resolveCode"](ctx, code)) as Return
             if(execution.value) elements.push(execution.value as string)
         }
 
-        return this.success(elements.join(separator || '\n'))
+        return this.success(elements.join(separator?.value || '\n'))
     },
 })

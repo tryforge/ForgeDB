@@ -48,6 +48,6 @@ declare const _default: NativeFunction<[{
     rest: false;
     type: ArgType.String;
     required: false;
-}], true>;
+}], false>;
 export default _default;
 //# sourceMappingURL=userLeaderboard.d.ts.map
