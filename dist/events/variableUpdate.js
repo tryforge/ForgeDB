@@ -20,4 +20,4 @@ exports.default = new eventManager_1.DBEventHandler({
         }
     }
 });
-//# sourceMappingURL=update.js.map
+//# sourceMappingURL=variableUpdate.js.map
