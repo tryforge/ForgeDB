@@ -71,7 +71,7 @@ exports.default = new forgescript_1.NativeFunction({
         },
         {
             name: "code",
-            description: "Code to execute for each row.",
+            description: "Code to execute for each row. Remember to use $return, otherwise it will not return anything.",
             rest: false,
             type: forgescript_1.ArgType.String,
             required: false,

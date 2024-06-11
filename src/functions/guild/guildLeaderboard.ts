@@ -62,7 +62,7 @@ export default new NativeFunction({
         },
         {
             name: "code",
-            description: "Code to execute for each row.",
+            description: "Code to execute for each row. Remember to use $return, otherwise it will not return anything.",
             rest: false,
             type: ArgType.String,
             required: false,
