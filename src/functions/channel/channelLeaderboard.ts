@@ -80,11 +80,14 @@ export default new NativeFunction({
         const limit = Number(max?.value) || 10
         const pag = Number(page?.value) || 1
 
+        const nameV = (await this["resolveCode"](ctx, name)) as Return
+        if (!this["isValidReturnType"](nameV)) return nameV
+
         const guildID = (await this["resolveCode"](ctx, guild)) as Return
         if (!this["isValidReturnType"](guildID)) return guildID
 
         const elements = new Array<string>()
-        const rows = await DataBase.find({name: name.value, type: 'channel', guildId: guildID.value as string ?? ctx.guild!.id})
+        const rows = await DataBase.find({name: nameV.value as string, type: 'channel', guildId: guildID.value as string ?? ctx.guild!.id})
             .then((x) => x.sort((x, y) => (sortType?.value === "desc" ? Number(x.value) - Number(y.value) : Number(y.value) - Number(x.value))))
             .then((x) => x.slice(pag * limit - limit, pag * limit))
             

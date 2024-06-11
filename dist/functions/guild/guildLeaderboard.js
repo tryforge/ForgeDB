@@ -74,8 +74,11 @@ exports.default = new forgescript_1.NativeFunction({
         const [name, sortType, max, page, separator, valueVariable, positionVariable, code] = this.data.fields;
         const limit = Number(max?.value) || 10;
         const pag = Number(page?.value) || 1;
+        const nameV = (await this["resolveCode"](ctx, name));
+        if (!this["isValidReturnType"](nameV))
+            return nameV;
         const elements = new Array();
-        const rows = await util_1.DataBase.find({ name: name.value, type: 'guild' })
+        const rows = await util_1.DataBase.find({ name: nameV.value, type: 'guild' })
             .then((x) => x.sort((x, y) => (sortType?.value === "desc" ? Number(x.value) - Number(y.value) : Number(y.value) - Number(x.value))))
             .then((x) => x.slice(pag * limit - limit, pag * limit));
         for (let i = 0, len = rows.length; i < len; i++) {
