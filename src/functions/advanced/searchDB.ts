@@ -1,12 +1,12 @@
 import { ArgType, NativeFunction } from "@tryforge/forgescript"
-import { DataBase, RecordData } from "../../util"
+import { DataBase } from "../../util"
 
 export enum VariableType { user, channel, role, message, member, custom, guild }
 
 export default new NativeFunction({
     name: "$searchDB",
     version: "2.0.0",
-    description: "Retrieves the value of a variable associated with a specific channel.",
+    description: "Retrieves variables associated with your inputs.",
     output: ArgType.Unknown,
     unwrap: true,
     args: [

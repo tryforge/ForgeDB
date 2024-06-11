@@ -39,7 +39,7 @@ export default new NativeFunction({
     async execute(ctx, [name, sortType, guild]) {
         const data = await DataBase.find({name, type: "guild"})
         data.sort((a, b) => parseInt(a.value) - parseInt(b.value))
-        const index = ([SortType[0], SortType.asc].indexOf(sortType ?? "asc") === -1 ? data : [...data].reverse()).findIndex((s) => s.id === (guild?.id ?? ctx.guild?.id))
+        const index = ([SortType[0], SortType.asc].indexOf(sortType && sortType.toString() !== '' ? sortType : 'asc') === -1 ? data : [...data].reverse()).findIndex((s) => s.id === (guild?.id ?? ctx.guild?.id))
         return this.success(index + 1)
     },
 })

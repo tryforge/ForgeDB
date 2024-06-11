@@ -16,7 +16,7 @@ var VariableType;
 exports.default = new forgescript_1.NativeFunction({
     name: "$searchDB",
     version: "2.0.0",
-    description: "Retrieves the value of a variable associated with a specific channel.",
+    description: "Retrieves variables associated with your inputs.",
     output: forgescript_1.ArgType.Unknown,
     unwrap: true,
     args: [

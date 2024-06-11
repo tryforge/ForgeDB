@@ -20,4 +20,4 @@ exports.default = new eventManager_1.DBEventHandler({
         }
     }
 });
-//# sourceMappingURL=create.js.map
+//# sourceMappingURL=variableCreate.js.map

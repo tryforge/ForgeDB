@@ -14,7 +14,7 @@ exports.default = new forgescript_1.NativeFunction({
     description: "Creates a user leaderboard for a variable",
     output: forgescript_1.ArgType.String,
     brackets: true,
-    unwrap: true,
+    unwrap: false,
     args: [
         {
             name: "name",
@@ -64,34 +64,37 @@ exports.default = new forgescript_1.NativeFunction({
         },
         {
             name: "code",
-            description: "Code to execute for each row. Remember to use $return",
+            description: "Code to execute for each row. Remember to use $return, otherwise it will not return anything.",
             rest: false,
             type: forgescript_1.ArgType.String,
             required: false,
         }
     ],
-    async execute(ctx, [name, sortType, max, page, separator, valueVariable, positionVariable]) {
-        const limit = max || 10;
-        const pag = page || 1;
-        const [, , , , , , , code] = this.data.fields;
+    async execute(ctx) {
+        const [name, sortType, max, page, separator, valueVariable, positionVariable, code] = this.data.fields;
+        const limit = Number(max?.value) || 10;
+        const pag = Number(page?.value) || 1;
+        const nameV = (await this["resolveCode"](ctx, name));
+        if (!this["isValidReturnType"](nameV))
+            return nameV;
         const elements = new Array();
-        const rows = await util_1.DataBase.find({ name, type: 'user' })
-            .then((x) => x.sort((x, y) => (sortType === SortType.desc ? Number(x.value) - Number(y.value) : Number(y.value) - Number(x.value))))
+        const rows = await util_1.DataBase.find({ name: nameV.value, type: 'user' })
+            .then((x) => x.sort((x, y) => (sortType?.value === "desc" ? Number(x.value) - Number(y.value) : Number(y.value) - Number(x.value))))
             .then((x) => x.slice(pag * limit - limit, pag * limit));
         for (let i = 0, len = rows.length; i < len; i++) {
             const index = pag * limit - limit + i + 1;
             const row = rows[i];
             const username = ctx.client.users.cache.get(row.id)?.username;
             const info = { username, ...row };
-            ctx.setEnvironmentKey(positionVariable || '', index);
-            ctx.setEnvironmentKey(valueVariable || '', info);
+            ctx.setEnvironmentKey(positionVariable?.value || '', index);
+            ctx.setEnvironmentKey(valueVariable?.value || '', info);
             if (!code)
                 elements.push(`${index}. ${username} ~ ${row.value}`);
             const execution = (await this["resolveCode"](ctx, code));
             if (execution.value)
                 elements.push(execution.value);
         }
-        return this.success(elements.join(separator || '\n'));
+        return this.success(elements.join(separator?.value || '\n'));
     },
 });
 //# sourceMappingURL=userLeaderboard.js.map
