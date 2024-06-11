@@ -86,7 +86,7 @@ exports.default = new forgescript_1.NativeFunction({
             return guildID;
         const elements = new Array();
         const rows = await util_1.DataBase.find({ name: name.value, type: 'member', guildId: guildID.value ?? ctx.guild.id })
-            .then((x) => x.sort((x, y) => (sortType?.value === SortType.desc ? Number(x.value) - Number(y.value) : Number(y.value) - Number(x.value))))
+            .then((x) => x.sort((x, y) => (sortType?.value === "desc" ? Number(x.value) - Number(y.value) : Number(y.value) - Number(x.value))))
             .then((x) => x.slice(pag * limit - limit, pag * limit));
         for (let i = 0, len = rows.length; i < len; i++) {
             const index = pag * limit - limit + i + 1;

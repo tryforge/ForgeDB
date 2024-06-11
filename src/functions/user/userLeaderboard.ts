@@ -73,10 +73,10 @@ export default new NativeFunction({
         
         const limit = Number(max?.value) || 10
         const pag = Number(page?.value) || 1
-        
+        console.log(sortType.value)
         const elements = new Array<string>()
         const rows = await DataBase.find({name: name.value, type: 'user'})
-            .then((x) => x.sort((x, y) => (sortType?.value as unknown as SortType === SortType.desc ? Number(x.value) - Number(y.value) : Number(y.value) - Number(x.value))))
+            .then((x) => x.sort((x, y) => (sortType?.value === "desc" ? Number(x.value) - Number(y.value) : Number(y.value) - Number(x.value))))
             .then((x) => x.slice(pag * limit - limit, pag * limit))
             
         for (let i = 0, len = rows.length; i < len; i++) {
