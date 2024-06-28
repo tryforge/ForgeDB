@@ -111,6 +111,7 @@ const client = new ForgeClient({
 Congratulations, you have now successfully connected your DB with ForgeDB and your client is connected to it now.
 
 <h3 align="center">Events</h3><hr>
+
 - What are DB events?
  > DB events are the events which get triggered when certain activities happen on your DB.
 - How are they helpful in developing apps powered by ForgeScript?
