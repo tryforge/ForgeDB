@@ -17,6 +17,7 @@
 5. [Documentation](https://docs.botforge.org/p/ForgeDB/)
 6. [Credits](#credits)
 <br>
+
 <h3 align="center">Effortless installation</h3><hr>
 
 1. Run the following command to install the required `npm packages`:
@@ -59,6 +60,7 @@ const client = new ForgeClient({
 })
 ```
 Congratulations, you have successfully connected your client to a MongoDB database
+
 <h3 align="center">Other Installation</h3><hr>
 <p align="center">Your here because you want to try other DBs. So now just follow the steps below to set up your bot to work with other DBs:</p>
 
@@ -109,7 +111,6 @@ const client = new ForgeClient({
 Congratulations, you have now successfully connected your DB with ForgeDB and your client is connected to it now.
 
 <h3 align="center">Events</h3><hr>
-
 - What are DB events?
  > DB events are the events which get triggered when certain activities happen on your DB.
 - How are they helpful in developing apps powered by ForgeScript?
