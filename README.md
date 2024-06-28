@@ -183,4 +183,5 @@ Aurea| Made this cool readme|[Discord](https://discord.com/users/976413539076026
 Aayush|Fixed grammatical and spelling mistakes|[Discord](https://discord.com/users/1077766221929402378) [GitHub](https://github.com/aayush117)
 Koomball|Android installation guide|[Discord](https://discord.com/users/1095378481237475409) [GitHub](https://github.com/koomball)
 <h2 align="center">Note from our team</h2>
- coming soon~
+
+> You can get the contributer role by forking this repository, making your changes and then open a pull request. If it's helpful then, you will receive if not then you won't.
