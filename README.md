@@ -144,7 +144,7 @@ This package was made by with love [aggelos](https://discord.com/users/637648484
 Contributor | Contribution | Conatct
 -|-|-
 Aggelos|Main developer|[Discord](https://discord.com/users/637648484979441706) [GitHub](https://github.com/aggelos-007)
-Aditya|Descriptions for functions|[Discord](https://discord.com/users/903681538842054686)
+Aditya|Descriptions for functions|[Discord](https://discord.com/users/903681538842054686) [GitHub](https://github.com/clyders)
 Aurea||[Discord](https://discord.com/users/976413539076026388) [GitHub](https://github.com/aurea6)
-Aayush|Fixed grammatical and spelling mistakes|
-Koomball||
+Aayush|Fixed grammatical and spelling mistakes|[Discord]() [GitHub]()
+Koomball||[Discord]() [GitHub](https://github.com/koomball)
