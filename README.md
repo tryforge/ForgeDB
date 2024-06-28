@@ -127,7 +127,11 @@ const client = new ForgeClient({
 })
 
 db.commands.add({
-    type: "connect" | "variableCreate" | "variableUpdate" | "variableDelete"
+    type: "" /* available types:
+connect
+variableCreate
+variableUpdate
+variableDelete */
     code: `Your_Code_Goes_Here`
 })
 ```
