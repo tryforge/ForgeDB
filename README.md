@@ -104,12 +104,13 @@ etc. */
 })
 ```
 Congratulations, you have now successfully connected your DB with ForgeDB and your client is connected to it now.
+
 <h3 align="center">Events</h3>
 
 - What are DB events?
- > answer here
+ > DB events are the events which get triggered when certain activities happen on your DB.
 - How are they helpful in developing apps powered by ForgeScript?
- > answer here
+ > DB events are really helpful in developing apps owned by ForgeScript, as they help you in monitoring activity in your DB and improve your logs.
 - How to use them?
  > Now when you finish configuring your database, you will have to head over to main file of your client and you will have to type this:
 ```js
