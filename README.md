@@ -1,33 +1,27 @@
-# ForgeDB
-An advanced DataBase extension for ForgeScript.
-
+<img src="https://cdn.discordapp.com/emojis/1185683362334134362.webp?size=64&quality=lossless" align="right" alt="ForgeDB logo"><h1 align="center">ForgeDB</h1><p align="center">An advanced DataBase extension for ForgeScript powered apps.</p>
 [![@tryforge/forge.db](https://img.shields.io/github/package-json/v/tryforge/ForgeDB/main?label=@tryforge/forge.db&color=5c16d4)](https://github.com/tryforge/ForgeDB/)
 [![@tryforge/forgescript](https://img.shields.io/github/package-json/v/tryforge/ForgeScript/main?label=@tryforge/forgescript&color=5c16d4)](https://github.com/tryforge/ForgeScript/)
-[![Discord](https://img.shields.io/discord/739934735387721768?logo=discord)](https://discord.gg/hcJgjzPvqb)
-
-## Table of Contents
+[![Discord](https://img.shields.io/discord/739934735387721768?logo=discord)](https://discord.gg/hcJgjzPvqb)<h2 align="center">Contents</h2>
 1. Installation
-    - [Quick Installation](#quick-installation)
-    - [MongoDB Installation](#mongodb-installation)
-    - [Other DB Installation](#other-db-installation)
-    - [Android Sqlite Build](#android-sqlite-build)
-2. [How to use Events](#how-to-use-events)
-3. [How to update](https://github.com/tryforge/ForgeDB/blob/main/guides/how-to-update.md)
-4. [Documentation](https://docs.botforge.org/p/ForgeDB/)
-5. [Credits](#credits)
+   - [Effortless installation](#effortless-installation)
+   - [MongoDB installation](#mongodb-installation)
+   - [Other installation](#other-installation)
+3. [Events](#events)
+4. [Updating](https://github.com/tryforge/ForgeDB/blob/main/guides/how-to-update.md)
+5. [Documentation](https://docs.botforge.org/p/ForgeDB/)
+6. [Credits](#credits)
+<br>
+<h3 align="center">Effortless installation</h3>
 
-### Quick Installation
-
-Download these npm packages:
+1. Run the following command to install the required `npm packages`:
 ```bash
 npm i @tryforge/forge.db sqlite3
 ```
-
-Now, in your client initialization:
-```ts
+2. Now, in your client initialization:
+```js
 const { ForgeDB } = require("@tryforge/forge.db")
 
-// I'll assume client, can be bot or anything else
+/* I'm assuming that the client can be an app or anything else */
 const client = new ForgeClient({
     ...options // The options you currently have
     extensions: [
@@ -35,20 +29,19 @@ const client = new ForgeClient({
     ]
 })
 ```
-And voi-la, you bot now has been connected to a local database.
+Congratulations, you have successfully connected your client to a local database.
 
-### MongoDB Installation
+<h3 align="center">MongoDB Installation</h3>
 
-Download these npm packages:
+1. Run the following command to install the required `npm packages`
 ```bash
 npm i @tryforge/forge.db mongodb
 ```
-
-Now, in your client initialization:
-```ts
+2. Now, in your client initialization:
+```js
 const { ForgeDB } = require("@tryforge/forge.db")
 
-// I'll assume client, can be bot or anything else
+// I'm assuming that the client, can be an app or anything else
 const client = new ForgeClient({
     ...options // The options you currently have
     extensions: [
@@ -59,89 +52,75 @@ const client = new ForgeClient({
     ]
 })
 ```
-And voi-la, you bot now has been connected to a mongo database.
+Congratulations, you have successfully connected your client to a MongoDB database
+<h3 align="center">Other Installation</h3>
+<p align="center">Your here because you want to try other DBs. So now just follow the steps below to set up your bot to work with other DBs:</p>
 
-### Other DB Installation
-If you want to install other dbs you need to follow these steps:
-1. Install forge.db package 
+1. You have to first install ForgeDB, so you just run this command in your terminal:
 ```bash
 npm i @tryforge/forge.db
 ```
-
-2. Install your db package
-    - For `better-sqlite3`
+2. Now that you've installed ForgeDB, you'll now have to install the DB package you want to use. Here are the ones ForgeDB currently supports:
+    - **Better Sqlite3**
     ```bash
     npm i better-sqlite3
     ```
-    - For `mysql`
-    ```bash
-    npm i mysql # or npm i mysql2
-    ```
-    - For `postgres`
+    - **MySQL**
+      > *MySQL have got two versions, you can use either of them.*
+       - `MySQL`
+         ```bash
+         npm i mysql
+         ```
+       - `MySQL2`
+         ```bash
+         npm i mysql2
+         ```
+    - **Postgres**
     ```bash
     npm i postgres
     ```
-3. Connect ForgeDB with ForgeScript
-```ts
+3. Now that you have installed your preferred DB package, now you have to connect it with ForgeDB and ForgeScript:
+```js
 const { ForgeDB } = require("@tryforge/forge.db")
 
-// I'll assume client, can be bot or anything else
+// I'm assuming that the client, can be an app or anything else
 const client = new ForgeClient({
     ...options // The options you currently have
     extensions: [
         new ForgeDB({
-            type: "mysql" | "postgres" | "better-sqlite3";
+            type: ""; /* You've to put the DB you want to use, example:
+mysql
+postgres
+better-sqlite3
+etc. */
             url?: string
             host?: string
             port?: number
             username?: string
             password?: string
-            database?: string //the path of your db
+            database?: string // The path of your DB
         })
     ]
 })
 ```
-And voi-la, you bot now has been connected to a database.
 
-### Android Sqlite Build
-Download these npm packages into your project:
-```bash
-npm i @tryforge/forge.db sqlite3
-```
+Congratulations, you have now successfully connected your DB with ForgeDB and your client is connected to it now.
 
-Run this console command in the Home directory:
-```bash
-mkdir .gyp
-```
+<h3 align="center">Events</h3>
 
-Now in your code editor inside the .gyp folder you created make a file called `include.gypi` and add this code.
-```gyp
-{'variables':{'android_ndk_path': ''}}
-```
-
-Now, in your client initialization:
-```ts
-const { ForgeDB } = require("@tryforge/forge.db")
-
-// I'll assume client, can be bot or anything else
-const client = new ForgeClient({
-    ...options // The options you currently have
-    extensions: [
-        new ForgeDB()
-    ]
-})
-```
-And voi-la, you bot now has been connected to a local database on your android device using termux.
-
-### How to use Events
-Once you configure your database you will head over to the main file of your bot and you will type this
-```ts
+- What are DB events?
+ > DB events are the events which get triggered when certain activities happen on your DB.
+- How are they helpful in developing apps powered by ForgeScript?
+ > DB events are really helpful in developing apps owned by ForgeScript, as they help you in monitoring activity in your DB and improve your logs.
+- How to use them?
+ > Now when you finish configuring your database, you will have to head over to main file of your client and you will have to type this:
+```js
 const { ForgeDB } = require("@tryforge/forge.db")
 
 const db = new ForgeDB({
     ...options? //The options you have for ForgeDB if you have any
-    events: [] //the events you want to use.
-    //Available: `connect`, `variableCreate`, variableUpdate, `variableDelete`
+    events: [] /* the events you want to use.
+Available: `connect`, `variableCreate`, variableUpdate, `variableDelete` */
 }) 
 
 const client = new ForgeClient({
@@ -150,14 +129,24 @@ const client = new ForgeClient({
 })
 
 db.commands.add({
-    type: "connect" | "variableCreate" | "variableUpdate" | "variableDelete"
+    type: "" /* available types:
+connect
+variableCreate
+variableUpdate
+variableDelete */
     code: `Your_Code_Goes_Here`
 })
 ```
-And voi-la, you learnt how to use database events!
 
-## Credits
-Thanks for reading this guide and for using ForgeDB <br>
-This package was made with love by [aggelos](https://discord.com/users/637648484979441706), a developer of ForgeScript. Use ForgeScript, it's better and easier.
+<h2 align="center">Credits</h2>
 
-Also huge thanks to [aditya](https://discord.com/users/903681538842054686) and [aurea](https://discord.com/users/976413539076026388) for their contributions <3
+*Thanks for reading till the end and using ForgeDB ;)* <br>
+This package was made by with love [aggelos](https://discord.com/users/637648484979441706), an awesome man who develops cool ForgeScript extensions.
+
+Contributor | Contribution | Conatct
+-|-|-
+Aggelos|Main developer|[Discord](https://discord.com/users/637648484979441706) [GitHub](https://github.com/aggelos-007)
+Aditya|Descriptions for functions|[Discord](https://discord.com/users/903681538842054686) [GitHub](https://github.com/clyders)
+Aurea||[Discord](https://discord.com/users/976413539076026388) [GitHub](https://github.com/aurea6)
+Aayush|Fixed grammatical and spelling mistakes|[Discord](https://discord.com/users/1077766221929402378) [GitHub](https://github.com/aayush117)
+Koomball|Improved Readme file|[Discord](https://discord.com/users/1095378481237475409) [GitHub](https://github.com/koomball)
