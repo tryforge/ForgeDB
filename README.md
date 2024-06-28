@@ -1,5 +1,6 @@
 <p align="center"><img src="https://cdn.discordapp.com/emojis/1185683362334134362.png?size=1024" alt="ForgeDB logo"></p>
-<h1 align="center">ForgeDB</h1><p align="center">An advanced DataBase extension for ForgeScript powered apps.</p>
+<h1 align="center">ForgeDB</h1>
+<p align="center">An advanced DataBase extension for ForgeScript powered apps.</p>
 
 <p align="center">
 <a href="https://github.com/tryforge/ForgeDB/"><img src="https://img.shields.io/github/package-json/v/tryforge/ForgeDB/main?label=@tryforge/forge.db&color=5c16d4" alt="@tryforge/forge.db"></a>
@@ -108,7 +109,6 @@ const client = new ForgeClient({
     ]
 })
 ```
-
 Congratulations, you have now successfully connected your DB with ForgeDB and your client is connected to it now.
 
 <h3 align="center">Android installation</h3><hr>
@@ -129,7 +129,7 @@ mkdir .gyp
 {'variables':{'android_ndk_path': ''}}
 ```
 5. Now, in your client initialization:
-```ts
+```js
 const { ForgeDB } = require("@tryforge/forge.db")
 
 // I'm assuming that the client, can be an app or anything else
@@ -182,3 +182,5 @@ Aditya|Descriptions for functions|[Discord](https://discord.com/users/9036815388
 Aurea| Made this cool readme|[Discord](https://discord.com/users/976413539076026388) [GitHub](https://github.com/aurea6)
 Aayush|Fixed grammatical and spelling mistakes|[Discord](https://discord.com/users/1077766221929402378) [GitHub](https://github.com/aayush117)
 Koomball|Android installation guide|[Discord](https://discord.com/users/1095378481237475409) [GitHub](https://github.com/koomball)
+<h2 align="center">Note from our team</h2>
+ coming soon~
