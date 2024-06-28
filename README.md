@@ -147,4 +147,4 @@ Aggelos|Main developer|[Discord](https://discord.com/users/637648484979441706) [
 Aditya|Descriptions for functions|[Discord](https://discord.com/users/903681538842054686) [GitHub](https://github.com/clyders)
 Aurea||[Discord](https://discord.com/users/976413539076026388) [GitHub](https://github.com/aurea6)
 Aayush|Fixed grammatical and spelling mistakes|[Discord](https://discord.com/users/1077766221929402378) [GitHub](https://github.com/aayush117)
-Koomball||[Discord](https://discord.com/users/1095378481237475409) [GitHub](https://github.com/koomball)
+Koomball|Improved Readme file|[Discord](https://discord.com/users/1095378481237475409) [GitHub](https://github.com/koomball)
