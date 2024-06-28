@@ -67,9 +67,9 @@ npm i @tryforge/forge.db
     ```
     - **MySQL**
       > *MySQL have got two versions, you can use either of them.*
-       - `MySQL1`
+       - `MySQL`
          ```bash
-         npm i mysql1
+         npm i mysql
          ```
        - `MySQL2`
          ```bash
