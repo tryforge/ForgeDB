@@ -7,7 +7,7 @@ export default new DBEventHandler({
     version: "2.0.0",
     description: "This event is triggered when a variable gets deleted.",
     listener(extras){
-        const commands = this.getExtension(ForgeDB, true).commands.get('delete')
+        const commands = this.getExtension(ForgeDB, true).commands.get('variableDelete')
         
         for (const command of commands) {
             Interpreter.run({
