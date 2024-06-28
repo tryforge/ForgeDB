@@ -132,8 +132,15 @@ db.commands.add({
 })
 ```
 
-## Credits
-Thanks for reading this guide and for using ForgeDB <br>
-This package was made by with love [aggelos](https://discord.com/users/637648484979441706), a developer of ForgeScript. Use ForgeScript, it's better and easier.
+<h2 align="center">Credits</h2>
 
-Also huge thanks to [aditya](https://discord.com/users/903681538842054686) and [aurea](https://discord.com/users/976413539076026388) for their contributions <3
+*Thanks for reading till the end and using ForgeDB ;)* <br>
+This package was made by with love [aggelos](https://discord.com/users/637648484979441706), an awesome man who develops cool ForgeScript extensions.
+
+Contributor | Contribution | Conatct
+-|-|-
+Aggelos|Main developer|[Discord](https://discord.com/users/637648484979441706) [GitHub](https://github.com/aggelos-007)
+Aditya|Descriptions for functions|[Discord](https://discord.com/users/903681538842054686)
+Aurea||[Discord](https://discord.com/users/976413539076026388) [GitHub](https://github.com/aurea6)
+Aayush|Fixed grammatical and spelling mistakes|
+Koomball||
