@@ -71,15 +71,27 @@ export default new NativeFunction({
     async execute(ctx) {
         const [name, sortType, max, page, separator, valueVariable, positionVariable, code] = this.data.fields as IExtendedCompiledFunctionField[]
         
-        const limit = Number(max?.value) || 10
-        const pag = Number(page?.value) || 1
-        
         const nameV = (await this["resolveCode"](ctx, name)) as Return
         if (!this["isValidReturnType"](nameV)) return nameV
 
+        const sortTypeV = (await this["resolveCode"](ctx, sortType)) as Return
+        if (!this["isValidReturnType"](sortTypeV)) return sortTypeV
+
+        const maxV = (await this["resolveCode"](ctx, max)) as Return
+        if (!this["isValidReturnType"](maxV)) return maxV
+
+        const pageV = (await this["resolveCode"](ctx, page)) as Return
+        if (!this["isValidReturnType"](pageV)) return pageV
+
+        const separatorV = (await this["resolveCode"](ctx, separator)) as Return
+        if (!this["isValidReturnType"](separatorV)) return separatorV
+
+        const limit = Number(maxV.value) || 10
+        const pag = Number(pageV.value) || 1
+
         const elements = new Array<string>()
         const rows = await DataBase.find({name: nameV.value as string, type: 'user'})
-            .then((x) => x.sort((x, y) => (sortType?.value === "desc" ? Number(x.value) - Number(y.value) : Number(y.value) - Number(x.value))))
+            .then((x) => x.sort((x, y) => (sortTypeV?.value === "desc" ? Number(x.value) - Number(y.value) : Number(y.value) - Number(x.value))))
             .then((x) => x.slice(pag * limit - limit, pag * limit))
             
         for (let i = 0, len = rows.length; i < len; i++) {
@@ -95,6 +107,6 @@ export default new NativeFunction({
             if(execution.value) elements.push(execution.value as string)
         }
 
-        return this.success(elements.join(separator?.value || '\n'))
+        return this.success(elements.join(separatorV?.value as string || '\n'))
     },
 })

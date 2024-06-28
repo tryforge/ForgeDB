@@ -7,7 +7,7 @@ export default new DBEventHandler({
     version: "2.0.0",
     description: "This event is triggered when a new variable gets created.",
     listener(extras){
-        const commands = this.getExtension(ForgeDB, true).commands.get('create')
+        const commands = this.getExtension(ForgeDB, true).commands.get('variableCreate')
         
         for (const command of commands) {
             Interpreter.run({
