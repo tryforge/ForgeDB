@@ -72,14 +72,26 @@ exports.default = new forgescript_1.NativeFunction({
     ],
     async execute(ctx) {
         const [name, sortType, max, page, separator, valueVariable, positionVariable, code] = this.data.fields;
-        const limit = Number(max?.value) || 10;
-        const pag = Number(page?.value) || 1;
         const nameV = (await this["resolveCode"](ctx, name));
         if (!this["isValidReturnType"](nameV))
             return nameV;
+        const sortTypeV = (await this["resolveCode"](ctx, sortType));
+        if (!this["isValidReturnType"](sortTypeV))
+            return sortTypeV;
+        const maxV = (await this["resolveCode"](ctx, max));
+        if (!this["isValidReturnType"](maxV))
+            return maxV;
+        const pageV = (await this["resolveCode"](ctx, page));
+        if (!this["isValidReturnType"](pageV))
+            return pageV;
+        const separatorV = (await this["resolveCode"](ctx, separator));
+        if (!this["isValidReturnType"](separatorV))
+            return separatorV;
+        const limit = Number(maxV.value) || 10;
+        const pag = Number(pageV.value) || 1;
         const elements = new Array();
         const rows = await util_1.DataBase.find({ name: nameV.value, type: 'guild' })
-            .then((x) => x.sort((x, y) => (sortType?.value === "desc" ? Number(x.value) - Number(y.value) : Number(y.value) - Number(x.value))))
+            .then((x) => x.sort((x, y) => (sortTypeV?.value === "desc" ? Number(x.value) - Number(y.value) : Number(y.value) - Number(x.value))))
             .then((x) => x.slice(pag * limit - limit, pag * limit));
         for (let i = 0, len = rows.length; i < len; i++) {
             const index = pag * limit - limit + i + 1;
@@ -94,7 +106,7 @@ exports.default = new forgescript_1.NativeFunction({
             if (execution.value)
                 elements.push(execution.value);
         }
-        return this.success(elements.join(separator?.value || '\n'));
+        return this.success(elements.join(separatorV?.value || '\n'));
     },
 });
 //# sourceMappingURL=guildLeaderboard.js.map
