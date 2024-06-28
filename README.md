@@ -103,6 +103,7 @@ etc. */
     ]
 })
 ```
+
 Congratulations, you have now successfully connected your DB with ForgeDB and your client is connected to it now.
 
 <h3 align="center">Events</h3>
