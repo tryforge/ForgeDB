@@ -1,11 +1,7 @@
-# ForgeDB
-An advanced DataBase extension for ForgeScript.
-
+<img src="https://cdn.discordapp.com/emojis/1185683362334134362.webp?size=64&quality=lossless" align="right" alt="ForgeDB logo"><h1 align="center">ForgeDB</h1><p align="center">An advanced DataBase extension for ForgeScript users.</p>
 [![@tryforge/forge.db](https://img.shields.io/github/package-json/v/tryforge/ForgeDB/main?label=@tryforge/forge.db&color=5c16d4)](https://github.com/tryforge/ForgeDB/)
 [![@tryforge/forgescript](https://img.shields.io/github/package-json/v/tryforge/ForgeScript/main?label=@tryforge/forgescript&color=5c16d4)](https://github.com/tryforge/ForgeScript/)
-[![Discord](https://img.shields.io/discord/739934735387721768?logo=discord)](https://discord.gg/hcJgjzPvqb)
-
-## Table of Contents
+[![Discord](https://img.shields.io/discord/739934735387721768?logo=discord)](https://discord.gg/hcJgjzPvqb)<h2 align="center">Contents</h2>
 1. Installation
     - [Quick Installation](#quick-installation)
     - [MongoDB Installation](#mongodb-installation)
