@@ -62,7 +62,7 @@ const client = new ForgeClient({
 Congratulations, you have successfully connected your client to a MongoDB database
 
 <h3 align="center">Other Installation</h3><hr>
-<p align="center">Your here because you want to try other DBs. So now just follow the steps below to set up your bot to work with other DBs:</p>
+<p align="center">You're here because you want to try other DBs. So now just follow the steps below to set up your bot to work with other DBs:</p>
 
 1. You have to first install ForgeDB, so you just run this command in your terminal:
 ```bash
@@ -74,7 +74,7 @@ npm i @tryforge/forge.db
     npm i better-sqlite3
     ```
     - **MySQL**
-      > *MySQL have got two versions, you can use either of them.*
+      > *MySQL has two versions, you can use either of them.*
        - `MySQL`
          ```bash
          npm i mysql
@@ -87,7 +87,7 @@ npm i @tryforge/forge.db
     ```bash
     npm i postgres
     ```
-3. Now that you have installed your preferred DB package, now you have to connect it with ForgeDB and ForgeScript:
+3. Now that you have installed your preferred DB package, you now have to connect it with ForgeDB and ForgeScript:
 ```js
 const { ForgeDB } = require("@tryforge/forge.db")
 
@@ -113,7 +113,7 @@ Congratulations, you have now successfully connected your DB with ForgeDB and yo
 <h3 align="center">Events</h3><hr>
 
 - What are DB events?
- > DB events are the events which get triggered when certain activities happen on your DB.
+ > DB events are the events which get triggered when certain activities happen in your DB.
 - How are they helpful in developing apps powered by ForgeScript?
  > DB events are really helpful in developing apps owned by ForgeScript, as they help you in monitoring activity in your DB and improve your logs.
 - How to use them?
@@ -141,7 +141,7 @@ db.commands.add({
 <h2 align="center">Credits</h2>
 
 *Thanks for reading till the end and using ForgeDB ;)* <br>
-This package was made by with love [aggelos](https://discord.com/users/637648484979441706), an awesome man who develops cool ForgeScript extensions.
+This package was made with love by [aggelos](https://discord.com/users/637648484979441706), an awesome man who develops cool ForgeScript extensions.
 
 Contributor | Contribution | Conatct
 -|-|-
