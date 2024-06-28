@@ -110,7 +110,7 @@ const { ForgeDB } = require("@tryforge/forge.db")
 const db = new ForgeDB({
     ...options? //The options you have for ForgeDB if you have any
     events: [] //the events you want to use.
-    //Availalbe: `connect`, `variableCreate`, variableUpdate, `variableDelete`
+    //Available: `connect`, `variableCreate`, variableUpdate, `variableDelete`
 }) 
 
 const client = new ForgeClient({
