@@ -3,26 +3,25 @@
 [![@tryforge/forgescript](https://img.shields.io/github/package-json/v/tryforge/ForgeScript/main?label=@tryforge/forgescript&color=5c16d4)](https://github.com/tryforge/ForgeScript/)
 [![Discord](https://img.shields.io/discord/739934735387721768?logo=discord)](https://discord.gg/hcJgjzPvqb)<h2 align="center">Contents</h2>
 1. Installation
-    - [Quick Installation](#quick-installation)
-    - [MongoDB Installation](#mongodb-installation)
-    - [Other DB Installation](#other-db-installation)
-2. [How to use Events](#how-to-use-events)
-3. [How to update](https://github.com/tryforge/ForgeDB/blob/main/guides/how-to-update.md)
-4. [Documentation](https://docs.botforge.org/p/ForgeDB/)
-5. [Credits](#credits)
+   - [Effortless installation](#effortless-installation)
+   - [MongoDB installation](#mongodb-installation)
+   - [Other installation](#other-installation)
+3. [Events](#events)
+4. [Updating](https://github.com/tryforge/ForgeDB/blob/main/guides/how-to-update.md)
+5. [Documentation](https://docs.botforge.org/p/ForgeDB/)
+6. [Credits](#credits)
+<br>
+<h3 align="center">Effortless instalation</h3>
 
-### Quick Installation
-
-Download these npm packages:
+1. Run the following command to install the required `npm packages`:
 ```bash
 npm i @tryforge/forge.db sqlite3
 ```
-
-Now, in your client initialization:
-```ts
+2. Now, in your client initialization:
+```js
 const { ForgeDB } = require("@tryforge/forge.db")
 
-// I'll assume client, can be bot or anything else
+/* I'm assuming that the client can be a bot or anything else */
 const client = new ForgeClient({
     ...options // The options you currently have
     extensions: [
@@ -30,20 +29,19 @@ const client = new ForgeClient({
     ]
 })
 ```
-And voi-la, you bot now has been connected a local database.
+Congratulations, you have successfully connected your client to a local database.
 
-### MongoDB Installation
+<h3 align="center">MongoDB Installation</h3>
 
-Download these npm packages:
+1. Run the following command to install the required `npm packages`
 ```bash
 npm i @tryforge/forge.db mongodb
 ```
-
-Now, in your client initialization:
-```ts
+2. Now, in your client initialization:
+```js
 const { ForgeDB } = require("@tryforge/forge.db")
 
-// I'll assume client, can be bot or anything else
+// I'm assuming tclient, can be bot or anything else
 const client = new ForgeClient({
     ...options // The options you currently have
     extensions: [
