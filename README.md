@@ -1,4 +1,4 @@
-<img src="https://cdn.discordapp.com/emojis/1185683362334134362.webp?size=64&quality=lossless" align="right" alt="ForgeDB logo"><h1 align="center">ForgeDB</h1><p align="center">An advanced DataBase extension for ForgeScript users.</p>
+<img src="https://cdn.discordapp.com/emojis/1185683362334134362.webp?size=64&quality=lossless" align="right" alt="ForgeDB logo"><h1 align="center">ForgeDB</h1><p align="center">An advanced DataBase extension for ForgeScript powered apps.</p>
 [![@tryforge/forge.db](https://img.shields.io/github/package-json/v/tryforge/ForgeDB/main?label=@tryforge/forge.db&color=5c16d4)](https://github.com/tryforge/ForgeDB/)
 [![@tryforge/forgescript](https://img.shields.io/github/package-json/v/tryforge/ForgeScript/main?label=@tryforge/forgescript&color=5c16d4)](https://github.com/tryforge/ForgeScript/)
 [![Discord](https://img.shields.io/discord/739934735387721768?logo=discord)](https://discord.gg/hcJgjzPvqb)<h2 align="center">Contents</h2>
@@ -11,7 +11,7 @@
 5. [Documentation](https://docs.botforge.org/p/ForgeDB/)
 6. [Credits](#credits)
 <br>
-<h3 align="center">Effortless instalation</h3>
+<h3 align="center">Effortless installation</h3>
 
 1. Run the following command to install the required `npm packages`:
 ```bash
@@ -21,7 +21,7 @@ npm i @tryforge/forge.db sqlite3
 ```js
 const { ForgeDB } = require("@tryforge/forge.db")
 
-/* I'm assuming that the client can be a bot or anything else */
+/* I'm assuming that the client can be an app or anything else */
 const client = new ForgeClient({
     ...options // The options you currently have
     extensions: [
@@ -41,7 +41,7 @@ npm i @tryforge/forge.db mongodb
 ```js
 const { ForgeDB } = require("@tryforge/forge.db")
 
-// I'm assuming tclient, can be bot or anything else
+// I'm assuming that the client, can be an app or anything else
 const client = new ForgeClient({
     ...options // The options you currently have
     extensions: [
@@ -52,59 +52,73 @@ const client = new ForgeClient({
     ]
 })
 ```
-And voi-la, you bot now has been connected a mongo database.
+Congratulations, you have successfully connected your client to a MongoDB database
+<h3 align="center">Other Installation</h3>
+<p align="center">Your here because you want to try other DBs. So now just follow the steps below to set up your bot to work with other DBs:</p>
 
-### Other DB Installation
-If you want to install other dbs you need to follow these steps:
-1. Install forge.db package 
+1. You have to first install ForgeDB, so you just run this command in your terminal:
 ```bash
 npm i @tryforge/forge.db
 ```
-
-2. Install your db package
-    - For `better-sqlite3`
+2. Now that you've installed ForgeDB, you'll now have to install the DB package you want to use. Here are the ones ForgeDB currently supports:
+    - **Better Sqlite3**
     ```bash
     npm i better-sqlite3
     ```
-    - For `mysql`
-    ```bash
-    npm i mysql # or npm i mysql2
-    ```
-    - For `postgres`
+    - **MySQL**
+      > *MySQL have got two versions, you can use either of them.*
+       - `MySQL1`
+         ```bash
+         npm i mysql1
+         ```
+       - `MySQL2`
+         ```bash
+         npm i mysql2
+         ```
+    - **Postgres**
     ```bash
     npm i postgres
     ```
-3. Connect ForgeDB with ForgeScript
-```ts
+3. Now that you have installed your preferred DB package, now you have to connect it with ForgeDB and ForgeScript:
+```js
 const { ForgeDB } = require("@tryforge/forge.db")
 
-// I'll assume client, can be bot or anything else
+// I'm assuming that the client, can be an app or anything else
 const client = new ForgeClient({
     ...options // The options you currently have
     extensions: [
         new ForgeDB({
-            type: "mysql" | "postgres" | "better-sqlite3";
+            type: ""; /* You've to put the DB you want to use, example:
+mysql
+postgres
+better-sqlite3
+etc. */
             url?: string
             host?: string
             port?: number
             username?: string
             password?: string
-            database?: string //the path of your db
+            database?: string // The path of your DB
         })
     ]
 })
 ```
-And voi-la, you bot now has been connected a database.
+Congratulations, you have now successfully connected your DB with ForgeDB and your client is connected to it now.
+<h3 align="center">Events</h3>
 
-### How to use Events
-Once you configure your database you will head over to the main file of your bot and you will type this
-```ts
+- What are DB events?
+ > answer here
+- How are they helpful in developing apps powered by ForgeScript?
+ > answer here
+- How to use them?
+ > Now when you finish configuring your database, you will have to head over to main file of your client and you will have to type this:
+```js
 const { ForgeDB } = require("@tryforge/forge.db")
 
 const db = new ForgeDB({
     ...options? //The options you have for ForgeDB if you have any
-    events: [] //the events you want to use.
-    //Available: `connect`, `variableCreate`, variableUpdate, `variableDelete`
+    events: [] /* the events you want to use.
+Available: `connect`, `variableCreate`, variableUpdate, `variableDelete` */
 }) 
 
 const client = new ForgeClient({
@@ -117,7 +131,6 @@ db.commands.add({
     code: `Your_Code_Goes_Here`
 })
 ```
-And voi-la, you learnt how to use database events!
 
 ## Credits
 Thanks for reading this guide and for using ForgeDB <br>
