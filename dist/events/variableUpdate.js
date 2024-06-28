@@ -9,7 +9,6 @@ exports.default = new eventManager_1.DBEventHandler({
     description: "This event is triggered when a variable gets updated.",
     listener(extras) {
         const commands = this.getExtension(__1.ForgeDB, true).commands.get('variableUpdate');
-        console.log(commands);
         for (const command of commands) {
             forgescript_1.Interpreter.run({
                 obj: {},
