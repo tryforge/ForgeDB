@@ -10,6 +10,7 @@ An advanced DataBase extension for ForgeScript.
     - [Quick Installation](#quick-installation)
     - [MongoDB Installation](#mongodb-installation)
     - [Other DB Installation](#other-db-installation)
+    - [Android Sqlite Build](#android-sqlite-build)
 2. [How to use Events](#how-to-use-events)
 3. [How to update](https://github.com/tryforge/ForgeDB/blob/main/guides/how-to-update.md)
 4. [Documentation](https://docs.botforge.org/p/ForgeDB/)
@@ -101,6 +102,36 @@ const client = new ForgeClient({
 })
 ```
 And voi-la, you bot now has been connected to a database.
+
+### Android Sqlite Build
+Download these npm packages into your project:
+```bash
+npm i @tryforge/forge.db sqlite3
+```
+
+Run this console command in the Home directory:
+```bash
+mkdir .gyp
+```
+
+Now in your code editor inside the .gyp folder you created make a file called `include.gypi` and add this code.
+```gyp
+{'variables':{'android_ndk_path': ''}}
+```
+
+Now, in your client initialization:
+```ts
+const { ForgeDB } = require("@tryforge/forge.db")
+
+// I'll assume client, can be bot or anything else
+const client = new ForgeClient({
+    ...options // The options you currently have
+    extensions: [
+        new ForgeDB()
+    ]
+})
+```
+And voi-la, you bot now has been connected to a local database on your android device using termux.
 
 ### How to use Events
 Once you configure your database you will head over to the main file of your bot and you will type this
