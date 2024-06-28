@@ -111,27 +111,28 @@ const client = new ForgeClient({
 
 Congratulations, you have now successfully connected your DB with ForgeDB and your client is connected to it now.
 
-<h3 align="center">Android Sqlite Build</h3><hr>
-1. Download these npm packages into your project:
+<h3 align="center">Android installation</h3><hr>
+
+> [!NOTE]
+> This section is for **[Termux](https://github.com/termux/termux-app)** users only!
+1. Run the following command to install the `npm packages`:
 ```bash
 npm i @tryforge/forge.db sqlite3
 ```
-
-Run this console command in the Home directory:
-```bash
+2. Once you have installed the packages successfully, you have to go to the **Home** directory of **Termux**.
+3. Now, run the following command:
+ ```bash
 mkdir .gyp
 ```
-
-Now in your code editor inside the .gyp folder you created make a file called `include.gypi` and add this code.
+4. Now in your code editor inside the `.gyp` folder you created make a file called `include.gypi` and add this code:
 ```gyp
 {'variables':{'android_ndk_path': ''}}
 ```
-
-Now, in your client initialization:
+5. Now, in your client initialization:
 ```ts
 const { ForgeDB } = require("@tryforge/forge.db")
 
-// I'll assume client, can be bot or anything else
+// I'm assuming that the client, can be an app or anything else
 const client = new ForgeClient({
     ...options // The options you currently have
     extensions: [
@@ -139,7 +140,7 @@ const client = new ForgeClient({
     ]
 })
 ```
-And voi-la, you bot now has been connected to a local database on your android device using termux.
+Congratulations, you have now successfully connected your local DB on your android device using termux. 
 
 <h3 align="center">Events</h3><hr>
 
@@ -180,4 +181,4 @@ Aggelos|Main developer|[Discord](https://discord.com/users/637648484979441706) [
 Aditya|Descriptions for functions|[Discord](https://discord.com/users/903681538842054686) [GitHub](https://github.com/clyders)
 Aurea| Made this cool readme|[Discord](https://discord.com/users/976413539076026388) [GitHub](https://github.com/aurea6)
 Aayush|Fixed grammatical and spelling mistakes|[Discord](https://discord.com/users/1077766221929402378) [GitHub](https://github.com/aayush117)
-Koomball|Improved Readme file|[Discord](https://discord.com/users/1095378481237475409) [GitHub](https://github.com/koomball)
+Koomball|Android installation guide|[Discord](https://discord.com/users/1095378481237475409) [GitHub](https://github.com/koomball)
