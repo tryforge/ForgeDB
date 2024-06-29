@@ -5,13 +5,14 @@ import { TransformEvents } from '..';
 import 'reflect-metadata';
 export declare class DataBase {
     private db;
+    private static type;
     private static db;
     private static emitter;
     private static entities;
     constructor(emitter: TypedEmitter<TransformEvents<IDBEvents>>, options?: IDataBaseOptions);
     init(): Promise<void>;
     static make_intetifier(data: RecordData): string;
-    static set(data: RecordData): Promise<boolean>;
+    static set(data: RecordData): Promise<void>;
     static get(data: RecordData): Promise<Record | null>;
     static getAll(): Promise<Record[]>;
     static find(data?: RecordData): Promise<Record[]>;
@@ -25,7 +26,7 @@ export declare class DataBase {
         name: string;
         id?: string;
         duration: number;
-    }): Promise<Cooldown>;
+    }): Promise<Cooldown | import("typeorm").UpdateResult>;
     static cdDelete(identifier: string): Promise<void>;
     static cdTimeLeft(identifier: string): Promise<number>;
 }
