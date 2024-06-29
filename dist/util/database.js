@@ -92,7 +92,11 @@ class DataBase {
         cd.id = data.id;
         cd.startedAt = Date.now();
         cd.duration = data.duration;
-        return this.db.getRepository(this.entities.cd).save(cd);
+        const oldCD = await this.db.getRepository(this.entities.cd).findOneBy({ identifier: this.make_cdIdentifier(data) });
+        if (oldCD && this.type == 'mongodb')
+            return await this.db.getRepository(this.entities.cd).update(oldCD, cd);
+        else
+            return await this.db.getRepository(this.entities.cd).save(cd);
     }
     static async cdDelete(identifier) {
         await this.db.getRepository(this.entities.cd).delete({ identifier });

@@ -26,7 +26,7 @@ export declare class DataBase {
         name: string;
         id?: string;
         duration: number;
-    }): Promise<Cooldown>;
+    }): Promise<Cooldown | import("typeorm").UpdateResult>;
     static cdDelete(identifier: string): Promise<void>;
     static cdTimeLeft(identifier: string): Promise<number>;
 }
