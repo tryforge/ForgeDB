@@ -143,7 +143,7 @@ db.commands.add({
 *Thanks for reading till the end and using ForgeDB ;)* <br>
 This package was made by with love [aggelos](https://discord.com/users/637648484979441706), an awesome man who develops cool ForgeScript extensions.
 
-Contributor | Contribution | Conatct
+Contributor | Contribution | Contact
 -|-|-
 Aggelos|Main developer|[Discord](https://discord.com/users/637648484979441706) [GitHub](https://github.com/aggelos-007)
 Aditya|Descriptions for functions|[Discord](https://discord.com/users/903681538842054686) [GitHub](https://github.com/clyders)
