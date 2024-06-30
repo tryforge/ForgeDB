@@ -12,7 +12,7 @@
    - [Effortless installation](#effortless-installation)
    - [MongoDB installation](#mongodb-installation)
    - [Other installation](#other-installation)
-   - [Android-installation](guides/android-installation.md)
+   - [Android-installation](https://github.com/tryforge/ForgeDB/blob/main/guides/android-installation.md)
 3. [Events](#events)
 4. [Updating](https://github.com/tryforge/ForgeDB/blob/main/guides/how-to-update.md)
 5. [Documentation](https://docs.botforge.org/p/ForgeDB/)
