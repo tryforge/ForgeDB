@@ -12,6 +12,7 @@
    - [Effortless installation](#effortless-installation)
    - [MongoDB installation](#mongodb-installation)
    - [Other installation](#other-installation)
+   - [Android-installation](guides/android-installation.md)
 3. [Events](#events)
 4. [Updating](https://github.com/tryforge/ForgeDB/blob/main/guides/how-to-update.md)
 5. [Documentation](https://docs.botforge.org/p/ForgeDB/)
@@ -143,10 +144,10 @@ db.commands.add({
 *Thanks for reading till the end and using ForgeDB ;)* <br>
 This package was made with love by [aggelos](https://discord.com/users/637648484979441706), an awesome man who develops cool ForgeScript extensions.
 
-Contributor | Contribution | Conatct
+Contributor | Contribution | Contact
 -|-|-
 Aggelos|Main developer|[Discord](https://discord.com/users/637648484979441706) [GitHub](https://github.com/aggelos-007)
 Aditya|Descriptions for functions|[Discord](https://discord.com/users/903681538842054686) [GitHub](https://github.com/clyders)
 Aurea| Made this cool readme|[Discord](https://discord.com/users/976413539076026388) [GitHub](https://github.com/aurea6)
 Aayush|Fixed grammatical and spelling mistakes|[Discord](https://discord.com/users/1077766221929402378) [GitHub](https://github.com/aayush117)
-Koomball|Improved Readme file|[Discord](https://discord.com/users/1095378481237475409) [GitHub](https://github.com/koomball)
+Koomball|Added android installation|[Discord](https://discord.com/users/1095378481237475409) [GitHub](https://github.com/koomball)
