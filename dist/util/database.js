@@ -9,12 +9,14 @@ function isGuildData(data) {
 }
 class DataBase {
     db;
+    static type;
     static db;
     static emitter;
     static entities;
     constructor(emitter, options) {
         const data = { ...options };
         data.type = data.type ?? 'sqlite';
+        DataBase.type = data.type;
         if (data.type != 'mongodb')
             data.database = data.database ?? 'forge.db';
         const config = { ...data };
@@ -49,8 +51,14 @@ class DataBase {
         if (isGuildData(data))
             newData.guildId = data.guildId;
         const oldData = await this.db.getRepository(this.entities.record).findOneBy({ identifier: this.make_intetifier(data) });
-        return await this.db.getRepository(this.entities.record).save(newData)
-            .then(() => oldData ? this.emitter.emit("variableUpdate", { newData, oldData }) : this.emitter.emit('variableCreate', { data: newData }));
+        if (oldData && this.type == 'mongodb') {
+            this.emitter.emit("variableUpdate", { newData, oldData });
+            this.db.getRepository(this.entities.record).update(oldData, newData);
+        }
+        else {
+            oldData ? this.emitter.emit("variableUpdate", { newData, oldData }) : this.emitter.emit('variableCreate', { data: newData });
+            await this.db.getRepository(this.entities.record).save(newData);
+        }
     }
     static async get(data) {
         const identifier = data.identifier ?? this.make_intetifier(data);
@@ -84,7 +92,11 @@ class DataBase {
         cd.id = data.id;
         cd.startedAt = Date.now();
         cd.duration = data.duration;
-        return this.db.getRepository(this.entities.cd).save(cd);
+        const oldCD = await this.db.getRepository(this.entities.cd).findOneBy({ identifier: this.make_cdIdentifier(data) });
+        if (oldCD && this.type == 'mongodb')
+            return await this.db.getRepository(this.entities.cd).update(oldCD, cd);
+        else
+            return await this.db.getRepository(this.entities.cd).save(cd);
     }
     static async cdDelete(identifier) {
         await this.db.getRepository(this.entities.cd).delete({ identifier });

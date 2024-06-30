@@ -11,6 +11,7 @@ function isGuildData(data: RecordData): data is GuildData {
 
 export class DataBase {
     private db: Promise<DataSource>;
+    private static type: IDataBaseOptions['type'];
     private static db: DataSource;
     private static emitter: TypedEmitter<TransformEvents<IDBEvents>>;
     private static entities: {
@@ -21,6 +22,7 @@ export class DataBase {
     constructor(emitter: TypedEmitter<TransformEvents<IDBEvents>>,options?: IDataBaseOptions) {
         const data = {...options}
         data.type = data.type ?? 'sqlite'
+        DataBase.type = data.type
         if(data.type != 'mongodb') data.database = data.database ?? 'forge.db'
         
         const config = {...data} as DataSourceOptions
@@ -58,9 +60,14 @@ export class DataBase {
         newData.value = data.value!
         if(isGuildData(data)) newData.guildId = data.guildId;
         const oldData = await this.db.getRepository(this.entities.record).findOneBy({ identifier: this.make_intetifier(data) })
-        
-        return await this.db.getRepository(this.entities.record).save(newData)
-        .then(() => oldData ? this.emitter.emit("variableUpdate", { newData, oldData }) : this.emitter.emit('variableCreate', { data: newData }))
+        if(oldData && this.type == 'mongodb'){
+            this.emitter.emit("variableUpdate", { newData, oldData })
+            this.db.getRepository(this.entities.record).update(oldData, newData);
+        } 
+        else {
+            oldData ? this.emitter.emit("variableUpdate", { newData, oldData }) : this.emitter.emit('variableCreate', { data: newData })
+            await this.db.getRepository(this.entities.record).save(newData)
+        } 
     }
 
     public static async get(data: RecordData) {
@@ -102,7 +109,9 @@ export class DataBase {
         cd.startedAt = Date.now()
         cd.duration = data.duration
 
-        return this.db.getRepository(this.entities.cd).save(cd)
+        const oldCD = await this.db.getRepository(this.entities.cd).findOneBy({ identifier: this.make_cdIdentifier(data) })
+        if(oldCD && this.type == 'mongodb') return await this.db.getRepository(this.entities.cd).update(oldCD, cd);
+        else return await this.db.getRepository(this.entities.cd).save(cd)
     }
 
     public static async cdDelete(identifier: string) {
