@@ -22,122 +22,126 @@
 <h3 align="center">Effortless installation</h3><hr>
 
 1. Run the following command to install the required `npm packages`:
-```bash
-npm i @tryforge/forge.db sqlite3
-```
+   ```bash
+   npm i @tryforge/forge.db sqlite3
+   ```
 2. Now, in your client initialization:
-```js
-const { ForgeDB } = require("@tryforge/forge.db")
-
-/* I'm assuming that the client can be an app or anything else */
-const client = new ForgeClient({
-    ...options // The options you currently have
-    extensions: [
-        new ForgeDB()
-    ]
-})
-```
+   ```js
+   const { ForgeClient } = require("@tryforge/forgescript")
+   const { ForgeDB } = require("@tryforge/forge.db")
+   
+   /* I'm assuming that the client can be an app or anything else */
+   const client = new ForgeClient({
+       ...options // The options you currently have
+       extensions: [
+           new ForgeDB()
+       ]
+   })
+   ```
 Congratulations, you have successfully connected your client to a local database.
 
 <h3 align="center">MongoDB Installation</h3><hr>
 
-1. Run the following command to install the required `npm packages`
-```bash
-npm i @tryforge/forge.db mongodb
-```
+1. Run the following command to install the required `npm packages`:
+   ```bash
+   npm i @tryforge/forge.db mongodb
+   ```
 2. Now, in your client initialization:
-```js
-const { ForgeDB } = require("@tryforge/forge.db")
-
-// I'm assuming that the client, can be an app or anything else
-const client = new ForgeClient({
-    ...options // The options you currently have
-    extensions: [
-        new ForgeDB({
-            type: "mongodb",
-            url: "Your_MongoURI_URL"
-        })
-    ]
-})
-```
-Congratulations, you have successfully connected your client to a MongoDB database
+   ```js
+   const { ForgeClient } = require("@tryforge/forgescript")
+   const { ForgeDB } = require("@tryforge/forge.db")
+   
+   // I'm assuming that the client, can be an app or anything else
+   const client = new ForgeClient({
+       ...options // The options you currently have
+       extensions: [
+           new ForgeDB({
+               type: "mongodb",
+               url: "Your_MongoURI_URL"
+           })
+       ]
+   })
+   ```
+Congratulations, you have successfully connected your client to a MongoDB database.
 
 <h3 align="center">Other Installation</h3><hr>
 <p align="center">You're here because you want to try other DBs. So now just follow the steps below to set up your bot to work with other DBs:</p>
 
 1. You have to first install ForgeDB, so you just run this command in your terminal:
-```bash
-npm i @tryforge/forge.db
-```
+   ```bash
+   npm i @tryforge/forge.db
+   ```
 2. Now that you've installed ForgeDB, you'll now have to install the DB package you want to use. Here are the ones ForgeDB currently supports:
-    - **Better Sqlite3**
-    ```bash
-    npm i better-sqlite3
-    ```
-    - **MySQL**
-      > *MySQL has two versions, you can use either of them.*
-       - `MySQL`
-         ```bash
-         npm i mysql
-         ```
-       - `MySQL2`
-         ```bash
-         npm i mysql2
-         ```
+   - **Better Sqlite3**
+     ```bash
+     npm i better-sqlite3
+     ```
+   - **MySQL**
+     > *MySQL has two versions, you can use either of them.*
+     - `MySQL`
+       ```bash
+       npm i mysql
+       ```
+     - `MySQL2`
+       ```bash
+       npm i mysql2
+       ```
     - **Postgres**
-    ```bash
-    npm i postgres
-    ```
+      ```bash
+      npm i postgres
+      ```
 3. Now that you have installed your preferred DB package, you now have to connect it with ForgeDB and ForgeScript:
-```js
-const { ForgeDB } = require("@tryforge/forge.db")
+   ```js
+   const { ForgeClient } = require("@tryforge/forgescript")
+   const { ForgeDB } = require("@tryforge/forge.db")
+   
+   // I'm assuming that the client, can be an app or anything else
+   const client = new ForgeClient({
+       ...options // The options you currently have
+       extensions: [
+            new ForgeDB({
+               type: ""; // You've to put the DB you want to use. Available: mysql, postgres, better-sqlite3, sqlite, mongodb
+               url?: string
+               host?: string
+               port?: number
+               username?: string
+               password?: string
+               database?: string // The path of your DB
+           })
+       ]
+   })
+   ```
 
-// I'm assuming that the client, can be an app or anything else
-const client = new ForgeClient({
-    ...options // The options you currently have
-    extensions: [
-        new ForgeDB({
-            type: ""; //You've to put the DB you want to use, available: mysql, postgres, better-sqlite3, sqlite, mongodb
-            url?: string
-            host?: string
-            port?: number
-            username?: string
-            password?: string
-            database?: string // The path of your DB
-        })
-    ]
-})
-```
-
-Congratulations, you have now successfully connected your DB with ForgeDB and your client is connected to it now.
+Congratulations, you have now successfully connected your database to ForgeDB and your client.
 
 <h3 align="center">Events</h3><hr>
 
 - What are DB events?
- > DB events are the events which get triggered when certain activities happen in your DB.
+  > DB events are the events which get triggered when certain activities happen in your DB.
 - How are they helpful in developing apps powered by ForgeScript?
- > DB events are really helpful in developing apps owned by ForgeScript, as they help you in monitoring activity in your DB and improve your logs.
+  > DB events are really helpful in developing apps powered by ForgeScript, as they help you in monitoring activity in your DB and improve your logs.
 - How to use them?
- > Now when you finish configuring your database, you will have to head over to main file of your client and you will have to type this:
-```js
-const { ForgeDB } = require("@tryforge/forge.db")
-
-const db = new ForgeDB({
-    ...options? //The options you have for ForgeDB if you have any
-    events: [] /* the events you want to use. 
-    Available: `connect`, `variableCreate`, variableUpdate, `variableDelete` */
-}) 
-
-const client = new ForgeClient({
-    ...options // The options you currently have
-    extensions: [ db ]
-})
-
-db.commands.add({
-    type: "" // Available types: connect, variableCreate, variableUpdate, variableDelete
-    code: `Your_Code_Goes_Here`
-})
-```
+  > Now when you finish configuring your database, you will have to head over to the main file of your client and you will have to type this:
+  ```js
+  const { ForgeClient } = require("@tryforge/forgescript")
+  const { ForgeDB } = require("@tryforge/forge.db")
+  
+  const db = new ForgeDB({
+      ...options? // The options you have for ForgeDB, if any.
+      events: [] /* The events you want to use. 
+      Available: connect, variableCreate, variableUpdate, variableDelete */
+  }) 
+  
+  const client = new ForgeClient({
+      ...options // The options you currently have
+     extensions: [ db ]
+  })
+  
+  db.commands.add({
+     type: "" // Available types: connect, variableCreate, variableUpdate, variableDelete
+     code: `Your_Code_Goes_Here`
+  })
+  ```
 
 <h2 align="center">Credits</h2>
 
@@ -146,8 +150,8 @@ This package was made with love by [aggelos](https://discord.com/users/637648484
 
 Contributor | Contribution | Contact
 -|-|-
-Aggelos|Main developer|[Discord](https://discord.com/users/637648484979441706) [GitHub](https://github.com/aggelos-007)
+Aggelos|Main Developer|[Discord](https://discord.com/users/637648484979441706) [GitHub](https://github.com/aggelos-007)
 Aditya|Descriptions for functions|[Discord](https://discord.com/users/903681538842054686) [GitHub](https://github.com/clyders)
-Aurea| Made this cool readme|[Discord](https://discord.com/users/976413539076026388) [GitHub](https://github.com/aurea6)
+Aurea|Made this cool ReadMe|[Discord](https://discord.com/users/976413539076026388) [GitHub](https://github.com/aurea6)
 Aayush|Fixed grammatical and spelling mistakes|[Discord](https://discord.com/users/1077766221929402378) [GitHub](https://github.com/aayush117)
-Koomball|Added android installation|[Discord](https://discord.com/users/1095378481237475409) [GitHub](https://github.com/koomball)
+Koomball|Added Android installation|[Discord](https://discord.com/users/1095378481237475409) [GitHub](https://github.com/koomball)
