@@ -100,7 +100,7 @@ Congratulations, you have successfully connected your client to a MongoDB databa
        ...options // The options you currently have
        extensions: [
             new ForgeDB({
-               type: ""; //You've to put the DB you want to use, available: mysql, postgres, better-sqlite3, sqlite, mongodb
+               type: ""; // You've to put the DB you want to use. Available: mysql, postgres, better-sqlite3, sqlite, mongodb
                url?: string
                host?: string
                port?: number
