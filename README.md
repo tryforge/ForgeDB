@@ -122,7 +122,6 @@ Congratulations, you have now successfully connected your database to ForgeDB an
   > DB events are really helpful in developing apps powered by ForgeScript, as they help you in monitoring activity in your DB and improve your logs.
 - How to use them?
   > Now when you finish configuring your database, you will have to head over to the main file of your client and you will have to type this:
-  
   ```js
   const { ForgeClient } = require("@tryforge/forgescript")
   const { ForgeDB } = require("@tryforge/forge.db")
