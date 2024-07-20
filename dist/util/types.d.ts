@@ -13,7 +13,7 @@ export declare class Record {
     identifier: string;
     name: string;
     id: string;
-    type: 'user' | 'channel' | 'role' | 'message' | 'member' | 'custom' | 'guild';
+    type: 'user' | 'channel' | 'role' | 'message' | 'member' | 'custom' | 'guild' | 'old';
     value: string;
     guildId?: string;
 }
@@ -28,7 +28,7 @@ export type GuildData = BaseData & {
     guildId: string;
 };
 export type NonGuildData = BaseData & {
-    type?: 'user' | 'message' | 'custom' | 'guild';
+    type?: 'user' | 'message' | 'custom' | 'guild' | 'old';
 };
 export type RecordData = BaseData & (GuildData | NonGuildData);
 export declare class Cooldown {
