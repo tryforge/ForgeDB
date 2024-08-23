@@ -25,13 +25,13 @@ export default new NativeFunction({
             name: "message ID",
             description: "The ID of the message",
             rest: false,
-            type: ArgType.Message,
+            type: ArgType.String,
             required: false,
         }
     ],
     brackets: true,
     async execute(ctx, [name, value, message]) {
-        await DataBase.set({name, id: message?.id ?? ctx.message!.id, value, type: "message"})
+        await DataBase.set({name, id: message ?? ctx.message!.id, value, type: "message"})
         return this.success()
     },
 })

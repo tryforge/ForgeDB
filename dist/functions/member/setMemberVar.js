@@ -26,7 +26,7 @@ exports.default = new forgescript_1.NativeFunction({
             name: "member ID",
             description: "The ID of the member",
             rest: false,
-            type: forgescript_1.ArgType.User,
+            type: forgescript_1.ArgType.String,
             required: false,
         },
         {
@@ -39,7 +39,7 @@ exports.default = new forgescript_1.NativeFunction({
     ],
     brackets: true,
     async execute(ctx, [name, value, member, guild]) {
-        await util_1.DataBase.set({ name, id: member?.id ?? ctx.member.id, value, type: "member", guildId: guild?.id ?? ctx.guild.id });
+        await util_1.DataBase.set({ name, id: member ?? ctx.member.id, value, type: "member", guildId: guild?.id ?? ctx.guild.id });
         return this.success();
     },
 });

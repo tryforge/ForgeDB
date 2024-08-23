@@ -78,7 +78,7 @@ export default new NativeFunction({
     ],
     async execute(ctx) {
         const [name, guild, sortType, max, page, separator, valueVariable, positionVariable, code] = this.data.fields as IExtendedCompiledFunctionField[]
-                
+
         const nameV = (await this["resolveCode"](ctx, name)) as Return
         if (!this["isValidReturnType"](nameV)) return nameV
 
@@ -104,12 +104,12 @@ export default new NativeFunction({
         const rows = await DataBase.find({name: nameV.value as string, type: 'member', guildId: guildID.value as string?? ctx.guild!.id})
             .then((x) => x.sort((x, y) => (sortTypeV?.value === "desc" ? Number(x.value) - Number(y.value) : Number(y.value) - Number(x.value))))
             .then((x) => x.slice(pag * limit - limit, pag * limit))
-            
+
         for (let i = 0, len = rows.length; i < len; i++) {
             const index = pag * limit - limit + i + 1
             const row = rows[i]
             const username = ctx.client.guilds.cache.get(guildID.value as string ?? ctx.guild!.id)?.members.cache.get(row.id)?.user.username
-            
+
             const info = { username,...row }
             ctx.setEnvironmentKey(positionVariable?.value || '', index)
             ctx.setEnvironmentKey(valueVariable?.value || '', info)

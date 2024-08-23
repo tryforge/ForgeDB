@@ -20,7 +20,7 @@ declare const _default: NativeFunction<[{
     name: string;
     rest: false;
     description: string;
-    type: ArgType.User;
+    type: ArgType.String;
     required: false;
 }], false>;
 export default _default;

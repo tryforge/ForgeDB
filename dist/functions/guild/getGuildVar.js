@@ -21,7 +21,7 @@ exports.default = new forgescript_1.NativeFunction({
             name: "guild ID",
             description: "The guild ID for which to retrieve the variable value",
             rest: false,
-            type: forgescript_1.ArgType.Guild,
+            type: forgescript_1.ArgType.String,
             required: false,
         },
         {
@@ -34,7 +34,7 @@ exports.default = new forgescript_1.NativeFunction({
     ],
     brackets: true,
     async execute(ctx, [name, guild, def]) {
-        const data = await util_1.DataBase.get({ name, id: guild?.id ?? ctx.guild.id, type: "guild" }).then((x) => x?.value);
+        const data = await util_1.DataBase.get({ name, id: guild ?? ctx.guild.id, type: "guild" }).then((x) => x?.value);
         if (data === null || data === undefined) {
             if (def)
                 return this.successJSON(def);

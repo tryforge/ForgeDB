@@ -19,12 +19,12 @@ export default new NativeFunction({
             name: "guild ID",
             description: "The identifier of the value",
             rest: false,
-            type: ArgType.Guild,
+            type: ArgType.String,
             required: false,
         }
     ],
     async execute(ctx, [name, guild]) {
-        await DataBase.delete({name, id: guild?.id ?? ctx.guild!.id, type: "guild"})
+        await DataBase.delete({name, id: guild ?? ctx.guild!.id, type: "guild"})
         return this.success()
     },
 })

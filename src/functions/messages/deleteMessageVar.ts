@@ -19,12 +19,12 @@ export default new NativeFunction({
             name: "message ID",
             description: "The ID of the message",
             rest: false,
-            type: ArgType.Message,
+            type: ArgType.String,
             required: false,
         }
     ],
     async execute(ctx, [name, message]) {
-        await DataBase.delete({name, id: message?.id ?? ctx.message!.id, type: "message"})
+        await DataBase.delete({name, id: message ?? ctx.message!.id, type: "message"})
         return this.success()
     },
 })
