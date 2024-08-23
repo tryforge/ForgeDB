@@ -33,7 +33,7 @@ exports.default = new forgescript_1.NativeFunction({
             name: "member ID",
             description: "The member ID for which to retrieve the position",
             rest: false,
-            type: forgescript_1.ArgType.User,
+            type: forgescript_1.ArgType.String,
             required: false,
         },
         {
@@ -48,7 +48,7 @@ exports.default = new forgescript_1.NativeFunction({
     async execute(ctx, [name, sortType, member, guild]) {
         const data = await util_1.DataBase.find({ name, type: "member", guildId: guild?.id ?? ctx.guild.id });
         data.sort((a, b) => parseInt(a.value) - parseInt(b.value));
-        const index = ([SortType[0], SortType.asc].indexOf(sortType && sortType.toString() !== '' ? sortType : 'asc') === -1 ? data : [...data].reverse()).findIndex((s) => s.id === (member?.id ?? ctx.member?.id));
+        const index = ([SortType[0], SortType.asc].indexOf(sortType && sortType.toString() !== '' ? sortType : 'asc') === -1 ? data : [...data].reverse()).findIndex((s) => s.id === (member ?? ctx.member?.id));
         return this.success(index + 1);
     },
 });

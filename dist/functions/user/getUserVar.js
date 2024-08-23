@@ -21,7 +21,7 @@ exports.default = new forgescript_1.NativeFunction({
             name: "user ID",
             description: "The identifier of the user.",
             rest: false,
-            type: forgescript_1.ArgType.User,
+            type: forgescript_1.ArgType.String,
             required: false,
         },
         {
@@ -34,7 +34,7 @@ exports.default = new forgescript_1.NativeFunction({
     ],
     brackets: true,
     async execute(ctx, [name, user, def]) {
-        const data = await util_1.DataBase.get({ name, id: user?.id ?? ctx.user.id, type: "user" }).then((x) => x?.value);
+        const data = await util_1.DataBase.get({ name, id: user ?? ctx.user.id, type: "user" }).then((x) => x?.value);
         if (data === null || data === undefined) {
             if (def)
                 return this.successJSON(def);

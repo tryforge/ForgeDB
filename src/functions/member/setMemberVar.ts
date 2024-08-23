@@ -25,7 +25,7 @@ export default new NativeFunction({
             name: "member ID",
             description: "The ID of the member",
             rest: false,
-            type: ArgType.User,
+            type: ArgType.String,
             required: false,
         },
         {
@@ -38,7 +38,7 @@ export default new NativeFunction({
     ],
     brackets: true,
     async execute(ctx, [name, value, member, guild]) {
-        await DataBase.set({name, id: member?.id ?? ctx.member!.id, value, type: "member", guildId: guild?.id ?? ctx.guild!.id})
+        await DataBase.set({name, id: member ?? ctx.member!.id, value, type: "member", guildId: guild?.id ?? ctx.guild!.id})
         return this.success()
     },
 })

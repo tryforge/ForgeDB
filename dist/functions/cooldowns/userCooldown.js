@@ -33,7 +33,7 @@ exports.default = new forgescript_1.NativeFunction({
             name: "user ID",
             rest: false,
             description: "The user id to assign the cooldown to",
-            type: forgescript_1.ArgType.User,
+            type: forgescript_1.ArgType.String,
             required: false,
         }
     ],

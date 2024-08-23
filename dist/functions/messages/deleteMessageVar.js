@@ -20,12 +20,12 @@ exports.default = new forgescript_1.NativeFunction({
             name: "message ID",
             description: "The ID of the message",
             rest: false,
-            type: forgescript_1.ArgType.Message,
+            type: forgescript_1.ArgType.String,
             required: false,
         }
     ],
     async execute(ctx, [name, message]) {
-        await util_1.DataBase.delete({ name, id: message?.id ?? ctx.message.id, type: "message" });
+        await util_1.DataBase.delete({ name, id: message ?? ctx.message.id, type: "message" });
         return this.success();
     },
 });

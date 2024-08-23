@@ -25,13 +25,13 @@ export default new NativeFunction({
             name: "guild ID",
             description: "The guild ID for which to set the variable value",
             rest: false,
-            type: ArgType.Guild,
+            type: ArgType.String,
             required: false,
         }
     ],
     brackets: true,
     async execute(ctx, [name, value, guild]) {
-        await DataBase.set({name, id: guild?.id ?? ctx.guild!.id, value, type: "guild"})
+        await DataBase.set({name, id: guild ?? ctx.guild!.id, value, type: "guild"})
         return this.success()
     },
 })

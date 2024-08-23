@@ -20,12 +20,12 @@ exports.default = new forgescript_1.NativeFunction({
             name: "guild ID",
             description: "The identifier of the value",
             rest: false,
-            type: forgescript_1.ArgType.Guild,
+            type: forgescript_1.ArgType.String,
             required: false,
         }
     ],
     async execute(ctx, [name, guild]) {
-        await util_1.DataBase.delete({ name, id: guild?.id ?? ctx.guild.id, type: "guild" });
+        await util_1.DataBase.delete({ name, id: guild ?? ctx.guild.id, type: "guild" });
         return this.success();
     },
 });

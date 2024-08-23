@@ -26,13 +26,13 @@ exports.default = new forgescript_1.NativeFunction({
             name: "message ID",
             description: "The ID of the message",
             rest: false,
-            type: forgescript_1.ArgType.Message,
+            type: forgescript_1.ArgType.String,
             required: false,
         }
     ],
     brackets: true,
     async execute(ctx, [name, value, message]) {
-        await util_1.DataBase.set({ name, id: message?.id ?? ctx.message.id, value, type: "message" });
+        await util_1.DataBase.set({ name, id: message ?? ctx.message.id, value, type: "message" });
         return this.success();
     },
 });

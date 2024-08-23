@@ -26,13 +26,13 @@ exports.default = new forgescript_1.NativeFunction({
             name: "guild ID",
             description: "The guild ID for which to set the variable value",
             rest: false,
-            type: forgescript_1.ArgType.Guild,
+            type: forgescript_1.ArgType.String,
             required: false,
         }
     ],
     brackets: true,
     async execute(ctx, [name, value, guild]) {
-        await util_1.DataBase.set({ name, id: guild?.id ?? ctx.guild.id, value, type: "guild" });
+        await util_1.DataBase.set({ name, id: guild ?? ctx.guild.id, value, type: "guild" });
         return this.success();
     },
 });
