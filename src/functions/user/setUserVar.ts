@@ -23,13 +23,13 @@ export default new NativeFunction({
             name: "user ID",
             description: "The user id of the variable",
             rest: false,
-            type: ArgType.User,
+            type: ArgType.String,
             required: false,
         }
     ],
     brackets: true,
     async execute(ctx, [name, value, user]) {
-        await DataBase.set({name, id: user?.id ?? ctx.user!.id, value, type: "user"})
+        await DataBase.set({name, id: user ?? ctx.user!.id, value, type: "user"})
         return this.success()
     },
 })
