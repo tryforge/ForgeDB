@@ -20,7 +20,7 @@ export default new NativeFunction({
             name: "user ID",
             description: "The identifier of the user.",
             rest: false,
-            type: ArgType.User,
+            type: ArgType.String,
             required: false,
         },
         {
@@ -33,7 +33,7 @@ export default new NativeFunction({
     ],
     brackets: true,
     async execute(ctx, [name, user, def]) {
-        const data = await DataBase.get({name, id: user?.id ?? ctx.user!.id, type: "user"}).then((x) => x?.value)
+        const data = await DataBase.get({name, id: user ?? ctx.user!.id, type: "user"}).then((x) => x?.value)
         if (data === null || data === undefined) {
             if (def) return this.successJSON(def)
             else if (ForgeDB.defaults && name in ForgeDB.defaults) {
