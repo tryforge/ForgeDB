@@ -223,7 +223,7 @@ Watch as the mystical packages materialize right before your eyes!
 <h2 align="center">Credits</h2>
 
 *Thanks for reading till the end and using ForgeDB ;)* <br>
-This package was made with love by [aggelos](https://discord.com/users/637648484979441706), an awesome man who develops cool ForgeScript extensions.
+This package was made with love by [Aggelos](https://discord.com/users/637648484979441706), an awesome man who develops cool ForgeScript extensions.
 
 
 Contributor | Contribution | Contact
