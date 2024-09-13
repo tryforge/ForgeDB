@@ -12,7 +12,7 @@ export class ForgeDB extends ForgeExtension {
 
     name: string = "ForgeDB"
     description: string = "A fast and reliable database extension for Forge"
-    version: string = "2.0.0"
+    version: string = "2.0.4"
 
     public commands!: any
     public emitter = new TypedEmitter<TransformEvents<IDBEvents>>()
