@@ -32,7 +32,7 @@ exports.default = new forgescript_1.NativeFunction({
             name: "userID",
             description: "The user ID of the value",
             rest: false,
-            type: forgescript_1.ArgType.User,
+            type: forgescript_1.ArgType.String,
             required: false,
         }
     ],
@@ -40,7 +40,7 @@ exports.default = new forgescript_1.NativeFunction({
     async execute(ctx, [name, sortType, user]) {
         const data = await util_1.DataBase.find({ name, type: "user" });
         data.sort((a, b) => parseInt(a.value) - parseInt(b.value));
-        const index = ([SortType[0], SortType.asc].indexOf(sortType && sortType.toString() !== '' ? sortType : 'asc') === -1 ? data : [...data].reverse()).findIndex((s) => s.id === (user?.id ?? ctx.user?.id));
+        const index = ([SortType[0], SortType.asc].indexOf(sortType && sortType.toString() !== '' ? sortType : 'asc') === -1 ? data : [...data].reverse()).findIndex((s) => s.id === (user ?? ctx.user?.id));
         return this.success(index + 1);
     },
 });

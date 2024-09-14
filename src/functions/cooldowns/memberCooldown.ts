@@ -56,9 +56,10 @@ export default new NativeFunction({
         const guildV = await this["resolveUnhandledArg"](ctx, 4)
         if (!this["isValidReturnType"](guildV)) return guildV 
         
-        const cooldown = await DataBase.cdTimeLeft(DataBase.make_cdIdentifier({name: `${nameV.value}-${guildV.id}`, id: idV.value?.id ?? ctx.channel?.id}))
+        const cooldown = await DataBase.cdTimeLeft(DataBase.make_cdIdentifier({name: `${nameV.value}-${guildV.id ?? ctx.guild?.id}`, id: idV.value?.id ?? ctx.member?.id}))
 
-        if(cooldown !== 0) {
+        if(cooldown.left !== 0) {
+            ctx.setEnvironmentKey("time", cooldown.left)
             const content = await this["resolveCode"](ctx, code)
             if (!this["isValidReturnType"](content)) return content
             ctx.container.content = content.value as string
@@ -66,7 +67,7 @@ export default new NativeFunction({
             return this.stop()
         }
 
-        await DataBase.cdAdd({name: `${nameV.value}-${guildV.id}`, id: idV.value?.id ?? ctx.member?.id, duration: dur.value as number})
+        await DataBase.cdAdd({name: `${nameV.value}-${guildV.id ?? ctx.guild?.id}`, id: idV.value?.id ?? ctx.member?.id, duration: dur.value as number})
 
         return this.success()
     },

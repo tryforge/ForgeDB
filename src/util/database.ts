@@ -120,6 +120,6 @@ export class DataBase {
 
     public static async cdTimeLeft(identifier: string) {
         const data = await this.db.getRepository(this.entities.cd).findOneBy({ identifier })
-        return data ? Math.max(data.duration - (Date.now() - data.startedAt), 0) : 0
+        return data ? {...data, left: Math.max(data.duration - (Date.now() - data.startedAt), 0)} : {left: 0}
     }
 }

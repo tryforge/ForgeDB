@@ -24,7 +24,7 @@ export class Record {
     id!: string;
 
     @Column()
-    type!: 'user' | 'channel' | 'role' | 'message' | 'member' | 'custom' | 'guild';
+    type!: 'user' | 'channel' | 'role' | 'message' | 'member' | 'custom' | 'guild' | 'old';
 
     @Column()
     value!: string;
@@ -41,7 +41,7 @@ export type BaseData = {
 };
 
 export type GuildData = BaseData & { type?: 'member' | 'channel' | 'role'; guildId: string };
-export type NonGuildData = BaseData & { type?: 'user' | 'message' | 'custom' | 'guild';};
+export type NonGuildData = BaseData & { type?: 'user' | 'message' | 'custom' | 'guild' | 'old';};
 
 export type RecordData = BaseData & (GuildData | NonGuildData);
 

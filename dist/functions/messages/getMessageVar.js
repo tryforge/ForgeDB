@@ -21,7 +21,7 @@ exports.default = new forgescript_1.NativeFunction({
             name: "message ID",
             description: "The ID of the message",
             rest: false,
-            type: forgescript_1.ArgType.Message,
+            type: forgescript_1.ArgType.String,
             required: false,
         },
         {
@@ -34,7 +34,7 @@ exports.default = new forgescript_1.NativeFunction({
     ],
     brackets: true,
     async execute(ctx, [name, message, def]) {
-        const data = await util_1.DataBase.get({ name, id: message?.id ?? ctx.message.id, type: "message" }).then((x) => x?.value);
+        const data = await util_1.DataBase.get({ name, id: message ?? ctx.message.id, type: "message" }).then((x) => x?.value);
         if (data === null || data === undefined) {
             if (def)
                 return this.successJSON(def);

@@ -24,13 +24,13 @@ exports.default = new forgescript_1.NativeFunction({
             name: "user ID",
             description: "The user id of the variable",
             rest: false,
-            type: forgescript_1.ArgType.User,
+            type: forgescript_1.ArgType.String,
             required: false,
         }
     ],
     brackets: true,
     async execute(ctx, [name, value, user]) {
-        await util_1.DataBase.set({ name, id: user?.id ?? ctx.user.id, value, type: "user" });
+        await util_1.DataBase.set({ name, id: user ?? ctx.user.id, value, type: "user" });
         return this.success();
     },
 });

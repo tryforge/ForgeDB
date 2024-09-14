@@ -49,7 +49,8 @@ export default new NativeFunction({
         
         const cooldown = await DataBase.cdTimeLeft(DataBase.make_cdIdentifier({name: nameV.value, id: idV.value?.id ?? ctx.guild?.id}))
 
-        if(cooldown !== 0) {
+        if(cooldown.left !== 0) {
+            ctx.setEnvironmentKey("time", cooldown.left)
             const content = await this["resolveCode"](ctx, code)
             if (!this["isValidReturnType"](content)) return content
             ctx.container.content = content.value as string

@@ -19,7 +19,7 @@ exports.default = new forgescript_1.NativeFunction({
         }
     ],
     async execute(_ctx, [name]) {
-        return this.success(await util_1.DataBase.cdTimeLeft(util_1.DataBase.make_cdIdentifier({ name })));
+        return this.success((await util_1.DataBase.cdTimeLeft(util_1.DataBase.make_cdIdentifier({ name }))).left);
     },
 });
 //# sourceMappingURL=getGlobalCooldownTime.js.map

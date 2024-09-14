@@ -33,7 +33,7 @@ exports.default = new forgescript_1.NativeFunction({
             name: "user ID",
             rest: false,
             description: "The user id to assign the cooldown to",
-            type: forgescript_1.ArgType.User,
+            type: forgescript_1.ArgType.String,
             required: false,
         }
     ],
@@ -49,7 +49,8 @@ exports.default = new forgescript_1.NativeFunction({
         if (!this["isValidReturnType"](idV))
             return idV;
         const cooldown = await util_1.DataBase.cdTimeLeft(util_1.DataBase.make_cdIdentifier({ name: nameV.value, id: idV.value?.id ?? ctx.user?.id }));
-        if (cooldown !== 0) {
+        if (cooldown.left !== 0) {
+            ctx.setEnvironmentKey("time", cooldown.left);
             const content = await this["resolveCode"](ctx, code);
             if (!this["isValidReturnType"](content))
                 return content;

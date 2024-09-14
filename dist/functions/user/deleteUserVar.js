@@ -19,12 +19,12 @@ exports.default = new forgescript_1.NativeFunction({
             name: "user ID",
             description: "The ID of the user",
             rest: false,
-            type: forgescript_1.ArgType.User,
+            type: forgescript_1.ArgType.String,
             required: false,
         }
     ],
     async execute(ctx, [name, user]) {
-        await util_1.DataBase.delete({ name, id: user?.id ?? ctx.user.id, type: "user" });
+        await util_1.DataBase.delete({ name, id: user ?? ctx.user.id, type: "user" });
         return this.success();
     },
 });

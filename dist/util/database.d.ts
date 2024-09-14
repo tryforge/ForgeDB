@@ -28,6 +28,15 @@ export declare class DataBase {
         duration: number;
     }): Promise<Cooldown | import("typeorm").UpdateResult>;
     static cdDelete(identifier: string): Promise<void>;
-    static cdTimeLeft(identifier: string): Promise<number>;
+    static cdTimeLeft(identifier: string): Promise<{
+        left: number;
+        identifier: string;
+        name: string;
+        id?: string;
+        startedAt: number;
+        duration: number;
+    } | {
+        left: number;
+    }>;
 }
 //# sourceMappingURL=database.d.ts.map

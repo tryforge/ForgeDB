@@ -39,7 +39,8 @@ exports.default = new forgescript_1.NativeFunction({
         if (!this["isValidReturnType"](nameV))
             return nameV;
         const cooldown = await util_1.DataBase.cdTimeLeft(util_1.DataBase.make_cdIdentifier({ name: nameV.value }));
-        if (cooldown !== 0) {
+        if (cooldown.left !== 0) {
+            ctx.setEnvironmentKey("time", cooldown.left);
             const content = await this["resolveCode"](ctx, code);
             if (!this["isValidReturnType"](content))
                 return content;

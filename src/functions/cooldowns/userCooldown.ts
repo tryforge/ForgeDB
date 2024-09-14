@@ -32,7 +32,7 @@ export default new NativeFunction({
             name: "user ID",
             rest: false,
             description: "The user id to assign the cooldown to",
-            type: ArgType.User,
+            type: ArgType.String,
             required: false,
         }
     ],
@@ -40,16 +40,17 @@ export default new NativeFunction({
         const [, , code] = this.data.fields! as IExtendedCompiledFunctionField[]
         const dur = await this["resolveUnhandledArg"](ctx, 1)
         if (!this["isValidReturnType"](dur)) return dur
-        
+
         const nameV = await this["resolveUnhandledArg"](ctx, 0)
         if (!this["isValidReturnType"](nameV)) return nameV
 
         const idV = await this["resolveUnhandledArg"](ctx, 3)
         if (!this["isValidReturnType"](idV)) return idV
-        
+
         const cooldown = await DataBase.cdTimeLeft(DataBase.make_cdIdentifier({name: nameV.value, id: idV.value?.id ?? ctx.user?.id}))
 
-        if(cooldown !== 0) {
+        if(cooldown.left !== 0) {
+            ctx.setEnvironmentKey("time", cooldown.left)
             const content = await this["resolveCode"](ctx, code)
             if (!this["isValidReturnType"](content)) return content
             ctx.container.content = content.value as string
