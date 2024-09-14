@@ -32,6 +32,6 @@ export default new NativeFunction({
         }
     ],
     async execute(ctx, [name, id, guild]) {
-        return this.success(await DataBase.cdTimeLeft(DataBase.make_cdIdentifier({name: `${name}-${guild?.id ?? ctx.guild?.id}`, id: id?.id ?? ctx.member?.id})))
+        return this.success((await DataBase.cdTimeLeft(DataBase.make_cdIdentifier({name: `${name}-${guild?.id ?? ctx.guild?.id}`, id: id?.id ?? ctx.member?.id}))).left)
     },
 })

@@ -25,6 +25,6 @@ export default new NativeFunction({
         }
     ],
     async execute(ctx, [name, id]) {
-        return this.success(await DataBase.cdTimeLeft(DataBase.make_cdIdentifier({name: name, id: id?.id ?? ctx.user?.id})))
+        return this.success((await DataBase.cdTimeLeft(DataBase.make_cdIdentifier({name: name, id: id?.id ?? ctx.user?.id}))).left)
     },
 })

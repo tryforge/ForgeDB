@@ -18,6 +18,6 @@ export default new NativeFunction({
         }
     ],
     async execute(_ctx, [name]) {
-        return this.success(await DataBase.cdTimeLeft(DataBase.make_cdIdentifier({name})))
+        return this.success((await DataBase.cdTimeLeft(DataBase.make_cdIdentifier({name}))).left)
     },
 })
