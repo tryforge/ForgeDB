@@ -10,7 +10,7 @@ class ForgeDB extends forgescript_1.ForgeExtension {
     static defaults;
     name = "ForgeDB";
     description = "A fast and reliable database extension for Forge";
-    version = "2.0.0";
+    version = require("../package.json").version;
     commands;
     emitter = new tiny_typed_emitter_1.TypedEmitter();
     constructor(options) {

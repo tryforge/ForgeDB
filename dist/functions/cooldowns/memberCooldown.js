@@ -57,7 +57,7 @@ exports.default = new forgescript_1.NativeFunction({
         const guildV = await this["resolveUnhandledArg"](ctx, 4);
         if (!this["isValidReturnType"](guildV))
             return guildV;
-        const cooldown = await util_1.DataBase.cdTimeLeft(util_1.DataBase.make_cdIdentifier({ name: `${nameV.value}-${guildV.id}`, id: idV.value?.id ?? ctx.channel?.id }));
+        const cooldown = await util_1.DataBase.cdTimeLeft(util_1.DataBase.make_cdIdentifier({ name: `${nameV.value}-${guildV.id ?? ctx.guild?.id}`, id: idV.value?.id ?? ctx.member?.id }));
         if (cooldown !== 0) {
             const content = await this["resolveCode"](ctx, code);
             if (!this["isValidReturnType"](content))
@@ -66,7 +66,7 @@ exports.default = new forgescript_1.NativeFunction({
             await ctx.container.send(ctx.obj);
             return this.stop();
         }
-        await util_1.DataBase.cdAdd({ name: `${nameV.value}-${guildV.id}`, id: idV.value?.id ?? ctx.member?.id, duration: dur.value });
+        await util_1.DataBase.cdAdd({ name: `${nameV.value}-${guildV.id ?? ctx.guild?.id}`, id: idV.value?.id ?? ctx.member?.id, duration: dur.value });
         return this.success();
     },
 });
