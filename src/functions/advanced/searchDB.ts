@@ -49,16 +49,14 @@ export default new NativeFunction({
     ],
     brackets: true,
     async execute(_ctx, [name, id, type, value, guild]) {
-        
-        const search = {
-            name: name ? name : undefined,
-            id: id ? id : undefined,
-            //@ts-ignore
-            type: VariableType[type]?.toString(),
-            value: value ? value : undefined,
-            guildId: guild?.id
-        }
-        
+        let search = {};
+
+        if(name) search = {...search, name };
+        if(id) search = {...search, id };
+        if(type) search = {...search, type: VariableType[type]?.toString() };
+        if(value) search = {...search, value };
+        if(guild) search = {...search, guildId: guild.id };
+
         return this.successJSON(await DataBase.find({...search}))
     }
 })

@@ -81,9 +81,7 @@ export class DataBase {
 
     public static async find(data?: RecordData){
         return await this.db.getRepository(this.entities.record).find({
-            where: {
-                ...data
-            }
+            where: { ...data }
         })
     }
 

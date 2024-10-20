@@ -69,9 +69,7 @@ class DataBase {
     }
     static async find(data) {
         return await this.db.getRepository(this.entities.record).find({
-            where: {
-                ...data
-            }
+            where: { ...data }
         });
     }
     static async delete(data) {
