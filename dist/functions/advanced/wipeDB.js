@@ -4,7 +4,7 @@ const forgescript_1 = require("@tryforge/forgescript");
 const util_1 = require("../../util");
 exports.default = new forgescript_1.NativeFunction({
     name: "$wipeDB",
-    version: "1.0.0",
+    version: "2.0.8",
     aliases: ["$deleteDB", "$clearDB"],
     description: "Whipes all the data stored in the database including cooldowns",
     output: forgescript_1.ArgType.Json,
