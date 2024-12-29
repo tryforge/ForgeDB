@@ -33,7 +33,7 @@ export declare class DataBase {
         left: number;
         identifier: string;
         name: string;
-        id?: string;
+        id?: string | undefined;
         startedAt: number;
         duration: number;
     } | {
