@@ -18,6 +18,7 @@ export declare class DataBase {
     static find(data?: RecordData): Promise<Record[]>;
     static delete(data: RecordData): Promise<import("typeorm").DeleteResult>;
     static wipe(): Promise<void>;
+    static cdWipe(): Promise<void>;
     static make_cdIdentifier(data: {
         name?: string;
         id?: string;

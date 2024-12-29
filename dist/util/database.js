@@ -80,6 +80,9 @@ class DataBase {
     static async wipe() {
         return await this.db.getRepository(this.entities.record).clear();
     }
+    static async cdWipe() {
+        return await this.db.getRepository(this.entities.cd).clear();
+    }
     static make_cdIdentifier(data) {
         return `${data.name}${data.id ? '_' + data.id : ''}`;
     }
