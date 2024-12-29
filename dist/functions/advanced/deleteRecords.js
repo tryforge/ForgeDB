@@ -14,16 +14,16 @@ var VariableType;
     VariableType[VariableType["guild"] = 6] = "guild";
 })(VariableType || (exports.VariableType = VariableType = {}));
 exports.default = new forgescript_1.NativeFunction({
-    name: "$searchDB",
-    aliases: ["$searchRecords", "$searchDataBase"],
-    version: "2.0.0",
-    description: "Retrieves variables associated with your inputs.",
+    name: "$deleteRecords",
+    version: "2.0.8",
+    aliases: ["$deleteVars", "$deleteVariables"],
+    description: "Deletes variables associated with your inputs.",
     output: forgescript_1.ArgType.Unknown,
     unwrap: true,
     args: [
         {
             name: "name",
-            description: "The name of the variable from which you want to retrieve the value.",
+            description: "The name of the variable from which you want to delete the value.",
             rest: false,
             type: forgescript_1.ArgType.String,
             required: false,
@@ -71,7 +71,10 @@ exports.default = new forgescript_1.NativeFunction({
             search = { ...search, value };
         if (guild)
             search = { ...search, guildId: guild.id };
-        return this.successJSON(await util_1.DataBase.find({ ...search }));
+        for (const record of await util_1.DataBase.find({ ...search })) {
+            await util_1.DataBase.delete(record);
+        }
+        return this.success();
     }
 });
-//# sourceMappingURL=searchDB.js.map
+//# sourceMappingURL=deleteRecords.js.map

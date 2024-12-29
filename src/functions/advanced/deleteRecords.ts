@@ -1,19 +1,19 @@
 import { ArgType, NativeFunction } from "@tryforge/forgescript"
-import { DataBase } from "../../util"
+import { DataBase, RecordData } from "../../util"
 
 export enum VariableType { user, channel, role, message, member, custom, guild }
 
 export default new NativeFunction({
-    name: "$searchDB",
-    aliases: ["$searchRecords", "$searchDataBase"],
-    version: "2.0.0",
-    description: "Retrieves variables associated with your inputs.",
+    name: "$deleteRecords",
+    version: "2.0.8",
+    aliases: ["$deleteVars", "$deleteVariables"],
+    description: "Deletes variables associated with your inputs.",
     output: ArgType.Unknown,
     unwrap: true,
     args: [
         {
             name: "name",
-            description: "The name of the variable from which you want to retrieve the value.",
+            description: "The name of the variable from which you want to delete the value.",
             rest: false,
             type: ArgType.String,
             required: false,
@@ -58,6 +58,9 @@ export default new NativeFunction({
         if(value) search = {...search, value };
         if(guild) search = {...search, guildId: guild.id };
 
-        return this.successJSON(await DataBase.find({...search}))
+        for (const record of await DataBase.find({...search})){
+            await DataBase.delete(record as RecordData)
+        }
+        return this.success()
     }
 })

@@ -95,6 +95,10 @@ export class DataBase {
         return await this.db.getRepository(this.entities.record).clear()
     }
 
+    public static async cdWipe() {
+        return await this.db.getRepository(this.entities.cd).clear()
+    }
+
     public static make_cdIdentifier(data: {name?: string, id?: string}){
         return `${data.name}${data.id ? '_'+data.id : ''}`
     }
