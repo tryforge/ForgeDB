@@ -16,13 +16,14 @@ var VariableType;
 exports.default = new forgescript_1.NativeFunction({
     name: "$deleteRecords",
     version: "2.0.8",
-    description: "Retrieves variables associated with your inputs.",
+    aliases: ["$deleteVars", "$deleteVariables"],
+    description: "Deletes variables associated with your inputs.",
     output: forgescript_1.ArgType.Unknown,
     unwrap: true,
     args: [
         {
             name: "name",
-            description: "The name of the variable from which you want to retrieve the value.",
+            description: "The name of the variable from which you want to delete the value.",
             rest: false,
             type: forgescript_1.ArgType.String,
             required: false,

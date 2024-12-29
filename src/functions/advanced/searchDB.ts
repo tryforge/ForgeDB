@@ -5,6 +5,7 @@ export enum VariableType { user, channel, role, message, member, custom, guild }
 
 export default new NativeFunction({
     name: "$searchDB",
+    aliases: ["$searchRecords", "$searchDataBase"],
     version: "2.0.0",
     description: "Retrieves variables associated with your inputs.",
     output: ArgType.Unknown,

@@ -5,6 +5,7 @@ const util_1 = require("../../util");
 exports.default = new forgescript_1.NativeFunction({
     name: "$getDB",
     version: "1.0.0",
+    aliases: ["$getDataBase", "$getRecords"],
     description: "Returns all stored identifiers in the database",
     output: forgescript_1.ArgType.Json,
     unwrap: false,

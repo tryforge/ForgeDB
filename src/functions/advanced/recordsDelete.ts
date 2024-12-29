@@ -13,7 +13,7 @@ export default new NativeFunction({
     args: [
         {
             name: "name",
-            description: "The name of the variable from which you want to retrieve the value.",
+            description: "The name of the variable from which you want to delete the value.",
             rest: false,
             type: ArgType.String,
             required: false,

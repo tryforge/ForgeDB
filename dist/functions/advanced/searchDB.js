@@ -15,6 +15,7 @@ var VariableType;
 })(VariableType || (exports.VariableType = VariableType = {}));
 exports.default = new forgescript_1.NativeFunction({
     name: "$searchDB",
+    aliases: ["$searchRecords", "$searchDataBase"],
     version: "2.0.0",
     description: "Retrieves variables associated with your inputs.",
     output: forgescript_1.ArgType.Unknown,
