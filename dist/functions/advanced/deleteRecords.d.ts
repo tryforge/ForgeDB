@@ -41,4 +41,4 @@ declare const _default: NativeFunction<[{
     required: false;
 }], true>;
 export default _default;
-//# sourceMappingURL=recordsDelete.d.ts.map
+//# sourceMappingURL=deleteRecords.d.ts.map
