@@ -39,5 +39,6 @@ export declare class DataBase {
     } | {
         left: number;
     }>;
+    static query(query: string): Promise<any>;
 }
 //# sourceMappingURL=database.d.ts.map
