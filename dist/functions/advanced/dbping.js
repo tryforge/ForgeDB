@@ -28,4 +28,4 @@ exports.default = new forgescript_1.NativeFunction({
         return this.success(res);
     },
 });
-//# sourceMappingURL=dbping.js.map
+//# sourceMappingURL=dbPing.js.map
