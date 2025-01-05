@@ -7,4 +7,4 @@ declare const _default: NativeFunction<[{
     rest: false;
 }], true>;
 export default _default;
-//# sourceMappingURL=dbping.d.ts.map
+//# sourceMappingURL=dbPing.d.ts.map

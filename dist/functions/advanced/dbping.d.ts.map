@@ -1,1 +1,1 @@
-{"version":3,"file":"dbping.d.ts","sourceRoot":"","sources":["../../../src/functions/advanced/dbping.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,OAAO,EAAE,cAAc,EAAE,MAAM,uBAAuB,CAAC;;;;;;;;AAIhE,wBAuBG"}
+{"version":3,"file":"dbPing.d.ts","sourceRoot":"","sources":["../../../src/functions/advanced/dbPing.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,OAAO,EAAE,cAAc,EAAE,MAAM,uBAAuB,CAAC;;;;;;;;AAIhE,wBAuBG"}
