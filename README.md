@@ -102,7 +102,6 @@ const client = new ForgeClient({
             port?: number
             username?: string
             password?: string
-            database?: string // The path of your DB
         })
     ]
 })
