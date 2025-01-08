@@ -20,10 +20,9 @@ export class DataBase {
     }
     
     constructor(emitter: TypedEmitter<TransformEvents<IDBEvents>>,options?: IDataBaseOptions) {
-        const data = {...options}
-        data.type = data.type ?? 'sqlite'
+        const data: IDataBaseOptions & {database?: string;} = {...options, type: options?.type ?? 'sqlite'}
         DataBase.type = data.type
-        if(data.type != 'mongodb') data.database = data.database ?? 'forge.db'
+        if(data.type != 'mongodb') data.database = 'database/forge.db'
         
         const config = {...data} as DataSourceOptions
         if(config.type == 'mongodb') Object.assign(config, {useUnifiedTopology: true})

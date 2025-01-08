@@ -9,7 +9,6 @@ export interface IDataBaseOptions {
     port?: number
     username?: string
     password?: string
-    database?: string
 }
 
 @Entity()

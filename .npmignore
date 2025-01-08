@@ -5,3 +5,4 @@ prisma
 */**/__tests__
 src
 metadata
+database

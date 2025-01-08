@@ -14,11 +14,10 @@ class DataBase {
     static emitter;
     static entities;
     constructor(emitter, options) {
-        const data = { ...options };
-        data.type = data.type ?? 'sqlite';
+        const data = { ...options, type: options?.type ?? 'sqlite' };
         DataBase.type = data.type;
         if (data.type != 'mongodb')
-            data.database = data.database ?? 'forge.db';
+            data.database = 'database/forge.db';
         const config = { ...data };
         if (config.type == 'mongodb')
             Object.assign(config, { useUnifiedTopology: true });
