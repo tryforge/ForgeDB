@@ -2,38 +2,36 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DataBase = void 0;
 const types_1 = require("./types");
-const typeorm_1 = require("typeorm");
 require("reflect-metadata");
+const databaseManager_1 = require("./databaseManager");
 function isGuildData(data) {
     return ['member', 'channel', 'role'].includes(data.type);
 }
-class DataBase {
+class DataBase extends databaseManager_1.DataBaseManager {
+    emitter;
+    database = "forge.db";
+    entityManager = {
+        entities: [types_1.Record, types_1.Cooldown],
+        mongoEntities: [types_1.MongoRecord, types_1.MongoCooldown]
+    };
     db;
     static type;
     static db;
     static emitter;
     static entities;
     constructor(emitter, options) {
-        const data = { ...options, type: options?.type ?? 'sqlite' };
-        DataBase.type = data.type;
-        if (data.type != 'mongodb')
-            data.database = 'database/forge.db';
-        const config = { ...data };
-        if (config.type == 'mongodb')
-            Object.assign(config, { useUnifiedTopology: true });
+        super(options);
+        this.emitter = emitter;
+        this.db = this.getDB();
+        this.init();
         DataBase.entities = {
-            record: data.type == 'mongodb' ? types_1.MongoRecord : types_1.Record,
-            cd: data.type == 'mongodb' ? types_1.MongoCooldown : types_1.Cooldown
+            record: this.type == 'mongodb' ? types_1.MongoRecord : types_1.Record,
+            cd: this.type == 'mongodb' ? types_1.MongoCooldown : types_1.Cooldown
         };
-        DataBase.emitter = emitter;
-        const db = new typeorm_1.DataSource({
-            ...config,
-            entities: [DataBase.entities.record, DataBase.entities.cd],
-            synchronize: true
-        });
-        this.db = db.initialize();
     }
     async init() {
+        (await this.db).initialize();
+        DataBase.emitter = this.emitter;
         DataBase.db = await this.db;
         DataBase.emitter.emit("connect");
     }

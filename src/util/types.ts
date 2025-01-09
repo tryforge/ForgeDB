@@ -1,15 +1,21 @@
 import { Entity, Column, PrimaryColumn, ObjectIdColumn } from "typeorm"
 import { IDBEvents } from "../structures";
 
-export interface IDataBaseOptions {
-    type: "mysql" | "postgres" | "sqlite" | "mongodb" | "better-sqlite3";
-    events?: Array<keyof IDBEvents>
-    url?: string
-    host?: string
-    port?: number
-    username?: string
-    password?: string
-}
+export type IDataBaseOptions = ({
+    type: "mysql" | "postgres";
+    url?: string;
+    host?: string;
+    port?: number;
+    username?: string;
+    password?: string;
+    database?: string;
+} | {
+    type: "mongodb";
+    url: string;
+}| {
+    type: "better-sqlite3" | "sqlite";
+    folder?: string;
+}) & {events?: Array<keyof IDBEvents>}
 
 @Entity()
 export class Record {

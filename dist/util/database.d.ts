@@ -1,9 +1,16 @@
-import { Cooldown, IDataBaseOptions, Record, RecordData } from './types';
+import { Cooldown, IDataBaseOptions, MongoCooldown, MongoRecord, Record, RecordData } from './types';
 import { TypedEmitter } from 'tiny-typed-emitter';
 import { IDBEvents } from '../structures';
 import { TransformEvents } from '..';
 import 'reflect-metadata';
-export declare class DataBase {
+import { DataBaseManager } from './databaseManager';
+export declare class DataBase extends DataBaseManager {
+    private emitter;
+    database: string;
+    entityManager: {
+        entities: (typeof Record | typeof Cooldown)[];
+        mongoEntities: (typeof MongoRecord | typeof MongoCooldown)[];
+    };
     private db;
     private static type;
     private static db;
@@ -33,7 +40,7 @@ export declare class DataBase {
         left: number;
         identifier: string;
         name: string;
-        id?: string | undefined;
+        id?: string;
         startedAt: number;
         duration: number;
     } | {

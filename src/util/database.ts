@@ -1,15 +1,22 @@
 import { Cooldown, GuildData, IDataBaseOptions, MongoCooldown, MongoRecord, Record, RecordData } from './types';
-import { DataSource, DataSourceOptions } from "typeorm";
+import { DataSource } from "typeorm";
 import { TypedEmitter } from 'tiny-typed-emitter';
 import { IDBEvents } from '../structures';
 import { TransformEvents } from '..';
 import 'reflect-metadata';
+import { DataBaseManager } from './databaseManager';
 
 function isGuildData(data: RecordData): data is GuildData {
     return ['member', 'channel', 'role'].includes(data.type!);
 }
 
-export class DataBase {
+export class DataBase extends DataBaseManager {
+    public database = "forge.db";
+    public entityManager = {
+        entities: [Record, Cooldown],
+        mongoEntities: [MongoRecord, MongoCooldown]
+    }
+
     private db: Promise<DataSource>;
     private static type: IDataBaseOptions['type'];
     private static db: DataSource;
@@ -19,29 +26,19 @@ export class DataBase {
         cd: typeof Cooldown | typeof MongoCooldown
     }
     
-    constructor(emitter: TypedEmitter<TransformEvents<IDBEvents>>,options?: IDataBaseOptions) {
-        const data: IDataBaseOptions & {database?: string;} = {...options, type: options?.type ?? 'sqlite'}
-        DataBase.type = data.type
-        if(data.type != 'mongodb') data.database = 'database/forge.db'
-        
-        const config = {...data} as DataSourceOptions
-        if(config.type == 'mongodb') Object.assign(config, {useUnifiedTopology: true})
-
+    constructor(private emitter: TypedEmitter<TransformEvents<IDBEvents>>,options?: IDataBaseOptions) {
+        super(options)
+        this.db = this.getDB()
+        this.init()
         DataBase.entities = {
-            record: data.type == 'mongodb' ? MongoRecord : Record,
-            cd: data.type == 'mongodb' ? MongoCooldown : Cooldown
+            record: this.type == 'mongodb' ? MongoRecord : Record,
+            cd: this.type == 'mongodb' ? MongoCooldown : Cooldown
         }
-        DataBase.emitter = emitter
-        
-        const db = new DataSource({
-            ...config,
-            entities: [ DataBase.entities.record, DataBase.entities.cd ],
-            synchronize: true
-        });
-        this.db = db.initialize()
     }
 
     public async init() {
+        (await this.db).initialize()
+        DataBase.emitter = this.emitter
         DataBase.db = await this.db
         DataBase.emitter.emit("connect")
     }

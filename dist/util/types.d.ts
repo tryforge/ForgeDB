@@ -1,13 +1,21 @@
 import { IDBEvents } from "../structures";
-export interface IDataBaseOptions {
-    type: "mysql" | "postgres" | "sqlite" | "mongodb" | "better-sqlite3";
-    events?: Array<keyof IDBEvents>;
+export type IDataBaseOptions = ({
+    type: "mysql" | "postgres";
     url?: string;
     host?: string;
     port?: number;
     username?: string;
     password?: string;
-}
+    database?: string;
+} | {
+    type: "mongodb";
+    url: string;
+} | {
+    type: "better-sqlite3" | "sqlite";
+    folder?: string;
+}) & {
+    events?: Array<keyof IDBEvents>;
+};
 export declare class Record {
     identifier: string;
     name: string;
