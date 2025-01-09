@@ -20,29 +20,34 @@ class DataBaseManager {
         if (check?.name == this.database)
             return check.db;
         const data = { ...this.config };
+        let db;
         switch (data.type) {
             case "mysql":
             case "postgres":
                 data.database = this.database;
-                return new typeorm_1.DataSource({
+                db = new typeorm_1.DataSource({
                     ...data,
                     entities: this.entityManager.entities,
                     synchronize: true
                 });
+                break;
             case "mongodb":
-                return new typeorm_1.DataSource({
+                db = new typeorm_1.DataSource({
                     ...data,
                     entities: this.entityManager.mongoEntities,
                     synchronize: true
                 });
+                break;
             default:
-                return new typeorm_1.DataSource({
+                db = new typeorm_1.DataSource({
                     ...data,
                     entities: this.entityManager.entities,
                     synchronize: true,
                     database: `${data.folder ?? "database"}/${this.database}`
                 });
         }
+        this.activeDataBases.push({ name: this.database, db });
+        return db;
     }
 }
 exports.DataBaseManager = DataBaseManager;

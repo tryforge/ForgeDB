@@ -34,6 +34,7 @@ export class DataBase extends DataBaseManager {
             record: this.type == 'mongodb' ? MongoRecord : Record,
             cd: this.type == 'mongodb' ? MongoCooldown : Cooldown
         }
+        DataBase.type = this.type
     }
 
     public async init() {

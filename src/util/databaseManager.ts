@@ -23,28 +23,33 @@ export abstract class DataBaseManager {
         const check = this.activeDataBases.find(s => s.name == "")
         if(check?.name == this.database) return check.db;
         const data: IDataBaseOptions = {...this.config}
+        let db;
         switch (data.type){
             case "mysql":
-            case "postgres":
+                case "postgres":
                 data.database = this.database
-                return new DataSource({
+                db = new DataSource({
                     ...data,
                     entities: this.entityManager.entities,
                     synchronize: true
                 });
+                break;
             case "mongodb":
-                return new DataSource({
+                db = new DataSource({
                     ...data,
                     entities: this.entityManager.mongoEntities,
                     synchronize: true
                 });
+                break;
             default:
-                return new DataSource({
+                db = new DataSource({
                     ...data,
                     entities: this.entityManager.entities,
                     synchronize: true,
                     database: `${data.folder ?? "database"}/${this.database}`
-            });
+                });
         }
+        this.activeDataBases.push({name: this.database, db})
+        return db;
     }
 };

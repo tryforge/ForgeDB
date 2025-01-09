@@ -28,6 +28,7 @@ class DataBase extends databaseManager_1.DataBaseManager {
             record: this.type == 'mongodb' ? types_1.MongoRecord : types_1.Record,
             cd: this.type == 'mongodb' ? types_1.MongoCooldown : types_1.Cooldown
         };
+        DataBase.type = this.type;
     }
     async init() {
         (await this.db).initialize();
