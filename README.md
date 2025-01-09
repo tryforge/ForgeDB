@@ -1,5 +1,5 @@
 <p align="center"><img src="https://cdn.discordapp.com/emojis/1185683362334134362.png?size=1024" alt="ForgeDB logo"></p>
-<h1 align="center">ForgeDB</h1><p align="center">An advanced DataBase extension for ForgeScript powered apps.</p>
+<h1 align="center">ForgeDB - UNSTABLE DO NOT UPDATE TO DEV</h1><p align="center">An advanced DataBase extension for ForgeScript powered apps.</p>
 
 <p align="center">
 <a href="https://github.com/tryforge/ForgeDB/"><img src="https://img.shields.io/github/package-json/v/tryforge/ForgeDB/main?label=@tryforge/forge.db&color=5c16d4" alt="@tryforge/forge.db"></a>
