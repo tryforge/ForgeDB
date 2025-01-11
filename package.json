@@ -25,7 +25,7 @@
   "author": "aggelos007",
   "license": "MIT",
   "devDependencies": {
-    "@tryforge/forgescript": "^1.4.0",
+    "@tryforge/forgescript": "github:tryforge/forgescript#dev",
     "@types/node": "^20.5.7",
     "mongodb": "^5.9.2",
     "sqlite": "5.1.1",
