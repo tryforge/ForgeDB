@@ -2,6 +2,7 @@ import { DataSource, EntitySchema, MixedList } from "typeorm";
 import 'reflect-metadata';
 import { IDataBaseOptions } from "./types";
 
+const activeDataBases: {name: string, db: DataSource}[] = [];
 export abstract class DataBaseManager {
     public abstract database: string;
     public abstract entityManager: {
@@ -10,7 +11,6 @@ export abstract class DataBaseManager {
     }
     public type: IDataBaseOptions['type'];
     private config: IDataBaseOptions
-    private activeDataBases?: {name: string; db: DataSource;}[]
 
     constructor(options?: IDataBaseOptions){
         if(options) options.type = options.type ?? "sqlite"
@@ -19,8 +19,7 @@ export abstract class DataBaseManager {
     }
 
     protected async getDB(){
-        if(!this.activeDataBases) this.activeDataBases = []
-        const check = this.activeDataBases.find(s => s.name == "")
+        const check = activeDataBases.find(s => s.name == this.database)
         if(check?.name == this.database) return check.db;
         const data: IDataBaseOptions = {...this.config}
         let db;
@@ -49,7 +48,8 @@ export abstract class DataBaseManager {
                     database: `${data.folder ?? "database"}/${this.database}`
                 });
         }
-        this.activeDataBases.push({name: this.database, db})
+        await db.initialize()
+        activeDataBases.push({name: this.database, db})
         return db;
     }
 };

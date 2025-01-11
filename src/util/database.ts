@@ -38,7 +38,6 @@ export class DataBase extends DataBaseManager {
     }
 
     public async init() {
-        (await this.db).initialize()
         DataBase.emitter = this.emitter
         DataBase.db = await this.db
         DataBase.emitter.emit("connect")

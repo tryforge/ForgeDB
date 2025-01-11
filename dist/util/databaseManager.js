@@ -3,10 +3,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.DataBaseManager = void 0;
 const typeorm_1 = require("typeorm");
 require("reflect-metadata");
+const activeDataBases = [];
 class DataBaseManager {
     type;
     config;
-    activeDataBases;
     constructor(options) {
         if (options)
             options.type = options.type ?? "sqlite";
@@ -14,9 +14,7 @@ class DataBaseManager {
         this.type = this.config.type;
     }
     async getDB() {
-        if (!this.activeDataBases)
-            this.activeDataBases = [];
-        const check = this.activeDataBases.find(s => s.name == "");
+        const check = activeDataBases.find(s => s.name == this.database);
         if (check?.name == this.database)
             return check.db;
         const data = { ...this.config };
@@ -46,7 +44,8 @@ class DataBaseManager {
                     database: `${data.folder ?? "database"}/${this.database}`
                 });
         }
-        this.activeDataBases.push({ name: this.database, db });
+        await db.initialize();
+        activeDataBases.push({ name: this.database, db });
         return db;
     }
 }

@@ -9,7 +9,6 @@ export declare abstract class DataBaseManager {
     };
     type: IDataBaseOptions['type'];
     private config;
-    private activeDataBases?;
     constructor(options?: IDataBaseOptions);
     protected getDB(): Promise<DataSource>;
 }

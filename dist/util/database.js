@@ -31,7 +31,6 @@ class DataBase extends databaseManager_1.DataBaseManager {
         DataBase.type = this.type;
     }
     async init() {
-        (await this.db).initialize();
         DataBase.emitter = this.emitter;
         DataBase.db = await this.db;
         DataBase.emitter.emit("connect");
