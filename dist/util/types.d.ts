@@ -52,7 +52,10 @@ export type CooldownData = {
     startedAt?: number;
     duration?: number;
 };
-export declare class MongoClasses {
+export declare class MongoRecord extends Record {
+    mongoId?: string;
+}
+export declare class MongoCooldown extends Cooldown {
     mongoId?: string;
 }
 //# sourceMappingURL=types.d.ts.map

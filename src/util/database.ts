@@ -1,4 +1,4 @@
-import { Cooldown, GuildData, IDataBaseOptions, Record, RecordData } from './types';
+import { Cooldown, GuildData, IDataBaseOptions, MongoCooldown, MongoRecord, Record, RecordData } from './types';
 import { DataSource } from "typeorm";
 import { TypedEmitter } from 'tiny-typed-emitter';
 import { IDBEvents } from '../structures';
@@ -12,7 +12,14 @@ function isGuildData(data: RecordData): data is GuildData {
 
 export class DataBase extends DataBaseManager {
     public database = "forge.db";
-    public activeEntities = [Record, Cooldown];
+    public entityManager = {
+        entities: [Record, Cooldown],
+        mongoEntities: [MongoRecord, MongoCooldown]
+    };
+    private static entities: {
+        Record: typeof Record | typeof MongoRecord;
+        Cooldown: typeof Cooldown | typeof MongoCooldown;
+    }
 
     private db: Promise<DataSource>;
     private static type: IDataBaseOptions['type'];
@@ -29,6 +36,10 @@ export class DataBase extends DataBaseManager {
         DataBase.emitter = this.emitter
         DataBase.db = await this.db
         DataBase.emitter.emit("connect")
+        DataBase.entities = {
+            Record: this.type == "mongodb" ? MongoRecord : Record,
+            Cooldown: this.type == "mongodb" ? MongoCooldown : Cooldown
+        }
     }
 
     public static make_intetifier(data: RecordData) {

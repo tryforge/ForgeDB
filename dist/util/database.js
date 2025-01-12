@@ -10,7 +10,11 @@ function isGuildData(data) {
 class DataBase extends databaseManager_1.DataBaseManager {
     emitter;
     database = "forge.db";
-    activeEntities = [types_1.Record, types_1.Cooldown];
+    entityManager = {
+        entities: [types_1.Record, types_1.Cooldown],
+        mongoEntities: [types_1.MongoRecord, types_1.MongoCooldown]
+    };
+    static entities;
     db;
     static type;
     static db;
@@ -25,6 +29,10 @@ class DataBase extends databaseManager_1.DataBaseManager {
         DataBase.emitter = this.emitter;
         DataBase.db = await this.db;
         DataBase.emitter.emit("connect");
+        DataBase.entities = {
+            Record: this.type == "mongodb" ? types_1.MongoRecord : types_1.Record,
+            Cooldown: this.type == "mongodb" ? types_1.MongoCooldown : types_1.Cooldown
+        };
     }
     static make_intetifier(data) {
         return `${data.type}_${data.name}_${isGuildData(data) ? data.guildId + '_' : ''}${data.id}`;

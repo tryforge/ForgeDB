@@ -1,13 +1,15 @@
 import { DataSource, EntitySchema, MixedList } from "typeorm";
+import { IDataBaseOptions } from "./types";
 import 'reflect-metadata';
-import { Cooldown, IDataBaseOptions, MongoClasses } from "./types";
 
 const activeDataBases: {name: string, db: DataSource}[] = [];
 
 export abstract class DataBaseManager {
     public abstract database: string;
-    public abstract activeEntities: MixedList<Function | string | EntitySchema>;
-    private static activeEntities: MixedList<Function | string | EntitySchema>;
+    public abstract entityManager: {
+        entities: MixedList<Function | string | EntitySchema>;
+        mongoEntities: MixedList<Function | string | EntitySchema>;
+    }
 
     public type: IDataBaseOptions['type'];
     private config: IDataBaseOptions
@@ -21,20 +23,6 @@ export abstract class DataBaseManager {
         this.type = this.config.type
     }
 
-    private wrapEntitiesForMongo() {
-        //@ts-ignore
-        this.activeEntities = this.activeEntities.map(s => {
-            const mongoEntity = class extends s {
-                constructor(...args: any[]){
-                    super(...args);
-                    Object.assign(this, new MongoClasses())
-                }
-            }
-            Object.defineProperty(mongoEntity, "name", { value: s.name });
-            return mongoEntity
-        })
-    }
-
     protected async getDB(){
         const check = activeDataBases.find(s => s.name == this.database)
         if(check?.name == this.database) return check.db;
@@ -45,51 +33,27 @@ export abstract class DataBaseManager {
             case "postgres":
                 db = new DataSource({
                     ...data,
-                    entities: this.activeEntities,
+                    entities: this.entityManager.entities,
                     synchronize: true
                 });
             break;
             case "mongodb":
-                this.wrapEntitiesForMongo()
                 db = new DataSource({
                     ...data,
-                    entities: this.activeEntities,
+                    entities: this.entityManager.mongoEntities,
                     synchronize: true
                 });
             break;
             default:
                 db = new DataSource({
                     ...data,
-                    entities: this.activeEntities,
+                    entities: this.entityManager.entities,
                     synchronize: true,
                     database: `${data.folder ?? "database"}/${this.database}`
                 });
         }
-        DataBaseManager.activeEntities = this.activeEntities
         await db.initialize()
         activeDataBases.push({name: this.database, db})
         return db;
     }
-
-    public get entities() {
-        const entitiesJson: Record<string, EntitySchema | string | Function> = {};
-        //@ts-ignore
-        this.activeEntities.forEach(entity => {
-            const className = entity.name;
-            entitiesJson[className] = entity;
-        });
-        
-        return entitiesJson;
-    };
-    
-    public static get entities() {
-        const entitiesJson: any = {};
-        //@ts-ignore
-        this.activeEntities.forEach(entity => {
-            const className = entity.name;
-            entitiesJson[className] = entity;
-        });
-        
-        return entitiesJson;
-    };
 };
