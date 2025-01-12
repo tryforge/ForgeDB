@@ -1,4 +1,4 @@
-import { Cooldown, GuildData, IDataBaseOptions, MongoCooldown, MongoRecord, Record, RecordData } from './types';
+import { Cooldown, GuildData, IDataBaseOptions, Record, RecordData } from './types';
 import { DataSource } from "typeorm";
 import { TypedEmitter } from 'tiny-typed-emitter';
 import { IDBEvents } from '../structures';
@@ -12,29 +12,17 @@ function isGuildData(data: RecordData): data is GuildData {
 
 export class DataBase extends DataBaseManager {
     public database = "forge.db";
-    public entityManager = {
-        entities: [Record, Cooldown],
-        mongoEntities: [MongoRecord, MongoCooldown]
-    }
+    public activeEntities = [Record, Cooldown];
 
     private db: Promise<DataSource>;
     private static type: IDataBaseOptions['type'];
     private static db: DataSource;
     private static emitter: TypedEmitter<TransformEvents<IDBEvents>>;
-    private static entities: {
-        record: typeof Record | typeof MongoRecord
-        cd: typeof Cooldown | typeof MongoCooldown
-    }
     
     constructor(private emitter: TypedEmitter<TransformEvents<IDBEvents>>,options?: IDataBaseOptions) {
         super(options)
         this.db = this.getDB()
         this.init()
-        DataBase.entities = {
-            record: this.type == 'mongodb' ? MongoRecord : Record,
-            cd: this.type == 'mongodb' ? MongoCooldown : Cooldown
-        }
-        DataBase.type = this.type
     }
 
     public async init() {
@@ -48,51 +36,51 @@ export class DataBase extends DataBaseManager {
     }
 
     public static async set(data: RecordData) {
-        const newData = new this.entities.record()
+        const newData = new this.entities.Record()
         newData.identifier = this.make_intetifier(data)
         newData.name = data.name!
         newData.id = data.id!
         newData.type = data.type!
         newData.value = data.value!
         if(isGuildData(data)) newData.guildId = data.guildId;
-        const oldData = await this.db.getRepository(this.entities.record).findOneBy({ identifier: this.make_intetifier(data) })
+        const oldData = await this.db.getRepository(this.entities.Record).findOneBy({ identifier: this.make_intetifier(data) })
         if(oldData && this.type == 'mongodb'){
             this.emitter.emit("variableUpdate", { newData, oldData })
-            this.db.getRepository(this.entities.record).update(oldData, newData);
+            this.db.getRepository(this.entities.Record).update(oldData, newData);
         } 
         else {
             oldData ? this.emitter.emit("variableUpdate", { newData, oldData }) : this.emitter.emit('variableCreate', { data: newData })
-            await this.db.getRepository(this.entities.record).save(newData)
+            await this.db.getRepository(this.entities.Record).save(newData)
         } 
     }
 
     public static async get(data: RecordData) {
         const identifier = data.identifier ?? this.make_intetifier(data)
-        return await this.db.getRepository(this.entities.record).findOneBy({ identifier })
+        return await this.db.getRepository(this.entities.Record).findOneBy({ identifier })
     }
 
     public static async getAll(){
-        return await this.db.getRepository(this.entities.record).find()
+        return await this.db.getRepository(this.entities.Record).find()
     }
 
     public static async find(data?: RecordData){
-        return await this.db.getRepository(this.entities.record).find({
+        return await this.db.getRepository(this.entities.Record).find({
             where: { ...data }
         })
     }
 
     public static async delete(data: RecordData) {
         const identifier = data.identifier ?? this.make_intetifier(data)
-        this.emitter.emit('variableDelete', { data: await this.db.getRepository(this.entities.record).findOneBy({ identifier }) })
-        return await this.db.getRepository(this.entities.record).delete({ identifier })
+        this.emitter.emit('variableDelete', { data: await this.db.getRepository(this.entities.Record).findOneBy({ identifier }) })
+        return await this.db.getRepository(this.entities.Record).delete({ identifier })
     }
 
     public static async wipe() {
-        return await this.db.getRepository(this.entities.record).clear()
+        return await this.db.getRepository(this.entities.Record).clear()
     }
 
     public static async cdWipe() {
-        return await this.db.getRepository(this.entities.cd).clear()
+        return await this.db.getRepository(this.entities.Cooldown).clear()
     }
 
     public static make_cdIdentifier(data: {name?: string, id?: string}){
@@ -100,24 +88,24 @@ export class DataBase extends DataBaseManager {
     }
 
     public static async cdAdd(data: {name: string, id?: string, duration: number}){
-        const cd = new this.entities.cd()
+        const cd = new this.entities.Cooldown()
         cd.identifier = this.make_cdIdentifier(data)
         cd.name = data.name
         cd.id = data.id
         cd.startedAt = Date.now()
         cd.duration = data.duration
 
-        const oldCD = await this.db.getRepository(this.entities.cd).findOneBy({ identifier: this.make_cdIdentifier(data) })
-        if(oldCD && this.type == 'mongodb') return await this.db.getRepository(this.entities.cd).update(oldCD, cd);
-        else return await this.db.getRepository(this.entities.cd).save(cd)
+        const oldCD = await this.db.getRepository(this.entities.Cooldown).findOneBy({ identifier: this.make_cdIdentifier(data) })
+        if(oldCD && this.type == 'mongodb') return await this.db.getRepository(this.entities.Cooldown).update(oldCD, cd);
+        else return await this.db.getRepository(this.entities.Cooldown).save(cd)
     }
 
     public static async cdDelete(identifier: string) {
-        await this.db.getRepository(this.entities.cd).delete({identifier})
+        await this.db.getRepository(this.entities.Cooldown).delete({identifier})
     }
 
     public static async cdTimeLeft(identifier: string) {
-        const data = await this.db.getRepository(this.entities.cd).findOneBy({ identifier })
+        const data = await this.db.getRepository(this.entities.Cooldown).findOneBy({ identifier })
         return data ? {...data, left: Math.max(data.duration - (Date.now() - data.startedAt), 0)} : {left: 0}
     }
 

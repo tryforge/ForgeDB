@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MongoCooldown = exports.MongoRecord = exports.Cooldown = exports.Record = void 0;
+exports.MongoClasses = exports.Cooldown = exports.Record = void 0;
 const typeorm_1 = require("typeorm");
 let Record = class Record {
     identifier;
@@ -78,26 +78,15 @@ __decorate([
 exports.Cooldown = Cooldown = __decorate([
     (0, typeorm_1.Entity)()
 ], Cooldown);
-let MongoRecord = class MongoRecord extends Record {
+let MongoClasses = class MongoClasses {
     mongoId;
 };
-exports.MongoRecord = MongoRecord;
+exports.MongoClasses = MongoClasses;
 __decorate([
     (0, typeorm_1.ObjectIdColumn)(),
     __metadata("design:type", String)
-], MongoRecord.prototype, "mongoId", void 0);
-exports.MongoRecord = MongoRecord = __decorate([
+], MongoClasses.prototype, "mongoId", void 0);
+exports.MongoClasses = MongoClasses = __decorate([
     (0, typeorm_1.Entity)()
-], MongoRecord);
-let MongoCooldown = class MongoCooldown extends Cooldown {
-    mongoId;
-};
-exports.MongoCooldown = MongoCooldown;
-__decorate([
-    (0, typeorm_1.ObjectIdColumn)(),
-    __metadata("design:type", String)
-], MongoCooldown.prototype, "mongoId", void 0);
-exports.MongoCooldown = MongoCooldown = __decorate([
-    (0, typeorm_1.Entity)()
-], MongoCooldown);
+], MongoClasses);
 //# sourceMappingURL=types.js.map

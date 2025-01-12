@@ -77,13 +77,7 @@ export type CooldownData = {
 }
 
 @Entity()
-export class MongoRecord extends Record {
+export class MongoClasses {
     @ObjectIdColumn()
-    mongoId?: string
-}
-
-@Entity()
-export class MongoCooldown extends Cooldown {
-    @ObjectIdColumn()
-    mongoId?: string
+    mongoId?: string;
 }

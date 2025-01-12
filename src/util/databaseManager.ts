@@ -1,14 +1,13 @@
 import { DataSource, EntitySchema, MixedList } from "typeorm";
 import 'reflect-metadata';
-import { IDataBaseOptions } from "./types";
+import { IDataBaseOptions, MongoClasses } from "./types";
 
 const activeDataBases: {name: string, db: DataSource}[] = [];
+
 export abstract class DataBaseManager {
     public abstract database: string;
-    public abstract entityManager: {
-        entities: MixedList<Function | string | EntitySchema>
-        mongoEntities: MixedList<Function | string | EntitySchema>
-    }
+    public abstract activeEntities: MixedList<Function | string | EntitySchema>;
+
     public type: IDataBaseOptions['type'];
     private config: IDataBaseOptions
 
@@ -19,6 +18,20 @@ export abstract class DataBaseManager {
         }
         else this.config = { type: "sqlite" };
         this.type = this.config.type
+    }
+
+    private wrapEntitiesForMongo() {
+        //@ts-ignore
+        this.activeEntities = this.activeEntities.map(s => {
+            const mongoEntity = class extends s {
+                constructor(...args: any[]){
+                    super(...args);
+                    Object.assign(this, new MongoClasses())
+                }
+            }
+            Object.defineProperty(mongoEntity, "name", { value: s.name });
+            return mongoEntity
+        })
     }
 
     protected async getDB(){
@@ -32,21 +45,22 @@ export abstract class DataBaseManager {
                 data.database = this.database
                 db = new DataSource({
                     ...data,
-                    entities: this.entityManager.entities,
+                    entities: this.activeEntities,
                     synchronize: true
                 });
                 break;
             case "mongodb":
+                this.wrapEntitiesForMongo()
                 db = new DataSource({
                     ...data,
-                    entities: this.entityManager.mongoEntities,
+                    entities: this.activeEntities,
                     synchronize: true
                 });
                 break;
             default:
                 db = new DataSource({
                     ...data,
-                    entities: this.entityManager.entities,
+                    entities: this.activeEntities,
                     synchronize: true,
                     database: `${data.folder ?? "database"}/${this.database}`
                 });
@@ -55,4 +69,26 @@ export abstract class DataBaseManager {
         activeDataBases.push({name: this.database, db})
         return db;
     }
+
+    public get entities() {
+        const entitiesJson: Record<string, EntitySchema | string | Function> = {};
+        //@ts-ignore
+        this.activeEntities.forEach(entity => {
+            const className = entity.name;
+            entitiesJson[className] = entity;
+        });
+        
+        return entitiesJson;
+    };
+
+    public static get entities() {
+        const entitiesJson: any = {};
+        //@ts-ignore
+        this.activeEntities.forEach(entity => {
+            const className = entity.name;
+            entitiesJson[className] = entity;
+        });
+        
+        return entitiesJson;
+    };
 };
