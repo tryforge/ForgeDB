@@ -16,7 +16,6 @@ class DataBase extends databaseManager_1.DataBaseManager {
     };
     static entities;
     db;
-    static type;
     static db;
     static emitter;
     constructor(emitter, options) {
@@ -27,7 +26,6 @@ class DataBase extends databaseManager_1.DataBaseManager {
             Record: this.type == "mongodb" ? types_1.MongoRecord : types_1.Record,
             Cooldown: this.type == "mongodb" ? types_1.MongoCooldown : types_1.Cooldown
         };
-        this.init();
     }
     async init() {
         DataBase.emitter = this.emitter;

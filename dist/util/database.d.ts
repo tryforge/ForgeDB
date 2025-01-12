@@ -13,7 +13,6 @@ export declare class DataBase extends DataBaseManager {
     };
     private static entities;
     private db;
-    private static type;
     private static db;
     private static emitter;
     constructor(emitter: TypedEmitter<TransformEvents<IDBEvents>>, options?: IDataBaseOptions);

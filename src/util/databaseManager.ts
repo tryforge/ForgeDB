@@ -12,6 +12,7 @@ export abstract class DataBaseManager {
     }
 
     public type: IDataBaseOptions['type'];
+    public static type: IDataBaseOptions['type'];
     private config: IDataBaseOptions
 
     constructor(options?: IDataBaseOptions){
@@ -21,6 +22,7 @@ export abstract class DataBaseManager {
         }
         else this.config = { type: "sqlite" };
         this.type = this.config.type
+        DataBaseManager.type = this.type
     }
 
     protected async getDB(){

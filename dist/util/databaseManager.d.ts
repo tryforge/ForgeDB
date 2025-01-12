@@ -8,6 +8,7 @@ export declare abstract class DataBaseManager {
         mongoEntities: MixedList<Function | string | EntitySchema>;
     };
     type: IDataBaseOptions['type'];
+    static type: IDataBaseOptions['type'];
     private config;
     constructor(options?: IDataBaseOptions);
     protected getDB(): Promise<DataSource>;

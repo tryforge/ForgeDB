@@ -28,6 +28,7 @@
     "@tryforge/forgescript": "github:tryforge/forgescript#dev",
     "@types/node": "^20.5.7",
     "mongodb": "^5.9.2",
+    "mysql2": "^3.12.0",
     "sqlite": "5.1.1",
     "typedoc": "^0.25.0",
     "typescript": "^5.2.2"

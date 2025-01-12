@@ -6,6 +6,7 @@ require("reflect-metadata");
 const activeDataBases = [];
 class DataBaseManager {
     type;
+    static type;
     config;
     constructor(options) {
         if (options) {
@@ -15,6 +16,7 @@ class DataBaseManager {
         else
             this.config = { type: "sqlite" };
         this.type = this.config.type;
+        DataBaseManager.type = this.type;
     }
     async getDB() {
         const check = activeDataBases.find(s => s.name == this.database);

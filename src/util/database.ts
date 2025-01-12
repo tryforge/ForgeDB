@@ -22,7 +22,6 @@ export class DataBase extends DataBaseManager {
     }
 
     private db: Promise<DataSource>;
-    private static type: IDataBaseOptions['type'];
     private static db: DataSource;
     private static emitter: TypedEmitter<TransformEvents<IDBEvents>>;
     
@@ -33,7 +32,6 @@ export class DataBase extends DataBaseManager {
             Record: this.type == "mongodb" ? MongoRecord : Record,
             Cooldown: this.type == "mongodb" ? MongoCooldown : Cooldown
         }
-        this.init()
     }
 
     public async init() {
