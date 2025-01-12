@@ -4,6 +4,7 @@ import { IDataBaseOptions } from "./types";
 export declare abstract class DataBaseManager {
     abstract database: string;
     abstract activeEntities: MixedList<Function | string | EntitySchema>;
+    private static activeEntities;
     type: IDataBaseOptions['type'];
     private config;
     constructor(options?: IDataBaseOptions);

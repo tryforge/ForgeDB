@@ -43,7 +43,7 @@ export class DataBase extends DataBaseManager {
         newData.type = data.type!
         newData.value = data.value!
         if(isGuildData(data)) newData.guildId = data.guildId;
-        const oldData = await this.db.getRepository(this.entities.Record).findOneBy({ identifier: this.make_intetifier(data) })
+        const oldData = await this.db.getRepository(this.entities.Record).findOneBy({ identifier: this.make_intetifier(data) }) as Record
         if(oldData && this.type == 'mongodb'){
             this.emitter.emit("variableUpdate", { newData, oldData })
             this.db.getRepository(this.entities.Record).update(oldData, newData);
@@ -71,7 +71,7 @@ export class DataBase extends DataBaseManager {
 
     public static async delete(data: RecordData) {
         const identifier = data.identifier ?? this.make_intetifier(data)
-        this.emitter.emit('variableDelete', { data: await this.db.getRepository(this.entities.Record).findOneBy({ identifier }) })
+        this.emitter.emit('variableDelete', { data: await this.db.getRepository(this.entities.Record).findOneBy({ identifier }) as Record })
         return await this.db.getRepository(this.entities.Record).delete({ identifier })
     }
 

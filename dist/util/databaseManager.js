@@ -6,6 +6,7 @@ require("reflect-metadata");
 const types_1 = require("./types");
 const activeDataBases = [];
 class DataBaseManager {
+    static activeEntities;
     type;
     config;
     constructor(options) {
@@ -61,6 +62,7 @@ class DataBaseManager {
                     database: `${data.folder ?? "database"}/${this.database}`
                 });
         }
+        DataBaseManager.activeEntities = this.activeEntities;
         await db.initialize();
         activeDataBases.push({ name: this.database, db });
         return db;

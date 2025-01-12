@@ -1,12 +1,13 @@
 import { DataSource, EntitySchema, MixedList } from "typeorm";
 import 'reflect-metadata';
-import { IDataBaseOptions, MongoClasses } from "./types";
+import { Cooldown, IDataBaseOptions, MongoClasses } from "./types";
 
 const activeDataBases: {name: string, db: DataSource}[] = [];
 
 export abstract class DataBaseManager {
     public abstract database: string;
     public abstract activeEntities: MixedList<Function | string | EntitySchema>;
+    private static activeEntities: MixedList<Function | string | EntitySchema>;
 
     public type: IDataBaseOptions['type'];
     private config: IDataBaseOptions
@@ -64,6 +65,7 @@ export abstract class DataBaseManager {
                     database: `${data.folder ?? "database"}/${this.database}`
                 });
         }
+        DataBaseManager.activeEntities = this.activeEntities
         await db.initialize()
         activeDataBases.push({name: this.database, db})
         return db;
@@ -79,7 +81,7 @@ export abstract class DataBaseManager {
         
         return entitiesJson;
     };
-
+    
     public static get entities() {
         const entitiesJson: any = {};
         //@ts-ignore
