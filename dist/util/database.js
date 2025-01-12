@@ -23,16 +23,16 @@ class DataBase extends databaseManager_1.DataBaseManager {
         super(options);
         this.emitter = emitter;
         this.db = this.getDB();
+        DataBase.entities = {
+            Record: this.type == "mongodb" ? types_1.MongoRecord : types_1.Record,
+            Cooldown: this.type == "mongodb" ? types_1.MongoCooldown : types_1.Cooldown
+        };
         this.init();
     }
     async init() {
         DataBase.emitter = this.emitter;
         DataBase.db = await this.db;
         DataBase.emitter.emit("connect");
-        DataBase.entities = {
-            Record: this.type == "mongodb" ? types_1.MongoRecord : types_1.Record,
-            Cooldown: this.type == "mongodb" ? types_1.MongoCooldown : types_1.Cooldown
-        };
     }
     static make_intetifier(data) {
         return `${data.type}_${data.name}_${isGuildData(data) ? data.guildId + '_' : ''}${data.id}`;

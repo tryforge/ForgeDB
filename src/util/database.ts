@@ -29,6 +29,10 @@ export class DataBase extends DataBaseManager {
     constructor(private emitter: TypedEmitter<TransformEvents<IDBEvents>>,options?: IDataBaseOptions) {
         super(options)
         this.db = this.getDB()
+        DataBase.entities = {
+            Record: this.type == "mongodb" ? MongoRecord : Record,
+            Cooldown: this.type == "mongodb" ? MongoCooldown : Cooldown
+        }
         this.init()
     }
 
@@ -36,10 +40,6 @@ export class DataBase extends DataBaseManager {
         DataBase.emitter = this.emitter
         DataBase.db = await this.db
         DataBase.emitter.emit("connect")
-        DataBase.entities = {
-            Record: this.type == "mongodb" ? MongoRecord : Record,
-            Cooldown: this.type == "mongodb" ? MongoCooldown : Cooldown
-        }
     }
 
     public static make_intetifier(data: RecordData) {
