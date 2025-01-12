@@ -41,14 +41,13 @@ export abstract class DataBaseManager {
         let db;
         switch (data.type){
             case "mysql":
-                case "postgres":
-                data.database = this.database
+            case "postgres":
                 db = new DataSource({
                     ...data,
                     entities: this.activeEntities,
                     synchronize: true
                 });
-                break;
+            break;
             case "mongodb":
                 this.wrapEntitiesForMongo()
                 db = new DataSource({
@@ -56,7 +55,7 @@ export abstract class DataBaseManager {
                     entities: this.activeEntities,
                     synchronize: true
                 });
-                break;
+            break;
             default:
                 db = new DataSource({
                     ...data,

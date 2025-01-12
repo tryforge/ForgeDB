@@ -39,7 +39,6 @@ class DataBaseManager {
         switch (data.type) {
             case "mysql":
             case "postgres":
-                data.database = this.database;
                 db = new typeorm_1.DataSource({
                     ...data,
                     entities: this.activeEntities,
