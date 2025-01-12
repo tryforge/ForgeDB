@@ -13,8 +13,11 @@ export abstract class DataBaseManager {
     private config: IDataBaseOptions
 
     constructor(options?: IDataBaseOptions){
-        if(options) options.type = options.type ?? "sqlite"
-        this.config = options ?? { type: "sqlite" }
+        if(options){
+            options.type = options.type ?? "sqlite"
+            this.config = options
+        }
+        else this.config = { type: "sqlite" };
         this.type = this.config.type
     }
 

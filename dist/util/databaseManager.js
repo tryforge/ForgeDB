@@ -8,9 +8,12 @@ class DataBaseManager {
     type;
     config;
     constructor(options) {
-        if (options)
+        if (options) {
             options.type = options.type ?? "sqlite";
-        this.config = options ?? { type: "sqlite" };
+            this.config = options;
+        }
+        else
+            this.config = { type: "sqlite" };
         this.type = this.config.type;
     }
     async getDB() {
