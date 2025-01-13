@@ -19,7 +19,7 @@ export type IDataBaseOptions = ({
 
 @Entity()
 export class Record {
-    @PrimaryColumn({ type: "text", length: 65535 })
+    @PrimaryColumn()
     identifier!: string;
 
     @Column({ type: "text", length: 65535 })
@@ -52,7 +52,7 @@ export type RecordData = BaseData & (GuildData | NonGuildData);
 
 @Entity()
 export class Cooldown {
-    @PrimaryColumn({ type: "text", length: 65535 })
+    @PrimaryColumn()
     identifier!: string;
 
     @Column()

@@ -21,7 +21,7 @@ let Record = class Record {
 };
 exports.Record = Record;
 __decorate([
-    (0, typeorm_1.PrimaryColumn)({ type: "text", length: 65535 }),
+    (0, typeorm_1.PrimaryColumn)(),
     __metadata("design:type", String)
 ], Record.prototype, "identifier", void 0);
 __decorate([
@@ -56,7 +56,7 @@ let Cooldown = class Cooldown {
 };
 exports.Cooldown = Cooldown;
 __decorate([
-    (0, typeorm_1.PrimaryColumn)({ type: "text", length: 65535 }),
+    (0, typeorm_1.PrimaryColumn)(),
     __metadata("design:type", String)
 ], Cooldown.prototype, "identifier", void 0);
 __decorate([
