@@ -54,3 +54,4 @@ export class ForgeDB extends ForgeExtension {
         return obj
     }
 }
+export { DataBaseManager } from './util'
