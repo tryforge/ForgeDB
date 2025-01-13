@@ -21,27 +21,27 @@ let Record = class Record {
 };
 exports.Record = Record;
 __decorate([
-    (0, typeorm_1.PrimaryColumn)(),
+    (0, typeorm_1.PrimaryColumn)("mediumtext"),
     __metadata("design:type", String)
 ], Record.prototype, "identifier", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
+    (0, typeorm_1.Column)("mediumtext"),
     __metadata("design:type", String)
 ], Record.prototype, "name", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ nullable: true }),
+    (0, typeorm_1.Column)("mediumtext", { nullable: true }),
     __metadata("design:type", String)
 ], Record.prototype, "id", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
+    (0, typeorm_1.Column)("mediumtext"),
     __metadata("design:type", String)
 ], Record.prototype, "type", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
+    (0, typeorm_1.Column)("mediumtext"),
     __metadata("design:type", String)
 ], Record.prototype, "value", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ nullable: true }),
+    (0, typeorm_1.Column)("mediumtext", { nullable: true }),
     __metadata("design:type", String)
 ], Record.prototype, "guildId", void 0);
 exports.Record = Record = __decorate([
@@ -56,23 +56,23 @@ let Cooldown = class Cooldown {
 };
 exports.Cooldown = Cooldown;
 __decorate([
-    (0, typeorm_1.PrimaryColumn)(),
+    (0, typeorm_1.PrimaryColumn)("mediumtext"),
     __metadata("design:type", String)
 ], Cooldown.prototype, "identifier", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
+    (0, typeorm_1.Column)("mediumtext"),
     __metadata("design:type", String)
 ], Cooldown.prototype, "name", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ nullable: true }),
+    (0, typeorm_1.Column)("mediumtext", { nullable: true }),
     __metadata("design:type", String)
 ], Cooldown.prototype, "id", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
+    (0, typeorm_1.Column)("mediumtext"),
     __metadata("design:type", Number)
 ], Cooldown.prototype, "startedAt", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
+    (0, typeorm_1.Column)("mediumtext"),
     __metadata("design:type", Number)
 ], Cooldown.prototype, "duration", void 0);
 exports.Cooldown = Cooldown = __decorate([
