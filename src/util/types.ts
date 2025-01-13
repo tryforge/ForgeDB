@@ -38,6 +38,27 @@ export class Record {
     guildId?: string;
 }
 
+@Entity()
+export class SQLiteRecord {
+    @PrimaryColumn()
+    identifier!: string;
+
+    @Column()
+    name!: string;
+
+    @Column({ nullable: true })
+    id!: string;
+
+    @Column()
+    type!: 'user' | 'channel' | 'role' | 'message' | 'member' | 'custom' | 'guild' | 'old';
+
+    @Column()
+    value!: string;
+
+    @Column({ nullable: true })
+    guildId?: string;
+}
+
 export type BaseData = {
     identifier?: string;
     name?: string;

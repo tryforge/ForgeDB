@@ -7,8 +7,10 @@ const activeDataBases: {name: string, db: DataSource}[] = [];
 export abstract class DataBaseManager {
     public abstract database: string;
     public abstract entityManager: {
-        entities: MixedList<Function | string | EntitySchema>;
-        mongoEntities: MixedList<Function | string | EntitySchema>;
+        sqlite: MixedList<Function | string | EntitySchema>;
+        mongo: MixedList<Function | string | EntitySchema>;
+        mysql: MixedList<Function | string | EntitySchema>;
+        postgres: MixedList<Function | string | EntitySchema>;
     }
 
     public type: IDataBaseOptions['type'];
@@ -32,24 +34,30 @@ export abstract class DataBaseManager {
         let db;
         switch (data.type){
             case "mysql":
+                db = new DataSource({
+                    ...data,
+                    entities: this.entityManager.mysql,
+                    synchronize: true
+                });
             case "postgres":
                 db = new DataSource({
                     ...data,
-                    entities: this.entityManager.entities,
+                    entities: this.entityManager.postgres,
                     synchronize: true
                 });
             break;
             case "mongodb":
                 db = new DataSource({
                     ...data,
-                    entities: this.entityManager.mongoEntities,
+                    entities: this.entityManager.mongo,
                     synchronize: true
                 });
             break;
             default:
+                console.log(this.entityManager.sqlite)
                 db = new DataSource({
                     ...data,
-                    entities: this.entityManager.entities,
+                    entities: this.entityManager.sqlite,
                     synchronize: true,
                     database: `${data.folder ?? "database"}/${this.database}`
                 });

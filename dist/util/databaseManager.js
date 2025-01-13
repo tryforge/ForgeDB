@@ -26,24 +26,30 @@ class DataBaseManager {
         let db;
         switch (data.type) {
             case "mysql":
+                db = new typeorm_1.DataSource({
+                    ...data,
+                    entities: this.entityManager.mysql,
+                    synchronize: true
+                });
             case "postgres":
                 db = new typeorm_1.DataSource({
                     ...data,
-                    entities: this.entityManager.entities,
+                    entities: this.entityManager.postgres,
                     synchronize: true
                 });
                 break;
             case "mongodb":
                 db = new typeorm_1.DataSource({
                     ...data,
-                    entities: this.entityManager.mongoEntities,
+                    entities: this.entityManager.mongo,
                     synchronize: true
                 });
                 break;
             default:
+                console.log(this.entityManager.sqlite);
                 db = new typeorm_1.DataSource({
                     ...data,
-                    entities: this.entityManager.entities,
+                    entities: this.entityManager.sqlite,
                     synchronize: true,
                     database: `${data.folder ?? "database"}/${this.database}`
                 });

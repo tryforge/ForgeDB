@@ -11,8 +11,10 @@ class DataBase extends databaseManager_1.DataBaseManager {
     emitter;
     database = "forge.db";
     entityManager = {
-        entities: [types_1.Record, types_1.Cooldown],
-        mongoEntities: [types_1.MongoRecord, types_1.MongoCooldown]
+        sqlite: [types_1.SQLiteRecord, types_1.Cooldown],
+        mongo: [types_1.MongoRecord, types_1.MongoCooldown],
+        mysql: [types_1.Record, types_1.Cooldown],
+        postgres: [types_1.Record, types_1.Cooldown],
     };
     static entities;
     db;
@@ -23,9 +25,10 @@ class DataBase extends databaseManager_1.DataBaseManager {
         this.emitter = emitter;
         this.db = this.getDB();
         DataBase.entities = {
-            Record: this.type == "mongodb" ? types_1.MongoRecord : types_1.Record,
+            Record: this.type == "mongodb" ? types_1.MongoRecord : (this.type == "sqlite" || this.type == "better-sqlite3") ? types_1.SQLiteRecord : types_1.Record,
             Cooldown: this.type == "mongodb" ? types_1.MongoCooldown : types_1.Cooldown
         };
+        console.log(DataBase.entities);
     }
     async init() {
         DataBase.emitter = this.emitter;

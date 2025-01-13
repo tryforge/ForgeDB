@@ -1,4 +1,4 @@
-import { Cooldown, GuildData, IDataBaseOptions, MongoCooldown, MongoRecord, Record, RecordData } from './types';
+import { Cooldown, GuildData, IDataBaseOptions, MongoCooldown, MongoRecord, Record, RecordData, SQLiteRecord } from './types';
 import { DataSource } from "typeorm";
 import { TypedEmitter } from 'tiny-typed-emitter';
 import { IDBEvents } from '../structures';
@@ -13,8 +13,10 @@ function isGuildData(data: RecordData): data is GuildData {
 export class DataBase extends DataBaseManager {
     public database = "forge.db";
     public entityManager = {
-        entities: [Record, Cooldown],
-        mongoEntities: [MongoRecord, MongoCooldown]
+        sqlite: [SQLiteRecord, Cooldown],
+        mongo: [MongoRecord, MongoCooldown],
+        mysql: [Record, Cooldown],
+        postgres: [Record, Cooldown],
     };
     private static entities: {
         Record: typeof Record | typeof MongoRecord;
@@ -29,9 +31,10 @@ export class DataBase extends DataBaseManager {
         super(options)
         this.db = this.getDB()
         DataBase.entities = {
-            Record: this.type == "mongodb" ? MongoRecord : Record,
+            Record: this.type == "mongodb" ? MongoRecord : (this.type == "sqlite" || this.type == "better-sqlite3") ? SQLiteRecord : Record,
             Cooldown: this.type == "mongodb" ? MongoCooldown : Cooldown
         }
+        console.log(DataBase.entities)
     }
 
     public async init() {

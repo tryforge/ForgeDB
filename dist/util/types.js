@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MongoCooldown = exports.MongoRecord = exports.Cooldown = exports.Record = void 0;
+exports.MongoCooldown = exports.MongoRecord = exports.Cooldown = exports.SQLiteRecord = exports.Record = void 0;
 const typeorm_1 = require("typeorm");
 let Record = class Record {
     identifier;
@@ -47,6 +47,42 @@ __decorate([
 exports.Record = Record = __decorate([
     (0, typeorm_1.Entity)()
 ], Record);
+let SQLiteRecord = class SQLiteRecord {
+    identifier;
+    name;
+    id;
+    type;
+    value;
+    guildId;
+};
+exports.SQLiteRecord = SQLiteRecord;
+__decorate([
+    (0, typeorm_1.PrimaryColumn)(),
+    __metadata("design:type", String)
+], SQLiteRecord.prototype, "identifier", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], SQLiteRecord.prototype, "name", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ nullable: true }),
+    __metadata("design:type", String)
+], SQLiteRecord.prototype, "id", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], SQLiteRecord.prototype, "type", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], SQLiteRecord.prototype, "value", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ nullable: true }),
+    __metadata("design:type", String)
+], SQLiteRecord.prototype, "guildId", void 0);
+exports.SQLiteRecord = SQLiteRecord = __decorate([
+    (0, typeorm_1.Entity)()
+], SQLiteRecord);
 let Cooldown = class Cooldown {
     identifier;
     name;

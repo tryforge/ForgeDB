@@ -4,8 +4,10 @@ import 'reflect-metadata';
 export declare abstract class DataBaseManager {
     abstract database: string;
     abstract entityManager: {
-        entities: MixedList<Function | string | EntitySchema>;
-        mongoEntities: MixedList<Function | string | EntitySchema>;
+        sqlite: MixedList<Function | string | EntitySchema>;
+        mongo: MixedList<Function | string | EntitySchema>;
+        mysql: MixedList<Function | string | EntitySchema>;
+        postgres: MixedList<Function | string | EntitySchema>;
     };
     type: IDataBaseOptions['type'];
     static type: IDataBaseOptions['type'];

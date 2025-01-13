@@ -24,6 +24,14 @@ export declare class Record {
     value: string;
     guildId?: string;
 }
+export declare class SQLiteRecord {
+    identifier: string;
+    name: string;
+    id: string;
+    type: 'user' | 'channel' | 'role' | 'message' | 'member' | 'custom' | 'guild' | 'old';
+    value: string;
+    guildId?: string;
+}
 export type BaseData = {
     identifier?: string;
     name?: string;
