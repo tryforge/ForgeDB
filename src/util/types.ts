@@ -19,22 +19,22 @@ export type IDataBaseOptions = ({
 
 @Entity()
 export class Record {
-    @PrimaryColumn("mediumtext")
+    @PrimaryColumn()
     identifier!: string;
 
-    @Column("mediumtext")
+    @Column()
     name!: string;
 
-    @Column("mediumtext", { nullable: true })
+    @Column({ nullable: true })
     id!: string;
 
-    @Column("mediumtext")
+    @Column()
     type!: 'user' | 'channel' | 'role' | 'message' | 'member' | 'custom' | 'guild' | 'old';
 
     @Column("mediumtext")
     value!: string;
 
-    @Column("mediumtext", { nullable: true })
+    @Column({ nullable: true })
     guildId?: string;
 }
 
@@ -52,19 +52,19 @@ export type RecordData = BaseData & (GuildData | NonGuildData);
 
 @Entity()
 export class Cooldown {
-    @PrimaryColumn("mediumtext")
+    @PrimaryColumn()
     identifier!: string;
 
-    @Column("mediumtext")
+    @Column()
     name!: string;
 
-    @Column("mediumtext",{ nullable: true })
+    @Column({ nullable: true })
     id?: string;
 
-    @Column("mediumtext")
+    @Column()
     startedAt!: number;
 
-    @Column("mediumtext")
+    @Column()
     duration!: number;
 }
 
