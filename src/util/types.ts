@@ -19,22 +19,22 @@ export type IDataBaseOptions = ({
 
 @Entity()
 export class Record {
-    @PrimaryColumn({ type: "text" })
+    @PrimaryColumn({ type: "text", length: 65535 })
     identifier!: string;
 
-    @Column({ type: "text" })
+    @Column({ type: "text", length: 65535 })
     name!: string;
 
-    @Column({ type: "text", nullable: true })
+    @Column({ type: "text", length: 65535, nullable: true })
     id!: string;
 
-    @Column({ type: "text" })
+    @Column({ type: "text", length: 65535 })
     type!: 'user' | 'channel' | 'role' | 'message' | 'member' | 'custom' | 'guild' | 'old';
 
-    @Column({ type: "text" })
+    @Column({ type: "text", length: 65535 })
     value!: string;
 
-    @Column({ type: "text", nullable: true })
+    @Column({ type: "text", length: 65535, nullable: true })
     guildId?: string;
 }
 
@@ -52,19 +52,19 @@ export type RecordData = BaseData & (GuildData | NonGuildData);
 
 @Entity()
 export class Cooldown {
-    @PrimaryColumn({ type: "text" })
+    @PrimaryColumn({ type: "text", length: 65535 })
     identifier!: string;
 
     @Column()
     name!: string;
 
-    @Column({ type: "text", nullable: true })
+    @Column({ type: "text", length: 65535, nullable: true })
     id?: string;
 
-    @Column({ type: "text" })
+    @Column({ type: "text", length: 65535 })
     startedAt!: number;
 
-    @Column({ type: "text" })
+    @Column({ type: "text", length: 65535 })
     duration!: number;
 }
 
