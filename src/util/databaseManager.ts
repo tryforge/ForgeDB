@@ -54,7 +54,6 @@ export abstract class DataBaseManager {
                 });
             break;
             default:
-                console.log(this.entityManager.sqlite)
                 db = new DataSource({
                     ...data,
                     entities: this.entityManager.sqlite,

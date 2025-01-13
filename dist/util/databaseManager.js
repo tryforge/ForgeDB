@@ -46,7 +46,6 @@ class DataBaseManager {
                 });
                 break;
             default:
-                console.log(this.entityManager.sqlite);
                 db = new typeorm_1.DataSource({
                     ...data,
                     entities: this.entityManager.sqlite,

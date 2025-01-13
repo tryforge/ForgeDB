@@ -28,7 +28,6 @@ class DataBase extends databaseManager_1.DataBaseManager {
             Record: this.type == "mongodb" ? types_1.MongoRecord : (this.type == "sqlite" || this.type == "better-sqlite3") ? types_1.SQLiteRecord : types_1.Record,
             Cooldown: this.type == "mongodb" ? types_1.MongoCooldown : types_1.Cooldown
         };
-        console.log(DataBase.entities);
     }
     async init() {
         DataBase.emitter = this.emitter;

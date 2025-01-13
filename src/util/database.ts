@@ -34,7 +34,6 @@ export class DataBase extends DataBaseManager {
             Record: this.type == "mongodb" ? MongoRecord : (this.type == "sqlite" || this.type == "better-sqlite3") ? SQLiteRecord : Record,
             Cooldown: this.type == "mongodb" ? MongoCooldown : Cooldown
         }
-        console.log(DataBase.entities)
     }
 
     public async init() {
