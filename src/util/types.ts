@@ -25,7 +25,7 @@ export class Record {
     @Column({ type: "text" })
     name!: string;
 
-    @Column({ type: "string", nullable: true })
+    @Column({ type: "text", nullable: true })
     id!: string;
 
     @Column({ type: "text" })
@@ -34,7 +34,7 @@ export class Record {
     @Column({ type: "text" })
     value!: string;
 
-    @Column({ type: "string", nullable: true })
+    @Column({ type: "text", nullable: true })
     guildId?: string;
 }
 
@@ -58,7 +58,7 @@ export class Cooldown {
     @Column()
     name!: string;
 
-    @Column({ type: "string", nullable: true })
+    @Column({ type: "text", nullable: true })
     id?: string;
 
     @Column({ type: "text" })
