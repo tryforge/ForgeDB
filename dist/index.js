@@ -8,7 +8,7 @@ const tiny_typed_emitter_1 = require("tiny-typed-emitter");
 class ForgeDB extends forgescript_1.ForgeExtension {
     options;
     static defaults;
-    name = "ForgeDB";
+    name = "forge.db";
     description = "A fast and reliable database extension for Forge";
     version = require("../package.json").version;
     commands;

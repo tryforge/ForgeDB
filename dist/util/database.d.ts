@@ -10,8 +10,8 @@ export declare class DataBase extends DataBaseManager {
     entityManager: {
         sqlite: (typeof SQLiteRecord | typeof Cooldown)[];
         mongo: (typeof MongoRecord | typeof MongoCooldown)[];
-        mysql: (typeof Cooldown | typeof Record)[];
-        postgres: (typeof Cooldown | typeof Record)[];
+        mysql: (typeof Record | typeof Cooldown)[];
+        postgres: (typeof Record | typeof Cooldown)[];
     };
     private static entities;
     private db;

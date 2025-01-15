@@ -10,7 +10,7 @@ export type TransformEvents<T> = {
 export class ForgeDB extends ForgeExtension {
     public static defaults?: Record<PropertyKey, IExtendedCompilationResult | unknown>
 
-    name: string = "ForgeDB"
+    name: string = "forge.db"
     description: string = "A fast and reliable database extension for Forge"
     version: string = require("../package.json").version
 
