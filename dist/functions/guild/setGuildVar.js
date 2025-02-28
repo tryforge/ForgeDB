@@ -6,6 +6,7 @@ exports.default = new forgescript_1.NativeFunction({
     name: "$setGuildVar",
     version: "2.0.0",
     description: "Assigns a value to a variable associated with a guild",
+    aliases: ["$setServerVar"],
     unwrap: true,
     args: [
         {

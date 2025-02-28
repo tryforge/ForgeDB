@@ -6,6 +6,7 @@ exports.default = new forgescript_1.NativeFunction({
     name: "$deleteGuildVar",
     version: "2.0.0",
     description: "Removes a value from a guild variable",
+    aliases: ["$deleteServerVar"],
     unwrap: true,
     brackets: true,
     args: [

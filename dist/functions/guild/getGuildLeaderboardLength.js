@@ -6,6 +6,7 @@ exports.default = new forgescript_1.NativeFunction({
     name: "$getGuildLeaderboardLength",
     version: "2.0.0",
     description: "Retrieves the length of a guild leaderboard",
+    aliases: ["$getServerLeaderboardLength"],
     output: forgescript_1.ArgType.Number,
     unwrap: true,
     args: [
