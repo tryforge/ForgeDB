@@ -10,6 +10,7 @@ export default new NativeFunction({
     name: "$guildLeaderboard",
     version: "2.0.0",
     description: "Creates a guild leaderboard of a variable",
+    aliases: ["$serverLeaderboard"],
     output: ArgType.String,
     brackets: true,
     unwrap: false,

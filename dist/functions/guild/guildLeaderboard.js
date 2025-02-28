@@ -12,6 +12,7 @@ exports.default = new forgescript_1.NativeFunction({
     name: "$guildLeaderboard",
     version: "2.0.0",
     description: "Creates a guild leaderboard of a variable",
+    aliases: ["$serverLeaderboard"],
     output: forgescript_1.ArgType.String,
     brackets: true,
     unwrap: false,

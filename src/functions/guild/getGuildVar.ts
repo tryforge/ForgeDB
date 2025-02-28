@@ -6,6 +6,7 @@ export default new NativeFunction({
     name: "$getGuildVar",
     version: "2.0.0",
     description: "Retrieves the value of a variable associated with a guild",
+    aliases: ["$getServerVar"],
     output: ArgType.Unknown,
     unwrap: true,
     args: [
