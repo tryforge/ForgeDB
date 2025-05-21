@@ -1,13 +1,5 @@
 import { ArgType, NativeFunction } from "@tryforge/forgescript";
-export declare enum VariableType {
-    user = 0,
-    channel = 1,
-    role = 2,
-    message = 3,
-    member = 4,
-    custom = 5,
-    guild = 6
-}
+import { VariableType } from "../../util";
 declare const _default: NativeFunction<[{
     name: string;
     description: string;

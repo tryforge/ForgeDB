@@ -35,8 +35,8 @@ exports.default = new forgescript_1.NativeFunction({
             description: "Specify whether to return decimals for more precise results (default: false)",
             rest: false,
             type: forgescript_1.ArgType.Boolean,
-            required: false
-        }
+            required: false,
+        },
     ],
     brackets: true,
     async execute(ctx, [name, guild, length, decimals]) {

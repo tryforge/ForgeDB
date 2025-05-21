@@ -14,10 +14,10 @@ export default new NativeFunction({
             rest: false,
             type: ArgType.String,
             required: true,
-        }
+        },
     ],
     async execute(_ctx, [name]) {
-        DataBase.cdDelete(DataBase.make_cdIdentifier({name}))
+        DataBase.cdDelete(DataBase.make_cdIdentifier({ name }))
         return this.success()
     },
 })

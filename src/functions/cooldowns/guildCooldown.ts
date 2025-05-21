@@ -34,22 +34,22 @@ export default new NativeFunction({
             description: "The guild id to assign the cooldown to",
             type: ArgType.Guild,
             required: false,
-        }
+        },
     ],
     async execute(ctx) {
         const [, , code] = this.data.fields! as IExtendedCompiledFunctionField[]
         const dur = await this["resolveUnhandledArg"](ctx, 1)
         if (!this["isValidReturnType"](dur)) return dur
-        
+
         const nameV = await this["resolveUnhandledArg"](ctx, 0)
         if (!this["isValidReturnType"](nameV)) return nameV
 
         const idV = await this["resolveUnhandledArg"](ctx, 3)
         if (!this["isValidReturnType"](idV)) return idV
-        
-        const cooldown = await DataBase.cdTimeLeft(DataBase.make_cdIdentifier({name: nameV.value, id: idV.value?.id ?? ctx.guild?.id}))
 
-        if(cooldown.left !== 0) {
+        const cooldown = await DataBase.cdTimeLeft(DataBase.make_cdIdentifier({ name: nameV.value, id: idV.value?.id ?? ctx.guild?.id }))
+
+        if (cooldown.left !== 0) {
             ctx.setEnvironmentKey("time", cooldown.left)
             const content = await this["resolveCode"](ctx, code)
             if (!this["isValidReturnType"](content)) return content
@@ -58,7 +58,7 @@ export default new NativeFunction({
             return this.stop()
         }
 
-        await DataBase.cdAdd({name: nameV.value as string, id: idV.value?.id ?? ctx.guild?.id, duration: dur.value as number})
+        await DataBase.cdAdd({ name: nameV.value as string, id: idV.value?.id ?? ctx.guild?.id, duration: dur.value as number })
 
         return this.success()
     },

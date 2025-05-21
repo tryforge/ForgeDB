@@ -1,5 +1,5 @@
-import { BaseEventHandler, ForgeClient } from '@tryforge/forgescript';
-import { Record } from '../util';
+import { BaseEventHandler, ForgeClient } from "@tryforge/forgescript";
+import { Record } from "../util";
 export interface IDBEvents {
     connect: [];
     variableCreate: [

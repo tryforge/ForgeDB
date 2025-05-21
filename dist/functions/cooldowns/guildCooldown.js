@@ -35,7 +35,7 @@ exports.default = new forgescript_1.NativeFunction({
             description: "The guild id to assign the cooldown to",
             type: forgescript_1.ArgType.Guild,
             required: false,
-        }
+        },
     ],
     async execute(ctx) {
         const [, , code] = this.data.fields;

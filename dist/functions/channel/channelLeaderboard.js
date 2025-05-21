@@ -1,13 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SortType = void 0;
 const forgescript_1 = require("@tryforge/forgescript");
 const util_1 = require("../../util");
-var SortType;
-(function (SortType) {
-    SortType[SortType["asc"] = 0] = "asc";
-    SortType[SortType["desc"] = 1] = "desc";
-})(SortType || (exports.SortType = SortType = {}));
 exports.default = new forgescript_1.NativeFunction({
     name: "$channelLeaderboard",
     version: "2.0.0",
@@ -35,7 +29,7 @@ exports.default = new forgescript_1.NativeFunction({
             description: "The sorting order for the leaderboard, either ascending (asc) or descending (desc).",
             rest: false,
             type: forgescript_1.ArgType.Enum,
-            enum: SortType,
+            enum: util_1.SortType,
         },
         {
             name: "max",
@@ -75,7 +69,7 @@ exports.default = new forgescript_1.NativeFunction({
             rest: false,
             type: forgescript_1.ArgType.String,
             required: false,
-        }
+        },
     ],
     async execute(ctx) {
         const [name, guild, sortType, max, page, separator, valueVariable, positionVariable, code] = this.data.fields;
@@ -100,7 +94,7 @@ exports.default = new forgescript_1.NativeFunction({
         const limit = Number(maxV.value) || 10;
         const pag = Number(pageV.value) || 1;
         const elements = new Array();
-        const rows = await util_1.DataBase.find({ name: nameV.value, type: 'channel', guildId: guildID.value ?? ctx.guild.id })
+        const rows = await util_1.DataBase.find({ name: nameV.value, type: "channel", guildId: guildID.value ?? ctx.guild.id })
             .then((x) => x.sort((x, y) => (sortTypeV?.value === "desc" ? Number(x.value) - Number(y.value) : Number(y.value) - Number(x.value))))
             .then((x) => x.slice(pag * limit - limit, pag * limit));
         for (let i = 0, len = rows.length; i < len; i++) {
@@ -108,15 +102,15 @@ exports.default = new forgescript_1.NativeFunction({
             const row = rows[i];
             const channel_name = ctx.client.guilds.cache.get(guildID.value ?? ctx.guild.id)?.channels.cache.get(row.id)?.name;
             const info = { channel_name, ...row };
-            ctx.setEnvironmentKey(positionVariable?.value || '', index);
-            ctx.setEnvironmentKey(valueVariable?.value || '', info);
+            ctx.setEnvironmentKey(positionVariable?.value || "", index);
+            ctx.setEnvironmentKey(valueVariable?.value || "", info);
             if (!code)
                 elements.push(`${index}. ${channel_name} ~ ${row.value}`);
             const execution = (await this["resolveCode"](ctx, code));
             if (execution.value)
                 elements.push(execution.value);
         }
-        return this.success(elements.join(separatorV?.value || '\n'));
+        return this.success(elements.join(separatorV?.value || "\n"));
     },
 });
 //# sourceMappingURL=channelLeaderboard.js.map

@@ -27,7 +27,7 @@ export default new NativeFunction({
         await DataBase.delete({
             type: "old",
             id,
-            name
+            name,
         })
         return this.success()
     },

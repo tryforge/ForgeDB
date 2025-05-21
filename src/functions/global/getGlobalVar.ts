@@ -26,7 +26,7 @@ export default new NativeFunction({
     ],
     brackets: true,
     async execute(ctx, [name, def]) {
-        const data = await DataBase.get({name, type: "custom"}).then((x) => x?.value)
+        const data = await DataBase.get({ name, type: "custom" }).then((x) => x?.value)
         if (data === null || data === undefined) {
             if (def) return this.successJSON(def)
             else if (ForgeDB.defaults && name in ForgeDB.defaults) {

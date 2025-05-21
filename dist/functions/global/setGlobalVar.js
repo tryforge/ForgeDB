@@ -21,7 +21,7 @@ exports.default = new forgescript_1.NativeFunction({
             rest: false,
             required: true,
             type: forgescript_1.ArgType.String,
-        }
+        },
     ],
     brackets: true,
     async execute(_ctx, [name, value]) {

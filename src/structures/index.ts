@@ -1,2 +1,2 @@
-export * from './commandManager'
-export * from './eventManager'
+export * from "./commandManager"
+export * from "./eventManager"

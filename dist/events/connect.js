@@ -8,15 +8,15 @@ exports.default = new eventManager_1.DBEventHandler({
     version: "2.0.0",
     description: "This event is triggered when ForgeDB is connected with ForgeScript",
     listener() {
-        const commands = this.getExtension(__1.ForgeDB, true).commands.get('connect');
+        const commands = this.getExtension(__1.ForgeDB, true).commands.get("connect");
         for (const command of commands) {
             forgescript_1.Interpreter.run({
                 obj: {},
                 client: this,
                 command,
-                data: command.compiled.code
+                data: command.compiled.code,
             });
         }
-    }
+    },
 });
 //# sourceMappingURL=connect.js.map

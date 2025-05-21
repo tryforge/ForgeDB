@@ -1,8 +1,5 @@
 import { ArgType, NativeFunction } from "@tryforge/forgescript";
-export declare enum SortType {
-    asc = 0,
-    desc = 1
-}
+import { SortType } from "../../util";
 declare const _default: NativeFunction<[{
     name: string;
     description: string;

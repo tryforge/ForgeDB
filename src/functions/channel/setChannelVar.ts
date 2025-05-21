@@ -1,5 +1,5 @@
 import { ArgType, NativeFunction } from "@tryforge/forgescript"
-import { BaseGuildTextChannel } from 'discord.js'
+import { BaseGuildTextChannel } from "discord.js"
 import { DataBase } from "../../util"
 
 export default new NativeFunction({
@@ -28,11 +28,11 @@ export default new NativeFunction({
             rest: false,
             type: ArgType.Channel,
             required: false,
-        }
+        },
     ],
     brackets: true,
     async execute(ctx, [name, value, channel]) {
-        await DataBase.set({name, id: channel?.id ?? ctx.channel!.id, value, type: "channel", guildId: (channel as BaseGuildTextChannel)?.guild.id ?? ctx.guild?.id})
+        await DataBase.set({ name, id: channel?.id ?? ctx.channel!.id, value, type: "channel", guildId: (channel as BaseGuildTextChannel)?.guild.id ?? ctx.guild?.id })
         return this.success()
     },
 })

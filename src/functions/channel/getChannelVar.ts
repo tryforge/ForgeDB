@@ -1,5 +1,5 @@
 import { ArgType, IExtendedCompilationResult, Interpreter, NativeFunction } from "@tryforge/forgescript"
-import { BaseGuildTextChannel } from 'discord.js'
+import { BaseGuildTextChannel } from "discord.js"
 import { DataBase } from "../../util"
 import { ForgeDB } from "../.."
 
@@ -34,7 +34,7 @@ export default new NativeFunction({
     ],
     brackets: true,
     async execute(ctx, [name, channel, def]) {
-        const data = await DataBase.get({name, id: channel?.id ?? ctx.channel!.id, type: "channel", guildId: (channel as BaseGuildTextChannel)?.guild.id ?? ctx.guild?.id}).then((x) => x?.value)
+        const data = await DataBase.get({ name, id: channel?.id ?? ctx.channel!.id, type: "channel", guildId: (channel as BaseGuildTextChannel)?.guild.id ?? ctx.guild?.id }).then((x) => x?.value)
         if (data === null || data === undefined) {
             if (def) return this.successJSON(def)
             else if (ForgeDB.defaults && name in ForgeDB.defaults) {

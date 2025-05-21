@@ -1,17 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SortType = void 0;
 const forgescript_1 = require("@tryforge/forgescript");
 const util_1 = require("../../util");
-var SortType;
-(function (SortType) {
-    SortType[SortType["asc"] = 0] = "asc";
-    SortType[SortType["desc"] = 1] = "desc";
-})(SortType || (exports.SortType = SortType = {}));
 exports.default = new forgescript_1.NativeFunction({
     name: "$getMemberLeaderboardValue",
     version: "2.0.0",
     description: "Retrieves the position of a member in the leaderboard of a variable",
+    aliases: ["$getMemberLeaderboardPosition"],
     output: forgescript_1.ArgType.Number,
     unwrap: true,
     args: [
@@ -27,7 +22,7 @@ exports.default = new forgescript_1.NativeFunction({
             description: "The sort order for the leaderboard, either ascending (asc) or descending (desc)",
             rest: false,
             type: forgescript_1.ArgType.Enum,
-            enum: SortType,
+            enum: util_1.SortType,
         },
         {
             name: "member ID",
@@ -42,12 +37,12 @@ exports.default = new forgescript_1.NativeFunction({
             rest: false,
             type: forgescript_1.ArgType.Guild,
             required: false,
-        }
+        },
     ],
     brackets: true,
     async execute(ctx, [name, sortType, member, guild]) {
         const data = await util_1.DataBase.find({ name, type: "member", guildId: guild?.id ?? ctx.guild.id });
-        const index = data.sort((x, y) => (sortType === SortType.desc ? Number(x.value) - Number(y.value) : Number(y.value) - Number(x.value))).findIndex((s) => s.id === (member ?? ctx.member?.id));
+        const index = data.sort((x, y) => (sortType === util_1.SortType.desc ? Number(x.value) - Number(y.value) : Number(y.value) - Number(x.value))).findIndex((s) => s.id === (member ?? ctx.member?.id));
         return this.success(index + 1);
     },
 });

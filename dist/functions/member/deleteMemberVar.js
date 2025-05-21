@@ -29,7 +29,7 @@ exports.default = new forgescript_1.NativeFunction({
             rest: false,
             type: forgescript_1.ArgType.String,
             required: false,
-        }
+        },
     ],
     async execute(ctx, [name, member, guild]) {
         await util_1.DataBase.delete({ name, id: member ?? ctx.member.id, type: "member", guildId: guild ?? ctx.guild.id });

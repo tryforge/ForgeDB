@@ -14,29 +14,29 @@ exports.default = new forgescript_1.NativeFunction({
             description: "The name of the variable to query",
             rest: false,
             type: forgescript_1.ArgType.String,
-            required: true
+            required: true,
         },
         {
             name: "guild ID",
             description: "The guild ID for which to retrieve channel variables",
             rest: false,
             type: forgescript_1.ArgType.Guild,
-            required: false
+            required: false,
         },
         {
             name: "length",
             description: "The number of users per page",
             rest: false,
             type: forgescript_1.ArgType.Number,
-            required: false
+            required: false,
         },
         {
             name: "decimals",
             description: "Specify whether to return decimals for more precise results (default: false)",
             rest: false,
             type: forgescript_1.ArgType.Boolean,
-            required: false
-        }
+            required: false,
+        },
     ],
     brackets: true,
     async execute(ctx, [name, guild, length, decimals]) {

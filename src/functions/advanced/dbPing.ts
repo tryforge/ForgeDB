@@ -16,15 +16,15 @@ export default new NativeFunction({
             description: "This will return the max decimals",
             type: ArgType.Boolean,
             required: false,
-            rest: false
-        }
+            rest: false,
+        },
     ],
     async execute(_ctx, [full]) {
         const start = performance.now()
         await DataBase.query("SELECT 1")
         const end = performance.now()
         let res = end - start
-        if(!full) res = Number(res.toFixed(2))
+        if (!full) res = Number(res.toFixed(2))
         return this.success(res)
     },
 })

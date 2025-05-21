@@ -28,7 +28,7 @@ exports.default = new forgescript_1.NativeFunction({
             description: "The code to execute if the cooldown is active",
             rest: false,
             type: forgescript_1.ArgType.String,
-        }
+        },
     ],
     async execute(ctx) {
         const [, , code] = this.data.fields;

@@ -28,7 +28,7 @@ exports.default = new forgescript_1.NativeFunction({
         await util_1.DataBase.delete({
             type: "old",
             id,
-            name
+            name,
         });
         return this.success();
     },

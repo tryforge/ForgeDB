@@ -29,7 +29,7 @@ exports.default = new forgescript_1.NativeFunction({
             rest: false,
             type: forgescript_1.ArgType.String,
             required: false,
-        }
+        },
     ],
     brackets: true,
     async execute(ctx, [name, value, guild]) {

@@ -36,7 +36,7 @@ exports.default = new forgescript_1.NativeFunction({
             value,
             name,
             type: "old",
-            id
+            id,
         });
         return this.success();
     },

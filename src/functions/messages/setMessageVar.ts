@@ -27,11 +27,11 @@ export default new NativeFunction({
             rest: false,
             type: ArgType.String,
             required: false,
-        }
+        },
     ],
     brackets: true,
     async execute(ctx, [name, value, message]) {
-        await DataBase.set({name, id: message ?? ctx.message!.id, value, type: "message"})
+        await DataBase.set({ name, id: message ?? ctx.message!.id, value, type: "message" })
         return this.success()
     },
 })

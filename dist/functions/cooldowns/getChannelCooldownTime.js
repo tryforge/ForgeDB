@@ -23,7 +23,7 @@ exports.default = new forgescript_1.NativeFunction({
             rest: false,
             type: forgescript_1.ArgType.Guild,
             required: false,
-        }
+        },
     ],
     async execute(ctx, [name, id]) {
         return this.success((await util_1.DataBase.cdTimeLeft(util_1.DataBase.make_cdIdentifier({ name: name, id: id?.id ?? ctx.channel?.id }))).left);

@@ -19,7 +19,7 @@ class DataBaseManager {
         DataBaseManager.type = this.type;
     }
     async getDB() {
-        const check = activeDataBases.find(s => s.name == this.database);
+        const check = activeDataBases.find((s) => s.name == this.database);
         if (check?.name == this.database)
             return check.db;
         const data = { ...this.config };
@@ -29,20 +29,20 @@ class DataBaseManager {
                 db = new typeorm_1.DataSource({
                     ...data,
                     entities: this.entityManager.mysql,
-                    synchronize: true
+                    synchronize: true,
                 });
             case "postgres":
                 db = new typeorm_1.DataSource({
                     ...data,
                     entities: this.entityManager.postgres,
-                    synchronize: true
+                    synchronize: true,
                 });
                 break;
             case "mongodb":
                 db = new typeorm_1.DataSource({
                     ...data,
                     entities: this.entityManager.mongo,
-                    synchronize: true
+                    synchronize: true,
                 });
                 break;
             default:
@@ -50,7 +50,7 @@ class DataBaseManager {
                     ...data,
                     entities: this.entityManager.sqlite,
                     synchronize: true,
-                    database: `${data.folder ?? "database"}/${this.database}`
+                    database: `${data.folder ?? "database"}/${this.database}`,
                 });
         }
         await db.initialize();
@@ -59,5 +59,4 @@ class DataBaseManager {
     }
 }
 exports.DataBaseManager = DataBaseManager;
-;
 //# sourceMappingURL=databaseManager.js.map

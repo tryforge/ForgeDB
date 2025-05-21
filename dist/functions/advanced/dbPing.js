@@ -17,8 +17,8 @@ exports.default = new forgescript_1.NativeFunction({
             description: "This will return the max decimals",
             type: forgescript_1.ArgType.Boolean,
             required: false,
-            rest: false
-        }
+            rest: false,
+        },
     ],
     async execute(_ctx, [full]) {
         const start = perf_hooks_1.performance.now();

@@ -33,20 +33,21 @@ export default new NativeFunction({
             rest: false,
             description: "The member id to assign the cooldown to",
             type: ArgType.User,
-            required: false
-        },{
+            required: false,
+        },
+        {
             name: "guild ID",
             description: "The guild of the identifier",
             rest: false,
             type: ArgType.Guild,
             required: false,
-        }
+        },
     ],
     async execute(ctx) {
         const [, , code] = this.data.fields! as IExtendedCompiledFunctionField[]
         const dur = await this["resolveUnhandledArg"](ctx, 1)
         if (!this["isValidReturnType"](dur)) return dur
-        
+
         const nameV = await this["resolveUnhandledArg"](ctx, 0)
         if (!this["isValidReturnType"](nameV)) return nameV
 
@@ -54,11 +55,11 @@ export default new NativeFunction({
         if (!this["isValidReturnType"](idV)) return idV
 
         const guildV = await this["resolveUnhandledArg"](ctx, 4)
-        if (!this["isValidReturnType"](guildV)) return guildV 
-        
-        const cooldown = await DataBase.cdTimeLeft(DataBase.make_cdIdentifier({name: `${nameV.value}-${guildV.id ?? ctx.guild?.id}`, id: idV.value?.id ?? ctx.member?.id}))
+        if (!this["isValidReturnType"](guildV)) return guildV
 
-        if(cooldown.left !== 0) {
+        const cooldown = await DataBase.cdTimeLeft(DataBase.make_cdIdentifier({ name: `${nameV.value}-${guildV.id ?? ctx.guild?.id}`, id: idV.value?.id ?? ctx.member?.id }))
+
+        if (cooldown.left !== 0) {
             ctx.setEnvironmentKey("time", cooldown.left)
             const content = await this["resolveCode"](ctx, code)
             if (!this["isValidReturnType"](content)) return content
@@ -67,7 +68,7 @@ export default new NativeFunction({
             return this.stop()
         }
 
-        await DataBase.cdAdd({name: `${nameV.value}-${guildV.id ?? ctx.guild?.id}`, id: idV.value?.id ?? ctx.member?.id, duration: dur.value as number})
+        await DataBase.cdAdd({ name: `${nameV.value}-${guildV.id ?? ctx.guild?.id}`, id: idV.value?.id ?? ctx.member?.id, duration: dur.value as number })
 
         return this.success()
     },

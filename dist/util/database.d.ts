@@ -1,9 +1,9 @@
-import { Cooldown, IDataBaseOptions, MongoCooldown, MongoRecord, Record, RecordData, SQLiteRecord } from './types';
-import { TypedEmitter } from 'tiny-typed-emitter';
-import { IDBEvents } from '../structures';
-import { TransformEvents } from '..';
-import 'reflect-metadata';
-import { DataBaseManager } from './databaseManager';
+import { Cooldown, IDataBaseOptions, MongoCooldown, MongoRecord, Record, RecordData, SQLiteRecord } from "./types";
+import { TypedEmitter } from "tiny-typed-emitter";
+import { IDBEvents } from "../structures";
+import { TransformEvents } from "..";
+import "reflect-metadata";
+import { DataBaseManager } from "./databaseManager";
 export declare class DataBase extends DataBaseManager {
     private emitter;
     database: string;
@@ -41,7 +41,7 @@ export declare class DataBase extends DataBaseManager {
         left: number;
         identifier: string;
         name: string;
-        id?: string;
+        id?: string | undefined;
         startedAt: number;
         duration: number;
     } | {

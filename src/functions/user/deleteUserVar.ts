@@ -14,16 +14,17 @@ export default new NativeFunction({
             rest: false,
             type: ArgType.String,
             required: true,
-        },{
+        },
+        {
             name: "user ID",
             description: "The ID of the user",
             rest: false,
             type: ArgType.String,
             required: false,
-        }
+        },
     ],
     async execute(ctx, [name, user]) {
-        await DataBase.delete({name, id: user ?? ctx.user!.id, type: "user"})
+        await DataBase.delete({ name, id: user ?? ctx.user!.id, type: "user" })
         return this.success()
     },
 })

@@ -21,10 +21,10 @@ export default new NativeFunction({
             rest: false,
             type: ArgType.Role,
             required: true,
-        }
+        },
     ],
     async execute(_ctx, [name, role]) {
-        await DataBase.delete({name, id: role?.id, type: "role", guildId: role.guild.id})
+        await DataBase.delete({ name, id: role?.id, type: "role", guildId: role.guild.id })
         return this.success()
     },
 })

@@ -27,19 +27,19 @@ export default new NativeFunction({
             description: "The code to execute if the cooldown is active",
             rest: false,
             type: ArgType.String,
-        }
+        },
     ],
     async execute(ctx) {
         const [, , code] = this.data.fields! as IExtendedCompiledFunctionField[]
         const dur = await this["resolveUnhandledArg"](ctx, 1)
         if (!this["isValidReturnType"](dur)) return dur
-        
+
         const nameV = await this["resolveUnhandledArg"](ctx, 0)
         if (!this["isValidReturnType"](nameV)) return nameV
 
-        const cooldown = await DataBase.cdTimeLeft(DataBase.make_cdIdentifier({name: nameV.value}))
+        const cooldown = await DataBase.cdTimeLeft(DataBase.make_cdIdentifier({ name: nameV.value }))
 
-        if(cooldown.left !== 0) {
+        if (cooldown.left !== 0) {
             ctx.setEnvironmentKey("time", cooldown.left)
             const content = await this["resolveCode"](ctx, code)
             if (!this["isValidReturnType"](content)) return content
@@ -48,7 +48,7 @@ export default new NativeFunction({
             return this.stop()
         }
 
-        await DataBase.cdAdd({name: nameV.value as string, duration: dur.value as number})
+        await DataBase.cdAdd({ name: nameV.value as string, duration: dur.value as number })
 
         return this.success()
     },

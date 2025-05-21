@@ -5,7 +5,7 @@ const types_1 = require("./types");
 require("reflect-metadata");
 const databaseManager_1 = require("./databaseManager");
 function isGuildData(data) {
-    return ['member', 'channel', 'role'].includes(data.type);
+    return ["member", "channel", "role"].includes(data.type);
 }
 class DataBase extends databaseManager_1.DataBaseManager {
     emitter;
@@ -25,8 +25,8 @@ class DataBase extends databaseManager_1.DataBaseManager {
         this.emitter = emitter;
         this.db = this.getDB();
         DataBase.entities = {
-            Record: this.type == "mongodb" ? types_1.MongoRecord : (this.type == "sqlite" || this.type == "better-sqlite3") ? types_1.SQLiteRecord : types_1.Record,
-            Cooldown: this.type == "mongodb" ? types_1.MongoCooldown : types_1.Cooldown
+            Record: this.type == "mongodb" ? types_1.MongoRecord : this.type == "sqlite" || this.type == "better-sqlite3" ? types_1.SQLiteRecord : types_1.Record,
+            Cooldown: this.type == "mongodb" ? types_1.MongoCooldown : types_1.Cooldown,
         };
     }
     async init() {
@@ -35,7 +35,7 @@ class DataBase extends databaseManager_1.DataBaseManager {
         DataBase.emitter.emit("connect");
     }
     static make_intetifier(data) {
-        return `${data.type}_${data.name}_${isGuildData(data) ? data.guildId + '_' : ''}${data.id}`;
+        return `${data.type}_${data.name}_${isGuildData(data) ? data.guildId + "_" : ""}${data.id}`;
     }
     static async set(data) {
         const newData = new this.entities.Record();
@@ -46,13 +46,13 @@ class DataBase extends databaseManager_1.DataBaseManager {
         newData.value = data.value;
         if (isGuildData(data))
             newData.guildId = data.guildId;
-        const oldData = await this.db.getRepository(this.entities.Record).findOneBy({ identifier: this.make_intetifier(data) });
-        if (oldData && this.type == 'mongodb') {
+        const oldData = (await this.db.getRepository(this.entities.Record).findOneBy({ identifier: this.make_intetifier(data) }));
+        if (oldData && this.type == "mongodb") {
             this.emitter.emit("variableUpdate", { newData, oldData });
             this.db.getRepository(this.entities.Record).update(oldData, newData);
         }
         else {
-            oldData ? this.emitter.emit("variableUpdate", { newData, oldData }) : this.emitter.emit('variableCreate', { data: newData });
+            oldData ? this.emitter.emit("variableUpdate", { newData, oldData }) : this.emitter.emit("variableCreate", { data: newData });
             await this.db.getRepository(this.entities.Record).save(newData);
         }
     }
@@ -65,12 +65,12 @@ class DataBase extends databaseManager_1.DataBaseManager {
     }
     static async find(data) {
         return await this.db.getRepository(this.entities.Record).find({
-            where: { ...data }
+            where: { ...data },
         });
     }
     static async delete(data) {
         const identifier = data.identifier ?? this.make_intetifier(data);
-        this.emitter.emit('variableDelete', { data: await this.db.getRepository(this.entities.Record).findOneBy({ identifier }) });
+        this.emitter.emit("variableDelete", { data: (await this.db.getRepository(this.entities.Record).findOneBy({ identifier })) });
         return await this.db.getRepository(this.entities.Record).delete({ identifier });
     }
     static async wipe() {
@@ -80,7 +80,7 @@ class DataBase extends databaseManager_1.DataBaseManager {
         return await this.db.getRepository(this.entities.Cooldown).clear();
     }
     static make_cdIdentifier(data) {
-        return `${data.name}${data.id ? '_' + data.id : ''}`;
+        return `${data.name}${data.id ? "_" + data.id : ""}`;
     }
     static async cdAdd(data) {
         const cd = new this.entities.Cooldown();
@@ -90,7 +90,7 @@ class DataBase extends databaseManager_1.DataBaseManager {
         cd.startedAt = Date.now();
         cd.duration = data.duration;
         const oldCD = await this.db.getRepository(this.entities.Cooldown).findOneBy({ identifier: this.make_cdIdentifier(data) });
-        if (oldCD && this.type == 'mongodb')
+        if (oldCD && this.type == "mongodb")
             return await this.db.getRepository(this.entities.Cooldown).update(oldCD, cd);
         else
             return await this.db.getRepository(this.entities.Cooldown).save(cd);

@@ -15,13 +15,14 @@ exports.default = new forgescript_1.NativeFunction({
             rest: false,
             type: forgescript_1.ArgType.String,
             required: true,
-        }, {
+        },
+        {
             name: "channel ID",
             description: "The unique identifier of the value to delete.",
             rest: false,
             type: forgescript_1.ArgType.Channel,
             required: false,
-        }
+        },
     ],
     async execute(ctx, [name, channel]) {
         await util_1.DataBase.delete({ name, id: channel?.id ?? ctx.channel.id, type: "channel", guildId: channel?.guild.id ?? ctx.guild?.id });

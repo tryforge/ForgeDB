@@ -36,7 +36,7 @@ export default new NativeFunction({
         const data = await DataBase.get({
             type: "old",
             id,
-            name
+            name,
         }).then((x) => x?.value)
         if (data === null || data === undefined) {
             if (def) return this.successJSON(def)
