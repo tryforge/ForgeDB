@@ -1,1 +1,1 @@
-{"version":3,"file":"getGuildLeaderboardID.d.ts","sourceRoot":"","sources":["../../../src/functions/guild/getGuildLeaderboardID.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,OAAO,EAAE,cAAc,EAAE,MAAM,uBAAuB,CAAA;AAC/D,OAAO,EAAY,QAAQ,EAAE,MAAM,YAAY,CAAA;;;;;;;;;;;;;;;;;;;;;AAE/C,wBAmCE"}
+{"version":3,"file":"getGuildLeaderboardID.d.ts","sourceRoot":"","sources":["../../../src/functions/guild/getGuildLeaderboardID.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,OAAO,EAAE,cAAc,EAAE,MAAM,uBAAuB,CAAA;AAC/D,OAAO,EAAY,QAAQ,EAAE,MAAM,YAAY,CAAA;;;;;;;;;;;;;;;;;;;;;AAE/C,wBAqCE"}

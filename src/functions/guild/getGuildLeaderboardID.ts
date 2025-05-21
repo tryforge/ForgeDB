@@ -5,6 +5,7 @@ export default new NativeFunction({
     name: "$getGuildLeaderboardID",
     version: "2.1.0",
     description: "Returns the guild in the leaderboard of a specified position",
+    aliases: ["$getServerLeaderboardID"],
     unwrap: true,
     brackets: true,
     args: [

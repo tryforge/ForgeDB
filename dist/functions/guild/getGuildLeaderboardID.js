@@ -4,7 +4,9 @@ const forgescript_1 = require("@tryforge/forgescript");
 const util_1 = require("../../util");
 exports.default = new forgescript_1.NativeFunction({
     name: "$getGuildLeaderboardID",
+    version: "2.1.0",
     description: "Returns the guild in the leaderboard of a specified position",
+    aliases: ["$getServerLeaderboardID"],
     unwrap: true,
     brackets: true,
     args: [
