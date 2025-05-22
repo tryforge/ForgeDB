@@ -1,8 +1,9 @@
-import { DataSource, EntitySchema, MixedList } from "typeorm"
-import { IDataBaseOptions } from "./types"
-import "reflect-metadata"
+import "reflect-metadata";
+import { IDataBaseOptions } from "./types";
+import { DataSource, EntitySchema, MixedList } from "typeorm";
 
-const activeDataBases: { name: string; db: DataSource }[] = []
+const activeDataBases: { name: string; db: DataSource }[] = [];
+let config: IDataBaseOptions;
 
 export abstract class DataBaseManager {
     public abstract database: string
@@ -13,24 +14,25 @@ export abstract class DataBaseManager {
         postgres: MixedList<Function | string | EntitySchema>
     }
 
-    public type: IDataBaseOptions["type"]
+    public type?: IDataBaseOptions["type"]
     public static type: IDataBaseOptions["type"]
-    private config: IDataBaseOptions
 
     constructor(options?: IDataBaseOptions) {
-        if (options) {
+        if (!config && options) {
             options.type = options.type ?? "sqlite"
-            this.config = options
-        } else this.config = { type: "sqlite" }
-        this.type = this.config.type
-        DataBaseManager.type = this.type
+            config = options
+        }
     }
 
     protected async getDB() {
+        await this.waitForConfig();
+        this.type = config.type
+        DataBaseManager.type = this.type
+
         const check = activeDataBases.find((s) => s.name == this.database)
-        if (check?.name == this.database) return check.db
-        const data: IDataBaseOptions = { ...this.config }
-        let db
+        if (check?.name == this.database) return check.db;
+        const data: IDataBaseOptions = { ...config };
+        let db;
         switch (data.type) {
             case "mysql":
                 db = new DataSource({
@@ -60,8 +62,23 @@ export abstract class DataBaseManager {
                     database: `${data.folder ?? "database"}/${this.database}`,
                 })
         }
-        await db.initialize()
+        db = await db.initialize()
         activeDataBases.push({ name: this.database, db })
         return db
+    }
+
+    private async waitForConfig(){
+        return new Promise((resolve) => {
+            const check = setInterval(() => {
+                if(config){
+                    clearInterval(check)
+                    resolve(config)
+                }
+            }, 50)
+            setTimeout(() => {
+                clearInterval(check)
+                if(!config) throw new Error("Unable to resolve ForgeDB extension configuration. Dependent packages failed to initialize.")
+            }, 10_000)
+        })
     }
 }

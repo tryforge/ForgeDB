@@ -21,7 +21,7 @@ class DataBase extends databaseManager_1.DataBaseManager {
     static db;
     static emitter;
     constructor(emitter, options) {
-        super(options);
+        super(options ?? { type: "sqlite" });
         this.emitter = emitter;
         this.db = this.getDB();
         DataBase.entities = {

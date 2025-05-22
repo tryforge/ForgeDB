@@ -26,7 +26,7 @@ export class ForgeDB extends ForgeExtension {
 
         EventManager.load('ForgeDBEvents', __dirname + '/events')
         this.load(__dirname + "/functions")
-        
+
         new DataBase(this.emitter, this.options).init()
         client.db = DataBase
 

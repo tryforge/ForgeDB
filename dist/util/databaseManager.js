@@ -1,28 +1,27 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DataBaseManager = void 0;
-const typeorm_1 = require("typeorm");
 require("reflect-metadata");
+const typeorm_1 = require("typeorm");
 const activeDataBases = [];
+let config;
 class DataBaseManager {
     type;
     static type;
-    config;
     constructor(options) {
-        if (options) {
+        if (!config && options) {
             options.type = options.type ?? "sqlite";
-            this.config = options;
+            config = options;
         }
-        else
-            this.config = { type: "sqlite" };
-        this.type = this.config.type;
-        DataBaseManager.type = this.type;
     }
     async getDB() {
+        await this.waitForConfig();
+        this.type = config.type;
+        DataBaseManager.type = this.type;
         const check = activeDataBases.find((s) => s.name == this.database);
         if (check?.name == this.database)
             return check.db;
-        const data = { ...this.config };
+        const data = { ...config };
         let db;
         switch (data.type) {
             case "mysql":
@@ -53,9 +52,24 @@ class DataBaseManager {
                     database: `${data.folder ?? "database"}/${this.database}`,
                 });
         }
-        await db.initialize();
+        db = await db.initialize();
         activeDataBases.push({ name: this.database, db });
         return db;
+    }
+    async waitForConfig() {
+        return new Promise((resolve) => {
+            const check = setInterval(() => {
+                if (config) {
+                    clearInterval(check);
+                    resolve(config);
+                }
+            }, 50);
+            setTimeout(() => {
+                clearInterval(check);
+                if (!config)
+                    throw new Error("Unable to resolve ForgeDB extension configuration. Dependent packages failed to initialize.");
+            }, 10_000);
+        });
     }
 }
 exports.DataBaseManager = DataBaseManager;

@@ -31,7 +31,7 @@ export class DataBase extends DataBaseManager {
         private emitter: TypedEmitter<TransformEvents<IDBEvents>>,
         options?: IDataBaseOptions
     ) {
-        super(options)
+        super(options ?? {type: "sqlite"})
         this.db = this.getDB()
         DataBase.entities = {
             Record: this.type == "mongodb" ? MongoRecord : this.type == "sqlite" || this.type == "better-sqlite3" ? SQLiteRecord : Record,
