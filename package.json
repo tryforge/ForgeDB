@@ -26,9 +26,9 @@
   "license": "GPL-3.0",
   "devDependencies": {
     "@tryforge/forgescript": "^1.4.0",
-    "@types/node": "^20.5.7",
-    "mongodb": "^5.9.2",
-    "sqlite": "5.1.1",
+    "@types/node": "^20.17.50",
+    "mongodb": "^6.16.0",
+    "sqlite3": "^5.1.7",
     "typedoc": "^0.25.0",
     "typescript": "^5.2.2"
   },
@@ -48,6 +48,6 @@
   },
   "dependencies": {
     "tiny-typed-emitter": "^2.1.0",
-    "typeorm": "^0.3.20"
+    "typeorm": "^0.3.24"
   }
 }
