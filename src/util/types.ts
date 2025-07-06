@@ -46,7 +46,7 @@ export type IDataBaseOptions = (
 ) & { events?: Array<keyof IDBEvents> }
 
 @Entity()
-export class Record {
+export class MySQLRecord {
     @PrimaryColumn()
     identifier!: string
 
@@ -59,7 +59,28 @@ export class Record {
     @Column()
     type!: "user" | "channel" | "role" | "message" | "member" | "custom" | "guild" | "old"
 
-    @Column("mediumtext")
+    @Column("longtext")
+    value!: string
+
+    @Column({ nullable: true })
+    guildId?: string
+}
+
+@Entity()
+export class PostgreSQLRecord {
+    @PrimaryColumn()
+    identifier!: string
+
+    @Column()
+    name!: string
+
+    @Column({ nullable: true })
+    id!: string
+
+    @Column()
+    type!: "user" | "channel" | "role" | "message" | "member" | "custom" | "guild" | "old"
+
+    @Column("text")
     value!: string
 
     @Column({ nullable: true })
@@ -126,7 +147,7 @@ export type CooldownData = {
 }
 
 @Entity()
-export class MongoRecord extends Record {
+export class MongoRecord extends SQLiteRecord {
     @ObjectIdColumn()
     mongoId?: string
 }

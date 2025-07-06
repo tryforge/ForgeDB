@@ -1,4 +1,4 @@
-import { Cooldown, GuildData, IDataBaseOptions, MongoCooldown, MongoRecord, Record, RecordData, SQLiteRecord } from "./types"
+import { Cooldown, GuildData, IDataBaseOptions, MongoCooldown, MongoRecord, MySQLRecord, PostgreSQLRecord, RecordData, SQLiteRecord } from "./types"
 import { DataSource } from "typeorm"
 import { TypedEmitter } from "tiny-typed-emitter"
 import { IDBEvents } from "../structures"
@@ -10,16 +10,18 @@ function isGuildData(data: RecordData): data is GuildData {
     return ["member", "channel", "role"].includes(data.type!)
 }
 
+type AnyRecord = typeof SQLiteRecord | typeof MongoRecord | typeof MySQLRecord | typeof PostgreSQLRecord
+type AnyCooldown = typeof MongoCooldown | typeof Cooldown
 export class DataBase extends DataBaseManager {
     public database = "forge.db"
     public entityManager = {
         sqlite: [SQLiteRecord, Cooldown],
-        mongo: [MongoRecord, MongoCooldown],
-        mysql: [Record, Cooldown],
-        postgres: [Record, Cooldown],
+        mongodb: [MongoRecord, MongoCooldown],
+        mysql: [MySQLRecord, Cooldown],
+        postgres: [PostgreSQLRecord, Cooldown],
     }
     private static entities: {
-        Record: typeof Record | typeof MongoRecord
+        Record: typeof SQLiteRecord | typeof MySQLRecord | typeof PostgreSQLRecord | typeof MongoRecord
         Cooldown: typeof Cooldown | typeof MongoCooldown
     }
 
@@ -32,10 +34,11 @@ export class DataBase extends DataBaseManager {
         options?: IDataBaseOptions
     ) {
         super(options ?? {type: "sqlite"})
+        this.type = options?.type  || "sqlite"
         this.db = this.getDB()
         DataBase.entities = {
-            Record: this.type == "mongodb" ? MongoRecord : this.type == "sqlite" || this.type == "better-sqlite3" ? SQLiteRecord : Record,
-            Cooldown: this.type == "mongodb" ? MongoCooldown : Cooldown,
+            Record: this.entityManager[this.type == "better-sqlite3" ? "sqlite" : this.type][0] as AnyRecord,
+            Cooldown: this.entityManager[this.type == "better-sqlite3" ? "sqlite" : this.type][1] as AnyCooldown,
         }
     }
 
@@ -57,7 +60,7 @@ export class DataBase extends DataBaseManager {
         newData.type = data.type!
         newData.value = data.value!
         if (isGuildData(data)) newData.guildId = data.guildId
-        const oldData = (await this.db.getRepository(this.entities.Record).findOneBy({ identifier: this.make_intetifier(data) })) as Record
+        const oldData = (await this.db.getRepository(this.entities.Record).findOneBy({ identifier: this.make_intetifier(data) })) as SQLiteRecord
         if (oldData && this.type == "mongodb") {
             this.emitter.emit("variableUpdate", { newData, oldData })
             this.db.getRepository(this.entities.Record).update(oldData, newData)
@@ -84,7 +87,7 @@ export class DataBase extends DataBaseManager {
 
     public static async delete(data: RecordData) {
         const identifier = data.identifier ?? this.make_intetifier(data)
-        this.emitter.emit("variableDelete", { data: (await this.db.getRepository(this.entities.Record).findOneBy({ identifier })) as Record })
+        this.emitter.emit("variableDelete", { data: (await this.db.getRepository(this.entities.Record).findOneBy({ identifier })) as SQLiteRecord })
         return await this.db.getRepository(this.entities.Record).delete({ identifier })
     }
 

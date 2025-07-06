@@ -1,4 +1,4 @@
-import { Cooldown, IDataBaseOptions, MongoCooldown, MongoRecord, Record, RecordData, SQLiteRecord } from "./types";
+import { Cooldown, IDataBaseOptions, MongoCooldown, MongoRecord, MySQLRecord, PostgreSQLRecord, RecordData, SQLiteRecord } from "./types";
 import { TypedEmitter } from "tiny-typed-emitter";
 import { IDBEvents } from "../structures";
 import { TransformEvents } from "..";
@@ -9,9 +9,9 @@ export declare class DataBase extends DataBaseManager {
     database: string;
     entityManager: {
         sqlite: (typeof SQLiteRecord | typeof Cooldown)[];
-        mongo: (typeof MongoRecord | typeof MongoCooldown)[];
-        mysql: (typeof Record | typeof Cooldown)[];
-        postgres: (typeof Record | typeof Cooldown)[];
+        mongodb: (typeof MongoRecord | typeof MongoCooldown)[];
+        mysql: (typeof MySQLRecord | typeof Cooldown)[];
+        postgres: (typeof PostgreSQLRecord | typeof Cooldown)[];
     };
     private static entities;
     private db;
@@ -21,9 +21,9 @@ export declare class DataBase extends DataBaseManager {
     init(): Promise<void>;
     static make_intetifier(data: RecordData): string;
     static set(data: RecordData): Promise<void>;
-    static get(data: RecordData): Promise<Record | null>;
-    static getAll(): Promise<Record[]>;
-    static find(data?: RecordData): Promise<Record[]>;
+    static get(data: RecordData): Promise<SQLiteRecord | null>;
+    static getAll(): Promise<SQLiteRecord[]>;
+    static find(data?: RecordData): Promise<SQLiteRecord[]>;
     static delete(data: RecordData): Promise<import("typeorm").DeleteResult>;
     static wipe(): Promise<void>;
     static cdWipe(): Promise<void>;
@@ -41,7 +41,7 @@ export declare class DataBase extends DataBaseManager {
         left: number;
         identifier: string;
         name: string;
-        id?: string | undefined;
+        id?: string;
         startedAt: number;
         duration: number;
     } | {

@@ -40,7 +40,7 @@ class DataBaseManager {
             case "mongodb":
                 db = new typeorm_1.DataSource({
                     ...data,
-                    entities: this.entityManager.mongo,
+                    entities: this.entityManager.mongodb,
                     synchronize: true,
                 });
                 break;

@@ -9,7 +9,7 @@ export abstract class DataBaseManager {
     public abstract database: string
     public abstract entityManager: {
         sqlite: MixedList<Function | string | EntitySchema>
-        mongo: MixedList<Function | string | EntitySchema>
+        mongodb: MixedList<Function | string | EntitySchema>
         mysql: MixedList<Function | string | EntitySchema>
         postgres: MixedList<Function | string | EntitySchema>
     }
@@ -50,7 +50,7 @@ export abstract class DataBaseManager {
             case "mongodb":
                 db = new DataSource({
                     ...data,
-                    entities: this.entityManager.mongo,
+                    entities: this.entityManager.mongodb,
                     synchronize: true,
                 })
                 break

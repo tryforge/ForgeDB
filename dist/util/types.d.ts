@@ -37,7 +37,15 @@ export type IDataBaseOptions = ({
 }) & {
     events?: Array<keyof IDBEvents>;
 };
-export declare class Record {
+export declare class MySQLRecord {
+    identifier: string;
+    name: string;
+    id: string;
+    type: "user" | "channel" | "role" | "message" | "member" | "custom" | "guild" | "old";
+    value: string;
+    guildId?: string;
+}
+export declare class PostgreSQLRecord {
     identifier: string;
     name: string;
     id: string;
@@ -81,7 +89,7 @@ export type CooldownData = {
     startedAt?: number;
     duration?: number;
 };
-export declare class MongoRecord extends Record {
+export declare class MongoRecord extends SQLiteRecord {
     mongoId?: string;
 }
 export declare class MongoCooldown extends Cooldown {
