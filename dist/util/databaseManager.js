@@ -30,6 +30,7 @@ class DataBaseManager {
                     entities: this.entityManager.mysql,
                     synchronize: true,
                 });
+                break;
             case "postgres":
                 db = new typeorm_1.DataSource({
                     ...data,
@@ -51,6 +52,7 @@ class DataBaseManager {
                     synchronize: true,
                     database: `${data.folder ?? "database"}/${this.database}`,
                 });
+                break;
         }
         db = await db.initialize();
         activeDataBases.push({ name: this.database, db });

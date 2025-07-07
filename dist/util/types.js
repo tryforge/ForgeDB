@@ -69,7 +69,7 @@ __decorate([
     __metadata("design:type", String)
 ], MySQLRecord.prototype, "guildId", void 0);
 exports.MySQLRecord = MySQLRecord = __decorate([
-    (0, typeorm_1.Entity)()
+    (0, typeorm_1.Entity)("record")
 ], MySQLRecord);
 let PostgreSQLRecord = class PostgreSQLRecord {
     identifier;
@@ -105,7 +105,7 @@ __decorate([
     __metadata("design:type", String)
 ], PostgreSQLRecord.prototype, "guildId", void 0);
 exports.PostgreSQLRecord = PostgreSQLRecord = __decorate([
-    (0, typeorm_1.Entity)()
+    (0, typeorm_1.Entity)("record")
 ], PostgreSQLRecord);
 let SQLiteRecord = class SQLiteRecord {
     identifier;
@@ -141,7 +141,7 @@ __decorate([
     __metadata("design:type", String)
 ], SQLiteRecord.prototype, "guildId", void 0);
 exports.SQLiteRecord = SQLiteRecord = __decorate([
-    (0, typeorm_1.Entity)()
+    (0, typeorm_1.Entity)("record")
 ], SQLiteRecord);
 let Cooldown = class Cooldown {
     identifier;

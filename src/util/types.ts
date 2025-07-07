@@ -45,7 +45,7 @@ export type IDataBaseOptions = (
       }
 ) & { events?: Array<keyof IDBEvents> }
 
-@Entity()
+@Entity("record")
 export class MySQLRecord {
     @PrimaryColumn()
     identifier!: string
@@ -66,7 +66,7 @@ export class MySQLRecord {
     guildId?: string
 }
 
-@Entity()
+@Entity("record")
 export class PostgreSQLRecord {
     @PrimaryColumn()
     identifier!: string
@@ -87,7 +87,7 @@ export class PostgreSQLRecord {
     guildId?: string
 }
 
-@Entity()
+@Entity("record")
 export class SQLiteRecord {
     @PrimaryColumn()
     identifier!: string

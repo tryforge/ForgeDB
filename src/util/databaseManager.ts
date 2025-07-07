@@ -40,20 +40,21 @@ export abstract class DataBaseManager {
                     entities: this.entityManager.mysql,
                     synchronize: true,
                 })
+                break;
             case "postgres":
                 db = new DataSource({
                     ...data,
                     entities: this.entityManager.postgres,
                     synchronize: true,
                 })
-                break
+                break;
             case "mongodb":
                 db = new DataSource({
                     ...data,
                     entities: this.entityManager.mongodb,
                     synchronize: true,
                 })
-                break
+                break;
             default:
                 db = new DataSource({
                     ...data,
@@ -61,6 +62,7 @@ export abstract class DataBaseManager {
                     synchronize: true,
                     database: `${data.folder ?? "database"}/${this.database}`,
                 })
+            break;
         }
         db = await db.initialize()
         activeDataBases.push({ name: this.database, db })
