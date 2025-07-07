@@ -19,7 +19,6 @@ export default new NativeFunction({
             name: "sort type",
             description: "The sort type for the leaderboard: 'asc' (ascending) or 'desc' (descending)",
             rest: false,
-            required: true,
             type: ArgType.Enum,
             enum: SortType,
         },

@@ -20,7 +20,6 @@ exports.default = new forgescript_1.NativeFunction({
             name: "sort type",
             description: "The sort type for the leaderboard: 'asc' (ascending) or 'desc' (descending)",
             rest: false,
-            required: true,
             type: forgescript_1.ArgType.Enum,
             enum: util_1.SortType,
         },

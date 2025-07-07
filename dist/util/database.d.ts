@@ -41,7 +41,7 @@ export declare class DataBase extends DataBaseManager {
         left: number;
         identifier: string;
         name: string;
-        id?: string;
+        id?: string | undefined;
         startedAt: number;
         duration: number;
     } | {
