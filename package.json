@@ -24,7 +24,7 @@
     "db"
   ],
   "author": "aggelos007",
-  "license": "MIT",
+  "license": "GPL-3.0",
   "devDependencies": {
     "@tryforge/forgescript": "^2.3.0",
     "@types/node": "^20.5.7",
