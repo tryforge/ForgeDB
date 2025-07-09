@@ -35,7 +35,7 @@ exports.default = new forgescript_1.NativeFunction({
             description: "The unique identifier (id) of the channel to apply the cooldown to.",
             type: forgescript_1.ArgType.Channel,
             required: false,
-        }
+        },
     ],
     async execute(ctx) {
         const [, , code] = this.data.fields;

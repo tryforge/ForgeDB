@@ -27,14 +27,14 @@ export default new NativeFunction({
             description: "Return decimals for more accurate results, default: false",
             rest: false,
             type: ArgType.Boolean,
-            required: false
-        }
+            required: false,
+        },
     ],
     brackets: true,
     async execute(_ctx, [name, length, decimals]) {
-        const data = await DataBase.find({name, type: "user"})
+        const data = await DataBase.find({ name, type: "user" })
         data.sort((a, b) => parseInt(a.value) - parseInt(b.value))
         const number = data.length / (length ?? 1)
-        return this.success(decimals ? number :  number % 1 ? Math.floor(number) + 1 : number)
+        return this.success(decimals ? number : number % 1 ? Math.floor(number) + 1 : number)
     },
 })

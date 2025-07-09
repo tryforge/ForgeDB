@@ -1,11 +1,12 @@
 {
   "name": "@tryforge/forge.db",
-  "version": "2.0.9",
+  "version": "2.1.0",
   "description": "Easy to use database for forge.",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
   "scripts": {
     "docgen": "tsc && typedoc src/index.ts && node dist/docgen",
+    "prettier": "prettier --write ./src/**/*",
     "test": "tsc && node dist/__tests__/"
   },
   "keywords": [
@@ -25,10 +26,11 @@
   "author": "aggelos007",
   "license": "GPL-3.0",
   "devDependencies": {
-    "@tryforge/forgescript": "^1.4.0",
+    "@tryforge/forgescript": "^2.3.0",
     "@types/node": "^20.5.7",
-    "mongodb": "^5.9.2",
-    "sqlite": "5.1.1",
+    "better-sqlite3": "^11.10.0",
+    "mongodb": "^6.16.0",
+    "prettier": "^3.5.3",
     "typedoc": "^0.25.0",
     "typescript": "^5.2.2"
   },
@@ -48,6 +50,6 @@
   },
   "dependencies": {
     "tiny-typed-emitter": "^2.1.0",
-    "typeorm": "^0.3.20"
+    "typeorm": "^0.3.24"
   }
 }

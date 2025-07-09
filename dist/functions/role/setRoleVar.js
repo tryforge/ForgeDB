@@ -14,19 +14,21 @@ exports.default = new forgescript_1.NativeFunction({
             rest: false,
             type: forgescript_1.ArgType.String,
             required: true,
-        }, {
+        },
+        {
             name: "value",
             description: "The value",
             rest: false,
             required: true,
             type: forgescript_1.ArgType.String,
-        }, {
+        },
+        {
             name: "role ID",
             description: "The ID of the role",
             rest: false,
             type: forgescript_1.ArgType.Role,
             required: true,
-        }
+        },
     ],
     brackets: true,
     async execute(_ctx, [name, value, role]) {

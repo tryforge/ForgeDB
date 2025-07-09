@@ -15,9 +15,9 @@ export default new NativeFunction({
             rest: false,
             type: ArgType.String,
             required: true,
-        }
+        },
     ],
     async execute(_ctx, [name]) {
-        return this.success((await DataBase.cdTimeLeft(DataBase.make_cdIdentifier({name}))).left)
+        return this.success((await DataBase.cdTimeLeft(DataBase.make_cdIdentifier({ name }))).left)
     },
 })

@@ -34,14 +34,14 @@ export default new NativeFunction({
             description: "Specify whether to return decimals for more precise results (default: false)",
             rest: false,
             type: ArgType.Boolean,
-            required: false
-        }
+            required: false,
+        },
     ],
     brackets: true,
     async execute(ctx, [name, guild, length, decimals]) {
-        const data = await DataBase.find({name, type: "member", guildId: guild?.id ?? ctx.guild!.id})
+        const data = await DataBase.find({ name, type: "member", guildId: guild?.id ?? ctx.guild!.id })
         data.sort((a, b) => parseInt(a.value) - parseInt(b.value))
-        const number = data.length / (length ?? 1)         
-        return this.success(decimals ? number :  number % 1 ? Math.floor(number) + 1 : number)
+        const number = data.length / (length ?? 1)
+        return this.success(decimals ? number : number % 1 ? Math.floor(number) + 1 : number)
     },
 })

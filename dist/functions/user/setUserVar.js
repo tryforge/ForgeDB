@@ -14,19 +14,21 @@ exports.default = new forgescript_1.NativeFunction({
             rest: false,
             type: forgescript_1.ArgType.String,
             required: true,
-        }, {
+        },
+        {
             name: "value",
             description: "The value",
             rest: false,
             required: true,
             type: forgescript_1.ArgType.String,
-        }, {
+        },
+        {
             name: "user ID",
             description: "The user id of the variable",
             rest: false,
             type: forgescript_1.ArgType.String,
             required: false,
-        }
+        },
     ],
     brackets: true,
     async execute(ctx, [name, value, user]) {

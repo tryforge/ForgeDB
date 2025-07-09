@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ForgeDB = void 0;
+exports.DataBaseManager = exports.ForgeDB = void 0;
 const forgescript_1 = require("@tryforge/forgescript");
 const util_1 = require("./util");
 const structures_1 = require("./structures");
@@ -8,7 +8,7 @@ const tiny_typed_emitter_1 = require("tiny-typed-emitter");
 class ForgeDB extends forgescript_1.ForgeExtension {
     options;
     static defaults;
-    name = "ForgeDB";
+    name = "forge.db";
     description = "A fast and reliable database extension for Forge";
     version = require("../package.json").version;
     commands;
@@ -46,4 +46,6 @@ class ForgeDB extends forgescript_1.ForgeExtension {
     }
 }
 exports.ForgeDB = ForgeDB;
+var util_2 = require("./util");
+Object.defineProperty(exports, "DataBaseManager", { enumerable: true, get: function () { return util_2.DataBaseManager; } });
 //# sourceMappingURL=index.js.map

@@ -1,21 +1,29 @@
-import { Cooldown, IDataBaseOptions, Record, RecordData } from './types';
-import { TypedEmitter } from 'tiny-typed-emitter';
-import { IDBEvents } from '../structures';
-import { TransformEvents } from '..';
-import 'reflect-metadata';
-export declare class DataBase {
+import { Cooldown, IDataBaseOptions, MongoCooldown, MongoRecord, MySQLRecord, PostgreSQLRecord, RecordData, SQLiteRecord } from "./types";
+import { TypedEmitter } from "tiny-typed-emitter";
+import { IDBEvents } from "../structures";
+import { TransformEvents } from "..";
+import "reflect-metadata";
+import { DataBaseManager } from "./databaseManager";
+export declare class DataBase extends DataBaseManager {
+    private emitter;
+    database: string;
+    entityManager: {
+        sqlite: (typeof SQLiteRecord | typeof Cooldown)[];
+        mongodb: (typeof MongoRecord | typeof MongoCooldown)[];
+        mysql: (typeof MySQLRecord | typeof Cooldown)[];
+        postgres: (typeof PostgreSQLRecord | typeof Cooldown)[];
+    };
+    private static entities;
     private db;
-    private static type;
     private static db;
     private static emitter;
-    private static entities;
     constructor(emitter: TypedEmitter<TransformEvents<IDBEvents>>, options?: IDataBaseOptions);
     init(): Promise<void>;
     static make_intetifier(data: RecordData): string;
     static set(data: RecordData): Promise<void>;
-    static get(data: RecordData): Promise<Record | null>;
-    static getAll(): Promise<Record[]>;
-    static find(data?: RecordData): Promise<Record[]>;
+    static get(data: RecordData): Promise<SQLiteRecord | null>;
+    static getAll(): Promise<SQLiteRecord[]>;
+    static find(data?: RecordData): Promise<SQLiteRecord[]>;
     static delete(data: RecordData): Promise<import("typeorm").DeleteResult>;
     static wipe(): Promise<void>;
     static cdWipe(): Promise<void>;

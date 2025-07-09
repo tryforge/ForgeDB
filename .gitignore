@@ -4,3 +4,4 @@ prisma
 *.db
 *.sqlite
 */**__tests__
+database

@@ -34,14 +34,15 @@ exports.default = new forgescript_1.NativeFunction({
             rest: false,
             description: "The member id to assign the cooldown to",
             type: forgescript_1.ArgType.User,
-            required: false
-        }, {
+            required: false,
+        },
+        {
             name: "guild ID",
             description: "The guild of the identifier",
             rest: false,
             type: forgescript_1.ArgType.Guild,
             required: false,
-        }
+        },
     ],
     async execute(ctx) {
         const [, , code] = this.data.fields;

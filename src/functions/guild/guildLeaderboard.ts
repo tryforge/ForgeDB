@@ -1,15 +1,11 @@
 import { ArgType, IExtendedCompiledFunctionField, NativeFunction, Return } from "@tryforge/forgescript"
-import { DataBase } from "../../util"
-
-export enum SortType {
-    asc,
-    desc,
-}
+import { DataBase, SortType } from "../../util"
 
 export default new NativeFunction({
     name: "$guildLeaderboard",
     version: "2.0.0",
     description: "Creates a guild leaderboard of a variable",
+    aliases: ["$serverLeaderboard"],
     output: ArgType.String,
     brackets: true,
     unwrap: false,
@@ -66,7 +62,7 @@ export default new NativeFunction({
             rest: false,
             type: ArgType.String,
             required: false,
-        }
+        },
     ],
     async execute(ctx) {
         const [name, sortType, max, page, separator, valueVariable, positionVariable, code] = this.data.fields as IExtendedCompiledFunctionField[]
@@ -90,7 +86,7 @@ export default new NativeFunction({
         const pag = Number(pageV.value) || 1
 
         const elements = new Array<string>()
-        const rows = await DataBase.find({name: nameV.value as string, type: 'guild'})
+        const rows = await DataBase.find({ name: nameV.value as string, type: "guild" })
             .then((x) => x.sort((x, y) => (sortTypeV?.value === "desc" ? Number(x.value) - Number(y.value) : Number(y.value) - Number(x.value))))
             .then((x) => x.slice(pag * limit - limit, pag * limit))
 
@@ -99,14 +95,14 @@ export default new NativeFunction({
             const row = rows[i]
             const guild_name = ctx.client.guilds.cache.get(row.id)?.name
 
-            const info = { guild_name,...row }
-            ctx.setEnvironmentKey(positionVariable?.value || '', index)
-            ctx.setEnvironmentKey(valueVariable?.value || '', info)
-            if(!code) elements.push(`${index}. ${guild_name} ~ ${row.value}`)
+            const info = { guild_name, ...row }
+            ctx.setEnvironmentKey(positionVariable?.value || "", index)
+            ctx.setEnvironmentKey(valueVariable?.value || "", info)
+            if (!code) elements.push(`${index}. ${guild_name} ~ ${row.value}`)
             const execution = (await this["resolveCode"](ctx, code)) as Return
-            if(execution.value) elements.push(execution.value as string)
+            if (execution.value) elements.push(execution.value as string)
         }
 
-        return this.success(elements.join(separatorV?.value as string|| '\n'))
+        return this.success(elements.join((separatorV?.value as string) || "\n"))
     },
 })

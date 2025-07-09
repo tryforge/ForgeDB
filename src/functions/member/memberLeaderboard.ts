@@ -1,11 +1,5 @@
 import { ArgType, IExtendedCompiledFunctionField, NativeFunction, Return } from "@tryforge/forgescript"
-import { Guild } from 'discord.js'
-import { DataBase } from "../../util"
-
-export enum SortType {
-    asc,
-    desc,
-}
+import { DataBase, SortType } from "../../util"
 
 export default new NativeFunction({
     name: "$memberLeaderboard",
@@ -74,7 +68,7 @@ export default new NativeFunction({
             rest: false,
             type: ArgType.String,
             required: false,
-        }
+        },
     ],
     async execute(ctx) {
         const [name, guild, sortType, max, page, separator, valueVariable, positionVariable, code] = this.data.fields as IExtendedCompiledFunctionField[]
@@ -101,23 +95,23 @@ export default new NativeFunction({
         const pag = Number(pageV.value) || 1
 
         const elements = new Array<string>()
-        const rows = await DataBase.find({name: nameV.value as string, type: 'member', guildId: guildID.value as string?? ctx.guild!.id})
+        const rows = await DataBase.find({ name: nameV.value as string, type: "member", guildId: (guildID.value as string) ?? ctx.guild!.id })
             .then((x) => x.sort((x, y) => (sortTypeV?.value === "desc" ? Number(x.value) - Number(y.value) : Number(y.value) - Number(x.value))))
             .then((x) => x.slice(pag * limit - limit, pag * limit))
 
         for (let i = 0, len = rows.length; i < len; i++) {
             const index = pag * limit - limit + i + 1
             const row = rows[i]
-            const username = ctx.client.guilds.cache.get(guildID.value as string ?? ctx.guild!.id)?.members.cache.get(row.id)?.user.username
+            const username = ctx.client.guilds.cache.get((guildID.value as string) ?? ctx.guild!.id)?.members.cache.get(row.id)?.user.username
 
-            const info = { username,...row }
-            ctx.setEnvironmentKey(positionVariable?.value || '', index)
-            ctx.setEnvironmentKey(valueVariable?.value || '', info)
-            if(!code) elements.push(`${index}. ${username} ~ ${row.value}`)
+            const info = { username, ...row }
+            ctx.setEnvironmentKey(positionVariable?.value || "", index)
+            ctx.setEnvironmentKey(valueVariable?.value || "", info)
+            if (!code) elements.push(`${index}. ${username} ~ ${row.value}`)
             const execution = (await this["resolveCode"](ctx, code)) as Return
-            if(execution.value) elements.push(execution.value as string)
+            if (execution.value) elements.push(execution.value as string)
         }
 
-        return this.success(elements.join(separatorV?.value as string|| '\n'))
+        return this.success(elements.join((separatorV?.value as string) || "\n"))
     },
 })

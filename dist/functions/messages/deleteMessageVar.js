@@ -22,7 +22,7 @@ exports.default = new forgescript_1.NativeFunction({
             rest: false,
             type: forgescript_1.ArgType.String,
             required: false,
-        }
+        },
     ],
     async execute(ctx, [name, message]) {
         await util_1.DataBase.delete({ name, id: message ?? ctx.message.id, type: "message" });

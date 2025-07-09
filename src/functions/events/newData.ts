@@ -1,7 +1,5 @@
 import { ArgType, NativeFunction } from "@tryforge/forgescript"
-import { RecordData } from "../../util"
-
-export enum DataType { identifier, name, id, type, value, guildId }
+import { DataType, RecordData } from "../../util"
 
 export default new NativeFunction({
     name: "$newData",
@@ -16,11 +14,11 @@ export default new NativeFunction({
             type: ArgType.Enum,
             enum: DataType,
             required: true,
-        }
+        },
     ],
     brackets: true,
     async execute(ctx, [type]) {
         //@ts-ignore
-        return this.success((ctx.runtime.extras as {newData: RecordData}).newData[DataType[type].toString()])
+        return this.success((ctx.runtime.extras as { newData: RecordData }).newData[DataType[type].toString()])
     },
 })

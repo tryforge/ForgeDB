@@ -5,6 +5,7 @@ export default new NativeFunction({
     name: "$deleteGuildVar",
     version: "2.0.0",
     description: "Removes a value from a guild variable",
+    aliases: ["$deleteServerVar"],
     unwrap: true,
     brackets: true,
     args: [
@@ -21,10 +22,10 @@ export default new NativeFunction({
             rest: false,
             type: ArgType.String,
             required: false,
-        }
+        },
     ],
     async execute(ctx, [name, guild]) {
-        await DataBase.delete({name, id: guild ?? ctx.guild!.id, type: "guild"})
+        await DataBase.delete({ name, id: guild ?? ctx.guild!.id, type: "guild" })
         return this.success()
     },
 })

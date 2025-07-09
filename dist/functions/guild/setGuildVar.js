@@ -6,6 +6,7 @@ exports.default = new forgescript_1.NativeFunction({
     name: "$setGuildVar",
     version: "2.0.0",
     description: "Assigns a value to a variable associated with a guild",
+    aliases: ["$setServerVar"],
     unwrap: true,
     args: [
         {
@@ -28,7 +29,7 @@ exports.default = new forgescript_1.NativeFunction({
             rest: false,
             type: forgescript_1.ArgType.String,
             required: false,
-        }
+        },
     ],
     brackets: true,
     async execute(ctx, [name, value, guild]) {

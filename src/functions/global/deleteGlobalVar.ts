@@ -14,10 +14,10 @@ export default new NativeFunction({
             rest: false,
             type: ArgType.String,
             required: true,
-        }
+        },
     ],
     async execute(_ctx, [name]) {
-        await DataBase.delete({name, type: "custom"})
+        await DataBase.delete({ name, type: "custom" })
         return this.success()
     },
 })

@@ -9,9 +9,33 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MongoCooldown = exports.MongoRecord = exports.Cooldown = exports.Record = void 0;
+exports.MongoCooldown = exports.MongoRecord = exports.Cooldown = exports.SQLiteRecord = exports.PostgreSQLRecord = exports.MySQLRecord = exports.VariableType = exports.DataType = exports.SortType = void 0;
 const typeorm_1 = require("typeorm");
-let Record = class Record {
+var SortType;
+(function (SortType) {
+    SortType[SortType["asc"] = 0] = "asc";
+    SortType[SortType["desc"] = 1] = "desc";
+})(SortType || (exports.SortType = SortType = {}));
+var DataType;
+(function (DataType) {
+    DataType[DataType["identifier"] = 0] = "identifier";
+    DataType[DataType["name"] = 1] = "name";
+    DataType[DataType["id"] = 2] = "id";
+    DataType[DataType["type"] = 3] = "type";
+    DataType[DataType["value"] = 4] = "value";
+    DataType[DataType["guildId"] = 5] = "guildId";
+})(DataType || (exports.DataType = DataType = {}));
+var VariableType;
+(function (VariableType) {
+    VariableType[VariableType["user"] = 0] = "user";
+    VariableType[VariableType["channel"] = 1] = "channel";
+    VariableType[VariableType["role"] = 2] = "role";
+    VariableType[VariableType["message"] = 3] = "message";
+    VariableType[VariableType["member"] = 4] = "member";
+    VariableType[VariableType["custom"] = 5] = "custom";
+    VariableType[VariableType["guild"] = 6] = "guild";
+})(VariableType || (exports.VariableType = VariableType = {}));
+let MySQLRecord = class MySQLRecord {
     identifier;
     name;
     id;
@@ -19,34 +43,106 @@ let Record = class Record {
     value;
     guildId;
 };
-exports.Record = Record;
+exports.MySQLRecord = MySQLRecord;
 __decorate([
     (0, typeorm_1.PrimaryColumn)(),
     __metadata("design:type", String)
-], Record.prototype, "identifier", void 0);
+], MySQLRecord.prototype, "identifier", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Record.prototype, "name", void 0);
+], MySQLRecord.prototype, "name", void 0);
 __decorate([
     (0, typeorm_1.Column)({ nullable: true }),
     __metadata("design:type", String)
-], Record.prototype, "id", void 0);
+], MySQLRecord.prototype, "id", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Record.prototype, "type", void 0);
+], MySQLRecord.prototype, "type", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
+    (0, typeorm_1.Column)("longtext"),
     __metadata("design:type", String)
-], Record.prototype, "value", void 0);
+], MySQLRecord.prototype, "value", void 0);
 __decorate([
     (0, typeorm_1.Column)({ nullable: true }),
     __metadata("design:type", String)
-], Record.prototype, "guildId", void 0);
-exports.Record = Record = __decorate([
-    (0, typeorm_1.Entity)()
-], Record);
+], MySQLRecord.prototype, "guildId", void 0);
+exports.MySQLRecord = MySQLRecord = __decorate([
+    (0, typeorm_1.Entity)("record")
+], MySQLRecord);
+let PostgreSQLRecord = class PostgreSQLRecord {
+    identifier;
+    name;
+    id;
+    type;
+    value;
+    guildId;
+};
+exports.PostgreSQLRecord = PostgreSQLRecord;
+__decorate([
+    (0, typeorm_1.PrimaryColumn)(),
+    __metadata("design:type", String)
+], PostgreSQLRecord.prototype, "identifier", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], PostgreSQLRecord.prototype, "name", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ nullable: true }),
+    __metadata("design:type", String)
+], PostgreSQLRecord.prototype, "id", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], PostgreSQLRecord.prototype, "type", void 0);
+__decorate([
+    (0, typeorm_1.Column)("text"),
+    __metadata("design:type", String)
+], PostgreSQLRecord.prototype, "value", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ nullable: true }),
+    __metadata("design:type", String)
+], PostgreSQLRecord.prototype, "guildId", void 0);
+exports.PostgreSQLRecord = PostgreSQLRecord = __decorate([
+    (0, typeorm_1.Entity)("record")
+], PostgreSQLRecord);
+let SQLiteRecord = class SQLiteRecord {
+    identifier;
+    name;
+    id;
+    type;
+    value;
+    guildId;
+};
+exports.SQLiteRecord = SQLiteRecord;
+__decorate([
+    (0, typeorm_1.PrimaryColumn)(),
+    __metadata("design:type", String)
+], SQLiteRecord.prototype, "identifier", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], SQLiteRecord.prototype, "name", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ nullable: true }),
+    __metadata("design:type", String)
+], SQLiteRecord.prototype, "id", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], SQLiteRecord.prototype, "type", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], SQLiteRecord.prototype, "value", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ nullable: true }),
+    __metadata("design:type", String)
+], SQLiteRecord.prototype, "guildId", void 0);
+exports.SQLiteRecord = SQLiteRecord = __decorate([
+    (0, typeorm_1.Entity)("record")
+], SQLiteRecord);
 let Cooldown = class Cooldown {
     identifier;
     name;
@@ -78,7 +174,7 @@ __decorate([
 exports.Cooldown = Cooldown = __decorate([
     (0, typeorm_1.Entity)()
 ], Cooldown);
-let MongoRecord = class MongoRecord extends Record {
+let MongoRecord = class MongoRecord extends SQLiteRecord {
     mongoId;
 };
 exports.MongoRecord = MongoRecord;

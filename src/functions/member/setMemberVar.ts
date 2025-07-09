@@ -34,11 +34,11 @@ export default new NativeFunction({
             rest: false,
             type: ArgType.Guild,
             required: false,
-        }
+        },
     ],
     brackets: true,
     async execute(ctx, [name, value, member, guild]) {
-        await DataBase.set({name, id: member ?? ctx.member!.id, value, type: "member", guildId: guild?.id ?? ctx.guild!.id})
+        await DataBase.set({ name, id: member ?? ctx.member!.id, value, type: "member", guildId: guild?.id ?? ctx.guild!.id })
         return this.success()
     },
 })

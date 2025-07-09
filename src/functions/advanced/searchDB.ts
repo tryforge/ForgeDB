@@ -1,7 +1,5 @@
 import { ArgType, NativeFunction } from "@tryforge/forgescript"
-import { DataBase } from "../../util"
-
-export enum VariableType { user, channel, role, message, member, custom, guild }
+import { DataBase, VariableType } from "../../util"
 
 export default new NativeFunction({
     name: "$searchDB",
@@ -50,14 +48,14 @@ export default new NativeFunction({
     ],
     brackets: true,
     async execute(_ctx, [name, id, type, value, guild]) {
-        let search = {};
+        let search = {}
 
-        if(name) search = {...search, name };
-        if(id) search = {...search, id };
-        if(type) search = {...search, type: VariableType[type]?.toString() };
-        if(value) search = {...search, value };
-        if(guild) search = {...search, guildId: guild.id };
+        if (name) search = { ...search, name }
+        if (id) search = { ...search, id }
+        if (type) search = { ...search, type: VariableType[type]?.toString() }
+        if (value) search = { ...search, value }
+        if (guild) search = { ...search, guildId: guild.id }
 
-        return this.successJSON(await DataBase.find({...search}))
-    }
+        return this.successJSON(await DataBase.find({ ...search }))
+    },
 })

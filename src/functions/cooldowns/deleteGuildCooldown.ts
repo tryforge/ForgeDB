@@ -21,10 +21,10 @@ export default new NativeFunction({
             rest: false,
             type: ArgType.Guild,
             required: false,
-        }
+        },
     ],
     async execute(ctx, [name, id]) {
-        DataBase.cdDelete(DataBase.make_cdIdentifier({name: name, id: id?.id ?? ctx.guild?.id}))
+        DataBase.cdDelete(DataBase.make_cdIdentifier({ name: name, id: id?.id ?? ctx.guild?.id }))
         return this.success()
     },
 })

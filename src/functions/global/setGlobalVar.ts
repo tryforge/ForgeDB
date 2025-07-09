@@ -20,11 +20,11 @@ export default new NativeFunction({
             rest: false,
             required: true,
             type: ArgType.String,
-        }
+        },
     ],
     brackets: true,
     async execute(_ctx, [name, value]) {
-        await DataBase.set({name, value, type: "custom"})
+        await DataBase.set({ name, value, type: "custom" })
         return this.success()
     },
 })

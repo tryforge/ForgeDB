@@ -21,10 +21,10 @@ export default new NativeFunction({
             rest: false,
             type: ArgType.String,
             required: false,
-        }
+        },
     ],
     async execute(ctx, [name, message]) {
-        await DataBase.delete({name, id: message ?? ctx.message!.id, type: "message"})
+        await DataBase.delete({ name, id: message ?? ctx.message!.id, type: "message" })
         return this.success()
     },
 })

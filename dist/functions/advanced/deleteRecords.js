@@ -1,18 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.VariableType = void 0;
 const forgescript_1 = require("@tryforge/forgescript");
 const util_1 = require("../../util");
-var VariableType;
-(function (VariableType) {
-    VariableType[VariableType["user"] = 0] = "user";
-    VariableType[VariableType["channel"] = 1] = "channel";
-    VariableType[VariableType["role"] = 2] = "role";
-    VariableType[VariableType["message"] = 3] = "message";
-    VariableType[VariableType["member"] = 4] = "member";
-    VariableType[VariableType["custom"] = 5] = "custom";
-    VariableType[VariableType["guild"] = 6] = "guild";
-})(VariableType || (exports.VariableType = VariableType = {}));
 exports.default = new forgescript_1.NativeFunction({
     name: "$deleteRecords",
     version: "2.0.8",
@@ -40,7 +29,7 @@ exports.default = new forgescript_1.NativeFunction({
             description: "The type or category of the variable.",
             rest: false,
             type: forgescript_1.ArgType.Enum,
-            enum: VariableType,
+            enum: util_1.VariableType,
             required: false,
         },
         {
@@ -66,7 +55,7 @@ exports.default = new forgescript_1.NativeFunction({
         if (id)
             search = { ...search, id };
         if (type)
-            search = { ...search, type: VariableType[type]?.toString() };
+            search = { ...search, type: util_1.VariableType[type]?.toString() };
         if (value)
             search = { ...search, value };
         if (guild)
@@ -75,6 +64,6 @@ exports.default = new forgescript_1.NativeFunction({
             await util_1.DataBase.delete(record);
         }
         return this.success();
-    }
+    },
 });
 //# sourceMappingURL=deleteRecords.js.map

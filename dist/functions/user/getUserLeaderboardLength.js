@@ -28,8 +28,8 @@ exports.default = new forgescript_1.NativeFunction({
             description: "Return decimals for more accurate results, default: false",
             rest: false,
             type: forgescript_1.ArgType.Boolean,
-            required: false
-        }
+            required: false,
+        },
     ],
     brackets: true,
     async execute(_ctx, [name, length, decimals]) {

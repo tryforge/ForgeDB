@@ -6,6 +6,7 @@ exports.default = new forgescript_1.NativeFunction({
     name: "$getGuildLeaderboardLength",
     version: "2.0.0",
     description: "Retrieves the length of a guild leaderboard",
+    aliases: ["$getServerLeaderboardLength"],
     output: forgescript_1.ArgType.Number,
     unwrap: true,
     args: [
@@ -28,8 +29,8 @@ exports.default = new forgescript_1.NativeFunction({
             description: "Specify whether to return decimals for more precise results (default: false)",
             rest: false,
             type: forgescript_1.ArgType.Boolean,
-            required: false
-        }
+            required: false,
+        },
     ],
     brackets: true,
     async execute(_ctx, [name, length, decimals]) {

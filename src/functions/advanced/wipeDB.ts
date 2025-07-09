@@ -9,7 +9,7 @@ export default new NativeFunction({
     output: ArgType.Json,
     unwrap: false,
     async execute(_ctx) {
-        await DataBase.wipe();
+        await DataBase.wipe()
         await DataBase.cdWipe()
         return this.success()
     },

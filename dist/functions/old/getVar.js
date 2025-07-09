@@ -37,7 +37,7 @@ exports.default = new forgescript_1.NativeFunction({
         const data = await util_1.DataBase.get({
             type: "old",
             id,
-            name
+            name,
         }).then((x) => x?.value);
         if (data === null || data === undefined) {
             if (def)

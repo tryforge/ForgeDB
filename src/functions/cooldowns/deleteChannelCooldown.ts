@@ -21,10 +21,10 @@ export default new NativeFunction({
             rest: false,
             type: ArgType.Channel,
             required: false,
-        }
+        },
     ],
     async execute(ctx, [name, id]) {
-        DataBase.cdDelete(DataBase.make_cdIdentifier({name: name, id: id?.id ?? ctx.channel?.id}))
+        DataBase.cdDelete(DataBase.make_cdIdentifier({ name: name, id: id?.id ?? ctx.channel?.id }))
         return this.success()
     },
 })

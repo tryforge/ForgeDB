@@ -6,6 +6,7 @@ exports.default = new forgescript_1.NativeFunction({
     name: "$deleteGuildVar",
     version: "2.0.0",
     description: "Removes a value from a guild variable",
+    aliases: ["$deleteServerVar"],
     unwrap: true,
     brackets: true,
     args: [
@@ -22,7 +23,7 @@ exports.default = new forgescript_1.NativeFunction({
             rest: false,
             type: forgescript_1.ArgType.String,
             required: false,
-        }
+        },
     ],
     async execute(ctx, [name, guild]) {
         await util_1.DataBase.delete({ name, id: guild ?? ctx.guild.id, type: "guild" });

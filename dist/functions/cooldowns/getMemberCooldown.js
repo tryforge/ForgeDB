@@ -30,7 +30,7 @@ exports.default = new forgescript_1.NativeFunction({
             rest: false,
             type: forgescript_1.ArgType.Guild,
             required: false,
-        }
+        },
     ],
     async execute(ctx, [name, id, guild]) {
         return this.success((await util_1.DataBase.cdTimeLeft(util_1.DataBase.make_cdIdentifier({ name: `${name}-${guild?.id ?? ctx.guild?.id}`, id: id?.id ?? ctx.member?.id }))).left);

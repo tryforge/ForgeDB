@@ -1,44 +1,40 @@
 import { ArgType, NativeFunction } from "@tryforge/forgescript"
-import { DataBase } from "../../util"
-
-export enum SortType {
-    asc,
-    desc,
-}
+import { DataBase, SortType } from "../../util"
 
 export default new NativeFunction({
     name: "$getUserLeaderboardValue",
     version: "2.0.0",
     description: "Returns the position of a user in the leaderboard of a specified variable",
+    aliases: ["$getUserLeaderboardPosition"],
     output: ArgType.Number,
     unwrap: true,
     args: [
         {
-            name: "variableName",
+            name: "name",
             description: "The name of the variable",
             rest: false,
             type: ArgType.String,
             required: true,
         },
         {
-            name: "sortType",
-            description: "The sort type for the leaderboard: 'asc' (ascending) or 'desc' (descending)",
+            name: "sort type",
+            description: "The sort order for the leaderboard, either ascending (asc) or descending (desc)",
             rest: false,
             type: ArgType.Enum,
             enum: SortType,
-        },{
-            name: "userID",
+        },
+        {
+            name: "user ID",
             description: "The user ID of the value",
             rest: false,
             type: ArgType.String,
             required: false,
-        }
+        },
     ],
     brackets: true,
     async execute(ctx, [name, sortType, user]) {
-        const data = await DataBase.find({name, type: "user"})
-        data.sort((a, b) => parseInt(a.value) - parseInt(b.value))
-        const index = ([SortType[0], SortType.asc].indexOf(sortType && sortType.toString() !== '' ? sortType : 'asc') === -1 ? data : [...data].reverse()).findIndex((s) => s.id === (user ?? ctx.user?.id))
+        const data = await DataBase.find({ name, type: "user" })
+        const index = data.sort((x, y) => (sortType === SortType.desc ? Number(x.value) - Number(y.value) : Number(y.value) - Number(x.value))).findIndex((s) => s.id === (user ?? ctx.user?.id))
         return this.success(index + 1)
     },
 })

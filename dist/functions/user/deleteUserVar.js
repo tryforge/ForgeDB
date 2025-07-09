@@ -15,13 +15,14 @@ exports.default = new forgescript_1.NativeFunction({
             rest: false,
             type: forgescript_1.ArgType.String,
             required: true,
-        }, {
+        },
+        {
             name: "user ID",
             description: "The ID of the user",
             rest: false,
             type: forgescript_1.ArgType.String,
             required: false,
-        }
+        },
     ],
     async execute(ctx, [name, user]) {
         await util_1.DataBase.delete({ name, id: user ?? ctx.user.id, type: "user" });

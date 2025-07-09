@@ -28,10 +28,10 @@ export default new NativeFunction({
             rest: false,
             type: ArgType.String,
             required: false,
-        }
+        },
     ],
     async execute(ctx, [name, member, guild]) {
-        await DataBase.delete({name, id: member ?? ctx.member!.id, type: "member", guildId: guild ?? ctx.guild!.id})
+        await DataBase.delete({ name, id: member ?? ctx.member!.id, type: "member", guildId: guild ?? ctx.guild!.id })
         return this.success()
     },
 })

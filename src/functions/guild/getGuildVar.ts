@@ -6,6 +6,7 @@ export default new NativeFunction({
     name: "$getGuildVar",
     version: "2.0.0",
     description: "Retrieves the value of a variable associated with a guild",
+    aliases: ["$getServerVar"],
     output: ArgType.Unknown,
     unwrap: true,
     args: [
@@ -33,7 +34,7 @@ export default new NativeFunction({
     ],
     brackets: true,
     async execute(ctx, [name, guild, def]) {
-        const data = await DataBase.get({name, id: guild ?? ctx.guild!.id, type: "guild"}).then((x) => x?.value)
+        const data = await DataBase.get({ name, id: guild ?? ctx.guild!.id, type: "guild" }).then((x) => x?.value)
         if (data === null || data === undefined) {
             if (def) return this.successJSON(def)
             else if (ForgeDB.defaults && name in ForgeDB.defaults) {

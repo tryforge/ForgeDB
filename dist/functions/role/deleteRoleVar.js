@@ -22,7 +22,7 @@ exports.default = new forgescript_1.NativeFunction({
             rest: false,
             type: forgescript_1.ArgType.Role,
             required: true,
-        }
+        },
     ],
     async execute(_ctx, [name, role]) {
         await util_1.DataBase.delete({ name, id: role?.id, type: "role", guildId: role.guild.id });

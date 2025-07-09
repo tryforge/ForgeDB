@@ -5,12 +5,12 @@ import { ForgeDB } from "../.."
 export default new NativeFunction({
     name: "$getUserVar",
     version: "2.0.0",
-    description: "Retrieves the value of a specified variable for a user.",
+    description: "Retrieves the value of a specified variable for a user",
     output: ArgType.Unknown,
     unwrap: true,
     args: [
         {
-            name: "variable name",
+            name: "name",
             description: "The name of the variable.",
             rest: false,
             type: ArgType.String,
@@ -33,7 +33,7 @@ export default new NativeFunction({
     ],
     brackets: true,
     async execute(ctx, [name, user, def]) {
-        const data = await DataBase.get({name, id: user ?? ctx.user!.id, type: "user"}).then((x) => x?.value)
+        const data = await DataBase.get({ name, id: user ?? ctx.user!.id, type: "user" }).then((x) => x?.value)
         if (data === null || data === undefined) {
             if (def) return this.successJSON(def)
             else if (ForgeDB.defaults && name in ForgeDB.defaults) {

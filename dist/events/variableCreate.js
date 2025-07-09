@@ -8,16 +8,16 @@ exports.default = new eventManager_1.DBEventHandler({
     version: "2.0.0",
     description: "This event is triggered when a new variable gets created.",
     listener(extras) {
-        const commands = this.getExtension(__1.ForgeDB, true).commands.get('variableCreate');
+        const commands = this.getExtension(__1.ForgeDB, true).commands.get("variableCreate");
         for (const command of commands) {
             forgescript_1.Interpreter.run({
                 obj: {},
                 client: this,
                 command,
                 data: command.compiled.code,
-                extras
+                extras,
             });
         }
-    }
+    },
 });
 //# sourceMappingURL=variableCreate.js.map

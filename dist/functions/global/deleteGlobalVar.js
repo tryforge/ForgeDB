@@ -15,7 +15,7 @@ exports.default = new forgescript_1.NativeFunction({
             rest: false,
             type: forgescript_1.ArgType.String,
             required: true,
-        }
+        },
     ],
     async execute(_ctx, [name]) {
         await util_1.DataBase.delete({ name, type: "custom" });

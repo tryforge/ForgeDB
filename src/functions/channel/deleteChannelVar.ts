@@ -1,5 +1,5 @@
 import { ArgType, NativeFunction } from "@tryforge/forgescript"
-import { BaseGuildTextChannel } from 'discord.js'
+import { BaseGuildTextChannel } from "discord.js"
 import { DataBase } from "../../util"
 
 export default new NativeFunction({
@@ -15,16 +15,17 @@ export default new NativeFunction({
             rest: false,
             type: ArgType.String,
             required: true,
-        },{
+        },
+        {
             name: "channel ID",
             description: "The unique identifier of the value to delete.",
             rest: false,
             type: ArgType.Channel,
             required: false,
-        }
+        },
     ],
     async execute(ctx, [name, channel]) {
-        await DataBase.delete({name, id: channel?.id ?? ctx.channel!.id, type: "channel", guildId: (channel as BaseGuildTextChannel)?.guild.id ?? ctx.guild?.id})
+        await DataBase.delete({ name, id: channel?.id ?? ctx.channel!.id, type: "channel", guildId: (channel as BaseGuildTextChannel)?.guild.id ?? ctx.guild?.id })
         return this.success()
     },
 })

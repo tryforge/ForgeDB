@@ -21,10 +21,10 @@ export default new NativeFunction({
             rest: false,
             type: ArgType.User,
             required: false,
-        }
+        },
     ],
     async execute(ctx, [name, id]) {
-        DataBase.cdDelete(DataBase.make_cdIdentifier({name: name, id: id?.id ?? ctx.user?.id}))
+        DataBase.cdDelete(DataBase.make_cdIdentifier({ name: name, id: id?.id ?? ctx.user?.id }))
         return this.success()
     },
 })

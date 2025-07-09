@@ -22,9 +22,9 @@ export default new NativeFunction({
             rest: false,
             type: ArgType.Guild,
             required: false,
-        }
+        },
     ],
     async execute(ctx, [name, id]) {
-        return this.success((await DataBase.cdTimeLeft(DataBase.make_cdIdentifier({name: name, id: id?.id ?? ctx.channel?.id}))).left)
+        return this.success((await DataBase.cdTimeLeft(DataBase.make_cdIdentifier({ name: name, id: id?.id ?? ctx.channel?.id }))).left)
     },
 })
